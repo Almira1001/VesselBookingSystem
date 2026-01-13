@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Export Vessel Planner</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="login-overlay">
+        <div class="login-box">
+            <div class="login-panel-left">
+                <h2>WELCOME BACK!</h2>
+                <p>Vessel Planner Team<br>Indah Kiat Karawang</p>
+            </div>
+            <div class="login-panel-right">
+                <h2>Login</h2>
+                <form id="login-form">
+                    <input type="text" id="username" placeholder="Username" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <p id="login-error" style="display:none;"></p>
+                    <button type="submit" class="btn-login">Log In</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="sidebar" style="display: none;">
+        <div class="sidebar-header">
+            <h2>🚢 Vessel Planner</h2>
+            <p>Export Management System</p>
+        </div>
+        <div class="sidebar-menu">
+            <div class="menu-item active" data-target="dashboard-view">
+                <span class="menu-icon">📊</span>
+                <span>Dashboard</span>
+            </div>
+            
+            <div class="menu-item" data-target="vessel-list-view">
+                <span class="menu-icon">📦</span>
+                <span>Shipping Line Logins</span>
+            </div>
+            
+            <div class="menu-item" data-target="vessel-schedule-view">
+                <span class="menu-icon">📅</span>
+                <span>Cargo Loaded by Vessel</span>
+            </div>
+            
+            <div class="menu-item" data-target="agreement-list-view">
+                <span class="menu-icon">🤝</span>
+                <span>Agreement List</span>
+            </div>
+            
+            <div class="menu-item" data-target="dummy-booking-view">
+                <span class="menu-icon">✏️</span>
+                <span>Dummy Booking</span>
+            </div>
+            
+            <div class="menu-item has-submenu">
+                <span class="menu-icon">🗺️</span>
+                <span>Tracking</span>
+                <span class="submenu-indicator">›</span>
+            </div>
+            <div class="submenu">
+                <div class="menu-item" data-target="tracking-view" data-region="Region 1"><span>Region 1</span></div>
+                <div class="menu-item" data-target="tracking-view" data-region="Region 2"><span>Region 2</span></div>
+                <div class="menu-item" data-target="tracking-view" data-region="Region 3"><span>Region 3</span></div>
+                <div class="menu-item" data-target="tracking-view" data-region="Region 4"><span>Region 4</span></div>
+                <div class="menu-item" data-target="tracking-view" data-region="Region 5"><span>Region 5</span></div>
+                <div class="menu-item" data-target="tracking-view" data-region="Region 6"><span>Region 6</span></div>
+                <div class="menu-item" data-target="tracking-view" data-region="Region 7"><span>Region 7</span></div>
+                <div class="menu-item" data-target="tracking-view" data-region="Region 8"><span>Region 8</span></div>
+            </div>
+
+            <div class="menu-item" data-target="reports-view">
+                <span class="menu-icon">📄</span>
+                <span>Reports</span>
+            </div>
+            <div class="menu-item" data-target="settings-view">
+                <span class="menu-icon">⚙️</span>
+                <span>Settings</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content" style="display: none;">
+        <div class="top-header">
+            <h1 id="main-title">📊 Dashboard</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary btn-bell" id="notification-bell" onclick="showNotificationModal()">
+                    🔔 <span id="notification-count" class="badge-count" style="display:none;">0</span>
+                </button>
+                
+                <button class="btn btn-danger" onclick="handleLogout()">
+                    🚪 Logout
+                </button>
+            </div>
+        </div>
+
+        <div class="content-area">
+        
+            <input type="file" id="hidden-file-input" style="display: none;" onchange="processFileUpload(event)">
+
+            <div id="notification-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="notification-modal-title">🔔 Terminal Schedule Updates</h2>
+                        <span class="modal-close" onclick="closeNotificationModal()">&times;</span>
+                    </div>
+                    <div class="modal-body" id="notification-modal-body">
+                        </div>
+                </div>
+            </div>
+            
+            <div id="image-viewer-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-content large-file-preview">
+                    <div class="modal-header">
+                        <h2 id="image-modal-title">View File</h2>
+                        <span class="modal-close" onclick="closeImageViewerModal()">&times;</span>
+                    </div>
+                    <div class="modal-body" id="image-viewer-modal-body">
+                        
+                        <div id="file-preview-area" style="text-align: center; padding: 20px;">
+                            </div>
+
+                        <div style="border-top: 1px solid #e0e6ed; margin-top: 20px; padding-top: 15px;">
+                            <p><strong>Nama File:</strong> <span id="file-name-display"></span></p>
+                            <p><strong>Ukuran:</strong> <span id="file-size-display"></span></p>
+                            <p><strong>Tanggal Upload:</strong> <span id="file-upload-date-display"></span></p>
+                            
+                            <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
+                                <a id="btn-open-new-tab" class="btn btn-success btn-small" target="_blank" style="display:none;">
+                                    Buka di Tab Baru
+                                </a>
+                                <a id="btn-download-file" class="btn btn-primary btn-small" style="display:none;">
+                                    Download File
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <div id="calendar-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="modal-date-title">Detail for...</h2>
+                        <span class="modal-close" onclick="closeModal()">&times;</span>
+                    </div>
+                    <div class="modal-body" id="modal-body-content">
+                        </div>
+                </div>
+            </div>
+
+            <div id="booking-modal" class="modal-overlay" style="display:none;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="booking-modal-title">Booking List</h2>
+                        <span class="modal-close" onclick="closeBookingModal()">&times;</span>
+                    </div>
+                    <div class="modal-body" id="booking-modal-body">
+                        </div>
+                </div>
+            </div>
+            
+            <div id="dashboard-view" class="content-view active">
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-title">Total Vessels</div>
+                                <div class="stat-value" id="totalVessels">0</div>
+                                <div class="stat-change">↑ 0% from last month</div>
+                            </div>
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">🚢</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-title">Status Done</div>
+                                <div class="stat-value" id="statusDoneCount">0</div>
+                                <div class="stat-change">↑ 0% completion rate</div>
+                            </div>
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white;">✓</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-title">Customer Hold</div>
+                                <div class="stat-value" id="customerCount">0</div>
+                                <div class="stat-change negative">↓ Needs attention</div>
+                            </div>
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f557 100%); color: white;">⏸</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-title">Pending</div>
+                                <div class="stat-value" id="pendingCount">0</div>
+                                <div class="stat-change">↑ In progress</div>
+                            </div>
+                            <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">⏱</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="charts-section" id="chartsSection">
+                
+                    <div class="chart-card" id="calendar-card-container">
+                        <div class="chart-header" id="calendar-header">
+                            <button id="prev-month-btn">‹</button>
+                            <div class="chart-title" id="calendar-month-year"></div>
+                            <button id="next-month-btn">›</button>
+                        </div>                        
+                        <div class="chart-body" id="calendar-body">
+                            <table id="calendar-table">
+                                <thead>
+                                    <tr>
+                                        <th>Min</th><th>Sen</th><th>Sel</th><th>Rab</th><th>Kam</th><th>Jum</th><th>Sab</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="calendar-dates-body">
+                                    </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="chart-card"><div class="chart-header"><div class="chart-title">📔 Incoterm Distribution</div></div><div class="chart-body"><canvas id="incotermChart"></canvas></div></div>
+                    <div class="chart-card"><div class="chart-header"><div class="chart-title">📈 Monthly Shipments</div></div><div class="chart-body"><canvas id="monthlyChart"></canvas></div></div>
+                    <div class="chart-card"><div class="chart-header"><div class="chart-title">🌍 Destination Analysis</div></div><div class="chart-body"><canvas id="destinationChart"></canvas></div></div>
+                    <div class="chart-card"><div class="chart-header"><div class="chart-title">📦 Total Containers by Size</div></div><div class="chart-body"><canvas id="containerChart"></canvas></div></div>
+                    <div class="chart-card" id="full-width-chart"><div class="chart-header"><div class="chart-title">🚢 Total Container per Shipping Lines</div></div><div class="chart-body"><canvas id="shippingLineContainerChart"></canvas></div></div>
+                </div>
+
+                <div class="filters-section">
+                     <div class="filters-grid">
+                         <div class="filter-group"><label>🔍 Search All</label><input type="text" id="filterGlobal" placeholder="Search anything..."></div>
+                         <div class="filter-group"><label>🗺️ Region</label>
+                             <select id="filterRegion">
+                                 <option value="">All Regions</option>
+                                 <option value="Region 1">Region 1</option>
+                                 <option value="Region 2">Region 2</option>
+                                 <option value="Region 3">Region 3</option>
+                                 <option value="Region 4">Region 4</option>
+                                 <option value="Region 5">Region 5</option>
+                                 <option value="Region 6">Region 6</option>
+                                 <option value="Region 7">Region 7</option>
+                                 <option value="Region 8">Region 8</option>
+                             </select>
+                         </div>
+                        <div class="filter-group"><label>📅 Booking Date From</label><input type="date" id="filterDateFrom"></div>
+                         <div class="filter-group"><label>📅 Booking Date To</label><input type="date" id="filterDateTo"></div>
+                         <div class="filter-group"><button class="btn btn-secondary" onclick="resetFilters()" style="width: 100%;">🔄 Reset</button></div>                         
+                     </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-container">
+                        <table id="vesselTable">
+                            <thead>
+                                <tr>
+                                    <th>No</th><th>Region</th><th>Product Group</th><th>SC</th><th>Delivery</th><th>20</th><th>40</th><th>40 HC</th><th>MAD</th><th>Ship to Party</th><th>Shipping Point</th><th>Country</th><th>IncoTerm</th><th>Destination Port</th><th>BOOKING DATE</th><th>MARKS BY CS</th><th>Booking Number</th><th>LINER</th><th>TOP 1 LINER</th><th>REASON</th><th>KETERANGAN</th><th>Vessel Name</th><th>Open CY</th><th>Closing Fisik</th><th>ETD</th><th>NW (Ton)</th><th>DO STATUS</th><th>Post to SAP</th><th>Masalah</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="vessel-list-view" class="content-view">
+                <div class="link-cards-container" id="vesselListContainer">
+                    </div>
+            </div>
+            
+            <div id="vessel-schedule-view" class="content-view">
+                <div class="link-cards-container" id="terminalScheduleContainer">
+                    <div class="link-card">
+                        <div class="link-card-header">
+                            <div class="link-card-info">
+                                <div class="link-card-icon"><span>📅</span></div>
+                                <h3 class="link-card-name">JICT</h3>
+                            </div>
+                            <a href="https://jict.co.id/index.php/vessel-schedule" target="_blank" class="btn btn-secondary">Visit</a>
+                        </div>
+                    </div>
+                    <div class="link-card">
+                        <div class="link-card-header">
+                            <div class="link-card-info">
+                                <div class="link-card-icon"><span>📅</span></div>
+                                <h3 class="link-card-name">KOJA</h3>
+                            </div>
+                            <a href="https://www.tpkkoja.co.id/vessel-schedule/" target="_blank" class="btn btn-secondary">Visit</a>
+                        </div>
+                    </div>
+                    <div class="link-card">
+                        <div class="link-card-header">
+                            <div class="link-card-info">
+                                <div class="link-card-icon"><span>📅</span></div>
+                                <h3 class="link-card-name">NPCT1</h3>
+                            </div>
+                            <a href="https://www.npct1.co.id/vessel-schedule" target="_blank" class="btn btn-secondary">Visit</a>
+                        </div>
+                    </div>
+                    <div class="link-card">
+                        <div class="link-card-header">
+                            <div class="link-card-info">
+                                <div class="link-card-icon"><span>📅</span></div>
+                                <h3 class="link-card-name">MAL</h3>
+                            </div>
+                            <a href="https://malt300.com/Layanan/jadwalKapal" target="_blank" class="btn btn-secondary">Visit</a>
+                        </div>
+                    </div>
+                    <div class="link-card">
+                        <div class="link-card-header">
+                            <div class="link-card-info">
+                                <div class="link-card-icon"><span>📅</span></div>
+                                <h3 class="link-card-name">Pelindo</h3>
+                            </div>
+                            <a href="https://ipctpk.co.id/vessel-schedule/" target="_blank" class="btn btn-secondary">Visit</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="filters-section" style="margin-bottom: 20px;">
+                    <div class="filters-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div class="filter-group">
+                            <label for="terminal-select">🚢 Pilih Terminal untuk Auto-Populate</label>
+                            <select id="terminal-select" class="editable-cell">
+                                <option value="">Pilih Terminal...</option>
+                                <option value="ALL_PORT">All Port (Agregasi)</option>
+                                <option value="JICT">JICT</option>
+                                <option value="KOJA">KOJA</option>
+                                <option value="NPCT1">NPCT1</option>
+                                <option value="MAL">MAL</option>
+                                <option value="Pelindo">Pelindo (Manual)</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="vessel-schedule-search">🔍 Search Vessel Schedule</label>
+                            <input type="text" id="vessel-schedule-search" class="editable-cell" placeholder="Search vessel, voyage, date, port..." oninput="filterVesselSchedule()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="add-row-container">
+                    <button class="btn btn-primary" onclick="addScheduleRow()">+ Add Schedule Row</button>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-container">
+                        <table id="terminalScheduleTable">
+                            <thead>
+                                <tr>
+                                    <th>Terminal</th>
+                                    <th>Vessel Name</th>
+                                    <th>Voyage</th>
+                                    <th>Voyage Out</th>
+                                    <th>ETA</th>
+                                    <th>ETD</th>
+                                    <th>ATA</th>
+                                    <th>ATD</th>
+                                    <th>Open Stack</th>
+                                    <th>Closing Document</th>
+                                    <th>Total Tonase (Ton)</th>
+                                    <th>Booking</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="terminalScheduleBody">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="agreement-list-view" class="content-view">
+                <div class="filters-section">
+                     <div class="filters-grid">
+                         <div class="filter-group">
+                             <label for="filterAgreement">🔍 Search Agreements</label>
+                             <input type="text" id="filterAgreement" placeholder="Search anything in agreements...">
+                         </div>
+                     </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-container">
+                        <table id="agreementTable">
+                            <thead id="agreementTableHead">
+                                </thead>
+                            <tbody id="agreementTableBody">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="tracking-view" class="content-view">
+                <h1 id="tracking-region-title">Tracking Information for Region 1</h1>
+                <p>Silakan isi atau perbarui data pada tabel di bawah ini. Perubahan akan otomatis ditampilkan di Dashboard. <br><b>Perhatian:</b> Perubahan akan hilang jika halaman di-refresh karena tidak ada database.</p>
+                
+                <div style="display: flex; gap: 10px; margin-top: 20px; margin-bottom: 20px; align-items: center;">
+                    <button class="btn btn-primary" onclick="addNewEntry()">+ Add New Entry</button>
+                    <button class="btn btn-danger" onclick="deleteRegionData()">🗑️ Delete All (Region)</button>
+                </div>
+                
+                <div class="filters-section" style="margin-bottom: 20px;">
+                    <div class="filters-grid" style="grid-template-columns: 1fr 1fr 1fr 200px;">
+                        <div class="filter-group"><label>🔍 Search</label><input type="text" id="filterTrackingGlobal" placeholder="Search anything..."></div>
+                        <div class="filter-group"><label>📅 Booking Date From</label><input type="date" id="filterTrackingDateFrom"></div>
+                        <div class="filter-group"><label>📅 Booking Date To</label><input type="date" id="filterTrackingDateTo"></div>
+                        <div class="filter-group"><button class="btn btn-secondary" onclick="resetTrackingFilters()" style="width: 100%;">🔄 Reset</button></div>
+                    </div>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-container">
+                        <table id="trackingVesselTable">
+                           <thead>
+                                <tr>
+                                    <th>No</th><th>Region</th><th>Product Group</th><th>SC</th><th>Delivery</th><th>20</th><th>40</th><th>40 HC</th><th>MAD</th><th>Ship to Party</th><th>Shipping Point</th><th>Country</th><th>IncoTerm</th><th>Destination Port</th><th>BOOKING DATE</th><th>MARKS BY CS</th><th>Booking Number</th><th>LINER</th><th>TOP 1 LINER</th><th>REASON</th><th>KETERANGAN</th><th>Vessel Name</th><th>Voyage</th><th>Open CY</th><th>Closing Fisik</th><th>ETD</th><th>NW (Ton)</th><th>DO STATUS</th><th>Post to SAP</th><th>Masalah</th><th>SI & BC Status</th><th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="trackingTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="dummy-booking-view" class="content-view">
+                <h1>✏️ Dummy Booking</h1>
+                <p>Ini adalah area untuk membuat entri booking sementara atau dummy. Data di sini **TIDAK AKAN** tercatat di dashboard, tracking per region, atau rekapan Cargo Loaded by Vessel.</p>
+                
+                <div style="display: flex; gap: 10px; margin-top: 20px; margin-bottom: 20px; align-items: center;">
+                    <button class="btn btn-primary" onclick="addNewDummyEntry()">+ Add New Dummy Entry</button>
+                    <button class="btn btn-danger" onclick="clearAllDummyData()">🗑️ Clear All Dummy Data</button>
+                </div>
+
+                <div class="table-card">
+                    <div class="table-container">
+                        <table id="dummyBookingTable">
+                           <thead>
+                                <tr>
+                                    <th>No</th><th>Region</th><th>Product Group</th><th>SC</th><th>Delivery</th><th>20</th><th>40</th><th>40 HC</th><th>MAD</th><th>Ship to Party</th><th>Shipping Point</th><th>Country</th><th>IncoTerm</th><th>Destination Port</th><th>BOOKING DATE</th><th>MARKS BY CS</th><th>Booking Number</th><th>LINER</th><th>TOP 1 LINER</th><th>REASON</th><th>KETERANGAN</th><th>Vessel Name</th><th>Voyage</th><th>Open CY</th><th>Closing Fisik</th><th>ETD</th><th>NW (Ton)</th><th>DO STATUS</th><th>Post to SAP</th><th>Masalah</th><th>SI & BC Status</th><th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dummyBookingTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="reports-view" class="content-view">
+                <h2>📄 Import Data from Excel</h2>
+                <p>Pilih file Excel (.xlsx, .xls) untuk diimpor. Sistem akan otomatis mencari baris header dan menambahkan datanya ke region yang sesuai. Data yang diimpor akan hilang jika halaman di-refresh.</p>
+                <div class="filter-group" style="margin-top: 20px; max-width: 400px;">
+                    <label for="excel-input">Pilih File Excel</label>
+                    <input type="file" id="excel-input" accept=".xlsx, .xls" class="editable-cell">
+                </div>
+                <div id="import-status" style="margin-top: 20px; white-space: pre-wrap;"></div>
+                <div class="table-card" style="margin-top: 20px;">
+                    <div class="table-container">
+                        <h3 style="text-align: center; padding: 15px 10px;">Isi Data dari File Excel</h3>
+                        <table id="report-preview-table">
+                            <thead></thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="settings-view" class="content-view">
+                <h1>⚙ Settings Page</h1>
+                <p>Content for Settings goes here.</p>
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

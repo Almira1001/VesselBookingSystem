@@ -1,0 +1,1945 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12px;
+    background: #f5f7fa;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* === CSS UNTUK LOGIN === */
+#login-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f5f7fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5000;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: opacity 0.3s ease;
+}
+
+.login-box {
+    display: flex;
+    width: 100%;
+    max-width: 850px;
+    height: 500px;
+    background: linear-gradient(135deg, #6A5ACD, #483D8B);
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.12); 
+    overflow: hidden;
+}
+
+.login-panel-left {
+    flex: 1;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+}
+
+.login-panel-left h2 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.login-panel-left p {
+    font-size: 16px;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+.login-panel-right {
+    flex: 1;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+
+.login-panel-right h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+#login-form {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#login-form input {
+    width: 100%;
+    padding: 14px 15px;
+    border: none;
+    background: #f0f0f0;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    transition: box-shadow 0.2s;
+}
+
+#login-form input:focus {
+    box-shadow: 0 0 0 3px rgba(72, 61, 139, 0.2);
+}
+
+#login-form input::placeholder {
+    color: #999;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: #483D8B;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.btn-login:hover {
+    background: #6A5ACD;
+}
+
+#login-error {
+    margin-bottom: 0px;
+    color: #e74c3c;
+    font-weight: 500;
+    text-align: center;
+}
+/* === AKHIR CSS LOGIN === */
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: linear-gradient(180deg, #1e3c72 0%, #2a5298 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 25px 20px;
+    background: rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.sidebar-header p {
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+.sidebar-menu {
+    flex: 1;
+    padding: 20px 0;
+    overflow-y: auto;
+}
+
+.menu-item {
+    padding: 14px 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-left: 3px solid transparent;
+}
+
+.menu-item:hover {
+    background: rgba(255,255,255,0.1);
+    border-left-color: #4fc3f7;
+}
+
+.menu-item.active {
+    background: rgba(255,255,255,0.15);
+    border-left-color: #4fc3f7;
+    font-weight: 600;
+}
+
+.menu-icon {
+    font-size: 18px;
+    width: 20px;
+}
+
+.sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 10px;
+    opacity: 0.7;
+}
+
+/* Gaya Submenu */
+.submenu-indicator {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+}
+.menu-item.has-submenu.open .submenu-indicator {
+    transform: rotate(90deg);
+}
+.submenu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    background: rgba(0,0,0,0.2);
+}
+.submenu.open {
+    max-height: 350px;
+}
+.submenu .menu-item {
+    padding-left: 55px;
+    font-size: 11px;
+}
+.submenu .menu-item.active {
+    font-weight: bold;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Top Header */
+.top-header {
+    background: white;
+    padding: 15px 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-header h1 {
+    font-size: 22px;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* --- GAYA UNTUK LONCENG NOTIFIKASI BARU --- */
+.btn-bell {
+    position: relative;
+    background: white !important;
+    border: 2px solid #667eea !important;
+    color: #667eea !important;
+    padding: 8px 12px;
+}
+
+.btn-bell:hover {
+    background: #f0f0f0 !important;
+}
+
+.badge-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #e74c3c;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1;
+    min-width: 18px;
+    text-align: center;
+    pointer-events: none; 
+}
+/* --- AKHIR GAYA LONCENG NOTIFIKASI --- */
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: white;
+    border: 1px solid #e74c3c;
+}
+.btn-danger:hover {
+    background: #c0392b;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+}
+
+.btn-secondary:hover {
+    background: #667eea;
+    color: white;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(17, 153, 142, 0.4);
+}
+.btn-info {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    color: white;
+}
+
+.btn-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+}
+/* Content Area */
+.content-area {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 30px 30px 50px 30px;
+    height: calc(100vh - 60px);
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+}
+
+.content-view {
+    display: none;
+}
+
+.content-view.active {
+    display: block;
+}
+
+/* Dashboard Stats */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.stat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.stat-title {
+    font-size: 13px;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+.stat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.stat-change {
+    font-size: 11px;
+    color: #27ae60;
+}
+
+.stat-change.negative {
+    color: #e74c3c;
+}
+
+/* Charts Section */
+.charts-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.chart-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    height: 340px;
+    display: flex;
+    flex-direction: column;
+}
+
+#full-width-chart {
+    grid-column: 1 / -1;
+}
+
+.chart-header {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0;
+    flex-shrink: 0;
+}
+
+.chart-body {
+    flex-grow: 1;
+    position: relative;
+    min-height: 0;
+}
+
+.chart-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Filters */
+.filters-section {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    align-items: end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filter-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #34495e;
+}
+
+.filter-group input,
+.filter-group select {
+    padding: 10px 12px;
+    border: 2px solid #e0e6ed;
+    border-radius: 8px;
+    font-size: 12px;
+    transition: all 0.3s;
+}
+
+.filter-group input:focus,
+.filter-group select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Table */
+.table-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: visible !important; /* TIDAK ADA SCROLL DI SINI */
+    margin-bottom: 30px;
+    margin-top: 0; /* REMOVE TOP MARGIN UNTUK PREVENT OVERLAP */
+}
+
+.table-container {
+    overflow-x: auto !important; /* HORIZONTAL SCROLL UNTUK TABEL LEBAR */
+    overflow-y: visible !important; /* NO VERTICAL SCROLL */
+    max-height: none !important;
+    height: auto !important;
+    width: 100%;
+    position: relative; /* UNTUK STICKY HEADER */
+}
+
+/* TRACKING VIEW - SAMA SEPERTI DUMMY BOOKING */
+#tracking-view .table-card {
+    height: calc(100vh - 400px);
+    min-height: 400px;
+    max-height: 700px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+}
+
+#tracking-view .table-container {
+    flex: 1;
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+}
+
+/* DUMMY BOOKING VIEW - TETAP SAMA */
+#dummy-booking-view .table-card {
+    height: calc(100vh - 400px);
+    min-height: 400px;
+    max-height: 700px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+}
+
+#dummy-booking-view .table-container {
+    flex: 1;
+    overflow-x: auto !important;
+    overflow-y: auto !important;
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+    display: table !important;
+    table-layout: fixed !important; /* ENFORCE FIXED LAYOUT */
+    overflow: visible !important;
+}
+
+/* TRACKING & DUMMY TABLE */
+#vesselTable,
+#trackingVesselTable,
+#dummyBookingTable {
+    table-layout: fixed !important; 
+    min-width: 3600px !important;
+    margin-bottom: 0 !important;
+    overflow: visible !important;
+}
+
+/* Wrapper untuk horizontal scroll pada tabel besar */
+#vesselTable,
+#trackingVesselTable,
+#dummyBookingTable {
+    display: table !important;
+    width: auto !important;
+}
+
+#vesselTable th,
+#trackingVesselTable th,
+#dummyBookingTable th {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#vesselTable td,
+#trackingVesselTable td,
+#dummyBookingTable td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* LEBAR KOLOM OPTIMIZED */
+/* LEBAR KOLOM FIXED - TIDAK BOLEH AUTO-MEMBESAR */
+#vesselTable th:nth-child(1), #trackingVesselTable th:nth-child(1), #dummyBookingTable th:nth-child(1) { 
+    width: 30px !important; /* FIXED: Tetap 30px */
+    min-width: 30px !important;
+    max-width: 30px !important;
+}
+
+#vesselTable th:nth-child(2), #trackingVesselTable th:nth-child(2), #dummyBookingTable th:nth-child(2) { 
+    width: 70px !important; /* FIXED: Tetap 70px */
+    min-width: 70px !important;
+    max-width: 70px !important;
+}
+
+#vesselTable th:nth-child(3), #trackingVesselTable th:nth-child(3), #dummyBookingTable th:nth-child(3) { width: 90px; }
+#vesselTable th:nth-child(4), #trackingVesselTable th:nth-child(4), #dummyBookingTable th:nth-child(4) { width: 85px; }
+#vesselTable th:nth-child(5), #trackingVesselTable th:nth-child(5), #dummyBookingTable th:nth-child(5) { width: 90px; }
+#vesselTable th:nth-child(6), #trackingVesselTable th:nth-child(6), #dummyBookingTable th:nth-child(6) { width: 35px; }
+#vesselTable th:nth-child(7), #trackingVesselTable th:nth-child(7), #dummyBookingTable th:nth-child(7) { width: 35px; }
+#vesselTable th:nth-child(8), #trackingVesselTable th:nth-child(8), #dummyBookingTable th:nth-child(8) { width: 45px; }
+#vesselTable th:nth-child(9), #trackingVesselTable th:nth-child(9), #dummyBookingTable th:nth-child(9) { width: 95px; }
+#vesselTable th:nth-child(10), #trackingVesselTable th:nth-child(10), #dummyBookingTable th:nth-child(10) { width: 180px; }
+#vesselTable th:nth-child(11), #trackingVesselTable th:nth-child(11), #dummyBookingTable th:nth-child(11) { width: 75px; }
+#vesselTable th:nth-child(12), #trackingVesselTable th:nth-child(12), #dummyBookingTable th:nth-child(12) { width: 90px; }
+#vesselTable th:nth-child(13), #trackingVesselTable th:nth-child(13), #dummyBookingTable th:nth-child(13) { width: 65px; }
+#vesselTable th:nth-child(14), #trackingVesselTable th:nth-child(14), #dummyBookingTable th:nth-child(14) { width: 120px; }
+#vesselTable th:nth-child(15), #trackingVesselTable th:nth-child(15), #dummyBookingTable th:nth-child(15) { width: 95px; }
+#vesselTable th:nth-child(16), #trackingVesselTable th:nth-child(16), #dummyBookingTable th:nth-child(16) { width: 90px; }
+#vesselTable th:nth-child(17), #trackingVesselTable th:nth-child(17), #dummyBookingTable th:nth-child(17) { width: 110px; }
+#vesselTable th:nth-child(18), #trackingVesselTable th:nth-child(18), #dummyBookingTable th:nth-child(18) { width: 100px; }
+#vesselTable th:nth-child(19), #trackingVesselTable th:nth-child(19), #dummyBookingTable th:nth-child(19) { width: 100px; }
+#vesselTable th:nth-child(20), #trackingVesselTable th:nth-child(20), #dummyBookingTable th:nth-child(20) { width: 90px; }
+#vesselTable th:nth-child(21), #trackingVesselTable th:nth-child(21), #dummyBookingTable th:nth-child(21) { width: 110px; }
+#vesselTable th:nth-child(22), #trackingVesselTable th:nth-child(22), #dummyBookingTable th:nth-child(22) { width: 110px; }
+
+/* KOLOM VOYAGE BARU - FIXED: Ditambahkan setelah Vessel Name */
+#trackingVesselTable th:nth-child(23), #dummyBookingTable th:nth-child(23) { width: 100px; } /* Voyage */
+
+/* Shift kolom berikutnya +1 karena ada Voyage */
+#vesselTable th:nth-child(23), #trackingVesselTable th:nth-child(24), #dummyBookingTable th:nth-child(24) { width: 95px; } /* Open CY */
+#vesselTable th:nth-child(24), #trackingVesselTable th:nth-child(25), #dummyBookingTable th:nth-child(25) { width: 95px; } /* Closing Fisik */
+#vesselTable th:nth-child(25), #trackingVesselTable th:nth-child(26), #dummyBookingTable th:nth-child(26) { width: 95px; } /* ETD */
+#vesselTable th:nth-child(26), #trackingVesselTable th:nth-child(27), #dummyBookingTable th:nth-child(27) { width: 70px; } /* NW */
+#vesselTable th:nth-child(27), #trackingVesselTable th:nth-child(28), #dummyBookingTable th:nth-child(28) { width: 75px; } /* DO STATUS */
+#vesselTable th:nth-child(28), #trackingVesselTable th:nth-child(29), #dummyBookingTable th:nth-child(29) { width: 65px; } /* Post to SAP */
+#vesselTable th:nth-child(29), #trackingVesselTable th:nth-child(30), #dummyBookingTable th:nth-child(30) { width: 90px; } /* Masalah */
+
+/* SI & BC dan Action untuk Tracking & Dummy */
+#trackingVesselTable th:nth-child(31), #dummyBookingTable th:nth-child(31) { width: 120px; } /* SI & BC */
+#trackingVesselTable th:nth-child(32), #dummyBookingTable th:nth-child(32) { width: 60px; } /* Action */
+
+th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4px 6px !important;
+    text-align: center;
+    font-weight: 600;
+    border: 1px solid #dee2e6;
+    white-space: nowrap;
+    vertical-align: middle;
+    font-size: 11px !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+    height: 32px !important;
+    max-height: 32px !important;
+    min-height: 32px !important;
+    line-height: 1.2 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+thead {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 100 !important;
+}
+
+td {
+    padding: 4px 6px !important;
+    border: 1px solid #dee2e6;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: left;
+    color: black;
+    height: 32px !important;
+    max-height: 32px !important;
+    min-height: 32px !important;
+    line-height: 1.2 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    font-size: 11px !important;
+}
+
+/* AGREEMENT LIST - KONSISTEN DENGAN TABEL LAIN */
+#agreementTable {
+    table-layout: fixed !important; /* CRITICAL: Fixed layout */
+    width: 100%;
+}
+
+#agreementTable th:nth-child(1), #agreementTable td:nth-child(1) { 
+    width: 100px !important;
+    min-width: 100px !important;
+    max-width: 100px !important;
+}
+
+#agreementTable th,
+#agreementTable td {
+    padding: 4px 6px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    height: 32px !important;
+    max-height: 32px !important;
+    min-height: 32px !important;
+    vertical-align: middle !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    font-weight: 400 !important;
+    box-sizing: border-box !important;
+}
+
+#agreementTable tbody tr {
+    height: 32px !important; /* Konsisten dengan tabel lain */
+}
+
+#agreementTable th {
+    font-weight: 600 !important; /* Semi-bold untuk header */
+}
+
+#agreementTable th:nth-child(1) { min-width: 100px; }
+#agreementTable th:nth-child(2) { min-width: 100px; }
+#agreementTable th:nth-child(3) { min-width: 250px; }
+#agreementTable th:nth-child(4) { min-width: 60px; }
+#agreementTable th:nth-child(5) { min-width: 80px; }
+#agreementTable th:nth-child(6) { min-width: 150px; }
+#agreementTable th:nth-child(7) { min-width: 100px; }
+#agreementTable th:nth-child(8) { min-width: 100px; }
+#agreementTable th:nth-child(9) { min-width: 120px; }
+
+.td-center {
+    text-align: center;
+}
+
+td:first-child,
+td:nth-child(6),
+td:nth-child(7),
+td:nth-child(8),
+td:nth-child(13),
+td:nth-child(23),
+td:nth-child(24),
+td:nth-child(25)
+{ 
+    text-align: center;
+}
+
+tbody tr:hover {
+    background: #f8f9fa;
+}
+
+/* ============================================
+   PRIORITY-BASED ROW COLORING
+   ============================================
+   HIERARKI WARNA (dari tertinggi ke terendah):
+   1. MERAH (.row-red) → Masalah ≠ "None"
+   2. HIJAU (.row-green) → Post to SAP = true
+   3. KUNING (.row-yellow) → DO Status = 'OK'
+   4. DEFAULT (no class) → Putih/Netral
+*/
+
+/* MERAH: Baris dengan masalah (tertinggi prioritas) */
+tr.row-red td {
+    background-color: #f8d7da !important; /* Light Red */
+    height: 32px !important;
+    max-height: 32px !important;
+    min-height: 32px !important;
+}
+
+/* HIJAU: Baris sudah post to SAP (prioritas kedua) */
+tr.row-green td {
+    background-color: #d4edda !important; /* Light Green */
+    height: 32px !important;
+    max-height: 32px !important;
+    min-height: 32px !important;
+}
+
+/* KUNING: Baris DO Status sudah OK (prioritas ketiga) */
+tr.row-yellow td {
+    background-color: #fff3cd !important; /* Light Yellow */
+    height: 32px !important;
+    max-height: 32px !important;
+    min-height: 32px !important;
+}
+
+/* OVERRIDE: Input & select di dalam baris berwarna tetap putih */
+tr.row-red td input.editable-cell,
+tr.row-green td input.editable-cell,
+tr.row-yellow td input.editable-cell,
+tr.row-red td select.editable-cell,
+tr.row-green td select.editable-cell,
+tr.row-yellow td select.editable-cell {
+    background-color: #ffffff !important;
+    height: 26px !important;
+    max-height: 26px !important;
+    min-height: 26px !important;
+}
+
+/* PENTING: Checkbox tidak terpengaruh background */
+tr.row-red td input[type="checkbox"],
+tr.row-green td input[type="checkbox"],
+tr.row-yellow td input[type="checkbox"] {
+    background: transparent !important;
+}
+
+.status-badge {
+    padding: 2px 6px !important;
+    border-radius: 12px;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 8px !important;
+    line-height: 1 !important;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    height: 18px !important;
+    max-height: 18px !important;
+    white-space: nowrap;
+}
+
+.status-done, .status-ok, .status-submitted { background: #d4edda; color: #155724; }
+.status-pending, .status-customer { background: #fff3cd; color: #856404; }
+.status-res, .status-cancel { background: #f8d7da; color: #721c24; }
+
+/* EDITABLE CELLS - KONSISTEN TYPOGRAPHY */
+.editable-cell,
+table input.editable-cell,
+table select.editable-cell,
+td input[type="text"],
+td input[type="date"],
+td input[type="time"],
+td input[type="number"],
+td select {
+    width: 100% !important;
+    padding: 4px 6px !important;
+    border: 1px solid #ced4da;
+    border-radius: 2px;
+    background-color: #fff;
+    box-sizing: border-box !important;
+    height: 28px !important;
+    max-height: 28px !important;
+    min-height: 28px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 11px !important;
+    line-height: 1.2 !important;
+    font-weight: 400;
+    color: #2c3e50;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.editable-cell:focus,
+table input.editable-cell:focus,
+table select.editable-cell:focus,
+td input:focus,
+td select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.2);
+}
+
+/* Input number - hilangkan spinner yang tidak konsisten */
+input[type="number"].editable-cell::-webkit-outer-spin-button,
+input[type="number"].editable-cell::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"].editable-cell {
+    -moz-appearance: textfield;
+}
+
+/* Standardisasi SEMUA checkbox di dalam tabel */
+.do-status-checkbox,
+table input[type="checkbox"],
+td input[type="checkbox"] {
+    width: 16px !important;
+    height: 16px !important;
+    cursor: pointer;
+    margin: 0 !important;
+    padding: 0 !important;
+    vertical-align: middle;
+    appearance: auto;
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    flex-shrink: 0 !important;
+}
+
+/* Wrapper untuk checkbox agar center alignment sempurna */
+td input[type="checkbox"] {
+    display: inline-block;
+    position: relative;
+    top: 0px !important; /* RESET TOP */
+}
+
+.link-cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+.link-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.link-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.link-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.link-card-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.link-card-icon {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.link-card-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+.link-card-icon span {
+    font-size: 24px;
+    color: white;
+}
+.link-card-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+.link-card-credentials {
+    width: 100%;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+.credential-item {
+    font-size: 11px;
+}
+.credential-item span {
+    display: block;
+    color: #7f8c8d;
+    font-weight: 500;
+    margin-bottom: 3px;
+    text-transform: uppercase;
+}
+
+/* === CSS KALENDER & MODAL === */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: modal-fade-in 0.3s;
+}
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 90%;
+    max-width: 600px;
+    overflow: hidden;
+}
+
+/* Penyesuaian untuk Modal Image Viewer */
+#image-viewer-modal .modal-content {
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+#image-viewer-modal .modal-body {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#uploaded-image {
+    max-width: 100%;
+    max-height: 80vh;
+    display: block;
+    object-fit: contain;
+}
+
+.modal-content.large-file-preview {
+    max-width: 900px;
+    width: 90%;
+}
+@keyframes modal-fade-in {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e6ed;
+    background: #f5f7fa;
+}
+.modal-header h2 {
+    font-size: 16px;
+    color: #2c3e50;
+}
+.modal-close {
+    font-size: 24px;
+    font-weight: bold;
+    color: #7f8c8d;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.modal-close:hover { color: #e74c3c; }
+.modal-body {
+    padding: 20px;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+.modal-content.large-file-preview .modal-body {
+    max-height: 85vh;
+    padding: 10px 20px 20px 20px;
+}
+.modal-event-item {
+    padding: 12px;
+    border: 1px solid #e0e6ed;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: #f8f9fa;
+}
+.modal-event-item strong {
+    font-size: 13px;
+    color: #667eea;
+    display: block;
+    margin-bottom: 5px;
+}
+.modal-event-item p {
+    font-size: 11px;
+    color: #34495e;
+    margin: 0;
+}
+
+#calendar-card-container {
+    height: 340px; 
+    grid-column: 1 / -1;
+}
+
+#calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#calendar-header button {
+    background: #e0e6ed;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: bold;
+    color: #34495e;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+#calendar-header button:hover {
+    background: #667eea;
+    color: white;
+}
+#calendar-body {
+    padding-top: 10px;
+}
+#calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#calendar-table th {
+    font-size: 10px;
+    font-weight: 600;
+    color: #7f8c8d;
+    padding: 8px 0;
+    background: none;
+    border: 2px solid #e0e6ed; 
+    text-align: center;
+}
+#calendar-table td {
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    border: 2px solid #e0e6ed; 
+    vertical-align: middle;
+    height: 36px; 
+    padding: 2px; 
+}
+
+.calendar-day {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #34495e;
+    position: relative;
+    border-radius: 6px; 
+}
+.day-other-month {
+    visibility: hidden; 
+}
+.day-today .calendar-day {
+    background-color: #667eea;
+    color: white;
+}
+.day-has-events .calendar-day {
+    border: 2px solid #11998e;
+    color: #11998e;
+}
+.day-has-events.day-today .calendar-day {
+    background-color: #667eea;
+    color: white;
+    border: 2px solid #11998e;
+}
+
+.day-clickable .calendar-day {
+    cursor: pointer;
+}
+.day-clickable .calendar-day:hover {
+    background: #f0f0f0;
+}
+.day-has-events .calendar-day {
+    cursor: pointer;
+}
+.day-has-events .calendar-day:hover {
+    background: #d4edda !important;
+}
+
+/* === ENHANCED BOOKING MODAL SUMMARY === */
+.booking-summary-enhanced {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.booking-count {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.booking-count .label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.booking-count .value {
+    font-size: 32px;
+    color: white;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.booking-total-nw {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.booking-total-nw .label {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.booking-total-nw .value-large {
+    font-size: 48px;
+    color: white;
+    font-weight: 800;
+    line-height: 1;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.booking-total-nw .unit {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    margin-top: -5px;
+}
+
+/* === ENHANCED BOOKING ITEM === */
+.booking-item-enhanced {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid #e0e6ed;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.booking-item-enhanced:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-color: #667eea;
+}
+
+.booking-item-details {
+    flex: 1;
+}
+
+.booking-item-details strong {
+    font-size: 13px;
+    color: #667eea;
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.booking-item-details p {
+    font-size: 11px;
+    color: #34495e;
+    margin: 3px 0;
+    line-height: 1.5;
+}
+
+.booking-item-nw-enhanced {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e8eaf6 100%);
+    border-radius: 8px;
+    margin-left: 15px;
+    min-width: 120px;
+}
+
+.booking-item-nw-enhanced .nw-value {
+    font-size: 24px;
+    color: #2c3e50;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.booking-item-nw-enhanced .nw-unit {
+    font-size: 12px;
+    color: #7f8c8d;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+/* LEGACY SUPPORT - Fallback untuk code lama */
+.booking-item {
+    padding: 12px;
+    border: 1px solid #e0e6ed;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: #f8f9fa;
+}
+
+.booking-item strong {
+    font-size: 13px;
+    color: #667eea;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.booking-item p {
+    font-size: 11px;
+    color: #34495e;
+    margin: 0;
+}
+
+.booking-item-nw {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 8px 15px;
+    background: #e8eaf6;
+    border-radius: 6px;
+    margin-left: 10px;
+    min-width: 100px;
+}
+
+.booking-item-nw span {
+    font-size: 10px;
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+.booking-item-nw strong {
+    font-size: 18px;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+.btn-small {
+    padding: 4px 8px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    font-weight: 500;
+    height: 26px !important;
+    max-height: 26px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* Semua button di dalam table harus konsisten */
+.btn-small,
+table .btn,
+table .btn-small,
+table .btn-danger,
+table .btn-secondary,
+table .btn-primary {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    font-weight: 500;
+    padding: 4px 8px !important;
+    height: 26px !important;
+    max-height: 26px !important;
+}
+
+.add-row-container {
+    margin-bottom: 20px; 
+    margin-top: 30px;
+}
+
+#vessel-schedule-view .table-card {
+    margin-top: 0;
+}
+
+/* TERMINAL SCHEDULE TABLE - KONSISTEN */
+#terminalScheduleTable {
+    min-width: 1500px; 
+    table-layout: fixed;
+}
+
+#vesselTable tbody tr,
+#trackingVesselTable tbody tr,
+#dummyBookingTable tbody tr {
+    height: 32px !important;
+    max-height: 32px !important;
+    min-height: 32px !important;
+}
+#agreementTable tbody tr,
+#terminalScheduleTable tbody tr {
+    height: 32px !important;
+    max-height: 32px !important;
+    min-height: 32px !important;
+}
+
+#terminalScheduleTable th, 
+#terminalScheduleTable td {
+    white-space: normal; 
+    vertical-align: middle;
+    padding: 4px 6px !important;
+    height: 32px !important;
+    max-height: 32px !important;
+    min-height: 32px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    font-weight: 400;
+    box-sizing: border-box !important;
+}
+
+#terminalScheduleTable th {
+    font-weight: 600; /* Semi-bold untuk header */
+}
+
+#terminalScheduleTable .editable-cell {
+    min-width: unset;
+    width: 100%;
+    padding: 2px 4px !important;
+    height: 26px !important;
+    max-height: 26px !important;
+    min-height: 26px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    font-weight: 400;
+}
+
+#terminalScheduleTable th:nth-child(1), td:nth-child(1) { width: 100px; }
+#terminalScheduleTable th:nth-child(2), td:nth-child(2) { width: 150px; }
+#terminalScheduleTable th:nth-child(3), td:nth-child(3) { width:80px; }
+#terminalScheduleTable th:nth-child(4), td:nth-child(4) { width: 80px; }
+#terminalScheduleTable th:nth-child(5), td:nth-child(5) { width: 120px; }
+#terminalScheduleTable th:nth-child(6), td:nth-child(6) { width: 120px; }
+#terminalScheduleTable th:nth-child(7), td:nth-child(7) { width: 120px; }
+#terminalScheduleTable th:nth-child(8), td:nth-child(8) { width: 120px; }
+#terminalScheduleTable th:nth-child(9), td:nth-child(9) { width: 120px; }
+#terminalScheduleTable th:nth-child(10), td:nth-child(10) { width: 120px; }
+#terminalScheduleTable th:nth-child(11), td:nth-child(11) { width: 100px; }
+#terminalScheduleTable th:nth-child(12), td:nth-child(12) { width: 60px; }
+#terminalScheduleTable th:nth-child(13), td:nth-child(13) { width: 60px; }
+#terminalScheduleTable .editable-cell {
+min-width: unset;
+width: 100%;
+padding: 2px 4px;
+min-height: 25px;
+}
+
+.total-tonase-cell {
+font-weight: bold;
+font-size: 13px;
+color: #2c3e50;
+vertical-align: middle;
+text-align: center;
+background-color: #f5f7fa;
+}
+
+.blocked-input-container {
+    background-color: #1c1c1c;
+    height: 26px !important;
+    max-height: 26px !important;
+    min-height: 26px !important;
+    border-radius: 3px;
+    border: 1px solid #1c1c1c;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box !important;
+}
+
+/* ============================================
+   REVISI #2: REPORTS TABLE FIXED COLUMNS
+   ============================================ */
+#report-preview-table {
+    table-layout: fixed !important;
+    width: 100% !important;
+    min-width: 100% !important;
+}
+
+#report-preview-table th:nth-child(1),
+#report-preview-table td:nth-child(1) {
+    width: 2cm !important;
+    min-width: 2cm !important;
+    max-width: 2cm !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+#report-preview-table th:nth-child(2),
+#report-preview-table td:nth-child(2) {
+    width: 4cm !important;
+    min-width: 4cm !important;
+    max-width: 4cm !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+#report-preview-table th,
+#report-preview-table td {
+    padding: 4px 6px !important;
+    border: 1px solid #dee2e6 !important;
+    vertical-align: middle !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+    height: 32px !important;
+    max-height: 32px !important;
+    min-height: 32px !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+#report-preview-table th {
+    font-weight: 600 !important;
+}
+
+#report-preview-table tbody tr:hover {
+    background: #f8f9fa !important;
+}
+
+/* === SI & BC FILE UPLOAD CELL - OPTIMIZED === */
+.si-bc-cell {
+    padding: 2px 3px !important;
+    vertical-align: middle !important;
+    height: 32px !important;
+    max-height: 32px !important;
+    min-height: 32px !important;
+    box-sizing: border-box !important;
+    text-align: center;
+}
+
+.file-upload-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    width: 100%;
+    height: 100%;
+    max-height: 22px !important; /* REDUCED */
+}
+
+.file-upload-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 6px !important;
+    background-color: #f0f0f0;
+    color: #6c757d;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+    font-weight: 500;
+    flex-shrink: 1;
+    height: 24px !important;
+    max-height: 24px !important;
+}
+
+
+.file-upload-label:hover {
+    background-color: #e2e6ea;
+    border-color: #adb5bd;
+}
+
+.file-upload-label.has-files {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+.file-upload-label.incomplete {
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeaa7;
+}
+
+.file-upload-input {
+    display: none;
+}
+
+.file-count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px !important;
+    height: 16px !important;
+    max-height: 16px !important;
+    padding: 0 4px;
+    background-color: #667eea;
+    color: white;
+    border-radius: 8px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.file-count-badge.complete {
+    background-color: #28a745;
+}
+
+.file-count-badge.incomplete {
+    background-color: #ffc107;
+}
+
+/* IKON MATA - DESIGN BARU */
+.btn-view-files {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px !important;
+    height: 24px !important;
+    max-height: 24px !important;
+    padding: 0 !important;
+    border: 1px solid #e8eaf6;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: #e8eaf6;
+    color: #5c6bc0;
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+    flex-shrink: 0;
+}
+
+.btn-view-files:hover {
+    background-color: #5c6bc0;
+    color: white;
+    border-color: #5c6bc0;
+    transform: scale(1.05);
+}
+
+.btn-view-files:active {
+    transform: scale(0.95);
+}
+/* Smooth scrolling untuk content area */
+.content-area {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* SCROLLBAR HANYA DI VIEWPORT */
+.content-area::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.content-area::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.content-area::-webkit-scrollbar-thumb {
+    background: #667eea;
+    border-radius: 10px;
+}
+
+.content-area::-webkit-scrollbar-thumb:hover {
+    background: #764ba2;
+}
+
+.table-container::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+/* DATETIME CONTAINER - TYPOGRAPHY KONSISTEN */
+.datetime-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0px !important; /* NO GAP */
+    width: 100%;
+    height: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.datetime-container input[type="date"],
+.datetime-container input[type="time"] {
+    width: 100% !important;
+    padding: 2px 4px !important;
+    border: 1px solid #ced4da;
+    border-radius: 2px;
+    background-color: #fff;
+    box-sizing: border-box !important;
+    height: 14px !important;
+    max-height: 14px !important;
+    min-height: 14px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+    font-weight: 400;
+    color: #2c3e50;
+    overflow: hidden !important;
+}
+
+.datetime-container input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 1px rgba(102, 126, 234, 0.2);
+}
+/* Modal untuk File Preview - Enhanced */
+#image-viewer-modal .modal-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+#image-viewer-modal .modal-body {
+    padding: 0;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+/* File list dalam modal */
+.file-list-item {
+    border: 1px solid #e0e6ed;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background: #f8f9fa;
+    transition: all 0.2s;
+}
+
+.file-list-item:hover {
+    background: #e9ecef;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+/* === HIGHLIGHT UNTUK BARIS PERTAMA VESSEL (Tambahkan di akhir file) === */
+#terminalScheduleTable tbody tr {
+    transition: background-color 0.3s ease;
+}
+
+#terminalScheduleTable tbody tr:hover {
+    background-color: #f0f4ff !important;
+}
+
+/* Styling untuk total tonase yang kosong */
+.total-tonase-cell:empty::after {
+    content: '-';
+    color: #adb5bd;
+    font-weight: 400;
+}
+/* === HIGHLIGHT UNTUK BARIS PERTAMA VESSEL === */
+#terminalScheduleTable tbody tr {
+    transition: all 0.3s ease;
+}
+
+#terminalScheduleTable tbody tr:hover {
+    background-color: #f0f4ff !important;
+    transform: translateX(2px);
+}
+
+/* Styling untuk total tonase yang kosong */
+.total-tonase-cell:empty::after {
+    content: '-';
+    color: #adb5bd;
+    font-weight: 400;
+}
+
+/* Styling untuk tonase yang ada nilai */
+.total-tonase-cell[data-vessel-name]:not([data-vessel-name=""]) {
+    background-color: #e8f5e9;
+    font-weight: 700;
+}
+/* === ENHANCED STYLING UNTUK BARIS DENGAN/TANPA TONASE === */
+#terminalScheduleTable tbody tr.has-tonase-row {
+    background-color: #e8f5e9 !important; /* Light green - HAS TONASE */
+    transition: all 0.3s ease;
+}
+
+#terminalScheduleTable tbody tr.has-tonase-row:hover {
+    background-color: #c8e6c9 !important;
+    transform: translateX(3px);
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+#terminalScheduleTable tbody tr.first-row-no-tonase {
+    background-color: #fff3e0 !important; /* Light orange - NO TONASE */
+    opacity: 0.7;
+}
+
+#terminalScheduleTable tbody tr.first-row-no-tonase:hover {
+    background-color: #ffe0b2 !important;
+    opacity: 1;
+}
+
+/* Styling untuk total tonase cell - ENHANCED */
+.total-tonase-cell {
+    font-weight: bold;
+    font-size: 13px;
+    color: #2c3e50;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #f5f7fa;
+    transition: all 0.3s ease;
+}
+
+.has-tonase-row .total-tonase-cell {
+    background-color: #4caf50 !important;
+    color: white !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+}
+
+.first-row-no-tonase .total-tonase-cell {
+    background-color: #ff9800 !important;
+    color: white !important;
+    font-style: italic;
+}
+
+/* Styling untuk tonase yang kosong */
+.total-tonase-cell:empty::after {
+    content: '-';
+    color: #adb5bd;
+    font-weight: 400;
+}
+
+/* Styling untuk tonase yang ada nilai */
+.total-tonase-cell[data-vessel-name]:not([data-vessel-name=""]) {
+    font-weight: 700;
+}
+
+/* Hover effect untuk row dengan tonase */
+#terminalScheduleTable tbody tr:hover .total-tonase-cell {
+    transform: scale(1.05);
+}
+/* === ENHANCED TONASE CELL DENGAN has-value CLASS === */
+.total-tonase-cell.has-value {
+    background-color: #4caf50 !important;
+    color: white !important;
+    font-size: 14px !important;
+    font-weight: 800 !important;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+    animation: pulse-tonase 2s ease-in-out infinite;
+}
+
+@keyframes pulse-tonase {
+    0%, 100% {
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.5);
+    }
+    50% {
+        box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8), 0 0 10px rgba(76, 175, 80, 0.5);
+    }
+}
+/* IKON EMAIL - DESIGN BARU */
+.btn-send-email {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px !important;
+    height: 24px !important;
+    max-height: 24px !important;
+    padding: 0 !important;
+    border: 1px solid #e3f2fd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: #e3f2fd;
+    color: #1976d2;
+    font-size: 12px !important;
+    line-height: 1.2 !important;
+    flex-shrink: 0;
+}
+
+.btn-send-email:hover {
+    background-color: #1976d2;
+    color: white;
+    border-color: #1976d2;
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
+}
+
+.btn-send-email:active {
+    transform: scale(0.95);
+}
