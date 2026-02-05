@@ -1,100 +1,9 @@
-// --- REVISED STATIC AGREEMENT DATA (RENAMED KEYS) ---
-const staticAgreementData = [
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"45G0","Rate":2793,"Source Location":"IDTPP","Destination Port":"JACKSONVILLE, FL","Agreement Status":"Released","Destination Location":"USJAX"},
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"42G0","Rate":2793,"Source Location":"IDTPP","Destination Port":"JACKSONVILLE, FL","Agreement Status":"Released","Destination Location":"USJAX"},
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20G0","Rate":2251,"Source Location":"IDTPP","Destination Port":"JACKSONVILLE, FL","Agreement Status":"Released","Destination Location":"USJAX"},
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"45G0","Rate":2974,"Source Location":"IDTPP","Destination Port":"HOUSTON, TX","Agreement Status":"Released","Destination Location":"USHOU"},
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"42G0","Rate":2974,"Source Location":"IDTPP","Destination Port":"HOUSTON, TX","Agreement Status":"Released","Destination Location":"USHOU"},
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20G0","Rate":2412,"Source Location":"IDTPP","Destination Port":"HOUSTON, TX","Agreement Status":"Released","Destination Location":"USHOU"},
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"45G0","Rate":4651,"Source Location":"IDTPP","Destination Port":"CINCINNATI, OH","Agreement Status":"Released","Destination Location":"USCWG"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"45G0","Rate":5303,"Source Location":"IDTPP","Destination Port":"PAPEETE","Agreement Status":"Released","Destination Location":"PFPPT"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"42G0","Rate":5303,"Source Location":"IDTPP","Destination Port":"PAPEETE","Agreement Status":"Released","Destination Location":"PFPPT"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"20G0","Rate":1344,"Source Location":"IDTPP","Destination Port":"MADANG","Agreement Status":"Released","Destination Location":"PGMAG"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"42G0","Rate":2679,"Source Location":"IDTPP","Destination Port":"MADANG","Agreement Status":"Released","Destination Location":"PGMAG"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"45G0","Rate":2678,"Source Location":"IDTPP","Destination Port":"MADANG","Agreement Status":"Released","Destination Location":"PGMAG"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"20G0","Rate":6844,"Source Location":"IDTPP","Destination Port":"NUKU'ALOFA","Agreement Status":"Released","Destination Location":"TOTBU"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"42G0","Rate":7803,"Source Location":"IDTPP","Destination Port":"NUKU'ALOFA","Agreement Status":"Released","Destination Location":"TOTBU"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"45G0","Rate":7803,"Source Location":"IDTPP","Destination Port":"NUKU'ALOFA","Agreement Status":"Released","Destination Location":"TOTBU"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"20G0","Rate":8344,"Source Location":"IDTPP","Destination Port":"APIA","Agreement Status":"Released","Destination Location":"WSAPW"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"42G0","Rate":9303,"Source Location":"IDTPP","Destination Port":"APIA","Agreement Status":"Released","Destination Location":"WSAPW"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"45G0","Rate":9303,"Source Location":"IDTPP","Destination Port":"APIA","Agreement Status":"Released","Destination Location":"WSAPW"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20G0","Rate":1905,"Source Location":"IDTPP","Destination Port":"SUVA","Agreement Status":"Released","Destination Location":"FJSUV"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"42G0","Rate":3699,"Source Location":"IDTPP","Destination Port":"SUVA","Agreement Status":"Released","Destination Location":"FJSUV"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"45G0","Rate":3699,"Source Location":"IDTPP","Destination Port":"SUVA","Agreement Status":"Released","Destination Location":"FJSUV"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20G0","Rate":718,"Source Location":"IDTPP","Destination Port":"AUCKLAND","Agreement Status":"Released","Destination Location":"NZAKL"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"42G0","Rate":1352,"Source Location":"IDTPP","Destination Port":"AUCKLAND","Agreement Status":"Released","Destination Location":"NZAKL"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"40HC","Rate":1367,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001648","Calculation Sheet":"3625","LINER":"ANL SINGAPORE PTE LTD. / JAKARTA SELATAN 12980","Type":"20","Rate":720,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001662","Calculation Sheet":"3982","LINER":"COSCO SHIPPING LINES / JAKARTA PUSAT 10220","Type":"20","Rate":345,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20","Rate":733,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001648","Calculation Sheet":"3625","LINER":"ANL SINGAPORE PTE LTD. / JAKARTA SELATAN 12980","Type":"40","Rate":1440,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001648","Calculation Sheet":"3625","LINER":"ANL SINGAPORE PTE LTD. / JAKARTA SELATAN 12980","Type":"40HC","Rate":1440,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001641","Calculation Sheet":"3617","LINER":"OCEAN NETWORK EXPRESS PTE. LTD. / JAKARTA SELATAN 1","Type":"20","Rate":775,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001641","Calculation Sheet":"3617","LINER":"OCEAN NETWORK EXPRESS PTE. LTD. / JAKARTA SELATAN 1","Type":"40","Rate":1550,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001641","Calculation Sheet":"3617","LINER":"OCEAN NETWORK EXPRESS PTE. LTD. / JAKARTA SELATAN 1","Type":"40HC","Rate":1550,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001647","Calculation Sheet":"3624","LINER":"ORIENT OVERSEAS CONTAINER LINE LTD / JAKARTA PUSAT","Type":"40HC","Rate":1680,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001647","Calculation Sheet":"3624","LINER":"ORIENT OVERSEAS CONTAINER LINE LTD / JAKARTA PUSAT","Type":"40","Rate":1680,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001647","Calculation Sheet":"3624","LINER":"ORIENT OVERSEAS CONTAINER LINE LTD / JAKARTA PUSAT","Type":"20","Rate":865,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"40","Rate":1818,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"40HC","Rate":1818,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"20","Rate":331,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001644","Calculation Sheet":"3620","LINER":"PT. PACIFIC INTERNATIONAL LINES / JAKARTA SELATAN","Type":"20","Rate":1089,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001644","Calculation Sheet":"3620","LINER":"PT. PACIFIC INTERNATIONAL LINES / JAKARTA SELATAN","Type":"40","Rate":1860,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001644","Calculation Sheet":"3620","LINER":"PT. PACIFIC INTERNATIONAL LINES / JAKARTA SELATAN","Type":"40HC","Rate":1860,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001744","Calculation Sheet":"3756","LINER":"CMA CGM SA / JAKARTA SELATAN 12980","Type":"40HC","Rate":3516,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"Released","Destination Location":"COBUN"},
-    {"Agreement":"2220001744","Calculation Sheet":"3756","LINER":"CMA CGM SA / JAKARTA SELATAN 12980","Type":"40","Rate":3516,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"Released","Destination Location":"COBUN"},
-    {"Agreement":"2220001744","Calculation Sheet":"3756","LINER":"CMA CGM SA / JAKARTA SELATAN 12980","Type":"20","Rate":2458,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"Released","Destination Location":"COBUN"},
-    {"Agreement":"2220001838","Calculation Sheet":"3852","LINER":"OCEAN NETWORK EXPRESS PTE. LTD. / JAKARTA SELATAN 1","Type":"40HC","Rate":1500,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"Released","Destination Location":"COBUN"},
-    {"Agreement":"2220001838","Calculation Sheet":"3852","LINER":"OCEAN NETWORK EXPRESS PTE. LTD. / JAKARTA SELATAN 1","Type":"40","Rate":1500,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"Released","Destination Location":"COBUN"},
-    {"Agreement":"2220001838","Calculation Sheet":"3852","LINER":"OCEAN NETWORK EXPRESS PTE. LTD. / JAKARTA SELATAN 1","Type":"20","Rate":1450,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"Released","Destination Location":"COBUN"},
-    {"Agreement":"2220001794","Calculation Sheet":"3847","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20","Rate":1518,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001794","Calculation Sheet":"3847","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"40","Rate":2053,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001794","Calculation Sheet":"3847","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"40HC","Rate":2053,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001839","Calculation Sheet":"3853","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20","Rate":1518,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001839","Calculation Sheet":"3853","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"40","Rate":2053,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001839","Calculation Sheet":"3853","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"40HC","Rate":2053,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001745","Calculation Sheet":"3757","LINER":"CMA CGM SA / JAKARTA SELATAN 12980","Type":"20","Rate":2358,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001746","Calculation Sheet":"3759","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"40HC","Rate":2748,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001746","Calculation Sheet":"3759","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"40","Rate":2748,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001747","Calculation Sheet":"3760","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"40HC","Rate":2748,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001745","Calculation Sheet":"3757","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"40","Rate":2748,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001745","Calculation Sheet":"3757","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"40HC","Rate":3216,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001745","Calculation Sheet":"3757","LINER":"CMA CGM SA / JAKARTA SELATAN 12980","Type":"40HC","Rate":3216,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001746","Calculation Sheet":"3759","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"20","Rate":2685,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001747","Calculation Sheet":"3760","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"20","Rate":2685,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"}
-];
-
-// --- DATA FROM UPLOADED FILE (WITH SAMPLE LINER DATA) ---
-const initialVesselData = [
-    // 'nw' (Net Weight) dalam Kg
-    {"region":"Region 1","vfPpp":"BREFCARD","sc":"D1H0001640","delivery":"D100004294","container20":"","container40":"","container40hc":1,"mad":"2025-05-16","shipToParty":"PEREZ TRADING CO MEXICO","shippingPoint":"821C","country":"MEXICO","incot":"FOB", "liner": "MSC", "vesselName": "SONGA SUCCESS", "nw": 21000, "masalah": "Tidak Ada"},
-    {"region":"Region 1","vfPpp":"BREFCARD","sc":"D1H0001249","delivery":"D100011154","container20":"","container40":"","container40hc":1,"mad":"2025-03-29","shipToParty":"GLASS-CO INDUSTRIES S.R.L.","shippingPoint":"821C","country":"ROMANIA","incot":"CIF", "liner": "MAERSK", "vesselName": "SONGA SUCCESS", "nw": 22000},
-    {"region":"Region 1","vfPpp":"BREFCARD","sc":"D1H0003535","delivery":"D100011991","container20":"","container40":"","container40hc":1,"mad":"2025-04-15","shipToParty":"PEREZ TRADING COMPANY TO GUATEMALA","shippingPoint":"821C","country":"GUATEMALA","incot":"FOB", "liner": "MAERSK", "vesselName": "SONGA SUCCESS", "nw": 23000},
-    {"region":"Region 6","vfPpp":"WS-PPP","sc":"D1H0014791","delivery":"D100013196","container20":10,"container40":"","container40hc":"","mad":"2025-06-27","shipToParty":"HARAS INTERNATIONAL LTD to Djibouti","shippingPoint":"821G","country":"DJIBOUTI","incot":"FOB", "liner": "HAPAG-LLOYD", "vesselName": "COSCO HAIFA", "nw": 240000},
-    {"region":"Region 6","vfPpp":"BREFCARD","sc":"D1H0014772","delivery":"D100014071","container20":5,"container40":"","container40hc":"","mad":"2025-06-20","shipToParty":"VITAL SOLUTIONS PTE LTD TO SOUTH AFRICA","shippingPoint":"821C","country":"SOUTH AFRICA","incot":"FOB", "liner": "COSCO", "vesselName": "COSCO HAIFA", "nw": 125000},
-    {"region":"Region 6","vfPpp":"BREFCARD","sc":"D1H0016359","delivery":"D100014485","container20":1,"container40":"","container40hc":"","mad":"2025-07-22","shipToParty":"VITAL SOLUTIONS PTE LTD TO IVORY COAST","shippingPoint":"821C","country":"IVORY COAST","incot":"FOB", "liner": "MSC", "vesselName": "MSC DUMMY", "nw": 25000},
-    {"region":"Region 6","vfPpp":"LABEL STOCK","sc":"D1H0016494","delivery":"D100014580","container20":1,"container40":"","container40hc":"","mad":"2025-08-16","shipToParty":"VITAL SOLUTIONS PTE LTD TO IVORY COAST","shippingPoint":"821Q","country":"IVORY COAST","incot":"FOB", "liner": "MSC", "vesselName": "MSC DUMMY", "nw": 25000},
-    {"region":"Region 1","vfPpp":"CARBONLESS","sc":"D1H0016256","delivery":"D100014647","container20":"","container40":"","container40hc":1,"mad":"2025-08-18","shipToParty":"PALS INTERNATIONAL L. L. C. TO COLOMBIA","shippingPoint":"821C","country":"COLOMBIA","incot":"FOB", "liner": "MAERSK", "vesselName": "MAERSK DUMMY", "nw": 22000},
-    {"region":"Region 6","vfPpp":"ART BOARD","sc":"D1H0016202","delivery":"D100014752","container20":1,"container40":"","container40hc":"","mad":"2025-08-11","shipToParty":"VITAL SOLUTIONS PTE LTD TO KENYA","shippingPoint":"821C","country":"KENYA","incot":"FOB", "liner": "COSCO", "vesselName": "COSCO HAIFA", "nw": 26000},
-    {"region":"Region 6","vfPpp":"BREFCARD","sc":"D1H0015825","delivery":"D100014808","container20":4,"container40":"","container40hc":"","mad":"2025-08-01","shipToParty":"TEXVISTA INTERNATIONAL PTE. LTD.","shippingPoint":"821C","country":"NIGERIA","incot":"CIF", "liner": "HAPAG-LLOYD", "vesselName": "HAPAG DUMMY", "nw": 100000},
-    {"region":"Region 2","vfPpp":"ART BOARD","sc":"D1H0015620","delivery":"D100015013","container20":2,"container40":"","container40hc":"","mad":"2025-08-19","shipToParty":"MOIZ SHABIR LTD","shippingPoint":"821C","country":"PAKISTAN","incot":"CIF", "liner": "MAERSK", "vesselName": "MAERSK DUMMY", "nw": 50000},
-    {"region":"Region 2","vfPpp":"ART BOARD","sc":"D1H0015626","delivery":"D100015030","container20":3,"container40":"","container40hc":"","mad":"2025-08-15","shipToParty":"GREEN GLOBE IMPEX PRIVATE LIMITED","shippingPoint":"821C","country":"INDIA","incot":"CIF", "liner": "ONE", "vesselName": "ONE DUMMY", "nw": 75000},
-    {"region":"Region 5","vfPpp":"PPC","sc":"D1H0016501","delivery":"D100015045","container20":1,"container40":"","container40hc":"","mad":"2025-08-15","shipToParty":"PAPER FORCE (OCEANIA) PTY.LTD.","shippingPoint":"821K","country":"AUSTRALIA","incot":"CFR", "liner": "ONE", "vesselName": "ONE DUMMY", "nw": 25000},
-    {"region":"Region 5","vfPpp":"PPC","sc":"D1H0016473","delivery":"D100015046","container20":2,"container40":"","container40hc":"","mad":"2025-08-09","shipToParty":"PAPER FORCE (OCEANIA) PTY.LTD.","shippingPoint":"821K","country":"AUSTRALIA","incot":"CFR", "liner": "MAERSK", "vesselName": "MAERSK DUMMY", "nw": 50000},
-    {"region":"Region 5","vfPpp":"PPC","sc":"D1H0016474","delivery":"D100015048","container20":1,"container40":"","container40hc":"","mad":"2025-08-19","shipToParty":"PAPER FORCE (OCEANIA) PTY.LTD.","shippingPoint":"821K","country":"AUSTRALIA","incot":"CFR", "liner": "MSC", "vesselName": "MSC DUMMY", "nw": 25000},
-    {"region":"Region 5","vfPpp":"PPC","sc":"D1H0016477","delivery":"D100015049","container20":2,"container40":"","container40hc":"","mad":"2025-08-09","shipToParty":"PAPER FORCE (OCEANIA) PTY.LTD.","shippingPoint":"821K","country":"AUSTRALIA","incot":"CFR", "liner": "COSCO", "vesselName": "COSCO HAIFA", "nw": 50000},
-    {"region":"Region 5","vfPpp":"PPC","sc":"D1H0016479","delivery":"D100015050","container20":2,"container40":"","container40hc":"","mad":"2025-08-09","shipToParty":"PAPER FORCE (OCEANIA) PTY.LTD.","shippingPoint":"821K","country":"AUSTRALIA","incot":"CFR", "liner": "HAPAG-LLOYD", "vesselName": "HAPAG DUMMY", "nw": 50000}
-];
-
 // === DATA JADWAL TERMINAL STATIS ===
 const terminalScheduleData = {
     "Pelindo": [
         {"vesselName": "CONTOH PELINDO", "voyage": "123P", "eta": "2025-11-20", "etd": "2025-11-21", "closing": "2025-11-19", "openStack": "2025-11-17"}
     ]
 };
-
-// --- AKHIR DATA BARU ---
-
 
 let globalData = [];
 let dummyData = []; // Data terpisah untuk Dummy Booking
@@ -246,6 +155,142 @@ window.showDayDetails = function(dateString) {
     document.getElementById('calendar-modal').style.display = 'flex';
 }
 
+function normalizeDestinationPort(port) {
+    if (!port) return '';
+    const portStr = String(port).trim();
+    const firstPart = portStr.split(',')[0].trim();
+    return firstPart.toUpperCase();
+}
+
+function normalizeContainerType(type) {
+    if (!type) return '';
+    const typeStr = String(type).trim().toUpperCase();
+    
+    if (typeStr.includes('20')) return '20';
+    if (typeStr.includes('42')) return '40';
+    if (typeStr.includes('45')) return '40HC';
+    if (typeStr === '40HC') return '40HC';
+    if (typeStr === '40') return '40';
+    if (typeStr === '20') return '20';
+    
+    return typeStr;
+}
+
+function autoFillTOP1LINER() {
+    console.log('=== AUTO-FILL TOP 1 LINER START ===');
+    
+    if (!staticAgreementData || staticAgreementData.length === 0) {
+        console.warn('Agreement data not available');
+        return;
+    }
+    
+    let updatedCount = 0;
+    
+    globalData.forEach(row => {
+        if (!row.destination) return;
+        
+        const normalizedDestPort = normalizeDestinationPort(row.destination);
+        console.log(`Processing row ${row.id}: Destination = "${row.destination}" → Normalized = "${normalizedDestPort}"`);
+        
+        row.top1_20 = '';
+        row.top1_40 = '';
+        row.top1_40hc = '';
+        
+        // CONTAINER 20
+        const qty20 = parseFloat(row.container20) || 0;
+        if (qty20 > 0) {
+            const matchingAgreements20 = staticAgreementData.filter(agr => {
+                const agrDestPort = normalizeDestinationPort(agr['Destination Port']);
+                const agrType = normalizeContainerType(agr['Type']);
+                return agrDestPort === normalizedDestPort && agrType === '20';
+            });
+            
+            console.log(`  Container 20: Found ${matchingAgreements20.length} matching agreements`);
+            
+            if (matchingAgreements20.length > 0) {
+                matchingAgreements20.sort((a, b) => {
+                    const rateA = parseFloat(a['Rate']) || 999999;
+                    const rateB = parseFloat(b['Rate']) || 999999;
+                    return rateA - rateB;
+                });
+                
+                const top1 = matchingAgreements20[0];
+                row.top1_20 = top1['LINER'] || '';
+                console.log(`  ✓ TOP 1 LINER 20: ${row.top1_20} (Rate: ${top1['Rate']})`);
+                updatedCount++;
+            } else {
+                console.log(`  ✗ No matching agreement for Container 20`);
+            }
+        } else {
+            console.log(`  Container 20: qty = 0, SKIP`);
+        }
+        
+        // CONTAINER 40
+        const qty40 = parseFloat(row.container40) || 0;
+        if (qty40 > 0) {
+            const matchingAgreements40 = staticAgreementData.filter(agr => {
+                const agrDestPort = normalizeDestinationPort(agr['Destination Port']);
+                const agrType = normalizeContainerType(agr['Type']);
+                return agrDestPort === normalizedDestPort && agrType === '40';
+            });
+            
+            console.log(`  Container 40: Found ${matchingAgreements40.length} matching agreements`);
+            
+            if (matchingAgreements40.length > 0) {
+                matchingAgreements40.sort((a, b) => {
+                    const rateA = parseFloat(a['Rate']) || 999999;
+                    const rateB = parseFloat(b['Rate']) || 999999;
+                    return rateA - rateB;
+                });
+                
+                const top1 = matchingAgreements40[0];
+                row.top1_40 = top1['LINER'] || '';
+                console.log(`  ✓ TOP 1 LINER 40: ${row.top1_40} (Rate: ${top1['Rate']})`);
+                updatedCount++;
+            } else {
+                console.log(`  ✗ No matching agreement for Container 40`);
+            }
+        } else {
+            console.log(`  Container 40: qty = 0, SKIP`);
+        }
+        
+        // CONTAINER 40HC
+        const qty40hc = parseFloat(row.container40hc) || 0;
+        if (qty40hc > 0) {
+            const matchingAgreements40hc = staticAgreementData.filter(agr => {
+                const agrDestPort = normalizeDestinationPort(agr['Destination Port']);
+                const agrType = normalizeContainerType(agr['Type']);
+                return agrDestPort === normalizedDestPort && agrType === '40HC';
+            });
+            
+            console.log(`  Container 40HC: Found ${matchingAgreements40hc.length} matching agreements`);
+            
+            if (matchingAgreements40hc.length > 0) {
+                matchingAgreements40hc.sort((a, b) => {
+                    const rateA = parseFloat(a['Rate']) || 999999;
+                    const rateB = parseFloat(b['Rate']) || 999999;
+                    return rateA - rateB;
+                });
+                
+                const top1 = matchingAgreements40hc[0];
+                row.top1_40hc = top1['LINER'] || '';
+                console.log(`  ✓ TOP 1 LINER 40HC: ${row.top1_40hc} (Rate: ${top1['Rate']})`);
+                updatedCount++;
+            } else {
+                console.log(`  ✗ No matching agreement for Container 40HC`);
+            }
+        } else {
+            console.log(`  Container 40HC: qty = 0, SKIP`);
+        }
+        
+        const top1Parts = [row.top1_20, row.top1_40, row.top1_40hc].filter(x => x);
+        row.top1 = top1Parts.length > 0 ? top1Parts.join(' | ') : '';
+    });
+    
+    console.log(`=== AUTO-FILL TOP 1 LINER COMPLETE ===`);
+    console.log(`Total fields updated: ${updatedCount}`);
+}
+
 function updateEventMap() {
     eventsByDate = {}; // Reset peta
     globalData.forEach(row => {
@@ -341,28 +386,36 @@ function renderAgreementTable(data) {
 
     const headers = [
         "Agreement", "Calculation Sheet", "LINER", "Type", "Rate", 
-        "Destination Port", "Agreement Status", "Source Location", "Destination Location"
+        "Destination Port", "Destination Location"
     ];
     
     tableHead.innerHTML = '<tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
 
     if (!data || data.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="${headers.length}" style="text-align:center;">No data to display.</td></tr>`;
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="7" style="text-align:center; padding: 40px; color: #7f8c8d;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">📄</div>
+                    <strong>No data to display</strong><br>
+                    <span style="font-size: 11px;">Upload an Excel file or adjust your search filter</span>
+                </td>
+            </tr>
+        `;
         return;
     }
 
     const typeDisplayMap = { '20G0': '20', '42G0': '40', '45G0': '40HC' };
     let bodyHtml = '';
     
-    // Batasi hingga 10 baris
-    data.slice(0, 10).forEach(row => {
+    data.forEach((row, index) => {
         bodyHtml += '<tr>';
-        headers.forEach(header => {
+        bodyHtml += `<td style="text-align:center;"><strong>${index + 1}</strong></td>`; // Nomor urut
+        headers.slice(1).forEach(header => { // Skip "No" karena sudah ditambahkan manual
             let cellValue = (row && row[header] !== undefined && row[header] !== null) ? row[header] : '';
             if (header === 'Type') {
                 cellValue = typeDisplayMap[cellValue] || cellValue;
             }
-            bodyHtml += `<td>${cellValue}</td>`;
+            bodyHtml += `<td title="${cellValue}">${cellValue}</td>`;
         });
         bodyHtml += '</tr>';
     });
@@ -372,7 +425,7 @@ function renderAgreementTable(data) {
 
 function filterAgreementTable() {
     const filterValue = document.getElementById('filterAgreement').value.toLowerCase();
-    const filteredData = staticAgreementData.filter(row => 
+    const filteredData = agreementData.filter(row => 
         Object.values(row).some(val => String(val).toLowerCase().includes(filterValue))
     );
     renderAgreementTable(filteredData);
@@ -381,15 +434,15 @@ function filterAgreementTable() {
 // === FUNGSI BARU: DUMMY BOOKING ===
 window.addNewDummyEntry = function() {
     const newId = dummyData.length > 0 ? Math.max(...dummyData.map(d => d.id)) + 1 : 1;
-    const newEntry = {
-        id: newId, region: "DUMMY", vfPpp: "", sc: "", delivery: "", container20: 0, container40: 0, container40hc: 0, mad: "",
-        shipToParty: "", shippingPoint: "", country: "", incot: "FOB", destination: "", bookingDa: "", marksBy: "", etd: "", 
-        bookingNumb: "", liner: "", top1: "", reason: "", 
-        keterangan: "", vesselName: "", 
-        nw: 0, 
-        doStatus: "CUSTOMER", postToSap: false, masalah: "None", // CRITICAL FIX: Default "None"
-        siStatus: 'Pending', bcStatus: 'Pending'
-    };
+const newEntry = {
+    id: newId, region: currentRegion, vfPpp: "", sc: "", delivery: "", container20: 0, container40: 0, container40hc: 0, mad: "",
+    shipToParty: "", shippingPoint: "", country: "", incot: "FOB", destination: "", bookingDa: "", marksBy: "", etd: "", 
+    bookingNumb: "", liner: "", top1_20: "", top1_40: "", top1_40hc: "", reason: "", 
+    keterangan: "", vesselName: "", 
+    nw: 0, 
+    doStatus: "CUSTOMER", postToSap: false, masalah: "None",
+    siStatus: 'Pending', bcStatus: 'Pending'
+};
     dummyData.push(newEntry);
     renderDummyBookingTable();
 } 
@@ -420,14 +473,14 @@ window.addNewEntry = function() {
         return;
     }
     const newId = globalData.length > 0 ? Math.max(...globalData.map(d => d.id)) + 1 : 1;
-    const newEntry = {
-        id: newId, region: currentRegion, vfPpp: "", sc: "", delivery: "", container20: 0, container40: 0, container40hc: 0, mad: "",
-        shipToParty: "", shippingPoint: "", country: "", incot: "FOB", destination: "", bookingDa: "", marksBy: "", etd: "", 
-        bookingNumb: "", liner: "", top1: "", reason: "", 
-        keterangan: "", vesselName: "", 
-        nw: 0, 
-        doStatus: "CUSTOMER", postToSap: false, masalah: "None", // CRITICAL FIX: Default "None"
-        siStatus: 'Pending', bcStatus: 'Pending'
+const newEntry = {
+    id: newId, region: currentRegion, vfPpp: "", sc: "", delivery: "", container20: 0, container40: 0, container40hc: 0, mad: "",
+    shipToParty: "", shippingPoint: "", country: "", incot: "FOB", destination: "", bookingDa: "", marksBy: "", etd: "", 
+    bookingNumb: "", liner: "", top1_20: "", top1_40: "", top1_40hc: "", reason: "", 
+    keterangan: "", vesselName: "", 
+    nw: 0, 
+    doStatus: "CUSTOMER", postToSap: false, masalah: "None",
+    siStatus: 'Pending', bcStatus: 'Pending'
     };
     globalData.push(newEntry);
     renderAllTablesAndCharts();
@@ -1054,11 +1107,13 @@ if (masalah !== 'None') {
                 <td><input type="date" class="editable-cell" value="${row.bookingDa || ''}" onchange="${updateHandler}(${rowId}, 'bookingDa', this.value)"></td>
                 <td title="${row.marksBy || ''}"><input type="text" class="editable-cell" value="${row.marksBy || ''}" onchange="${updateHandler}(${rowId}, 'marksBy', this.value)"></td>
                 <td title="${row.bookingNumb || ''}"><input type="text" class="editable-cell" value="${row.bookingNumb || ''}" onchange="${updateHandler}(${rowId}, 'bookingNumb', this.value)"></td>
-                <td title="${row.liner || ''}"><input type="text" class="editable-cell" value="${row.liner || ''}" onchange="${updateHandler}(${rowId}, 'liner', this.value)"></td>
-                <td title="${row.top1 || ''}"><input type="text" class="editable-cell" value="${row.top1 || ''}" onchange="${updateHandler}(${rowId}, 'top1', this.value)"></td>
-                <td title="${row.reason || ''}"><input type="text" class="editable-cell" value="${row.reason || ''}" onchange="${updateHandler}(${rowId}, 'reason', this.value)"></td>
-                <td title="${row.keterangan || ''}"><input type="text" class="editable-cell" value="${row.keterangan || ''}" onchange="${updateHandler}(${rowId}, 'keterangan', this.value)"></td>
-                <td title="${row.vesselName || ''}"><input type="text" class="editable-cell" value="${row.vesselName || ''}" onchange="${updateHandler}(${rowId}, 'vesselName', this.value)"></td>
+<td title="${row.liner || ''}"><input type="text" class="editable-cell" value="${row.liner || ''}" onchange="${updateHandler}(${rowId}, 'liner', this.value)"></td>
+<td title="${row.top1_20 || ''}"><input type="text" class="editable-cell" value="${row.top1_20 || ''}" onchange="${updateHandler}(${rowId}, 'top1_20', this.value)"></td>
+<td title="${row.top1_40 || ''}"><input type="text" class="editable-cell" value="${row.top1_40 || ''}" onchange="${updateHandler}(${rowId}, 'top1_40', this.value)"></td>
+<td title="${row.top1_40hc || ''}"><input type="text" class="editable-cell" value="${row.top1_40hc || ''}" onchange="${updateHandler}(${rowId}, 'top1_40hc', this.value)"></td>
+<td title="${row.reason || ''}"><input type="text" class="editable-cell" value="${row.reason || ''}" onchange="${updateHandler}(${rowId}, 'reason', this.value)"></td>
+<td title="${row.keterangan || ''}"><input type="text" class="editable-cell" value="${row.keterangan || ''}" onchange="${updateHandler}(${rowId}, 'keterangan', this.value)"></td>
+<td title="${row.vesselName || ''}"><input type="text" class="editable-cell" value="${row.vesselName || ''}" onchange="${updateHandler}(${rowId}, 'vesselName', this.value)"></td>
                 <td title="${row.voyage || ''}"><input type="text" class="editable-cell" value="${row.voyage || ''}" onchange="${updateHandler}(${rowId}, 'voyage', this.value)"></td>
                 <td>
                     <div class="datetime-container">
@@ -1092,46 +1147,47 @@ if (masalah !== 'None') {
                     </td>
                 ` : ''}
             `;
-        } else {
-            const nwInTons = (parseFloat(row.nw) || 0) / 1000;
-            tr.innerHTML = `
-                <td style="text-align:center;"><strong>${index + 1}</strong></td>
-                <td title="${row.region || ''}">${row.region || ''}</td>
-                <td title="${row.vfPpp || ''}">${row.vfPpp || ''}</td>
-                <td title="${row.sc || ''}">${row.sc || ''}</td>
-                <td title="${row.delivery || ''}">${row.delivery || ''}</td>
-                <td style="text-align:center;">${row.container20 || 0}</td>
-                <td style="text-align:center;">${row.container40 || 0}</td>
-                <td style="text-align:center;">${row.container40hc || 0}</td>
-                <td>${row.mad || ''}</td>
-                <td title="${row.shipToParty || ''}">${row.shipToParty || ''}</td>
-                <td title="${row.shippingPoint || ''}">${row.shippingPoint || ''}</td>
-                <td title="${row.country || ''}">${row.country || ''}</td>
-                <td style="text-align:center;">${row.incot || ''}</td>
-                <td title="${row.destination || ''}">${row.destination || ''}</td>
-                <td>${row.bookingDa || ''}</td>
-                <td title="${row.marksBy || ''}">${row.marksBy || ''}</td>
-                <td title="${row.bookingNumb || ''}">${row.bookingNumb || ''}</td>
-                <td title="${row.liner || ''}">${row.liner || ''}</td>
-                <td title="${row.top1 || ''}">${row.top1 || ''}</td>
-                <td title="${row.reason || ''}">${row.reason || ''}</td>
-                <td title="${row.keterangan || ''}">${row.keterangan || ''}</td>
-                <td title="${row.vesselName || ''}">${row.vesselName || ''}</td>
-                <td title="${row.voyage || ''}">${row.voyage || ''}</td>
-                <td>${row.openCyDate || ''} ${row.openCyTime || ''}</td>
-                <td>${row.closingFisikDate || ''} ${row.closingFisikTime || ''}</td>
-                <td>${row.etd || ''}</td>
-                <td style="text-align:center;">${nwInTons.toFixed(2)}</td>
-                <td style="text-align:center;">
-                    <span class="status-badge status-${doStatus.toLowerCase()}">${doStatus}</span>
-                </td>
-                <td style="text-align:center;">
-                    <input type="checkbox" ${postToSap ? 'checked' : ''} disabled>
-                </td>
-                <td title="${masalah}">${masalah}</td>
-            `;
-        }
-        tbody.appendChild(tr);
+} else {
+    const nwInTons = (parseFloat(row.nw) || 0) / 1000;
+    tr.innerHTML = `
+        <td style="text-align:center;"><strong>${index + 1}</strong></td>
+        <td title="${row.region || ''}">${row.region || ''}</td>
+        <td title="${row.vfPpp || ''}">${row.vfPpp || ''}</td>
+        <td title="${row.sc || ''}">${row.sc || ''}</td>
+        <td title="${row.delivery || ''}">${row.delivery || ''}</td>
+        <td style="text-align:center;">${row.container20 || 0}</td>
+        <td style="text-align:center;">${row.container40 || 0}</td>
+        <td style="text-align:center;">${row.container40hc || 0}</td>
+        <td>${row.mad || ''}</td>
+        <td title="${row.shipToParty || ''}">${row.shipToParty || ''}</td>
+        <td title="${row.shippingPoint || ''}">${row.shippingPoint || ''}</td>
+        <td title="${row.country || ''}">${row.country || ''}</td>
+        <td style="text-align:center;">${row.incot || ''}</td>
+        <td title="${row.destination || ''}">${row.destination || ''}</td>
+        <td>${row.bookingDa || ''}</td>
+        <td title="${row.marksBy || ''}">${row.marksBy || ''}</td>
+        <td title="${row.bookingNumb || ''}">${row.bookingNumb || ''}</td>
+<td title="${row.liner || ''}">${row.liner || ''}</td>
+<td title="${row.top1_20 || ''}">${row.top1_20 || ''}</td>
+<td title="${row.top1_40 || ''}">${row.top1_40 || ''}</td>
+<td title="${row.top1_40hc || ''}">${row.top1_40hc || ''}</td>
+<td title="${row.reason || ''}">${row.reason || ''}</td>
+<td title="${row.keterangan || ''}">${row.keterangan || ''}</td>
+        <td title="${row.vesselName || ''}">${row.vesselName || ''}</td>
+        <td title="${row.voyage || ''}">${row.voyage || ''}</td>
+        <td>${row.openCyDate || ''} ${row.openCyTime || ''}</td>
+        <td>${row.closingFisikDate || ''} ${row.closingFisikTime || ''}</td>
+        <td>${row.etd || ''}</td>
+        <td style="text-align:center;">${nwInTons.toFixed(2)}</td>
+        <td style="text-align:center;">
+            <input type="checkbox" class="do-status-checkbox" ${doStatus === 'OK' ? 'checked' : ''} disabled>
+        </td>
+        <td style="text-align:center;">
+            <input type="checkbox" ${postToSap ? 'checked' : ''} disabled>
+        </td>
+        <td title="${masalah}">${masalah}</td>
+    `;
+}        tbody.appendChild(tr);
     });
 }
 
@@ -1145,6 +1201,100 @@ function renderDummyBookingTable() {
 // === AKHIR FUNGSI BARU ===
 
 
+// === FUNGSI HELPER: FIND BEST LINER FOR ALL CONTAINER TYPES (20, 40, 40HC) ===
+// ========================= REVISI CRITICAL: TOP 1 LINER PER TYPE CONTAINER =========================
+// Fungsi ini mencari TOP 1 LINER untuk SETIAP TYPE CONTAINER (20, 40, 40HC) secara TERPISAH dan INDEPENDEN
+// KRITERIA WAJIB:
+// 1. Rate TERENDAH
+// 2. Destination Port HARUS sama
+// 3. Type container HARUS sesuai (20 ≠ 40 ≠ 40HC)
+// 4. Jika tidak ada match, return 'N/A' (NULL equivalent)
+function findBestLinersForAllTypes(destinationPort) {
+    // Validasi input
+    if (!destinationPort || !agreementData || agreementData.length === 0) {
+        console.log('[findBestLinersForAllTypes] No destination port or no agreement data');
+        return {
+            '20': 'N/A',
+            '40': 'N/A',
+            '40HC': 'N/A'
+        };
+    }
+
+    const destPortUpper = destinationPort.trim().toUpperCase();
+    console.log(`[findBestLinersForAllTypes] Searching for destination: ${destPortUpper}`);
+    
+    // Type mapping untuk matching dengan Agreement List
+    // Setiap type memiliki kemungkinan format yang berbeda di Agreement List
+    const typeMap = {
+        '20': ['20G0', '20'],      // Type 20 bisa ditulis sebagai 20G0 atau 20
+        '40': ['42G0', '40'],      // Type 40 bisa ditulis sebagai 42G0 atau 40
+        '40HC': ['45G0', '40HC']   // Type 40HC bisa ditulis sebagai 45G0 atau 40HC
+    };
+    
+    const results = {};
+    
+    // WAJIB: Loop untuk SETIAP tipe container SECARA TERPISAH
+    // Tidak boleh digabung atau dipaksakan satu LINER untuk semua type
+    ['20', '40', '40HC'].forEach(containerType => {
+        const validTypes = typeMap[containerType];
+        
+        console.log(`[findBestLinersForAllTypes] Processing type: ${containerType}, valid types: ${validTypes.join(', ')}`);
+        
+        // Filter agreements yang WAJIB memenuhi SEMUA kriteria:
+        // 1. Destination Port HARUS sama (exact match, case insensitive)
+        // 2. Type container HARUS sesuai dengan type yang dicari
+        const matchingAgreements = agreementData.filter(agreement => {
+            const agreementDest = (agreement['Destination Port'] || '').trim().toUpperCase();
+            const agreementType = (agreement.Type || '').trim();
+            
+            // CRITICAL: Destination Port HARUS exact match
+            const destMatch = agreementDest === destPortUpper;
+            
+            // CRITICAL: Type container HARUS sesuai (tidak boleh cross-type)
+            const typeMatch = validTypes.includes(agreementType);
+            
+            const isMatch = destMatch && typeMatch;
+            
+            if (isMatch) {
+                console.log(`[findBestLinersForAllTypes] Match found - LINER: ${agreement.LINER}, Type: ${agreementType}, Rate: ${agreement.Rate}`);
+            }
+            
+            return isMatch;
+        });
+        
+        console.log(`[findBestLinersForAllTypes] Found ${matchingAgreements.length} matches for type ${containerType}`);
+        
+        // Jika tidak ada agreement yang cocok, return N/A (NULL equivalent)
+        // TIDAK ADA default value, TIDAK ADA fallback, TIDAK ADA asumsi
+        if (matchingAgreements.length === 0) {
+            results[containerType] = 'N/A';
+            console.log(`[findBestLinersForAllTypes] No matches for type ${containerType} - returning N/A`);
+        } else {
+            // Sort by rate ASCENDING (termurah di index 0)
+            matchingAgreements.sort((a, b) => {
+                const rateA = parseFloat(a.Rate) || 999999;
+                const rateB = parseFloat(b.Rate) || 999999;
+                return rateA - rateB;
+            });
+            
+            // Ambil TOP 1 (rate termurah)
+            const topLiner = matchingAgreements[0];
+            results[containerType] = topLiner.LINER || 'N/A';
+            
+            console.log(`[findBestLinersForAllTypes] TOP 1 for type ${containerType}: ${results[containerType]} (Rate: ${topLiner.Rate})`);
+        }
+    });
+    
+    console.log('[findBestLinersForAllTypes] Final results:', results);
+    return results;
+}
+
+// === FUNGSI HELPER: FORMAT TOP 1 LINER DISPLAY (3 BARIS) ===
+function formatTop1LinerDisplay(linersObj) {
+    return `20: ${linersObj['20']}\n40: ${linersObj['40']}\n40HC: ${linersObj['40HC']}`;
+}
+
+// === LEGACY FUNCTION: findBestLiner (untuk backward compatibility) ===
 function findBestLiner(destinationPort, containerTypeCode) {
     if (!destinationPort || !containerTypeCode) return null;
 
@@ -1156,7 +1306,10 @@ function findBestLiner(destinationPort, containerTypeCode) {
     if (normalizedTypeCode === '45G0') alternateTypeCodes.push('40HC');
     if (normalizedTypeCode === '20G0') alternateTypeCodes.push('20');
     
-    const matchingAgreements = staticAgreementData.filter(agreement => {
+    // CRITICAL FIX: Use agreementData instead of staticAgreementData
+    if (!agreementData || agreementData.length === 0) return null;
+    
+    const matchingAgreements = agreementData.filter(agreement => {
         const agreementDest = (agreement['Destination Port'] || '').trim().toUpperCase();
         const agreementType = (agreement.Type || '').trim();
         return agreementDest === destinationPort && (agreementType === normalizedTypeCode || alternateTypeCodes.includes(agreementType));
@@ -1169,7 +1322,9 @@ function findBestLiner(destinationPort, containerTypeCode) {
     return matchingAgreements[0].LINER;
 }
 
-// === FUNGSI handleDummyCellUpdate (MIRIP handleCellUpdate) ===
+// === FUNGSI handleDummyCellUpdate - REVISI FINAL: HANYA ISI TOP 1 LINER ===
+// PENTING: KOLOM LINER TIDAK DIISI OTOMATIS - User harus isi manual
+// HANYA kolom TOP 1 LINER (20), TOP 1 LINER (40), dan TOP 1 LINER (40HC) yang diisi otomatis
 window.handleDummyCellUpdate = function(rowId, key, value) {
     const rowIndex = dummyData.findIndex(row => row.id === parseInt(rowId));
     if (rowIndex > -1) {
@@ -1187,38 +1342,43 @@ window.handleDummyCellUpdate = function(rowId, key, value) {
             dummyData[rowIndex][key] = value;
         }
         
-        // CRITICAL FIX: Tandai row sebagai modified
         dummyData[rowIndex].isModified = true;
 
-        // --- AUTO-FILL LOGIC (Sama dengan handleCellUpdate) ---
+        // === AUTO-FILL LOGIC - HANYA UNTUK TOP 1 LINER PER TYPE ===
+        // TRIGGER: Jika user mengubah destination atau container type
         const triggers = ['destination', 'container20', 'container40', 'container40hc'];
         if (triggers.includes(key)) {
             const currentRow = dummyData[rowIndex];
             const destPort = (currentRow.destination || '').split(',')[0].trim().toUpperCase();
 
             if (destPort) {
-                let containerTypeCode = null;
+                console.log(`[handleDummyCellUpdate] Destination changed to: ${destPort}`);
                 
-                if (parseInt(currentRow.container20) > 0) containerTypeCode = '20';
-                else if (parseInt(currentRow.container40) > 0) containerTypeCode = '40';
-                else if (parseInt(currentRow.container40hc) > 0) containerTypeCode = '40HC';
+                // Cari TOP 1 LINER untuk SEMUA type container SECARA TERPISAH
+                const bestLiners = findBestLinersForAllTypes(destPort);
                 
-                if (containerTypeCode) {
-                    const bestLiner = findBestLiner(destPort, containerTypeCode);
-                    if (bestLiner) {
-                        dummyData[rowIndex].liner = bestLiner;
-                        dummyData[rowIndex].top1 = bestLiner;
-                    }
-                }
+                // ISI HANYA 3 kolom TOP 1 LINER (20, 40, 40HC)
+                dummyData[rowIndex].top1_20 = bestLiners['20'];
+                dummyData[rowIndex].top1_40 = bestLiners['40'];
+                dummyData[rowIndex].top1_40hc = bestLiners['40HC'];
+                
+                console.log(`[handleDummyCellUpdate] TOP 1 LINER filled: 20=${bestLiners['20']}, 40=${bestLiners['40']}, 40HC=${bestLiners['40HC']}`);
+                
+                // PENTING: KOLOM LINER TIDAK DIISI
+                // Kolom LINER dibiarkan kosong untuk diisi manual oleh user
+                // TIDAK ADA kode: dummyData[rowIndex].liner = ...
+                console.log('[handleDummyCellUpdate] LINER column left empty for manual input');
             }
         }
         
-        // PENTING: Re-render untuk update warna baris secara real-time
         renderDummyBookingTable();
     }
 }
-// === AKHIR FUNGSI BARU ===
+// === AKHIR FUNGSI REVISI ===
 
+// === FUNGSI handleCellUpdate - REVISI FINAL: HANYA ISI TOP 1 LINER ===
+// PENTING: KOLOM LINER TIDAK DIISI OTOMATIS - User harus isi manual
+// HANYA kolom TOP 1 LINER (20), TOP 1 LINER (40), dan TOP 1 LINER (40HC) yang diisi otomatis
 window.handleCellUpdate = function(rowId, key, value) {
     const rowIndex = globalData.findIndex(row => row.id === parseInt(rowId));
     if (rowIndex > -1) {
@@ -1236,33 +1396,35 @@ window.handleCellUpdate = function(rowId, key, value) {
             globalData[rowIndex][key] = value;
         }
         
-        // CRITICAL FIX: Tandai row sebagai modified
         globalData[rowIndex].isModified = true;
 
-        // --- AUTO-FILL LOGIC (Tidak berubah) ---
+        // === AUTO-FILL LOGIC - HANYA UNTUK TOP 1 LINER PER TYPE ===
+        // TRIGGER: Jika user mengubah destination atau container type
         const triggers = ['destination', 'container20', 'container40', 'container40hc'];
         if (triggers.includes(key)) {
             const currentRow = globalData[rowIndex];
             const destPort = (currentRow.destination || '').split(',')[0].trim().toUpperCase();
 
             if (destPort) {
-                let containerTypeCode = null;
+                console.log(`[handleCellUpdate] Destination changed to: ${destPort}`);
                 
-                if (parseInt(currentRow.container20) > 0) containerTypeCode = '20';
-                else if (parseInt(currentRow.container40) > 0) containerTypeCode = '40';
-                else if (parseInt(currentRow.container40hc) > 0) containerTypeCode = '40HC';
+                // Cari TOP 1 LINER untuk SEMUA type container SECARA TERPISAH
+                const bestLiners = findBestLinersForAllTypes(destPort);
                 
-                if (containerTypeCode) {
-                    const bestLiner = findBestLiner(destPort, containerTypeCode);
-                    if (bestLiner) {
-                        globalData[rowIndex].liner = bestLiner;
-                        globalData[rowIndex].top1 = bestLiner;
-                    }
-                }
+                // ISI HANYA 3 kolom TOP 1 LINER (20, 40, 40HC)
+                globalData[rowIndex].top1_20 = bestLiners['20'];
+                globalData[rowIndex].top1_40 = bestLiners['40'];
+                globalData[rowIndex].top1_40hc = bestLiners['40HC'];
+                
+                console.log(`[handleCellUpdate] TOP 1 LINER filled: 20=${bestLiners['20']}, 40=${bestLiners['40']}, 40HC=${bestLiners['40HC']}`);
+                
+                // PENTING: KOLOM LINER TIDAK DIISI
+                // Kolom LINER dibiarkan kosong untuk diisi manual oleh user
+                // TIDAK ADA kode: globalData[rowIndex].liner = ...
+                console.log('[handleCellUpdate] LINER column left empty for manual input');
             }
         }
         
-        // PENTING: Re-render untuk update warna baris secara real-time
         renderAllTablesAndCharts();
     }
 }
@@ -1293,10 +1455,17 @@ window.updateDoStatus = function(rowId, isChecked) {
 }
 
 function updateStats(data) {
-    document.getElementById('totalVessels').textContent = data.length;
-    document.getElementById('statusDoneCount').textContent = data.filter(r => r.postToSap).length;
-    document.getElementById('customerCount').textContent = data.filter(r => r.doStatus === 'CUSTOMER').length;
-    document.getElementById('pendingCount').textContent = data.length - data.filter(r => r.postToSap).length;
+    // Total Delivery Orders: semua data yang ada
+    document.getElementById('totalDeliveryOrders').textContent = data.length;
+    
+    // Done Booking: DO Status = 'OK' (sudah di-ceklis)
+    document.getElementById('doneBookingCount').textContent = data.filter(r => r.doStatus === 'OK').length;
+    
+    // Problem: Masalah !== "None"
+    document.getElementById('problemCount').textContent = data.filter(r => r.masalah && r.masalah !== 'None').length;
+    
+    // Done Process: Post to SAP = true (sudah di-ceklis)
+    document.getElementById('doneProcessCount').textContent = data.filter(r => r.postToSap === true).length;
 }
 
 function getFilteredDashboardData() {
@@ -1306,11 +1475,35 @@ function getFilteredDashboardData() {
     const dateTo = document.getElementById('filterDateTo').value;
 
     return globalData.filter(row => {
+        // Filter Region
         const matchesRegion = !regionFilter || row.region === regionFilter;
-        const matchesGlobal = !globalFilter || Object.values(row).some(val => String(val).toLowerCase().includes(globalFilter));
+        
+        // Filter Global Search
+        const matchesGlobal = !globalFilter || Object.values(row).some(val => 
+            String(val).toLowerCase().includes(globalFilter)
+        );
+        
+        // FIXED: Filter Tanggal - Check BOTH bookingDa AND mad
         let matchesDate = true;
-        if (dateFrom && row.mad) matchesDate = row.mad >= dateFrom;
-        if (matchesDate && dateTo && row.mad) matchesDate = row.mad <= dateTo;
+        
+        if (dateFrom || dateTo) {
+            // Get booking date from either bookingDa or mad (prioritize bookingDa)
+            const bookingDate = row.bookingDa || row.mad || '';
+            
+            if (!bookingDate) {
+                // No date in row - exclude if filter active
+                matchesDate = false;
+            } else {
+                // Check date range
+                if (dateFrom && bookingDate < dateFrom) {
+                    matchesDate = false;
+                }
+                if (dateTo && bookingDate > dateTo) {
+                    matchesDate = false;
+                }
+            }
+        }
+        
         return matchesRegion && matchesGlobal && matchesDate;
     });
 }
@@ -1318,8 +1511,8 @@ function getFilteredDashboardData() {
 function filterTable() {
     const filtered = getFilteredDashboardData();
     renderTable(filtered, 'tableBody', false);
-    updateCharts(filtered);
-    updateStats(filtered);
+    updateCharts(filtered); // ✅ Charts already updated
+    updateStats(filtered);  // ✅ Stats already updated
 }
 
 function filterTrackingTable() {
@@ -1391,82 +1584,88 @@ window.exportDashboardToExcel = function() {
     }
 
     // Header yang sesuai dengan tabel dashboard
-    const headers = [
-        "NO", "Region", "Product Group", "SC", "Delivery", "20", "40", "40 HC", 
-        "MAD", "Ship to Party", "Shipping Point", "Country", "IncoTerm", 
-        "Destination Port", "BOOKING DATE", "MARKS BY CS", "Booking Number", 
-        "LINER", "TOP 1 LINER", "REASON", "KETERANGAN", "Vessel Name", "Open CY", "Closing Fisik", "ETD", "NW (Ton)", "DO STATUS", 
-        "Post to SAP", "Masalah"
-    ];
+// Header yang sesuai dengan tabel dashboard
+const headers = [
+    "NO", "Region", "Product Group", "SC", "Delivery", "20", "40", "40 HC", 
+    "MAD", "Ship to Party", "Shipping Point", "Country", "IncoTerm", 
+    "Destination Port", "BOOKING DATE", "MARKS BY CS", "Booking Number", 
+    "LINER", "TOP 1 LINER", "REASON", "KETERANGAN", "Vessel Name", "Voyage", "Open CY", "Closing Fisik", "ETD", "NW (Ton)", "DO STATUS", 
+    "Post to SAP", "Masalah"
+];
 
-    // Siapkan data untuk Excel
-    const excelData = dataToExport.map((row, index) => {
-        const nwInTons = (parseFloat(row.nw) || 0) / 1000;
-        return [
-            index + 1,
-            row.region || '',
-            row.vfPpp || '',
-            row.sc || '',
-            row.delivery || '',
-            row.container20 || 0,
-            row.container40 || 0,
-            row.container40hc || 0,
-            row.mad || '',
-            row.shipToParty || '',
-            row.shippingPoint || '',
-            row.country || '',
-            row.incot || '',
-            row.destination || '',
-            row.bookingDa || '',
-            row.marksBy || '',
-            row.etd || '',
-            row.bookingNumb || '',
-            row.liner || '',
-            row.top1 || '',
-            row.reason || '',
-            row.keterangan || '',
-            nwInTons.toFixed(2),
-            row.doStatus || 'N/A',
-            row.postToSap ? 'Yes' : 'No',
-            row.masalah || ''
-        ];
-    });
+// Siapkan data untuk Excel
+const excelData = dataToExport.map((row, index) => {
+    const nwInTons = (parseFloat(row.nw) || 0) / 1000;
+    return [
+        index + 1,
+        row.region || '',
+        row.vfPpp || '',
+        row.sc || '',
+        row.delivery || '',
+        row.container20 || 0,
+        row.container40 || 0,
+        row.container40hc || 0,
+        row.mad || '',
+        row.shipToParty || '',
+        row.shippingPoint || '',
+        row.country || '',
+        row.incot || '',
+        row.destination || '',
+        row.bookingDa || '',
+        row.marksBy || '',
+        row.bookingNumb || '',
+        row.liner || '',
+        row.top1 || '',
+        row.reason || '',
+        row.keterangan || '',
+        row.vesselName || '',
+        row.voyage || '',
+        row.openCyDate || '',
+        row.closingFisikDate || '',
+        row.etd || '',
+        nwInTons.toFixed(2),
+        row.doStatus || 'N/A',
+        row.postToSap ? 'Yes' : 'No',
+        row.masalah || ''
+    ];
+});
 
     // Buat worksheet
     const ws = XLSX.utils.aoa_to_sheet([headers, ...excelData]);
 
     // Set column widths
-    const columnWidths = [
-        { wch: 2 },  // No
-        { wch: 5 }, // Region
-        { wch: 15 }, // Product Group
-        { wch: 12 }, // SC
-        { wch: 12 }, // Delivery
-        { wch: 5 },  // 20
-        { wch: 5 },  // 40
-        { wch: 10 },  // 40 HC
-        { wch: 12 }, // MAD
-        { wch: 25 }, // Ship to Party
-        { wch: 15 }, // Shipping Point
-        { wch: 15 }, // Country
-        { wch: 10 }, // IncoTerm
-        { wch: 20 }, // Destination Port
-        { wch: 14 }, // BOOKING DATE
-        { wch: 18 }, // MARKS BY CS
-        { wch: 18 }, // Booking Number
-        { wch: 20 }, // LINER
-        { wch: 20 }, // TOP 1 LINER
-        { wch: 15 }, // REASON
-        { wch: 20 }, // KETERANGAN
-        { wch: 12 }, // Vessel Name
-        { wch: 12 }, // Open CY
-        { wch: 12 }, // Closing FIsik
-        { wch: 12 }, // ETD
-        { wch: 10 }, // NW (Ton)
-        { wch: 12 }, // DO STATUS
-        { wch: 12 }, // Post to SAP
-        { wch: 15 }  // Masalah
-    ];
+const columnWidths = [
+    { wch: 2 },  // No
+    { wch: 5 }, // Region
+    { wch: 15 }, // Product Group
+    { wch: 12 }, // SC
+    { wch: 12 }, // Delivery
+    { wch: 5 },  // 20
+    { wch: 5 },  // 40
+    { wch: 10 },  // 40 HC
+    { wch: 12 }, // MAD
+    { wch: 25 }, // Ship to Party
+    { wch: 15 }, // Shipping Point
+    { wch: 15 }, // Country
+    { wch: 10 }, // IncoTerm
+    { wch: 20 }, // Destination Port
+    { wch: 14 }, // BOOKING DATE
+    { wch: 18 }, // MARKS BY CS
+    { wch: 18 }, // Booking Number
+    { wch: 20 }, // LINER
+    { wch: 20 }, // TOP 1 LINER
+    { wch: 15 }, // REASON
+    { wch: 20 }, // KETERANGAN
+    { wch: 18 }, // Vessel Name
+    { wch: 12 }, // Voyage
+    { wch: 12 }, // Open CY
+    { wch: 12 }, // Closing Fisik
+    { wch: 12 }, // ETD
+    { wch: 10 }, // NW (Ton)
+    { wch: 12 }, // DO STATUS
+    { wch: 12 }, // Post to SAP
+    { wch: 15 }  // Masalah
+];
     ws['!cols'] = columnWidths;
 
     // Styling: Header row
@@ -1673,18 +1872,52 @@ function handleExcelUpload(event) {
             
             const headersFromFile = rawHeaders.map(h => String(h || '').trim().toLowerCase().replace(/[\s\.\-\/]/g, ''));
             
-            const headerMap = {
-                'region': 'region','productgroup': 'vfPpp','vfppp': 'vfPpp','sc': 'sc','delivery': 'delivery',
-                '20': 'container20','container20': 'container20',
-                '40': 'container40','container40': 'container40',
-                '40hc': 'container40hc','container40hc': 'container40hc',
-                'mad': 'mad','shiptoparty': 'shipToParty','shippingpoint': 'shippingPoint','country': 'country',
-                'incoterm': 'incot','incot': 'incot','destinationport': 'destination','destination': 'destination',
-                'bookingdate': 'bookingDa','marksbycs': 'marksBy','etd': 'etd','bookingnumber': 'bookingNumb',
-                'liner': 'liner','top1liner': 'top1','reason': 'reason','keterangan': 'keterangan',
-                'nw': 'nw', 'netweight': 'nw', 'vesselname': 'vesselName', 'voyage': 'voyage'
-            };
-            
+const headerMap = {
+    'region': 'region',
+    'productgroup': 'vfPpp',
+    'vfppp': 'vfPpp',
+    'sc': 'sc',
+    'delivery': 'delivery',
+    '20': 'container20',
+    'container20': 'container20',
+    '40': 'container40',
+    'container40': 'container40',
+    '40hc': 'container40hc',
+    'container40hc': 'container40hc',
+    'mad': 'mad',
+    'shiptoparty': 'shipToParty',
+    
+    // FIXED: Shipping Point - handle both "Shipping Point" and "SP"
+    'shippingpoint': 'shippingPoint',
+    'sp': 'shippingPoint',
+    
+    // CRITICAL FIX: Country - handle "Country Port (Port)" exact match
+    'country': 'country',
+    'countryport': 'country',
+    'countryport(port)': 'country', // "Country Port (Port)" → "countryportport"
+    'port': 'country',
+    
+    'incoterm': 'incot',
+    'incot': 'incot',
+    'destinationport': 'destination',
+    'destination': 'destination',
+    'bookingdate': 'bookingDa',
+    'marksbycs': 'marksBy',
+    'etd': 'etd',
+    'bookingnumber': 'bookingNumb',
+    'liner': 'liner',
+    'top1liner': 'top1',
+    'reason': 'reason',
+    'keterangan': 'keterangan',
+    'nw': 'nw',
+    'netweight': 'nw',
+    
+    // FIXED: Vessel Name - handle both "Vessel Name" and "Vessel"
+    'vesselname': 'vesselName',
+    'vessel': 'vesselName',
+    
+    'voyage': 'voyage'
+};            
             // FUNGSI KRITIKAL: Mengonversi ke YYYY-MM-DD agar dibaca oleh input type="date"
             function convertToISODate(cellValue) {
                 if (!cellValue) return '';
@@ -1742,6 +1975,13 @@ function handleExcelUpload(event) {
                     }
                 }
 
+                // Normalisasi Destination Port
+                if (newRow.destination) {
+                    const originalDest = newRow.destination;
+                    newRow.destination = normalizeDestinationPort(newRow.destination);
+                    console.log(`Destination normalized: "${originalDest}" → "${newRow.destination}"`);
+                }
+
                 // Set default values
                 newRow.doStatus = 'CUSTOMER'; 
                 newRow.postToSap = false; 
@@ -1751,6 +1991,12 @@ function handleExcelUpload(event) {
                 newRow.voyage = newRow.voyage || "";
                 newRow.siStatus = 'Pending';
                 newRow.bcStatus = 'Pending';
+                
+                // Initialize TOP 1 LINER columns
+                newRow.top1_20 = '';
+                newRow.top1_40 = '';
+                newRow.top1_40hc = '';
+                newRow.top1 = '';
                 
                 return newRow;
             }).filter(row => {
@@ -1777,6 +2023,9 @@ function handleExcelUpload(event) {
             
             console.log('Total globalData after import:', globalData.length);
             
+            // AUTO-FILL TOP 1 LINER
+            autoFillTOP1LINER();
+            
             // CRITICAL FIX: Render semua view
             renderAllTablesAndCharts();
             
@@ -1787,7 +2036,7 @@ function handleExcelUpload(event) {
             }
             
             console.log('=== EXCEL IMPORT SUCCESS ===');
-            alert(`✅ ${jsonData.length} data berhasil diimpor ke globalData!\n\nSilakan buka menu Tracking Region untuk melihat data.`);
+            alert(`✅ ${jsonData.length} data berhasil diimpor ke globalData!\n\nKolom TOP 1 LINER telah terisi otomatis berdasarkan Agreement List.`);
 
         } catch (error) {
             console.error('=== EXCEL IMPORT ERROR ===', error);
@@ -1924,13 +2173,12 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     // === AKHIR HOOK KALENDER ===
 
-    renderAgreementTable(staticAgreementData);
     renderVesselList();
     renderAllTablesAndCharts();
     
     // Inisiasi awal notifikasi
     updateNotificationDisplay();
-    
+    document.getElementById('agreement-excel-input').addEventListener('change', handleAgreementExcelUpload);
     document.getElementById('excel-input').addEventListener('change', handleExcelUpload);
     document.getElementById('filterAgreement').addEventListener('input', filterAgreementTable);
 
@@ -2867,4 +3115,185 @@ window.updateTotalTonaseAndReorder = function(vesselNameInput) {
     });
     
     console.log('=== updateTotalTonaseAndReorder() END ===\n');
+}
+// === FUNGSI AUTO-FIT COLUMNS ===
+window.autoFitColumns = function(tableId) {
+    const table = document.getElementById(tableId);
+    if (!table) {
+        console.error(`Table with ID "${tableId}" not found`);
+        return;
+    }
+    
+    console.log(`=== AUTO-FIT COLUMNS for ${tableId} ===`);
+    
+    const headers = table.querySelectorAll('thead th');
+    const rows = table.querySelectorAll('tbody tr');
+    
+    if (headers.length === 0) {
+        console.warn('No headers found in table');
+        return;
+    }
+    
+    // Reset all column widths first
+    headers.forEach(th => {
+        th.style.width = 'auto';
+        th.style.minWidth = '30px';
+        th.style.maxWidth = 'none';
+    });
+    
+    // Calculate optimal width for each column
+    headers.forEach((th, colIndex) => {
+        let maxWidth = 0;
+        
+        // Measure header text width
+        const headerText = th.textContent || th.innerText;
+        const headerWidth = getTextWidth(headerText, getComputedStyle(th).font);
+        maxWidth = Math.max(maxWidth, headerWidth);
+        
+        // Measure cell content widths (sample first 50 rows for performance)
+        const sampleSize = Math.min(rows.length, 50);
+        for (let i = 0; i < sampleSize; i++) {
+            const cell = rows[i].cells[colIndex];
+            if (!cell) continue;
+            
+            // Check if cell has input/select
+            const input = cell.querySelector('input, select');
+            if (input) {
+                const inputValue = input.value || input.placeholder || '';
+                const inputWidth = getTextWidth(inputValue, getComputedStyle(input).font);
+                maxWidth = Math.max(maxWidth, inputWidth);
+            } else {
+                const cellText = cell.textContent || cell.innerText;
+                const cellWidth = getTextWidth(cellText, getComputedStyle(cell).font);
+                maxWidth = Math.max(maxWidth, cellWidth);
+            }
+        }
+        
+        // Add padding (12px padding left + 12px padding right = 24px total)
+        const optimalWidth = Math.ceil(maxWidth) + 24;
+        
+        // Set minimum 30px, maximum 500px
+        const finalWidth = Math.max(30, Math.min(500, optimalWidth));
+        
+        th.style.width = `${finalWidth}px`;
+        
+        console.log(`Column ${colIndex + 1} (${headerText}): ${finalWidth}px`);
+    });
+    
+    console.log('=== AUTO-FIT COMPLETE ===');
+    alert(`✅ Columns auto-fitted successfully for ${tableId}!\n\nYou can still manually resize columns by dragging the column borders.`);
+}
+
+// Helper function to measure text width
+function getTextWidth(text, font) {
+    const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement('canvas'));
+    const context = canvas.getContext('2d');
+    context.font = font;
+    const metrics = context.measureText(text);
+    return metrics.width;
+}
+function handleAgreementExcelUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const statusDiv = document.getElementById('agreement-import-status');
+    statusDiv.style.display = 'block';
+    statusDiv.style.background = '#fff3cd';
+    statusDiv.style.border = '1px solid #ffc107';
+    statusDiv.style.color = '#856404';
+    statusDiv.innerHTML = '⏳ Reading Excel file...';
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            console.log('=== AGREEMENT EXCEL IMPORT START ===');
+            
+            const workbook = XLSX.read(new Uint8Array(e.target.result), { type: 'array', cellDates: true });
+            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+            const dataAsArray = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "", raw: false });
+
+            console.log('Total rows in Excel:', dataAsArray.length);
+
+            // Cari header row
+            let headerRowIndex = -1;
+            const headerKeywords = ['agreement', 'calculation', 'liner', 'type', 'rate', 'destination'];
+            for(let i = 0; i < Math.min(10, dataAsArray.length); i++){
+                const score = (dataAsArray[i] || []).reduce((acc, cell) => {
+                    const cellStr = String(cell).toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+                    return acc + (headerKeywords.some(kw => cellStr.includes(kw)) ? 1 : 0);
+                }, 0);
+                if (score > 2) { 
+                    headerRowIndex = i; 
+                    console.log('Header found at row:', i);
+                    break; 
+                }
+            }
+
+            if (headerRowIndex === -1) throw new Error("Could not find a valid header row in the Excel file.");
+            
+            const rawHeaders = dataAsArray[headerRowIndex];
+            const rawDataRows = dataAsArray.slice(headerRowIndex + 1);
+            
+            console.log('Raw headers:', rawHeaders);
+            console.log('Data rows to process:', rawDataRows.length);
+            
+            const headersFromFile = rawHeaders.map(h => String(h || '').trim().toLowerCase().replace(/[\s\.\-\/]/g, ''));
+            
+            const headerMap = {
+                'agreement': 'Agreement',
+                'calculationsheet': 'Calculation Sheet',
+                'liner': 'LINER',
+                'type': 'Type',
+                'rate': 'Rate',
+                'destinationport': 'Destination Port',
+                'destinationlocation': 'Destination Location',
+                // Alternatif mappings
+                'destination': 'Destination Port',
+                'dest': 'Destination Port',
+                'location': 'Destination Location'
+            };
+            
+            const jsonData = rawDataRows.map(rowArray => {
+                const newRow = {};
+                headersFromFile.forEach((header, index) => {
+                    if (header && headerMap[header]) {
+                        newRow[headerMap[header]] = rowArray[index];
+                    }
+                });
+                return newRow;
+            }).filter(row => {
+                // Filter: harus ada Agreement ATAU Rate
+                return row['Agreement'] || row['Rate'];
+            });
+            
+            console.log('Processed rows:', jsonData.length);
+            console.log('Sample data:', jsonData.slice(0, 2));
+            
+            if (jsonData.length === 0) throw new Error("No valid data found in Excel file.");
+            
+            // Set ke global variable
+            agreementData = jsonData;
+            
+            // Render tabel
+            renderAgreementTable(agreementData);
+            
+            // Update status
+            statusDiv.style.background = '#d4edda';
+            statusDiv.style.border = '1px solid #c3e6cb';
+            statusDiv.style.color = '#155724';
+            statusDiv.innerHTML = `✅ Successfully imported ${jsonData.length} agreement records!`;
+            
+            console.log('=== AGREEMENT EXCEL IMPORT SUCCESS ===');
+
+        } catch (error) {
+            console.error('=== AGREEMENT EXCEL IMPORT ERROR ===', error);
+            statusDiv.style.background = '#f8d7da';
+            statusDiv.style.border = '1px solid #f5c6cb';
+            statusDiv.style.color = '#721c24';
+            statusDiv.innerHTML = `❌ Error: ${error.message}`;
+        } finally {
+            event.target.value = '';
+        }
+    };
+    reader.readAsArrayBuffer(file);
 }
