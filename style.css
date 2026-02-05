@@ -289,7 +289,7 @@ body {
 /* --- AKHIR GAYA LONCENG NOTIFIKASI --- */
 
 .btn {
-    padding: 8px 16px;
+    padding: 8px 12px; /* REDUCED: 16px → 12px */
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -300,6 +300,12 @@ body {
     align-items: center;
     gap: 6px;
     text-decoration: none;
+}
+
+/* KHUSUS: Button di header lebih compact */
+.header-actions .btn {
+    padding: 6px 10px; /* Lebih kecil untuk header */
+    font-size: 16px; /* Icon lebih besar */
 }
 
 .btn-danger {
@@ -555,6 +561,22 @@ body {
     height: 100%;
     max-height: 100%;
     width: 100%;
+    resize: horizontal; /* Allow horizontal resizing like Excel */
+}
+
+/* Enable column resizing for tracking table */
+#trackingVesselTable {
+    table-layout: auto !important; /* Change from fixed to auto for flexible columns */
+}
+
+#trackingVesselTable th {
+    resize: horizontal;
+    overflow: auto;
+    position: relative;
+}
+
+#trackingVesselTable th:hover {
+    cursor: col-resize;
 }
 
 /* DUMMY BOOKING VIEW - TETAP SAMA */
@@ -580,31 +602,21 @@ body {
     width: 100%;
 }
 
-
-
-
-
-
-
-
-
-
-
 table {
     width: 100%;
     border-collapse: collapse;
     font-size: 10px;
     display: table !important;
-    table-layout: fixed !important; /* ENFORCE FIXED LAYOUT */
+    table-layout: fixed !important;
     overflow: visible !important;
 }
 
-/* TRACKING & DUMMY TABLE */
+/* TRACKING & DUMMY TABLE - REDUCED WIDTH */
 #vesselTable,
 #trackingVesselTable,
 #dummyBookingTable {
     table-layout: fixed !important; 
-    min-width: 3600px !important;
+    min-width: 2800px !important;
     margin-bottom: 0 !important;
     overflow: visible !important;
 }
@@ -633,56 +645,131 @@ table {
     white-space: nowrap;
 }
 
-/* LEBAR KOLOM OPTIMIZED */
-/* LEBAR KOLOM FIXED - TIDAK BOLEH AUTO-MEMBESAR */
-#vesselTable th:nth-child(1), #trackingVesselTable th:nth-child(1), #dummyBookingTable th:nth-child(1) { 
-    width: 30px !important; /* FIXED: Tetap 30px */
-    min-width: 30px !important;
-    max-width: 30px !important;
+/* RESIZABLE COLUMNS - ALL TABLES CAN BE ADJUSTED */
+#vesselTable,
+#trackingVesselTable,
+#dummyBookingTable {
+    table-layout: auto !important; /* Allow columns to auto-adjust */
 }
 
-#vesselTable th:nth-child(2), #trackingVesselTable th:nth-child(2), #dummyBookingTable th:nth-child(2) { 
-    width: 70px !important; /* FIXED: Tetap 70px */
-    min-width: 70px !important;
-    max-width: 70px !important;
+#vesselTable th,
+#trackingVesselTable th,
+#dummyBookingTable th {
+    resize: horizontal;
+    overflow: auto;
+    position: relative;
+    min-width: 30px; /* Minimum width untuk bisa dikecilkan */
+    max-width: none !important; /* No maximum width restriction */
 }
 
-#vesselTable th:nth-child(3), #trackingVesselTable th:nth-child(3), #dummyBookingTable th:nth-child(3) { width: 90px; }
-#vesselTable th:nth-child(4), #trackingVesselTable th:nth-child(4), #dummyBookingTable th:nth-child(4) { width: 85px; }
-#vesselTable th:nth-child(5), #trackingVesselTable th:nth-child(5), #dummyBookingTable th:nth-child(5) { width: 90px; }
-#vesselTable th:nth-child(6), #trackingVesselTable th:nth-child(6), #dummyBookingTable th:nth-child(6) { width: 35px; }
-#vesselTable th:nth-child(7), #trackingVesselTable th:nth-child(7), #dummyBookingTable th:nth-child(7) { width: 35px; }
-#vesselTable th:nth-child(8), #trackingVesselTable th:nth-child(8), #dummyBookingTable th:nth-child(8) { width: 45px; }
-#vesselTable th:nth-child(9), #trackingVesselTable th:nth-child(9), #dummyBookingTable th:nth-child(9) { width: 95px; }
-#vesselTable th:nth-child(10), #trackingVesselTable th:nth-child(10), #dummyBookingTable th:nth-child(10) { width: 180px; }
-#vesselTable th:nth-child(11), #trackingVesselTable th:nth-child(11), #dummyBookingTable th:nth-child(11) { width: 75px; }
-#vesselTable th:nth-child(12), #trackingVesselTable th:nth-child(12), #dummyBookingTable th:nth-child(12) { width: 90px; }
-#vesselTable th:nth-child(13), #trackingVesselTable th:nth-child(13), #dummyBookingTable th:nth-child(13) { width: 65px; }
-#vesselTable th:nth-child(14), #trackingVesselTable th:nth-child(14), #dummyBookingTable th:nth-child(14) { width: 120px; }
-#vesselTable th:nth-child(15), #trackingVesselTable th:nth-child(15), #dummyBookingTable th:nth-child(15) { width: 95px; }
-#vesselTable th:nth-child(16), #trackingVesselTable th:nth-child(16), #dummyBookingTable th:nth-child(16) { width: 90px; }
-#vesselTable th:nth-child(17), #trackingVesselTable th:nth-child(17), #dummyBookingTable th:nth-child(17) { width: 110px; }
-#vesselTable th:nth-child(18), #trackingVesselTable th:nth-child(18), #dummyBookingTable th:nth-child(18) { width: 100px; }
-#vesselTable th:nth-child(19), #trackingVesselTable th:nth-child(19), #dummyBookingTable th:nth-child(19) { width: 100px; }
-#vesselTable th:nth-child(20), #trackingVesselTable th:nth-child(20), #dummyBookingTable th:nth-child(20) { width: 90px; }
-#vesselTable th:nth-child(21), #trackingVesselTable th:nth-child(21), #dummyBookingTable th:nth-child(21) { width: 110px; }
-#vesselTable th:nth-child(22), #trackingVesselTable th:nth-child(22), #dummyBookingTable th:nth-child(22) { width: 110px; }
+#vesselTable th:hover,
+#trackingVesselTable th:hover,
+#dummyBookingTable th:hover {
+    cursor: col-resize;
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
 
-/* KOLOM VOYAGE BARU - FIXED: Ditambahkan setelah Vessel Name */
-#trackingVesselTable th:nth-child(23), #dummyBookingTable th:nth-child(23) { width: 100px; } /* Voyage */
+#vesselTable th:nth-child(3), #trackingVesselTable th:nth-child(3), #dummyBookingTable th:nth-child(3) { 
+    width: 120px !important; min-width: 120px !important; max-width: 120px !important; 
+}
+#vesselTable th:nth-child(4), #trackingVesselTable th:nth-child(4), #dummyBookingTable th:nth-child(4) { 
+    width: 90px !important; min-width: 90px !important; max-width: 90px !important; 
+}
+#vesselTable th:nth-child(4), #trackingVesselTable th:nth-child(4), #dummyBookingTable th:nth-child(4) { 
+    width: 90px !important; min-width: 90px !important; max-width: 90px !important; 
+}
+#vesselTable th:nth-child(5), #trackingVesselTable th:nth-child(5), #dummyBookingTable th:nth-child(5) { 
+    width: 90px !important; min-width: 90px !important; max-width: 90px !important; 
+}
+#vesselTable th:nth-child(6), #trackingVesselTable th:nth-child(6), #dummyBookingTable th:nth-child(6) { 
+    width: 50px !important; min-width: 50px !important; max-width: 50px !important; 
+}
+#vesselTable th:nth-child(7), #trackingVesselTable th:nth-child(7), #dummyBookingTable th:nth-child(7) { 
+    width: 50px !important; min-width: 50px !important; max-width: 50px !important; 
+}
+#vesselTable th:nth-child(8), #trackingVesselTable th:nth-child(8), #dummyBookingTable th:nth-child(8) { 
+    width: 50px !important; min-width: 50px !important; max-width: 50px !important; 
+}
+#vesselTable th:nth-child(9), #trackingVesselTable th:nth-child(9), #dummyBookingTable th:nth-child(9) { 
+    width: 90px !important; min-width: 90px !important; max-width: 90px !important; 
+}
+#vesselTable th:nth-child(10), #trackingVesselTable th:nth-child(10), #dummyBookingTable th:nth-child(10) { 
+    width: 200px !important; min-width: 200px !important; max-width: 200px !important; 
+}
+#vesselTable th:nth-child(11), #trackingVesselTable th:nth-child(11), #dummyBookingTable th:nth-child(11) { 
+    width: 70px !important; min-width: 70px !important; max-width: 70px !important; 
+}
+#vesselTable th:nth-child(12), #trackingVesselTable th:nth-child(12), #dummyBookingTable th:nth-child(12) { 
+    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
+}
+#vesselTable th:nth-child(13), #trackingVesselTable th:nth-child(13), #dummyBookingTable th:nth-child(13) { 
+    width: 60px !important; min-width: 60px !important; max-width: 60px !important; 
+}
+#vesselTable th:nth-child(14), #trackingVesselTable th:nth-child(14), #dummyBookingTable th:nth-child(14) { 
+    width: 110px !important; min-width: 110px !important; max-width: 110px !important; 
+}
+#vesselTable th:nth-child(15), #trackingVesselTable th:nth-child(15), #dummyBookingTable th:nth-child(15) { 
+    width: 90px !important; min-width: 90px !important; max-width: 90px !important; 
+}
+#vesselTable th:nth-child(16), #trackingVesselTable th:nth-child(16), #dummyBookingTable th:nth-child(16) { 
+    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
+}
+#vesselTable th:nth-child(17), #trackingVesselTable th:nth-child(17), #dummyBookingTable th:nth-child(17) { 
+    width: 100px !important; min-width: 100px !important; max-width: 100px !important; 
+}
+#vesselTable th:nth-child(18), #trackingVesselTable th:nth-child(18), #dummyBookingTable th:nth-child(18) { 
+    width: 95px !important; min-width: 95px !important; max-width: 95px !important; 
+}
+#vesselTable th:nth-child(19), #trackingVesselTable th:nth-child(19), #dummyBookingTable th:nth-child(19) { 
+    width: 95px !important; min-width: 95px !important; max-width: 95px !important; 
+}
+#vesselTable th:nth-child(20), #trackingVesselTable th:nth-child(20), #dummyBookingTable th:nth-child(20) { 
+    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
+}
+#vesselTable th:nth-child(21), #trackingVesselTable th:nth-child(21), #dummyBookingTable th:nth-child(21) { 
+    width: 100px !important; min-width: 100px !important; max-width: 100px !important; 
+}
+#vesselTable th:nth-child(22), #trackingVesselTable th:nth-child(22), #dummyBookingTable th:nth-child(22) { 
+    width: 100px !important; min-width: 100px !important; max-width: 100px !important; 
+}
 
-/* Shift kolom berikutnya +1 karena ada Voyage */
-#vesselTable th:nth-child(23), #trackingVesselTable th:nth-child(24), #dummyBookingTable th:nth-child(24) { width: 95px; } /* Open CY */
-#vesselTable th:nth-child(24), #trackingVesselTable th:nth-child(25), #dummyBookingTable th:nth-child(25) { width: 95px; } /* Closing Fisik */
-#vesselTable th:nth-child(25), #trackingVesselTable th:nth-child(26), #dummyBookingTable th:nth-child(26) { width: 95px; } /* ETD */
-#vesselTable th:nth-child(26), #trackingVesselTable th:nth-child(27), #dummyBookingTable th:nth-child(27) { width: 70px; } /* NW */
-#vesselTable th:nth-child(27), #trackingVesselTable th:nth-child(28), #dummyBookingTable th:nth-child(28) { width: 75px; } /* DO STATUS */
-#vesselTable th:nth-child(28), #trackingVesselTable th:nth-child(29), #dummyBookingTable th:nth-child(29) { width: 65px; } /* Post to SAP */
-#vesselTable th:nth-child(29), #trackingVesselTable th:nth-child(30), #dummyBookingTable th:nth-child(30) { width: 90px; } /* Masalah */
+/* KOLOM VOYAGE - COMPACT */
+#trackingVesselTable th:nth-child(23), #dummyBookingTable th:nth-child(23) { 
+    width: 80px !important; min-width: 80px !important; max-width: 80px !important; 
+}
 
-/* SI & BC dan Action untuk Tracking & Dummy */
-#trackingVesselTable th:nth-child(31), #dummyBookingTable th:nth-child(31) { width: 120px; } /* SI & BC */
-#trackingVesselTable th:nth-child(32), #dummyBookingTable th:nth-child(32) { width: 60px; } /* Action */
+/* DATE/TIME COLUMNS - COMPACT */
+#vesselTable th:nth-child(23), #trackingVesselTable th:nth-child(24), #dummyBookingTable th:nth-child(24) { 
+    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
+}
+#vesselTable th:nth-child(24), #trackingVesselTable th:nth-child(25), #dummyBookingTable th:nth-child(25) { 
+    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
+}
+#vesselTable th:nth-child(25), #trackingVesselTable th:nth-child(26), #dummyBookingTable th:nth-child(26) { 
+    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
+}
+
+/* NUMERIC COLUMNS - COMPACT */
+#vesselTable th:nth-child(26), #trackingVesselTable th:nth-child(27), #dummyBookingTable th:nth-child(27) { 
+    width: 65px !important; min-width: 65px !important; max-width: 65px !important; 
+}
+#vesselTable th:nth-child(27), #trackingVesselTable th:nth-child(28), #dummyBookingTable th:nth-child(28) { 
+    width: 70px !important; min-width: 70px !important; max-width: 70px !important; 
+}
+#vesselTable th:nth-child(28), #trackingVesselTable th:nth-child(29), #dummyBookingTable th:nth-child(29) { 
+    width: 60px !important; min-width: 60px !important; max-width: 60px !important; 
+}
+#vesselTable th:nth-child(29), #trackingVesselTable th:nth-child(30), #dummyBookingTable th:nth-child(30) { 
+    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
+}
+
+/* ACTION COLUMNS - COMPACT */
+#trackingVesselTable th:nth-child(31), #dummyBookingTable th:nth-child(31) { 
+    width: 110px !important; min-width: 110px !important; max-width: 110px !important; 
+}
+#trackingVesselTable th:nth-child(32), #dummyBookingTable th:nth-child(32) { 
+    width: 55px !important; min-width: 55px !important; max-width: 55px !important; 
+}
 
 th {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -766,15 +853,13 @@ td {
     font-weight: 600 !important; /* Semi-bold untuk header */
 }
 
-#agreementTable th:nth-child(1) { min-width: 100px; }
-#agreementTable th:nth-child(2) { min-width: 100px; }
-#agreementTable th:nth-child(3) { min-width: 250px; }
-#agreementTable th:nth-child(4) { min-width: 60px; }
-#agreementTable th:nth-child(5) { min-width: 80px; }
-#agreementTable th:nth-child(6) { min-width: 150px; }
-#agreementTable th:nth-child(7) { min-width: 100px; }
-#agreementTable th:nth-child(8) { min-width: 100px; }
-#agreementTable th:nth-child(9) { min-width: 120px; }
+#agreementTable th:nth-child(1) { min-width: 100px; } /* Agreement */
+#agreementTable th:nth-child(2) { min-width: 100px; } /* Calculation Sheet */
+#agreementTable th:nth-child(3) { min-width: 250px; } /* LINER */
+#agreementTable th:nth-child(4) { min-width: 60px; } /* Type */
+#agreementTable th:nth-child(5) { min-width: 80px; } /* Rate */
+#agreementTable th:nth-child(6) { min-width: 150px; } /* Destination Port */
+#agreementTable th:nth-child(7) { min-width: 120px; } /* Destination Location */
 
 .td-center {
     text-align: center;
@@ -1942,4 +2027,79 @@ background-color: #f5f7fa;
 
 .btn-send-email:active {
     transform: scale(0.95);
+}
+
+/* Agreement Import Status */
+#agreement-import-status {
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+}
+/* ===================================================================
+   TOP 1 LINER STYLING - 3 BARIS (20, 40, 40HC)
+   =================================================================== */
+
+/* Kolom TOP 1 LINER - allow multiline display */
+/* Kolom 19 style sudah tidak diperlukan - sudah ada di bawah untuk 3 kolom terpisah */
+
+
+/* Textarea style sudah tidak diperlukan - sekarang pakai input biasa */
+
+
+/* Style gradient sudah tidak diperlukan - sudah pakai 3 kolom terpisah */
+
+/* ===================================================================
+   TOP 1 LINER - 3 SUB KOLOM (20, 40, 40HC)
+   =================================================================== */
+
+/* Header dengan rowspan dan colspan */
+#vesselTable thead tr:first-child th,
+#trackingVesselTable thead tr:first-child th,
+#dummyBookingTable thead tr:first-child th {
+    vertical-align: middle !important;
+}
+
+/* Sub-header TOP 1 LINER (20, 40, 40HC) */
+#vesselTable thead tr:nth-child(2) th,
+#trackingVesselTable thead tr:nth-child(2) th,
+#dummyBookingTable thead tr:nth-child(2) th {
+    color: white;
+    font-size: 10px !important;
+    font-weight: 600;
+    padding: 4px 6px !important;
+    height: 28px !important;
+}
+
+/* Kolom TOP 1 LINER - DIPERLEBAR 250px agar nama liner terbaca semua */
+#vesselTable th:nth-child(19),
+#vesselTable td:nth-child(19),
+#trackingVesselTable th:nth-child(19),
+#trackingVesselTable td:nth-child(19),
+#dummyBookingTable th:nth-child(19),
+#dummyBookingTable td:nth-child(19),
+#vesselTable th:nth-child(20),
+#vesselTable td:nth-child(20),
+#trackingVesselTable th:nth-child(20),
+#trackingVesselTable td:nth-child(20),
+#dummyBookingTable th:nth-child(20),
+#dummyBookingTable td:nth-child(20),
+#vesselTable th:nth-child(21),
+#vesselTable td:nth-child(21),
+#trackingVesselTable th:nth-child(21),
+#trackingVesselTable td:nth-child(21),
+#dummyBookingTable th:nth-child(21),
+#dummyBookingTable td:nth-child(21) {
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: clip !important;
+}
+
+/* Shift kolom REASON dan seterusnya karena sekarang ada 3 kolom TOP 1 LINER */
+#vesselTable th:nth-child(22),
+#trackingVesselTable th:nth-child(22),
+#dummyBookingTable th:nth-child(22) { 
+    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
 }
