@@ -289,7 +289,7 @@ body {
 /* --- AKHIR GAYA LONCENG NOTIFIKASI --- */
 
 .btn {
-    padding: 8px 12px; /* REDUCED: 16px → 12px */
+    padding: 8px 16px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -300,12 +300,6 @@ body {
     align-items: center;
     gap: 6px;
     text-decoration: none;
-}
-
-/* KHUSUS: Button di header lebih compact */
-.header-actions .btn {
-    padding: 6px 10px; /* Lebih kecil untuk header */
-    font-size: 16px; /* Icon lebih besar */
 }
 
 .btn-danger {
@@ -347,21 +341,13 @@ body {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(17, 153, 142, 0.4);
 }
-.btn-info {
-    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
-    color: white;
-}
 
-.btn-info:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
-}
 /* Content Area */
 .content-area {
     flex: 1;
-    overflow-y: auto;
+    overflow-y: auto; /* SCROLL TETAP DI VIEWPORT */
     overflow-x: hidden;
-    padding: 30px 30px 50px 30px;
+    padding: 20px 25px 20px 25px; /* PADDING JELAS: TOP, RIGHT, BOTTOM, LEFT */
     height: calc(100vh - 60px);
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
@@ -540,66 +526,220 @@ body {
     position: relative; /* UNTUK STICKY HEADER */
 }
 
-/* TRACKING VIEW - SAMA SEPERTI DUMMY BOOKING */
+/* KHUSUS UNTUK TRACKING VIEW - FIXED HEIGHT CONTAINER */
 #tracking-view .table-card {
-    height: calc(100vh - 400px);
-    min-height: 400px;
-    max-height: 700px;
+    height: calc(100vh - 400px); /* TINGGI TETAP: VIEWPORT - HEADER - FILTERS - MARGIN */
+    min-height: 400px; /* MINIMUM HEIGHT AGAR TIDAK TERLALU KECIL */
+    max-height: 700px; /* MAXIMUM HEIGHT AGAR TIDAK TERLALU BESAR */
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    margin-bottom: 30px;
+    overflow: hidden; /* LAPISAN LUAR TIDAK SCROLL */
 }
 
 #tracking-view .table-container {
-    flex: 1;
-    overflow-x: auto !important;
-    overflow-y: auto !important;
-    height: 100%;
-    max-height: 100%;
-    width: 100%;
-    resize: horizontal; /* Allow horizontal resizing like Excel */
+    flex: 1; /* AMBIL SISA RUANG YANG ADA */
+    overflow-x: auto !important; /* HORIZONTAL SCROLL UNTUK TABEL LEBAR */
+    overflow-y: auto !important; /* VERTICAL SCROLL UNTUK BARIS BANYAK */
+    height: 100%; /* GUNAKAN FULL HEIGHT DARI PARENT */
+    max-height: 100%; /* ENFORCE MAX HEIGHT */
 }
 
-/* Enable column resizing for tracking table */
-#trackingVesselTable {
-    table-layout: auto !important; /* Change from fixed to auto for flexible columns */
-}
-
-#trackingVesselTable th {
-    resize: horizontal;
-    overflow: auto;
-    position: relative;
-}
-
-#trackingVesselTable th:hover {
-    cursor: col-resize;
-}
-
-/* DUMMY BOOKING VIEW - TETAP SAMA */
+/* KHUSUS UNTUK DUMMY BOOKING VIEW - SAMA SEPERTI TRACKING */
 #dummy-booking-view .table-card {
-    height: calc(100vh - 400px);
-    min-height: 400px;
-    max-height: 700px;
+    height: calc(100vh - 400px); /* TINGGI TETAP: VIEWPORT - HEADER - FILTERS - MARGIN */
+    min-height: 400px; /* MINIMUM HEIGHT AGAR TIDAK TERLALU KECIL */
+    max-height: 700px; /* MAXIMUM HEIGHT AGAR TIDAK TERLALU BESAR */
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    margin-bottom: 30px;
+    overflow: hidden; /* LAPISAN LUAR TIDAK SCROLL */
 }
 
 #dummy-booking-view .table-container {
-    flex: 1;
-    overflow-x: auto !important;
-    overflow-y: auto !important;
-    height: 100%;
-    max-height: 100%;
-    width: 100%;
+    flex: 1; /* AMBIL SISA RUANG YANG ADA */
+    overflow-x: auto !important; /* HORIZONTAL SCROLL UNTUK TABEL LEBAR */
+    overflow-y: auto !important; /* VERTICAL SCROLL UNTUK BARIS BANYAK */
+    height: 100%; /* GUNAKAN FULL HEIGHT DARI PARENT */
+    max-height: 100%; /* ENFORCE MAX HEIGHT */
+}
+
+/* KHUSUS UNTUK TRACKING VIEW - FIXED HEIGHT CONTAINER */
+#tracking-view .table-card {
+    height: calc(100vh - 400px); /* TINGGI TETAP: VIEWPORT - HEADER - FILTERS - MARGIN */
+    min-height: 400px; /* MINIMUM HEIGHT AGAR TIDAK TERLALU KECIL */
+    max-height: 700px; /* MAXIMUM HEIGHT AGAR TIDAK TERLALU BESAR */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* LAPISAN LUAR TIDAK SCROLL */
+}
+
+#tracking-view .table-container {
+    flex: 1; /* AMBIL SISA RUANG YANG ADA */
+    overflow-x: auto !important; /* HORIZONTAL SCROLL UNTUK TABEL LEBAR */
+    overflow-y: auto !important; /* VERTICAL SCROLL UNTUK BARIS BANYAK */
+    height: 100%; /* GUNAKAN FULL HEIGHT DARI PARENT */
+    max-height: 100%; /* ENFORCE MAX HEIGHT */
+}
+
+/* KHUSUS UNTUK DUMMY BOOKING VIEW - SAMA SEPERTI TRACKING */
+#dummy-booking-view .table-card {
+    height: calc(100vh - 400px); /* TINGGI TETAP: VIEWPORT - HEADER - FILTERS - MARGIN */
+    min-height: 400px; /* MINIMUM HEIGHT AGAR TIDAK TERLALU KECIL */
+    max-height: 700px; /* MAXIMUM HEIGHT AGAR TIDAK TERLALU BESAR */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* LAPISAN LUAR TIDAK SCROLL */
+}
+
+#dummy-booking-view .table-container {
+    flex: 1; /* AMBIL SISA RUANG YANG ADA */
+    overflow-x: auto !important; /* HORIZONTAL SCROLL UNTUK TABEL LEBAR */
+    overflow-y: auto !important; /* VERTICAL SCROLL UNTUK BARIS BANYAK */
+    height: 100%; /* GUNAKAN FULL HEIGHT DARI PARENT */
+    max-height: 100%; /* ENFORCE MAX HEIGHT */
+}
+
+/* KHUSUS UNTUK TRACKING VIEW - FIXED HEIGHT CONTAINER */
+#tracking-view .table-card {
+    height: calc(100vh - 400px); /* TINGGI TETAP: VIEWPORT - HEADER - FILTERS - MARGIN */
+    min-height: 400px; /* MINIMUM HEIGHT AGAR TIDAK TERLALU KECIL */
+    max-height: 700px; /* MAXIMUM HEIGHT AGAR TIDAK TERLALU BESAR */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* LAPISAN LUAR TIDAK SCROLL */
+}
+
+#tracking-view .table-container {
+    flex: 1; /* AMBIL SISA RUANG YANG ADA */
+    overflow-x: auto !important; /* HORIZONTAL SCROLL UNTUK TABEL LEBAR */
+    overflow-y: auto !important; /* VERTICAL SCROLL UNTUK BARIS BANYAK */
+    height: 100%; /* GUNAKAN FULL HEIGHT DARI PARENT */
+    max-height: 100%; /* ENFORCE MAX HEIGHT */
+}
+
+/* KHUSUS UNTUK DUMMY BOOKING VIEW - SAMA SEPERTI TRACKING */
+#dummy-booking-view .table-card {
+    height: calc(100vh - 400px); /* TINGGI TETAP: VIEWPORT - HEADER - FILTERS - MARGIN */
+    min-height: 400px; /* MINIMUM HEIGHT AGAR TIDAK TERLALU KECIL */
+    max-height: 700px; /* MAXIMUM HEIGHT AGAR TIDAK TERLALU BESAR */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* LAPISAN LUAR TIDAK SCROLL */
+}
+
+#dummy-booking-view .table-container {
+    flex: 1; /* AMBIL SISA RUANG YANG ADA */
+    overflow-x: auto !important; /* HORIZONTAL SCROLL UNTUK TABEL LEBAR */
+    overflow-y: auto !important; /* VERTICAL SCROLL UNTUK BARIS BANYAK */
+    height: 100%; /* GUNAKAN FULL HEIGHT DARI PARENT */
+    max-height: 100%; /* ENFORCE MAX HEIGHT */
+}
+
+/* KHUSUS UNTUK TRACKING VIEW - FIXED HEIGHT CONTAINER */
+#tracking-view .table-card {
+    height: calc(100vh - 400px); /* TINGGI TETAP: VIEWPORT - HEADER - FILTERS - MARGIN */
+    min-height: 400px; /* MINIMUM HEIGHT AGAR TIDAK TERLALU KECIL */
+    max-height: 700px; /* MAXIMUM HEIGHT AGAR TIDAK TERLALU BESAR */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* LAPISAN LUAR TIDAK SCROLL */
+}
+
+#tracking-view .table-container {
+    flex: 1; /* AMBIL SISA RUANG YANG ADA */
+    overflow-x: auto !important; /* HORIZONTAL SCROLL UNTUK TABEL LEBAR */
+    overflow-y: auto !important; /* VERTICAL SCROLL UNTUK BARIS BANYAK */
+    height: 100%; /* GUNAKAN FULL HEIGHT DARI PARENT */
+    max-height: 100%; /* ENFORCE MAX HEIGHT */
+}
+
+/* KHUSUS UNTUK DUMMY BOOKING VIEW - SAMA SEPERTI TRACKING */
+#dummy-booking-view .table-card {
+    height: calc(100vh - 400px); /* TINGGI TETAP: VIEWPORT - HEADER - FILTERS - MARGIN */
+    min-height: 400px; /* MINIMUM HEIGHT AGAR TIDAK TERLALU KECIL */
+    max-height: 700px; /* MAXIMUM HEIGHT AGAR TIDAK TERLALU BESAR */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* LAPISAN LUAR TIDAK SCROLL */
+}
+
+#dummy-booking-view .table-container {
+    flex: 1; /* AMBIL SISA RUANG YANG ADA */
+    overflow-x: auto !important; /* HORIZONTAL SCROLL UNTUK TABEL LEBAR */
+    overflow-y: auto !important; /* VERTICAL SCROLL UNTUK BARIS BANYAK */
+    height: 100%; /* GUNAKAN FULL HEIGHT DARI PARENT */
+    max-height: 100%; /* ENFORCE MAX HEIGHT */
+}
+
+/* KHUSUS UNTUK TRACKING VIEW - FIXED HEIGHT CONTAINER */
+#tracking-view .table-card {
+    height: calc(100vh - 400px); /* TINGGI TETAP: VIEWPORT - HEADER - FILTERS - MARGIN */
+    min-height: 400px; /* MINIMUM HEIGHT AGAR TIDAK TERLALU KECIL */
+    max-height: 700px; /* MAXIMUM HEIGHT AGAR TIDAK TERLALU BESAR */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* LAPISAN LUAR TIDAK SCROLL */
+}
+
+#tracking-view .table-container {
+    flex: 1; /* AMBIL SISA RUANG YANG ADA */
+    overflow-x: auto !important; /* HORIZONTAL SCROLL UNTUK TABEL LEBAR */
+    overflow-y: auto !important; /* VERTICAL SCROLL UNTUK BARIS BANYAK */
+    height: 100%; /* GUNAKAN FULL HEIGHT DARI PARENT */
+    max-height: 100%; /* ENFORCE MAX HEIGHT */
+}
+
+/* KHUSUS UNTUK DUMMY BOOKING VIEW - SAMA SEPERTI TRACKING */
+#dummy-booking-view .table-card {
+    height: calc(100vh - 400px); /* TINGGI TETAP: VIEWPORT - HEADER - FILTERS - MARGIN */
+    min-height: 400px; /* MINIMUM HEIGHT AGAR TIDAK TERLALU KECIL */
+    max-height: 700px; /* MAXIMUM HEIGHT AGAR TIDAK TERLALU BESAR */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* LAPISAN LUAR TIDAK SCROLL */
+}
+
+#dummy-booking-view .table-container {
+    flex: 1; /* AMBIL SISA RUANG YANG ADA */
+    overflow-x: auto !important; /* HORIZONTAL SCROLL UNTUK TABEL LEBAR */
+    overflow-y: auto !important; /* VERTICAL SCROLL UNTUK BARIS BANYAK */
+    height: 100%; /* GUNAKAN FULL HEIGHT DARI PARENT */
+    max-height: 100%; /* ENFORCE MAX HEIGHT */
+}
+
+/* KHUSUS UNTUK TRACKING VIEW - FIXED HEIGHT CONTAINER */
+#tracking-view .table-card {
+    height: calc(100vh - 400px); /* TINGGI TETAP: VIEWPORT - HEADER - FILTERS - MARGIN */
+    min-height: 400px; /* MINIMUM HEIGHT AGAR TIDAK TERLALU KECIL */
+    max-height: 700px; /* MAXIMUM HEIGHT AGAR TIDAK TERLALU BESAR */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* LAPISAN LUAR TIDAK SCROLL */
+}
+
+#tracking-view .table-container {
+    flex: 1; /* AMBIL SISA RUANG YANG ADA */
+    overflow-x: auto !important; /* HORIZONTAL SCROLL UNTUK TABEL LEBAR */
+    overflow-y: auto !important; /* VERTICAL SCROLL UNTUK BARIS BANYAK */
+    height: 100%; /* GUNAKAN FULL HEIGHT DARI PARENT */
+    max-height: 100%; /* ENFORCE MAX HEIGHT */
+}
+
+/* KHUSUS UNTUK DUMMY BOOKING VIEW - SAMA SEPERTI TRACKING */
+#dummy-booking-view .table-card {
+    height: calc(100vh - 400px); /* TINGGI TETAP: VIEWPORT - HEADER - FILTERS - MARGIN */
+    min-height: 400px; /* MINIMUM HEIGHT AGAR TIDAK TERLALU KECIL */
+    max-height: 700px; /* MAXIMUM HEIGHT AGAR TIDAK TERLALU BESAR */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* LAPISAN LUAR TIDAK SCROLL */
+}
+
+#dummy-booking-view .table-container {
+    flex: 1; /* AMBIL SISA RUANG YANG ADA */
+    overflow-x: auto !important; /* HORIZONTAL SCROLL UNTUK TABEL LEBAR */
+    overflow-y: auto !important; /* VERTICAL SCROLL UNTUK BARIS BANYAK */
+    height: 100%; /* GUNAKAN FULL HEIGHT DARI PARENT */
+    max-height: 100%; /* ENFORCE MAX HEIGHT */
 }
 
 table {
@@ -607,16 +747,16 @@ table {
     border-collapse: collapse;
     font-size: 10px;
     display: table !important;
-    table-layout: fixed !important;
+    table-layout: fixed !important; /* ENFORCE FIXED LAYOUT */
     overflow: visible !important;
 }
 
-/* TRACKING & DUMMY TABLE - REDUCED WIDTH */
+/* TRACKING & DUMMY TABLE */
 #vesselTable,
 #trackingVesselTable,
 #dummyBookingTable {
     table-layout: fixed !important; 
-    min-width: 2800px !important;
+    min-width: 3600px !important;
     margin-bottom: 0 !important;
     overflow: visible !important;
 }
@@ -645,149 +785,74 @@ table {
     white-space: nowrap;
 }
 
-/* RESIZABLE COLUMNS - ALL TABLES CAN BE ADJUSTED */
-#vesselTable,
-#trackingVesselTable,
-#dummyBookingTable {
-    table-layout: auto !important; /* Allow columns to auto-adjust */
+/* LEBAR KOLOM OPTIMIZED */
+/* LEBAR KOLOM FIXED - TIDAK BOLEH AUTO-MEMBESAR */
+#vesselTable th:nth-child(1), #trackingVesselTable th:nth-child(1), #dummyBookingTable th:nth-child(1) { 
+    width: 30px !important; /* FIXED: Tetap 30px */
+    min-width: 30px !important;
+    max-width: 30px !important;
 }
 
-#vesselTable th,
-#trackingVesselTable th,
-#dummyBookingTable th {
-    resize: horizontal;
-    overflow: auto;
-    position: relative;
-    min-width: 30px; /* Minimum width untuk bisa dikecilkan */
-    max-width: none !important; /* No maximum width restriction */
+#vesselTable th:nth-child(2), #trackingVesselTable th:nth-child(2), #dummyBookingTable th:nth-child(2) { 
+    width: 70px !important; /* FIXED: Tetap 70px */
+    min-width: 70px !important;
+    max-width: 70px !important;
 }
 
-#vesselTable th:hover,
-#trackingVesselTable th:hover,
-#dummyBookingTable th:hover {
-    cursor: col-resize;
-    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
-}
+#vesselTable th:nth-child(3), #trackingVesselTable th:nth-child(3), #dummyBookingTable th:nth-child(3) { width: 90px; }
+#vesselTable th:nth-child(4), #trackingVesselTable th:nth-child(4), #dummyBookingTable th:nth-child(4) { width: 85px; }
+#vesselTable th:nth-child(5), #trackingVesselTable th:nth-child(5), #dummyBookingTable th:nth-child(5) { width: 90px; }
+#vesselTable th:nth-child(6), #trackingVesselTable th:nth-child(6), #dummyBookingTable th:nth-child(6) { width: 35px; }
+#vesselTable th:nth-child(7), #trackingVesselTable th:nth-child(7), #dummyBookingTable th:nth-child(7) { width: 35px; }
+#vesselTable th:nth-child(8), #trackingVesselTable th:nth-child(8), #dummyBookingTable th:nth-child(8) { width: 45px; }
+#vesselTable th:nth-child(9), #trackingVesselTable th:nth-child(9), #dummyBookingTable th:nth-child(9) { width: 95px; }
+#vesselTable th:nth-child(10), #trackingVesselTable th:nth-child(10), #dummyBookingTable th:nth-child(10) { width: 180px; }
+#vesselTable th:nth-child(11), #trackingVesselTable th:nth-child(11), #dummyBookingTable th:nth-child(11) { width: 75px; }
+#vesselTable th:nth-child(12), #trackingVesselTable th:nth-child(12), #dummyBookingTable th:nth-child(12) { width: 90px; }
+#vesselTable th:nth-child(13), #trackingVesselTable th:nth-child(13), #dummyBookingTable th:nth-child(13) { width: 65px; }
+#vesselTable th:nth-child(14), #trackingVesselTable th:nth-child(14), #dummyBookingTable th:nth-child(14) { width: 120px; }
+#vesselTable th:nth-child(15), #trackingVesselTable th:nth-child(15), #dummyBookingTable th:nth-child(15) { width: 95px; }
+#vesselTable th:nth-child(16), #trackingVesselTable th:nth-child(16), #dummyBookingTable th:nth-child(16) { width: 90px; }
+#vesselTable th:nth-child(17), #trackingVesselTable th:nth-child(17), #dummyBookingTable th:nth-child(17) { width: 110px; }
+#vesselTable th:nth-child(18), #trackingVesselTable th:nth-child(18), #dummyBookingTable th:nth-child(18) { width: 100px; }
+#vesselTable th:nth-child(19), #trackingVesselTable th:nth-child(19), #dummyBookingTable th:nth-child(19) { width: 100px; }
+#vesselTable th:nth-child(20), #trackingVesselTable th:nth-child(20), #dummyBookingTable th:nth-child(20) { width: 90px; }
+#vesselTable th:nth-child(21), #trackingVesselTable th:nth-child(21), #dummyBookingTable th:nth-child(21) { width: 110px; }
+#vesselTable th:nth-child(22), #trackingVesselTable th:nth-child(22), #dummyBookingTable th:nth-child(22) { width: 110px; }
 
-#vesselTable th:nth-child(3), #trackingVesselTable th:nth-child(3), #dummyBookingTable th:nth-child(3) { 
-    width: 120px !important; min-width: 120px !important; max-width: 120px !important; 
-}
-#vesselTable th:nth-child(4), #trackingVesselTable th:nth-child(4), #dummyBookingTable th:nth-child(4) { 
-    width: 90px !important; min-width: 90px !important; max-width: 90px !important; 
-}
-#vesselTable th:nth-child(4), #trackingVesselTable th:nth-child(4), #dummyBookingTable th:nth-child(4) { 
-    width: 90px !important; min-width: 90px !important; max-width: 90px !important; 
-}
-#vesselTable th:nth-child(5), #trackingVesselTable th:nth-child(5), #dummyBookingTable th:nth-child(5) { 
-    width: 90px !important; min-width: 90px !important; max-width: 90px !important; 
-}
-#vesselTable th:nth-child(6), #trackingVesselTable th:nth-child(6), #dummyBookingTable th:nth-child(6) { 
-    width: 50px !important; min-width: 50px !important; max-width: 50px !important; 
-}
-#vesselTable th:nth-child(7), #trackingVesselTable th:nth-child(7), #dummyBookingTable th:nth-child(7) { 
-    width: 50px !important; min-width: 50px !important; max-width: 50px !important; 
-}
-#vesselTable th:nth-child(8), #trackingVesselTable th:nth-child(8), #dummyBookingTable th:nth-child(8) { 
-    width: 50px !important; min-width: 50px !important; max-width: 50px !important; 
-}
-#vesselTable th:nth-child(9), #trackingVesselTable th:nth-child(9), #dummyBookingTable th:nth-child(9) { 
-    width: 90px !important; min-width: 90px !important; max-width: 90px !important; 
-}
-#vesselTable th:nth-child(10), #trackingVesselTable th:nth-child(10), #dummyBookingTable th:nth-child(10) { 
-    width: 200px !important; min-width: 200px !important; max-width: 200px !important; 
-}
-#vesselTable th:nth-child(11), #trackingVesselTable th:nth-child(11), #dummyBookingTable th:nth-child(11) { 
-    width: 70px !important; min-width: 70px !important; max-width: 70px !important; 
-}
-#vesselTable th:nth-child(12), #trackingVesselTable th:nth-child(12), #dummyBookingTable th:nth-child(12) { 
-    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
-}
-#vesselTable th:nth-child(13), #trackingVesselTable th:nth-child(13), #dummyBookingTable th:nth-child(13) { 
-    width: 60px !important; min-width: 60px !important; max-width: 60px !important; 
-}
-#vesselTable th:nth-child(14), #trackingVesselTable th:nth-child(14), #dummyBookingTable th:nth-child(14) { 
-    width: 110px !important; min-width: 110px !important; max-width: 110px !important; 
-}
-#vesselTable th:nth-child(15), #trackingVesselTable th:nth-child(15), #dummyBookingTable th:nth-child(15) { 
-    width: 90px !important; min-width: 90px !important; max-width: 90px !important; 
-}
-#vesselTable th:nth-child(16), #trackingVesselTable th:nth-child(16), #dummyBookingTable th:nth-child(16) { 
-    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
-}
-#vesselTable th:nth-child(17), #trackingVesselTable th:nth-child(17), #dummyBookingTable th:nth-child(17) { 
-    width: 100px !important; min-width: 100px !important; max-width: 100px !important; 
-}
-#vesselTable th:nth-child(18), #trackingVesselTable th:nth-child(18), #dummyBookingTable th:nth-child(18) { 
-    width: 95px !important; min-width: 95px !important; max-width: 95px !important; 
-}
-#vesselTable th:nth-child(19), #trackingVesselTable th:nth-child(19), #dummyBookingTable th:nth-child(19) { 
-    width: 95px !important; min-width: 95px !important; max-width: 95px !important; 
-}
-#vesselTable th:nth-child(20), #trackingVesselTable th:nth-child(20), #dummyBookingTable th:nth-child(20) { 
-    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
-}
-#vesselTable th:nth-child(21), #trackingVesselTable th:nth-child(21), #dummyBookingTable th:nth-child(21) { 
-    width: 100px !important; min-width: 100px !important; max-width: 100px !important; 
-}
-#vesselTable th:nth-child(22), #trackingVesselTable th:nth-child(22), #dummyBookingTable th:nth-child(22) { 
-    width: 100px !important; min-width: 100px !important; max-width: 100px !important; 
-}
+/* KOLOM VOYAGE BARU - FIXED: Ditambahkan setelah Vessel Name */
+#trackingVesselTable th:nth-child(23), #dummyBookingTable th:nth-child(23) { width: 100px; } /* Voyage */
 
-/* KOLOM VOYAGE - COMPACT */
-#trackingVesselTable th:nth-child(23), #dummyBookingTable th:nth-child(23) { 
-    width: 80px !important; min-width: 80px !important; max-width: 80px !important; 
-}
+/* Shift kolom berikutnya +1 karena ada Voyage */
+#vesselTable th:nth-child(23), #trackingVesselTable th:nth-child(24), #dummyBookingTable th:nth-child(24) { width: 95px; } /* Open CY */
+#vesselTable th:nth-child(24), #trackingVesselTable th:nth-child(25), #dummyBookingTable th:nth-child(25) { width: 95px; } /* Closing Fisik */
+#vesselTable th:nth-child(25), #trackingVesselTable th:nth-child(26), #dummyBookingTable th:nth-child(26) { width: 95px; } /* ETD */
+#vesselTable th:nth-child(26), #trackingVesselTable th:nth-child(27), #dummyBookingTable th:nth-child(27) { width: 70px; } /* NW */
+#vesselTable th:nth-child(27), #trackingVesselTable th:nth-child(28), #dummyBookingTable th:nth-child(28) { width: 75px; } /* DO STATUS */
+#vesselTable th:nth-child(28), #trackingVesselTable th:nth-child(29), #dummyBookingTable th:nth-child(29) { width: 65px; } /* Post to SAP */
+#vesselTable th:nth-child(29), #trackingVesselTable th:nth-child(30), #dummyBookingTable th:nth-child(30) { width: 90px; } /* Masalah */
 
-/* DATE/TIME COLUMNS - COMPACT */
-#vesselTable th:nth-child(23), #trackingVesselTable th:nth-child(24), #dummyBookingTable th:nth-child(24) { 
-    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
-}
-#vesselTable th:nth-child(24), #trackingVesselTable th:nth-child(25), #dummyBookingTable th:nth-child(25) { 
-    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
-}
-#vesselTable th:nth-child(25), #trackingVesselTable th:nth-child(26), #dummyBookingTable th:nth-child(26) { 
-    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
-}
-
-/* NUMERIC COLUMNS - COMPACT */
-#vesselTable th:nth-child(26), #trackingVesselTable th:nth-child(27), #dummyBookingTable th:nth-child(27) { 
-    width: 65px !important; min-width: 65px !important; max-width: 65px !important; 
-}
-#vesselTable th:nth-child(27), #trackingVesselTable th:nth-child(28), #dummyBookingTable th:nth-child(28) { 
-    width: 70px !important; min-width: 70px !important; max-width: 70px !important; 
-}
-#vesselTable th:nth-child(28), #trackingVesselTable th:nth-child(29), #dummyBookingTable th:nth-child(29) { 
-    width: 60px !important; min-width: 60px !important; max-width: 60px !important; 
-}
-#vesselTable th:nth-child(29), #trackingVesselTable th:nth-child(30), #dummyBookingTable th:nth-child(30) { 
-    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
-}
-
-/* ACTION COLUMNS - COMPACT */
-#trackingVesselTable th:nth-child(31), #dummyBookingTable th:nth-child(31) { 
-    width: 110px !important; min-width: 110px !important; max-width: 110px !important; 
-}
-#trackingVesselTable th:nth-child(32), #dummyBookingTable th:nth-child(32) { 
-    width: 55px !important; min-width: 55px !important; max-width: 55px !important; 
-}
+/* SI & BC dan Action untuk Tracking & Dummy */
+#trackingVesselTable th:nth-child(31), #dummyBookingTable th:nth-child(31) { width: 120px; } /* SI & BC */
+#trackingVesselTable th:nth-child(32), #dummyBookingTable th:nth-child(32) { width: 60px; } /* Action */
 
 th {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    padding: 4px 6px !important;
+    padding: 2px 2px !important; /* MINIMAL PADDING */
     text-align: center;
     font-weight: 600;
     border: 1px solid #dee2e6;
     white-space: nowrap;
     vertical-align: middle;
-    font-size: 11px !important;
+    font-size: 9px !important; /* REDUCED dari 10px */
     position: sticky !important;
     top: 0 !important;
     z-index: 100 !important;
-    height: 32px !important;
-    max-height: 32px !important;
-    min-height: 32px !important;
-    line-height: 1.2 !important;
+    height: 24px !important; /* REDUCED dari 32px ke 24px */
+    max-height: 24px !important;
+    min-height: 24px !important;
+    line-height: 1 !important; /* TIGHT */
     box-sizing: border-box !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
@@ -800,20 +865,20 @@ thead {
 }
 
 td {
-    padding: 4px 6px !important;
+    padding: 0px 2px !important; /* MINIMAL PADDING */
     border: 1px solid #dee2e6;
     white-space: nowrap;
     vertical-align: middle;
     text-align: left;
     color: black;
-    height: 32px !important;
-    max-height: 32px !important;
-    min-height: 32px !important;
-    line-height: 1.2 !important;
+    height: 24px !important; /* REDUCED dari 32px ke 24px */
+    max-height: 24px !important;
+    min-height: 24px !important;
+    line-height: 1 !important; /* TIGHT */
     box-sizing: border-box !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    font-size: 11px !important;
+    font-size: 9px !important; /* REDUCED dari 10px */
 }
 
 /* AGREEMENT LIST - KONSISTEN DENGAN TABEL LAIN */
@@ -853,13 +918,15 @@ td {
     font-weight: 600 !important; /* Semi-bold untuk header */
 }
 
-#agreementTable th:nth-child(1) { min-width: 100px; } /* Agreement */
-#agreementTable th:nth-child(2) { min-width: 100px; } /* Calculation Sheet */
-#agreementTable th:nth-child(3) { min-width: 250px; } /* LINER */
-#agreementTable th:nth-child(4) { min-width: 60px; } /* Type */
-#agreementTable th:nth-child(5) { min-width: 80px; } /* Rate */
-#agreementTable th:nth-child(6) { min-width: 150px; } /* Destination Port */
-#agreementTable th:nth-child(7) { min-width: 120px; } /* Destination Location */
+#agreementTable th:nth-child(1) { min-width: 100px; }
+#agreementTable th:nth-child(2) { min-width: 100px; }
+#agreementTable th:nth-child(3) { min-width: 250px; }
+#agreementTable th:nth-child(4) { min-width: 60px; }
+#agreementTable th:nth-child(5) { min-width: 80px; }
+#agreementTable th:nth-child(6) { min-width: 150px; }
+#agreementTable th:nth-child(7) { min-width: 100px; }
+#agreementTable th:nth-child(8) { min-width: 100px; }
+#agreementTable th:nth-child(9) { min-width: 120px; }
 
 .td-center {
     text-align: center;
@@ -966,17 +1033,17 @@ td input[type="time"],
 td input[type="number"],
 td select {
     width: 100% !important;
-    padding: 4px 6px !important;
+    padding: 0px 2px !important; /* MINIMAL PADDING */
     border: 1px solid #ced4da;
     border-radius: 2px;
     background-color: #fff;
     box-sizing: border-box !important;
-    height: 28px !important;
-    max-height: 28px !important;
-    min-height: 28px !important;
+    height: 20px !important; /* REDUCED dari 26px ke 20px */
+    max-height: 20px !important;
+    min-height: 20px !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 11px !important;
-    line-height: 1.2 !important;
+    font-size: 9px !important; /* REDUCED dari 10px */
+    line-height: 1 !important; /* TIGHT */
     font-weight: 400;
     color: #2c3e50;
     transition: border-color 0.2s, box-shadow 0.2s;
@@ -1010,8 +1077,8 @@ input[type="number"].editable-cell {
 .do-status-checkbox,
 table input[type="checkbox"],
 td input[type="checkbox"] {
-    width: 16px !important;
-    height: 16px !important;
+    width: 12px !important; /* REDUCED dari 14px */
+    height: 12px !important;
     cursor: pointer;
     margin: 0 !important;
     padding: 0 !important;
@@ -1470,13 +1537,13 @@ td input[type="checkbox"] {
 }
 
 .btn-small {
-    padding: 4px 8px !important;
+    padding: 2px 6px !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 10px !important;
+    font-size: 9px !important;
     line-height: 1.2 !important;
     font-weight: 500;
-    height: 26px !important;
-    max-height: 26px !important;
+    height: 22px !important;
+    max-height: 22px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -1490,12 +1557,12 @@ table .btn-danger,
 table .btn-secondary,
 table .btn-primary {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 10px !important;
-    line-height: 1.2 !important;
+    font-size: 8px !important; /* REDUCED dari 9px */
+    line-height: 1 !important;
     font-weight: 500;
-    padding: 4px 8px !important;
-    height: 26px !important;
-    max-height: 26px !important;
+    padding: 1px 4px !important; /* MINIMAL */
+    height: 18px !important; /* REDUCED dari 22px */
+    max-height: 18px !important;
 }
 
 .add-row-container {
@@ -1516,9 +1583,9 @@ table .btn-primary {
 #vesselTable tbody tr,
 #trackingVesselTable tbody tr,
 #dummyBookingTable tbody tr {
-    height: 32px !important;
-    max-height: 32px !important;
-    min-height: 32px !important;
+    height: 24px !important; /* REDUCED dari 32px ke 24px */
+    max-height: 24px !important;
+    min-height: 24px !important;
 }
 #agreementTable tbody tr,
 #terminalScheduleTable tbody tr {
@@ -1680,21 +1747,21 @@ background-color: #f5f7fa;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 4px 6px !important;
+    padding: 0px 3px !important; /* MINIMAL */
     background-color: #f0f0f0;
     color: #6c757d;
     border: 1px solid #ced4da;
-    border-radius: 4px;
+    border-radius: 2px;
     cursor: pointer;
     transition: all 0.2s;
     white-space: nowrap;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 9px !important;
-    line-height: 1.2 !important;
+    font-size: 7px !important; /* REDUCED dari 8px */
+    line-height: 1 !important;
     font-weight: 500;
     flex-shrink: 1;
-    height: 24px !important;
-    max-height: 24px !important;
+    height: 16px !important; /* REDUCED dari 20px */
+    max-height: 16px !important;
 }
 
 
@@ -1719,23 +1786,7 @@ background-color: #f5f7fa;
     display: none;
 }
 
-.file-count-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 16px !important;
-    height: 16px !important;
-    max-height: 16px !important;
-    padding: 0 4px;
-    background-color: #667eea;
-    color: white;
-    border-radius: 8px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 9px !important;
-    line-height: 1.2 !important;
-    font-weight: 700;
-    flex-shrink: 0;
-}
+z
 
 .file-count-badge.complete {
     background-color: #28a745;
@@ -1750,18 +1801,18 @@ background-color: #f5f7fa;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 24px !important;
-    height: 24px !important;
-    max-height: 24px !important;
+    width: 20px !important;
+    height: 20px !important;
+    max-height: 20px !important;
     padding: 0 !important;
     border: 1px solid #e8eaf6;
-    border-radius: 4px;
+    border-radius: 3px;
     cursor: pointer;
     transition: all 0.2s;
     background-color: #e8eaf6;
     color: #5c6bc0;
     font-size: 12px !important;
-    line-height: 1.2 !important;
+    line-height: 1 !important;
     flex-shrink: 0;
 }
 
@@ -1778,45 +1829,48 @@ background-color: #f5f7fa;
 /* Smooth scrolling untuk content area */
 .content-area {
     scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
+    -webkit-overflow-scrolling: touch; /* Untuk smooth scroll di iOS */
 }
 
-/* SCROLLBAR HANYA DI VIEWPORT */
+/* Styling scrollbar untuk browser yang mendukung */
+/* ============================================
+   SCROLLBAR HANYA DI VIEWPORT
+   ============================================ */
 .content-area::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
+    width: 12px !important;
+    height: 12px !important;
 }
 
 .content-area::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
+    background: #f1f1f1 !important;
+    border-radius: 10px !important;
 }
 
 .content-area::-webkit-scrollbar-thumb {
-    background: #667eea;
-    border-radius: 10px;
+    background: #667eea !important;
+    border-radius: 10px !important;
 }
 
 .content-area::-webkit-scrollbar-thumb:hover {
-    background: #764ba2;
+    background: #764ba2 !important;
 }
 
 .table-container::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 8px !important;
+    height: 8px !important;
 }
 
 .table-container::-webkit-scrollbar-track {
-    background: transparent;
+    background: transparent !important;
 }
 
 .table-container::-webkit-scrollbar-thumb {
-    background: #ccc;
-    border-radius: 4px;
+    background: #ccc !important;
+    border-radius: 4px !important;
 }
 
 .table-container::-webkit-scrollbar-thumb:hover {
-    background: #999;
+    background: #999 !important;
 }
 /* DATETIME CONTAINER - TYPOGRAPHY KONSISTEN */
 .datetime-container {
@@ -1831,17 +1885,17 @@ background-color: #f5f7fa;
 .datetime-container input[type="date"],
 .datetime-container input[type="time"] {
     width: 100% !important;
-    padding: 2px 4px !important;
+    padding: 0px 1px !important; /* MINIMAL */
     border: 1px solid #ced4da;
     border-radius: 2px;
     background-color: #fff;
     box-sizing: border-box !important;
-    height: 14px !important;
-    max-height: 14px !important;
-    min-height: 14px !important;
+    height: 10px !important; /* HALF OF TD (24px / 2) */
+    max-height: 10px !important;
+    min-height: 10px !important;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 9px !important;
-    line-height: 1.2 !important;
+    font-size: 7px !important; /* VERY SMALL */
+    line-height: 1 !important;
     font-weight: 400;
     color: #2c3e50;
     overflow: hidden !important;
@@ -1996,110 +2050,4 @@ background-color: #f5f7fa;
     50% {
         box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.8), 0 0 10px rgba(76, 175, 80, 0.5);
     }
-}
-/* IKON EMAIL - DESIGN BARU */
-.btn-send-email {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 24px !important;
-    height: 24px !important;
-    max-height: 24px !important;
-    padding: 0 !important;
-    border: 1px solid #e3f2fd;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s;
-    background-color: #e3f2fd;
-    color: #1976d2;
-    font-size: 12px !important;
-    line-height: 1.2 !important;
-    flex-shrink: 0;
-}
-
-.btn-send-email:hover {
-    background-color: #1976d2;
-    color: white;
-    border-color: #1976d2;
-    transform: scale(1.05);
-    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
-}
-
-.btn-send-email:active {
-    transform: scale(0.95);
-}
-
-/* Agreement Import Status */
-#agreement-import-status {
-    font-size: 12px;
-    font-weight: 500;
-    text-align: center;
-}
-/* ===================================================================
-   TOP 1 LINER STYLING - 3 BARIS (20, 40, 40HC)
-   =================================================================== */
-
-/* Kolom TOP 1 LINER - allow multiline display */
-/* Kolom 19 style sudah tidak diperlukan - sudah ada di bawah untuk 3 kolom terpisah */
-
-
-/* Textarea style sudah tidak diperlukan - sekarang pakai input biasa */
-
-
-/* Style gradient sudah tidak diperlukan - sudah pakai 3 kolom terpisah */
-
-/* ===================================================================
-   TOP 1 LINER - 3 SUB KOLOM (20, 40, 40HC)
-   =================================================================== */
-
-/* Header dengan rowspan dan colspan */
-#vesselTable thead tr:first-child th,
-#trackingVesselTable thead tr:first-child th,
-#dummyBookingTable thead tr:first-child th {
-    vertical-align: middle !important;
-}
-
-/* Sub-header TOP 1 LINER (20, 40, 40HC) */
-#vesselTable thead tr:nth-child(2) th,
-#trackingVesselTable thead tr:nth-child(2) th,
-#dummyBookingTable thead tr:nth-child(2) th {
-    color: white;
-    font-size: 10px !important;
-    font-weight: 600;
-    padding: 4px 6px !important;
-    height: 28px !important;
-}
-
-/* Kolom TOP 1 LINER - DIPERLEBAR 250px agar nama liner terbaca semua */
-#vesselTable th:nth-child(19),
-#vesselTable td:nth-child(19),
-#trackingVesselTable th:nth-child(19),
-#trackingVesselTable td:nth-child(19),
-#dummyBookingTable th:nth-child(19),
-#dummyBookingTable td:nth-child(19),
-#vesselTable th:nth-child(20),
-#vesselTable td:nth-child(20),
-#trackingVesselTable th:nth-child(20),
-#trackingVesselTable td:nth-child(20),
-#dummyBookingTable th:nth-child(20),
-#dummyBookingTable td:nth-child(20),
-#vesselTable th:nth-child(21),
-#vesselTable td:nth-child(21),
-#trackingVesselTable th:nth-child(21),
-#trackingVesselTable td:nth-child(21),
-#dummyBookingTable th:nth-child(21),
-#dummyBookingTable td:nth-child(21) {
-    width: 250px !important;
-    min-width: 250px !important;
-    max-width: 250px !important;
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: clip !important;
-}
-
-/* Shift kolom REASON dan seterusnya karena sekarang ada 3 kolom TOP 1 LINER */
-#vesselTable th:nth-child(22),
-#trackingVesselTable th:nth-child(22),
-#dummyBookingTable th:nth-child(22) { 
-    width: 85px !important; min-width: 85px !important; max-width: 85px !important; 
 }
