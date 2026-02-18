@@ -83,8 +83,8 @@
                 <span>Reports</span>
             </div>
             <div class="menu-item" data-target="settings-view">
-                <span class="menu-icon">⚙️</span>
-                <span>Settings</span>
+                <span class="menu-icon">💾</span>
+                <span>Database Cost</span>
             </div>
         </div>
     </div>
@@ -268,36 +268,36 @@
                         <table id="vesselTable">
 <thead>
     <tr>
-        <th rowspan="2">No</th>
-        <th rowspan="2">Region</th>
-        <th rowspan="2">Product Group</th>
-        <th rowspan="2">SC</th>
-        <th rowspan="2">Delivery</th>
-        <th rowspan="2">20</th>
-        <th rowspan="2">40</th>
-        <th rowspan="2">40 HC</th>
-        <th rowspan="2">MAD</th>
-        <th rowspan="2">Ship to Party</th>
-        <th rowspan="2">Shipping Point</th>
-        <th rowspan="2">Country</th>
-        <th rowspan="2">IncoTerm</th>
-        <th rowspan="2">Destination Port</th>
-        <th rowspan="2">BOOKING DATE</th>
-        <th rowspan="2">MARKS BY CS</th>
-        <th rowspan="2">Booking Number</th>
-        <th rowspan="2">LINER</th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">No<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',0)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Region<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',1)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Product Group<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',2)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">SC<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',3)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Delivery<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',4)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">20<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',5)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">40<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',6)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">40 HC<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',7)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">MAD<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',8)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Ship to Party<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',9)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Shipping Point<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',10)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Country<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',11)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">IncoTerm<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',12)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Destination Port<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',13)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">BOOKING DATE<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',14)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">MARKS BY CS<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',15)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Booking Number<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',16)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">LINER<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',17)">▼</span></th>
         <th colspan="3">TOP 1 LINER</th>
-        <th rowspan="2">REASON</th>
-        <th rowspan="2">KETERANGAN</th>
-        <th rowspan="2">Vessel Name</th>
-        <th rowspan="2">Voyage</th>
-        <th rowspan="2">Open CY</th>
-        <th rowspan="2">Closing Fisik</th>
-        <th rowspan="2">ETD</th>
-        <th rowspan="2">NW (Ton)</th>
-        <th rowspan="2">DO STATUS</th>
-        <th rowspan="2">Post to SAP</th>
-        <th rowspan="2">Masalah</th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">REASON<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',21)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">KETERANGAN<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',22)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Vessel Name<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',23)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Voyage<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',24)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Open CY<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',25)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Closing Fisik<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',26)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">ETD<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',27)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">NW (Ton)<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',28)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">DO STATUS<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',29)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Post to SAP<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',30)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Masalah<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'vesselTable',31)">▼</span></th>
     </tr>
     <tr>
         <th>20</th>
@@ -395,16 +395,16 @@
             <table id="terminalScheduleTable">                <div class="table-card">
                             <thead>
                     <tr>
-                        <th>Terminal</th>
-                        <th>Vessel Name</th>
-                        <th>Voyage</th>
-                        <th>ETA</th>
-                        <th>ETD</th>
-                        <th>ATA</th>
-                        <th>ATD</th>
-                        <th>Open Stack</th>
-                        <th>Closing Document</th>
-                        <th>Total Tonase (Ton)</th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">Terminal<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'terminalScheduleTable',0)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">Vessel Name<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'terminalScheduleTable',1)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">Voyage<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'terminalScheduleTable',2)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">ETA<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'terminalScheduleTable',3)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">ETD<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'terminalScheduleTable',4)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">ATA<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'terminalScheduleTable',5)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">ATD<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'terminalScheduleTable',6)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">Open Stack<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'terminalScheduleTable',7)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">Closing Document<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'terminalScheduleTable',8)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">Total Tonase (Ton)<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'terminalScheduleTable',9)">▼</span></th>
                         <th>Booking</th>
                         <th>Action</th>
                     </tr>
@@ -437,13 +437,13 @@
             <table id="agreementTable">
                 <thead id="agreementTableHead">
                     <tr>
-                        <th>Agreement</th>
-                        <th>Calculation Sheet</th>
-                        <th>LINER</th>
-                        <th>Type</th>
-                        <th>Rate</th>
-                        <th>Destination Port</th>
-                        <th>Destination Location</th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">Agreement<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'agreementTable',0)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">Calculation Sheet<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'agreementTable',1)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">LINER<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'agreementTable',2)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">Type<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'agreementTable',3)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">Rate<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'agreementTable',4)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">Destination Port<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'agreementTable',5)">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:22px;">Destination Location<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'agreementTable',6)">▼</span></th>
                     </tr>
                 </thead>
                 <tbody id="agreementTableBody">
@@ -462,9 +462,8 @@
             
 <div id="tracking-view" class="content-view">
     <h1 id="tracking-region-title">Tracking Information for Region 1</h1>
-    <p>Silakan isi atau perbarui data pada tabel di bawah ini. Perubahan akan otomatis ditampilkan di Dashboard. <br><b>Perhatian:</b> Perubahan akan hilang jika halaman di-refresh karena tidak ada database.</p>
     
-    <div style="display: flex; gap: 10px; margin-top: 20px; margin-bottom: 20px; align-items: center;">
+    <div style="display: flex; gap: 10px; margin-top: 10px; margin-bottom: 20px; align-items: center;">
         <button class="btn btn-primary" onclick="addNewEntry()">+ Add New Entry</button>
         <button class="btn btn-danger" onclick="deleteRegionData()">🗑️ Delete All (Region)</button>
         <button class="btn btn-success" onclick="autoFitColumns('trackingVesselTable')">📏 Auto-Fit Columns</button>
@@ -482,11 +481,47 @@
                 <div class="table-card">
                     <div class="table-container">
                         <table id="trackingVesselTable">
-                           <thead>
-    <tr>
-        <th>No</th><th>Region</th><th>Product Group</th><th>SC</th><th>Delivery</th><th>20</th><th>40</th><th>40 HC</th><th>MAD</th><th>Ship to Party</th><th>Shipping Point</th><th>Country</th><th>IncoTerm</th><th>Destination Port</th><th>BOOKING DATE</th><th>MARKS BY CS</th><th>Booking Number</th><th>LINER</th><th>TOP 1 LINER (20)</th><th>TOP 1 LINER (40)</th><th>TOP 1 LINER (40HC)</th><th>REASON</th><th>KETERANGAN</th><th>Vessel Name</th><th>Voyage</th><th>Open CY</th><th>Closing Fisik</th><th>ETD</th><th>NW (Ton)</th><th>DO STATUS</th><th>Post to SAP</th><th>Masalah</th><th>SI & BC Status</th><th>Action</th>
-    </tr>
-</thead>
+<thead>
+        <tr>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">No<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',0)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Region<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',1)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Product Group<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',2)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">SC<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',3)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Delivery<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',4)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">20<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',5)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">40<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',6)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">40 HC<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',7)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">MAD<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',8)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Ship to Party<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',9)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Shipping Point<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',10)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Country<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',11)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">IncoTerm<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',12)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Destination Port<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',13)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">BOOKING DATE<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',14)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">MARKS BY CS<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',15)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Booking Number<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',16)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">LINER<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',17)">▼</span></th>
+            <th colspan="3">TOP 1 LINER</th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">REASON<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',21)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">KETERANGAN<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',22)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Vessel Name<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',23)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Voyage<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',24)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Open CY<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',25)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Closing Fisik<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',26)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">ETD<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',27)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">NW (Ton)<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',28)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">DO STATUS<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',29)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Post to SAP<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',30)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Masalah<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',31)">▼</span></th>
+            <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">SI & BC Status<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'trackingVesselTable',32)">▼</span></th>
+            <th rowspan="2">Action</th>
+        </tr>
+        <tr>
+            <th>20</th>
+            <th>40</th>
+            <th>40 HC</th>
+        </tr>
+    </thead>
                             <tbody id="trackingTableBody"></tbody>
                         </table>
                     </div>
@@ -503,9 +538,45 @@
                 <div class="table-card">
                     <div class="table-container">
                         <table id="dummyBookingTable">
-                           <thead>
+<thead>
     <tr>
-        <th>No</th><th>Region</th><th>Product Group</th><th>SC</th><th>Delivery</th><th>20</th><th>40</th><th>40 HC</th><th>MAD</th><th>Ship to Party</th><th>Shipping Point</th><th>Country</th><th>IncoTerm</th><th>Destination Port</th><th>BOOKING DATE</th><th>MARKS BY CS</th><th>Booking Number</th><th>LINER</th><th>TOP 1 LINER (20)</th><th>TOP 1 LINER (40)</th><th>TOP 1 LINER (40HC)</th><th>REASON</th><th>KETERANGAN</th><th>Vessel Name</th><th>Voyage</th><th>Open CY</th><th>Closing Fisik</th><th>ETD</th><th>NW (Ton)</th><th>DO STATUS</th><th>Post to SAP</th><th>Masalah</th><th>SI & BC Status</th><th>Action</th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">No<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',0)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Region<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',1)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Product Group<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',2)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">SC<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',3)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Delivery<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',4)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">20<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',5)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">40<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',6)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">40 HC<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',7)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">MAD<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',8)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Ship to Party<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',9)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Shipping Point<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',10)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Country<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',11)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">IncoTerm<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',12)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Destination Port<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',13)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">BOOKING DATE<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',14)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">MARKS BY CS<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',15)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Booking Number<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',16)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">LINER<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',17)">▼</span></th>
+        <th colspan="3">TOP 1 LINER</th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">REASON<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',21)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">KETERANGAN<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',22)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Vessel Name<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',23)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Voyage<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',24)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Open CY<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',25)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Closing Fisik<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',26)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">ETD<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',27)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">NW (Ton)<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',28)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">DO STATUS<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',29)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Post to SAP<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',30)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">Masalah<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',31)">▼</span></th>
+        <th rowspan="2" style="position:relative;white-space:nowrap;padding-right:22px;">SI & BC Status<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'dummyBookingTable',32)">▼</span></th>
+        <th rowspan="2">Action</th>
+    </tr>
+    <tr>
+        <th>20</th>
+        <th>40</th>
+        <th>40 HC</th>
     </tr>
 </thead>
                             <tbody id="dummyBookingTableBody"></tbody>
@@ -531,7 +602,43 @@
                     </div>
                 </div>
             </div>
-<div id="settings-view" class="content-view"><h1>⚙ Settings Page</h1><p>Content for Settings goes here.</p></div>
+            <div id="settings-view" class="content-view">
+                
+                <div class="filters-section">
+                    <div class="filters-grid" style="grid-template-columns: 1fr 1fr;">
+                        <div class="filter-group">
+                            <label for="database-cost-input">📁 Pilih File Excel</label>
+                            <input type="file" id="database-cost-input" accept=".xlsx, .xls" class="editable-cell">
+                        </div>
+                        <div class="filter-group">
+                            <label for="database-cost-search">🔍 Search Database Cost</label>
+                            <input type="text" id="database-cost-search" class="editable-cell" placeholder="Search shipping line, charges type, currency..." oninput="filterDatabaseCostTable()">
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="database-cost-status" style="margin-top: 20px; white-space: pre-wrap;"></div>
+                
+                <div class="table-card" style="margin-top: 20px;">
+                    <div class="table-container">
+                        <table id="database-cost-preview-table">
+                            <thead>
+                                <tr>
+                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">No <span onclick="openDbCostColFilter(event,0)" id="db-cost-filter-btn-0" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
+                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Shipping Line <span onclick="openDbCostColFilter(event,1)" id="db-cost-filter-btn-1" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
+                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Charges Type <span onclick="openDbCostColFilter(event,2)" id="db-cost-filter-btn-2" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
+                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Currency <span onclick="openDbCostColFilter(event,3)" id="db-cost-filter-btn-3" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
+                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Amount <span onclick="openDbCostColFilter(event,4)" id="db-cost-filter-btn-4" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
+                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Remarks <span onclick="openDbCostColFilter(event,5)" id="db-cost-filter-btn-5" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
+                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Unit of Measure <span onclick="openDbCostColFilter(event,6)" id="db-cost-filter-btn-6" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
+                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Link <span onclick="openDbCostColFilter(event,7)" id="db-cost-filter-btn-7" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
