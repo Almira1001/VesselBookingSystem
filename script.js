@@ -1,91 +1,3 @@
-// --- REVISED STATIC AGREEMENT DATA (RENAMED KEYS) ---
-const staticAgreementData = [
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"45G0","Rate":2793,"Source Location":"IDTPP","Destination Port":"JACKSONVILLE, FL","Agreement Status":"Released","Destination Location":"USJAX"},
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"42G0","Rate":2793,"Source Location":"IDTPP","Destination Port":"JACKSONVILLE, FL","Agreement Status":"Released","Destination Location":"USJAX"},
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20G0","Rate":2251,"Source Location":"IDTPP","Destination Port":"JACKSONVILLE, FL","Agreement Status":"Released","Destination Location":"USJAX"},
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"45G0","Rate":2974,"Source Location":"IDTPP","Destination Port":"HOUSTON, TX","Agreement Status":"Released","Destination Location":"USHOU"},
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"42G0","Rate":2974,"Source Location":"IDTPP","Destination Port":"HOUSTON, TX","Agreement Status":"Released","Destination Location":"USHOU"},
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20G0","Rate":2412,"Source Location":"IDTPP","Destination Port":"HOUSTON, TX","Agreement Status":"Released","Destination Location":"USHOU"},
-    {"Agreement":"2220001637","Calculation Sheet":"3613","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"45G0","Rate":4651,"Source Location":"IDTPP","Destination Port":"CINCINNATI, OH","Agreement Status":"Released","Destination Location":"USCWG"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"45G0","Rate":5303,"Source Location":"IDTPP","Destination Port":"PAPEETE","Agreement Status":"Released","Destination Location":"PFPPT"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"42G0","Rate":5303,"Source Location":"IDTPP","Destination Port":"PAPEETE","Agreement Status":"Released","Destination Location":"PFPPT"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"20G0","Rate":1344,"Source Location":"IDTPP","Destination Port":"MADANG","Agreement Status":"Released","Destination Location":"PGMAG"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"42G0","Rate":2679,"Source Location":"IDTPP","Destination Port":"MADANG","Agreement Status":"Released","Destination Location":"PGMAG"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"45G0","Rate":2678,"Source Location":"IDTPP","Destination Port":"MADANG","Agreement Status":"Released","Destination Location":"PGMAG"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"20G0","Rate":6844,"Source Location":"IDTPP","Destination Port":"NUKU'ALOFA","Agreement Status":"Released","Destination Location":"TOTBU"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"42G0","Rate":7803,"Source Location":"IDTPP","Destination Port":"NUKU'ALOFA","Agreement Status":"Released","Destination Location":"TOTBU"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"45G0","Rate":7803,"Source Location":"IDTPP","Destination Port":"NUKU'ALOFA","Agreement Status":"Released","Destination Location":"TOTBU"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"20G0","Rate":8344,"Source Location":"IDTPP","Destination Port":"APIA","Agreement Status":"Released","Destination Location":"WSAPW"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"42G0","Rate":9303,"Source Location":"IDTPP","Destination Port":"APIA","Agreement Status":"Released","Destination Location":"WSAPW"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"45G0","Rate":9303,"Source Location":"IDTPP","Destination Port":"APIA","Agreement Status":"Released","Destination Location":"WSAPW"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20G0","Rate":1905,"Source Location":"IDTPP","Destination Port":"SUVA","Agreement Status":"Released","Destination Location":"FJSUV"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"42G0","Rate":3699,"Source Location":"IDTPP","Destination Port":"SUVA","Agreement Status":"Released","Destination Location":"FJSUV"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"45G0","Rate":3699,"Source Location":"IDTPP","Destination Port":"SUVA","Agreement Status":"Released","Destination Location":"FJSUV"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20G0","Rate":718,"Source Location":"IDTPP","Destination Port":"AUCKLAND","Agreement Status":"Released","Destination Location":"NZAKL"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","Valid-From Date":"01/07/2025","Valid-To Date":"30/09/2025","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"42G0","Rate":1352,"Source Location":"IDTPP","Destination Port":"AUCKLAND","Agreement Status":"Released","Destination Location":"NZAKL"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"40HC","Rate":1367,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001648","Calculation Sheet":"3625","LINER":"ANL SINGAPORE PTE LTD. / JAKARTA SELATAN 12980","Type":"20","Rate":720,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001662","Calculation Sheet":"3982","LINER":"COSCO SHIPPING LINES / JAKARTA PUSAT 10220","Type":"20","Rate":345,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001643","Calculation Sheet":"3619","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20","Rate":733,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001648","Calculation Sheet":"3625","LINER":"ANL SINGAPORE PTE LTD. / JAKARTA SELATAN 12980","Type":"40","Rate":1440,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001648","Calculation Sheet":"3625","LINER":"ANL SINGAPORE PTE LTD. / JAKARTA SELATAN 12980","Type":"40HC","Rate":1440,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001641","Calculation Sheet":"3617","LINER":"OCEAN NETWORK EXPRESS PTE. LTD. / JAKARTA SELATAN 1","Type":"20","Rate":775,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001641","Calculation Sheet":"3617","LINER":"OCEAN NETWORK EXPRESS PTE. LTD. / JAKARTA SELATAN 1","Type":"40","Rate":1550,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001641","Calculation Sheet":"3617","LINER":"OCEAN NETWORK EXPRESS PTE. LTD. / JAKARTA SELATAN 1","Type":"40HC","Rate":1550,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001647","Calculation Sheet":"3624","LINER":"ORIENT OVERSEAS CONTAINER LINE LTD / JAKARTA PUSAT","Type":"40HC","Rate":1680,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001647","Calculation Sheet":"3624","LINER":"ORIENT OVERSEAS CONTAINER LINE LTD / JAKARTA PUSAT","Type":"40","Rate":1680,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001647","Calculation Sheet":"3624","LINER":"ORIENT OVERSEAS CONTAINER LINE LTD / JAKARTA PUSAT","Type":"20","Rate":865,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"40","Rate":1818,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"40HC","Rate":1818,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001640","Calculation Sheet":"3616","LINER":"MAERSK A/S / JAKARTA PUSAT 10220","Type":"20","Rate":331,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001644","Calculation Sheet":"3620","LINER":"PT. PACIFIC INTERNATIONAL LINES / JAKARTA SELATAN","Type":"20","Rate":1089,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001644","Calculation Sheet":"3620","LINER":"PT. PACIFIC INTERNATIONAL LINES / JAKARTA SELATAN","Type":"40","Rate":1860,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001644","Calculation Sheet":"3620","LINER":"PT. PACIFIC INTERNATIONAL LINES / JAKARTA SELATAN","Type":"40HC","Rate":1860,"Source Location":"IDTPP","Destination Port":"BRISBANE","Agreement Status":"Released","Destination Location":"AUBNE"},
-    {"Agreement":"2220001744","Calculation Sheet":"3756","LINER":"CMA CGM SA / JAKARTA SELATAN 12980","Type":"40HC","Rate":3516,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"Released","Destination Location":"COBUN"},
-    {"Agreement":"2220001744","Calculation Sheet":"3756","LINER":"CMA CGM SA / JAKARTA SELATAN 12980","Type":"40","Rate":3516,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"Released","Destination Location":"COBUN"},
-    {"Agreement":"2220001744","Calculation Sheet":"3756","LINER":"CMA CGM SA / JAKARTA SELATAN 12980","Type":"20","Rate":2458,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"Released","Destination Location":"COBUN"},
-    {"Agreement":"2220001838","Calculation Sheet":"3852","LINER":"OCEAN NETWORK EXPRESS PTE. LTD. / JAKARTA SELATAN 1","Type":"40HC","Rate":1500,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"Released","Destination Location":"COBUN"},
-    {"Agreement":"2220001838","Calculation Sheet":"3852","LINER":"OCEAN NETWORK EXPRESS PTE. LTD. / JAKARTA SELATAN 1","Type":"40","Rate":1500,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"Released","Destination Location":"COBUN"},
-    {"Agreement":"2220001838","Calculation Sheet":"3852","LINER":"OCEAN NETWORK EXPRESS PTE. LTD. / JAKARTA SELATAN 1","Type":"20","Rate":1450,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"Released","Destination Location":"COBUN"},
-    {"Agreement":"2220001794","Calculation Sheet":"3847","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20","Rate":1518,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001794","Calculation Sheet":"3847","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"40","Rate":2053,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001794","Calculation Sheet":"3847","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"40HC","Rate":2053,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001839","Calculation Sheet":"3853","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"20","Rate":1518,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001839","Calculation Sheet":"3853","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"40","Rate":2053,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001839","Calculation Sheet":"3853","LINER":"MEDITERRANEAN SHIPPING COMPANY SA / JAKARTA SELATA","Type":"40HC","Rate":2053,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001745","Calculation Sheet":"3757","LINER":"CMA CGM SA / JAKARTA SELATAN 12980","Type":"20","Rate":2358,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001746","Calculation Sheet":"3759","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"40HC","Rate":2748,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001746","Calculation Sheet":"3759","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"40","Rate":2748,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001747","Calculation Sheet":"3760","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"40HC","Rate":2748,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001745","Calculation Sheet":"3757","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"40","Rate":2748,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001745","Calculation Sheet":"3757","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"40HC","Rate":3216,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001745","Calculation Sheet":"3757","LINER":"CMA CGM SA / JAKARTA SELATAN 12980","Type":"40HC","Rate":3216,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001746","Calculation Sheet":"3759","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"20","Rate":2685,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"},
-    {"Agreement":"2220001747","Calculation Sheet":"3760","LINER":"HAPAG LLOYD / JAKARTA SELATAN 12950","Type":"20","Rate":2685,"Source Location":"IDTPP","Destination Port":"BUENAVENTURA","Agreement Status":"In Process","Destination Location":"COBUN"}
-];
-
-// --- DATA FROM UPLOADED FILE (WITH SAMPLE LINER DATA) ---
-const initialVesselData = [
-    // 'nw' (Net Weight) dalam Kg
-    {"region":"Region 1","vfPpp":"BREFCARD","sc":"D1H0001640","delivery":"D100004294","container20":"","container40":"","container40hc":1,"mad":"2025-05-16","shipToParty":"PEREZ TRADING CO MEXICO","shippingPoint":"821C","country":"MEXICO","incot":"FOB", "liner": "MSC", "vesselName": "SONGA SUCCESS", "nw": 21000, "masalah": "Tidak Ada"},
-    {"region":"Region 1","vfPpp":"BREFCARD","sc":"D1H0001249","delivery":"D100011154","container20":"","container40":"","container40hc":1,"mad":"2025-03-29","shipToParty":"GLASS-CO INDUSTRIES S.R.L.","shippingPoint":"821C","country":"ROMANIA","incot":"CIF", "liner": "MAERSK", "vesselName": "SONGA SUCCESS", "nw": 22000},
-    {"region":"Region 1","vfPpp":"BREFCARD","sc":"D1H0003535","delivery":"D100011991","container20":"","container40":"","container40hc":1,"mad":"2025-04-15","shipToParty":"PEREZ TRADING COMPANY TO GUATEMALA","shippingPoint":"821C","country":"GUATEMALA","incot":"FOB", "liner": "MAERSK", "vesselName": "SONGA SUCCESS", "nw": 23000},
-    {"region":"Region 6","vfPpp":"WS-PPP","sc":"D1H0014791","delivery":"D100013196","container20":10,"container40":"","container40hc":"","mad":"2025-06-27","shipToParty":"HARAS INTERNATIONAL LTD to Djibouti","shippingPoint":"821G","country":"DJIBOUTI","incot":"FOB", "liner": "HAPAG-LLOYD", "vesselName": "COSCO HAIFA", "nw": 240000},
-    {"region":"Region 6","vfPpp":"BREFCARD","sc":"D1H0014772","delivery":"D100014071","container20":5,"container40":"","container40hc":"","mad":"2025-06-20","shipToParty":"VITAL SOLUTIONS PTE LTD TO SOUTH AFRICA","shippingPoint":"821C","country":"SOUTH AFRICA","incot":"FOB", "liner": "COSCO", "vesselName": "COSCO HAIFA", "nw": 125000},
-    {"region":"Region 6","vfPpp":"BREFCARD","sc":"D1H0016359","delivery":"D100014485","container20":1,"container40":"","container40hc":"","mad":"2025-07-22","shipToParty":"VITAL SOLUTIONS PTE LTD TO IVORY COAST","shippingPoint":"821C","country":"IVORY COAST","incot":"FOB", "liner": "MSC", "vesselName": "MSC DUMMY", "nw": 25000},
-    {"region":"Region 6","vfPpp":"LABEL STOCK","sc":"D1H0016494","delivery":"D100014580","container20":1,"container40":"","container40hc":"","mad":"2025-08-16","shipToParty":"VITAL SOLUTIONS PTE LTD TO IVORY COAST","shippingPoint":"821Q","country":"IVORY COAST","incot":"FOB", "liner": "MSC", "vesselName": "MSC DUMMY", "nw": 25000},
-    {"region":"Region 1","vfPpp":"CARBONLESS","sc":"D1H0016256","delivery":"D100014647","container20":"","container40":"","container40hc":1,"mad":"2025-08-18","shipToParty":"PALS INTERNATIONAL L. L. C. TO COLOMBIA","shippingPoint":"821C","country":"COLOMBIA","incot":"FOB", "liner": "MAERSK", "vesselName": "MAERSK DUMMY", "nw": 22000},
-    {"region":"Region 6","vfPpp":"ART BOARD","sc":"D1H0016202","delivery":"D100014752","container20":1,"container40":"","container40hc":"","mad":"2025-08-11","shipToParty":"VITAL SOLUTIONS PTE LTD TO KENYA","shippingPoint":"821C","country":"KENYA","incot":"FOB", "liner": "COSCO", "vesselName": "COSCO HAIFA", "nw": 26000},
-    {"region":"Region 6","vfPpp":"BREFCARD","sc":"D1H0015825","delivery":"D100014808","container20":4,"container40":"","container40hc":"","mad":"2025-08-01","shipToParty":"TEXVISTA INTERNATIONAL PTE. LTD.","shippingPoint":"821C","country":"NIGERIA","incot":"CIF", "liner": "HAPAG-LLOYD", "vesselName": "HAPAG DUMMY", "nw": 100000},
-    {"region":"Region 2","vfPpp":"ART BOARD","sc":"D1H0015620","delivery":"D100015013","container20":2,"container40":"","container40hc":"","mad":"2025-08-19","shipToParty":"MOIZ SHABIR LTD","shippingPoint":"821C","country":"PAKISTAN","incot":"CIF", "liner": "MAERSK", "vesselName": "MAERSK DUMMY", "nw": 50000},
-    {"region":"Region 2","vfPpp":"ART BOARD","sc":"D1H0015626","delivery":"D100015030","container20":3,"container40":"","container40hc":"","mad":"2025-08-15","shipToParty":"GREEN GLOBE IMPEX PRIVATE LIMITED","shippingPoint":"821C","country":"INDIA","incot":"CIF", "liner": "ONE", "vesselName": "ONE DUMMY", "nw": 75000},
-    {"region":"Region 5","vfPpp":"PPC","sc":"D1H0016501","delivery":"D100015045","container20":1,"container40":"","container40hc":"","mad":"2025-08-15","shipToParty":"PAPER FORCE (OCEANIA) PTY.LTD.","shippingPoint":"821K","country":"AUSTRALIA","incot":"CFR", "liner": "ONE", "vesselName": "ONE DUMMY", "nw": 25000},
-    {"region":"Region 5","vfPpp":"PPC","sc":"D1H0016473","delivery":"D100015046","container20":2,"container40":"","container40hc":"","mad":"2025-08-09","shipToParty":"PAPER FORCE (OCEANIA) PTY.LTD.","shippingPoint":"821K","country":"AUSTRALIA","incot":"CFR", "liner": "MAERSK", "vesselName": "MAERSK DUMMY", "nw": 50000},
-    {"region":"Region 5","vfPpp":"PPC","sc":"D1H0016474","delivery":"D100015048","container20":1,"container40":"","container40hc":"","mad":"2025-08-19","shipToParty":"PAPER FORCE (OCEANIA) PTY.LTD.","shippingPoint":"821K","country":"AUSTRALIA","incot":"CFR", "liner": "MSC", "vesselName": "MSC DUMMY", "nw": 25000},
-    {"region":"Region 5","vfPpp":"PPC","sc":"D1H0016477","delivery":"D100015049","container20":2,"container40":"","container40hc":"","mad":"2025-08-09","shipToParty":"PAPER FORCE (OCEANIA) PTY.LTD.","shippingPoint":"821K","country":"AUSTRALIA","incot":"CFR", "liner": "COSCO", "vesselName": "COSCO HAIFA", "nw": 50000},
-    {"region":"Region 5","vfPpp":"PPC","sc":"D1H0016479","delivery":"D100015050","container20":2,"container40":"","container40hc":"","mad":"2025-08-09","shipToParty":"PAPER FORCE (OCEANIA) PTY.LTD.","shippingPoint":"821K","country":"AUSTRALIA","incot":"CFR", "liner": "HAPAG-LLOYD", "vesselName": "HAPAG DUMMY", "nw": 50000}
-];
-
 // === DATA JADWAL TERMINAL STATIS ===
 const terminalScheduleData = {
     "Pelindo": [
@@ -93,11 +5,10 @@ const terminalScheduleData = {
     ]
 };
 
-// --- AKHIR DATA BARU ---
-
-
 let globalData = [];
 let dummyData = []; // Data terpisah untuk Dummy Booking
+let databaseCostData = { headers: [], rows: [] }; // Data untuk Database Cost
+let agreementData = []; // Data Agreement List untuk TOP 1 LINER
 
 let currentRegion = null;
 let incotermChart, monthlyChart, destinationChart, shippingLineContainerChart, containerChart;
@@ -246,6 +157,142 @@ window.showDayDetails = function(dateString) {
     document.getElementById('calendar-modal').style.display = 'flex';
 }
 
+function normalizeDestinationPort(port) {
+    if (!port) return '';
+    const portStr = String(port).trim();
+    const firstPart = portStr.split(',')[0].trim();
+    return firstPart.toUpperCase();
+}
+
+function normalizeContainerType(type) {
+    if (!type) return '';
+    const typeStr = String(type).trim().toUpperCase();
+    
+    if (typeStr.includes('20')) return '20';
+    if (typeStr.includes('42')) return '40';
+    if (typeStr.includes('45')) return '40HC';
+    if (typeStr === '40HC') return '40HC';
+    if (typeStr === '40') return '40';
+    if (typeStr === '20') return '20';
+    
+    return typeStr;
+}
+
+function autoFillTOP1LINER() {
+    console.log('=== AUTO-FILL TOP 1 LINER START ===');
+    
+    if (!agreementData || agreementData.length === 0) {
+        console.warn('Agreement data not available');
+        return;
+    }
+    
+    let updatedCount = 0;
+    
+    globalData.forEach(row => {
+        if (!row.destination) return;
+        
+        const normalizedDestPort = normalizeDestinationPort(row.destination);
+        console.log(`Processing row ${row.id}: Destination = "${row.destination}" → Normalized = "${normalizedDestPort}"`);
+        
+        row.top1_20 = '';
+        row.top1_40 = '';
+        row.top1_40hc = '';
+        
+        // CONTAINER 20
+        const qty20 = parseFloat(row.container20) || 0;
+        if (qty20 > 0) {
+            const matchingAgreements20 = agreementData.filter(agr => {
+                const agrDestPort = normalizeDestinationPort(agr['Destination Port']);
+                const agrType = normalizeContainerType(agr['Type']);
+                return agrDestPort === normalizedDestPort && agrType === '20';
+            });
+            
+            console.log(`  Container 20: Found ${matchingAgreements20.length} matching agreements`);
+            
+            if (matchingAgreements20.length > 0) {
+                matchingAgreements20.sort((a, b) => {
+                    const rateA = parseFloat(a['Rate']) || 999999;
+                    const rateB = parseFloat(b['Rate']) || 999999;
+                    return rateA - rateB;
+                });
+                
+                const top1 = matchingAgreements20[0];
+                row.top1_20 = top1['LINER'] || '';
+                console.log(`  ✓ TOP 1 LINER 20: ${row.top1_20} (Rate: ${top1['Rate']})`);
+                updatedCount++;
+            } else {
+                console.log(`  ✗ No matching agreement for Container 20`);
+            }
+        } else {
+            console.log(`  Container 20: qty = 0, SKIP`);
+        }
+        
+        // CONTAINER 40
+        const qty40 = parseFloat(row.container40) || 0;
+        if (qty40 > 0) {
+            const matchingAgreements40 = agreementData.filter(agr => {
+                const agrDestPort = normalizeDestinationPort(agr['Destination Port']);
+                const agrType = normalizeContainerType(agr['Type']);
+                return agrDestPort === normalizedDestPort && agrType === '40';
+            });
+            
+            console.log(`  Container 40: Found ${matchingAgreements40.length} matching agreements`);
+            
+            if (matchingAgreements40.length > 0) {
+                matchingAgreements40.sort((a, b) => {
+                    const rateA = parseFloat(a['Rate']) || 999999;
+                    const rateB = parseFloat(b['Rate']) || 999999;
+                    return rateA - rateB;
+                });
+                
+                const top1 = matchingAgreements40[0];
+                row.top1_40 = top1['LINER'] || '';
+                console.log(`  ✓ TOP 1 LINER 40: ${row.top1_40} (Rate: ${top1['Rate']})`);
+                updatedCount++;
+            } else {
+                console.log(`  ✗ No matching agreement for Container 40`);
+            }
+        } else {
+            console.log(`  Container 40: qty = 0, SKIP`);
+        }
+        
+        // CONTAINER 40HC
+        const qty40hc = parseFloat(row.container40hc) || 0;
+        if (qty40hc > 0) {
+            const matchingAgreements40hc = agreementData.filter(agr => {
+                const agrDestPort = normalizeDestinationPort(agr['Destination Port']);
+                const agrType = normalizeContainerType(agr['Type']);
+                return agrDestPort === normalizedDestPort && agrType === '40HC';
+            });
+            
+            console.log(`  Container 40HC: Found ${matchingAgreements40hc.length} matching agreements`);
+            
+            if (matchingAgreements40hc.length > 0) {
+                matchingAgreements40hc.sort((a, b) => {
+                    const rateA = parseFloat(a['Rate']) || 999999;
+                    const rateB = parseFloat(b['Rate']) || 999999;
+                    return rateA - rateB;
+                });
+                
+                const top1 = matchingAgreements40hc[0];
+                row.top1_40hc = top1['LINER'] || '';
+                console.log(`  ✓ TOP 1 LINER 40HC: ${row.top1_40hc} (Rate: ${top1['Rate']})`);
+                updatedCount++;
+            } else {
+                console.log(`  ✗ No matching agreement for Container 40HC`);
+            }
+        } else {
+            console.log(`  Container 40HC: qty = 0, SKIP`);
+        }
+        
+        const top1Parts = [row.top1_20, row.top1_40, row.top1_40hc].filter(x => x);
+        row.top1 = top1Parts.length > 0 ? top1Parts.join(' | ') : '';
+    });
+    
+    console.log(`=== AUTO-FILL TOP 1 LINER COMPLETE ===`);
+    console.log(`Total fields updated: ${updatedCount}`);
+}
+
 function updateEventMap() {
     eventsByDate = {}; // Reset peta
     globalData.forEach(row => {
@@ -341,38 +388,208 @@ function renderAgreementTable(data) {
 
     const headers = [
         "Agreement", "Calculation Sheet", "LINER", "Type", "Rate", 
-        "Destination Port", "Agreement Status", "Source Location", "Destination Location"
+        "Destination Port", "Destination Location"
     ];
     
     tableHead.innerHTML = '<tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
 
     if (!data || data.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="${headers.length}" style="text-align:center;">No data to display.</td></tr>`;
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="7" style="text-align:center; padding: 40px; color: #7f8c8d;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">📄</div>
+                    <strong>No data to display</strong><br>
+                    <span style="font-size: 11px;">Upload an Excel file or adjust your search filter</span>
+                </td>
+            </tr>
+        `;
         return;
     }
 
     const typeDisplayMap = { '20G0': '20', '42G0': '40', '45G0': '40HC' };
     let bodyHtml = '';
     
-    // Batasi hingga 10 baris
-    data.slice(0, 10).forEach(row => {
+    data.forEach((row, index) => {
         bodyHtml += '<tr>';
-        headers.forEach(header => {
+        bodyHtml += `<td style="text-align:center;"><strong>${index + 1}</strong></td>`; // Nomor urut
+        headers.slice(1).forEach(header => { // Skip "No" karena sudah ditambahkan manual
             let cellValue = (row && row[header] !== undefined && row[header] !== null) ? row[header] : '';
             if (header === 'Type') {
                 cellValue = typeDisplayMap[cellValue] || cellValue;
             }
-            bodyHtml += `<td>${cellValue}</td>`;
+            bodyHtml += `<td title="${cellValue}">${cellValue}</td>`;
         });
         bodyHtml += '</tr>';
     });
 
     tableBody.innerHTML = bodyHtml;
 }
+// === FUNGSI BARU: HANDLE AGREEMENT EXCEL UPLOAD ===
+function handleAgreementExcelUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
 
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            console.log('=== AGREEMENT EXCEL IMPORT START ===');
+            
+            const workbook = XLSX.read(new Uint8Array(e.target.result), { type: 'array', cellDates: true });
+            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+            const dataAsArray = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "", raw: false });
+
+            console.log('Total rows in Agreement Excel:', dataAsArray.length);
+
+            // Cari header row
+            let headerRowIndex = -1;
+            const headerKeywords = ['agreement', 'liner', 'type', 'rate', 'destination'];
+            for(let i=0; i < Math.min(10, dataAsArray.length); i++){
+                const score = (dataAsArray[i] || []).reduce((acc, cell) => {
+                    const cellStr = String(cell).toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+                    return acc + (headerKeywords.some(kw => cellStr.includes(kw)) ? 1 : 0);
+                }, 0);
+                if (score > 2) { 
+                    headerRowIndex = i; 
+                    console.log('Agreement header found at row:', i);
+                    break; 
+                }
+            }
+
+            if (headerRowIndex === -1) {
+                throw new Error("Could not find a valid header row in the Agreement Excel file.");
+            }
+            
+            const rawHeaders = dataAsArray[headerRowIndex];
+            const rawDataRows = dataAsArray.slice(headerRowIndex + 1);
+            
+            console.log('Raw headers:', rawHeaders);
+            console.log('Data rows to process:', rawDataRows.length);
+            
+            // Convert to JSON format
+            const jsonData = [];
+            rawDataRows.forEach(rowArray => {
+                if (!rowArray || rowArray.length === 0) return;
+                
+                const rowObj = {};
+                rawHeaders.forEach((header, index) => {
+                    rowObj[header] = rowArray[index] || '';
+                });
+                
+                // Filter: harus ada data minimal
+                if (rowObj['Agreement'] || rowObj['LINER'] || rowObj['Destination Port']) {
+                    jsonData.push(rowObj);
+                }
+            });
+            
+            console.log('Processed agreement rows:', jsonData.length);
+            console.log('Sample agreement data:', jsonData.slice(0, 2));
+            
+            if (jsonData.length === 0) {
+                throw new Error("No valid agreement data found.");
+            }
+            
+            // CRITICAL: Set agreementData global variable
+            agreementData = jsonData;
+            
+            console.log('=== AGREEMENT DATA LOADED ===');
+            console.log('Total agreements:', agreementData.length);
+            
+            // Render Agreement Table
+            renderAgreementTable(agreementData);
+            
+            // CRITICAL: AUTO-UPDATE SEMUA TOP 1 LINER yang sudah ada
+            autoUpdateAllTop1Liners();
+            
+            alert(`✅ ${agreementData.length} agreement data berhasil diimpor!\n\nTOP 1 LINER akan otomatis terisi saat Anda mengisi Destination Port dan Container Type.`);
+
+        } catch (error) {
+            console.error('=== AGREEMENT IMPORT ERROR ===', error);
+            alert("❌ Error: " + error.message);
+        } finally {
+            event.target.value = '';
+        }
+    };
+    reader.readAsArrayBuffer(file);
+}
+
+// === FUNGSI BARU: AUTO UPDATE ALL TOP 1 LINER ===
+function autoUpdateAllTop1Liners() {
+    console.log('=== AUTO UPDATE ALL TOP 1 LINER START ===');
+    
+    let updatedCount = 0;
+    
+    // Update globalData
+    globalData.forEach((row, index) => {
+        const destPort = (row.destination || '').split(',')[0].trim().toUpperCase();
+        if (!destPort) return;
+        
+        console.log(`Processing row ${index + 1}: ${destPort}`);
+        
+        // Container 20
+        const qty20 = parseFloat(row.container20) || 0;
+        if (qty20 > 0) {
+            const matching20 = agreementData.filter(agr => {
+                const agrDest = (agr['Destination Port'] || '').trim().toUpperCase();
+                const agrType = (agr['Type'] || '').trim();
+                return agrDest === destPort && (agrType === '20' || agrType === '20G0');
+            });
+            if (matching20.length > 0) {
+                matching20.sort((a, b) => (parseFloat(a.Rate) || 999999) - (parseFloat(b.Rate) || 999999));
+                row.top1_20 = matching20[0].LINER || '';
+                updatedCount++;
+            }
+        }
+        
+        // Container 40
+        const qty40 = parseFloat(row.container40) || 0;
+        if (qty40 > 0) {
+            const matching40 = agreementData.filter(agr => {
+                const agrDest = (agr['Destination Port'] || '').trim().toUpperCase();
+                const agrType = (agr['Type'] || '').trim();
+                return agrDest === destPort && (agrType === '40' || agrType === '42G0');
+            });
+            if (matching40.length > 0) {
+                matching40.sort((a, b) => (parseFloat(a.Rate) || 999999) - (parseFloat(b.Rate) || 999999));
+                row.top1_40 = matching40[0].LINER || '';
+                updatedCount++;
+            }
+        }
+        
+        // Container 40HC
+        const qty40hc = parseFloat(row.container40hc) || 0;
+        if (qty40hc > 0) {
+            const matching40hc = agreementData.filter(agr => {
+                const agrDest = (agr['Destination Port'] || '').trim().toUpperCase();
+                const agrType = (agr['Type'] || '').trim();
+                return agrDest === destPort && (agrType === '40HC' || agrType === '45G0');
+            });
+            if (matching40hc.length > 0) {
+                matching40hc.sort((a, b) => (parseFloat(a.Rate) || 999999) - (parseFloat(b.Rate) || 999999));
+                row.top1_40hc = matching40hc[0].LINER || '';
+                updatedCount++;
+            }
+        }
+    });
+    
+    console.log(`Updated ${updatedCount} TOP 1 LINER fields in globalData`);
+    
+    // Re-render semua tabel
+    const allData = globalData;
+    renderTable(allData, 'tableBody', false);
+    updateCharts(allData);
+    updateStats(allData);
+    
+    if (currentRegion) {
+        filterTrackingTable();
+    }
+    
+    renderDummyBookingTable();
+    
+    console.log('=== AUTO UPDATE ALL TOP 1 LINER DONE ===');
+}
 function filterAgreementTable() {
     const filterValue = document.getElementById('filterAgreement').value.toLowerCase();
-    const filteredData = staticAgreementData.filter(row => 
+    const filteredData = agreementData.filter(row => 
         Object.values(row).some(val => String(val).toLowerCase().includes(filterValue))
     );
     renderAgreementTable(filteredData);
@@ -381,15 +598,15 @@ function filterAgreementTable() {
 // === FUNGSI BARU: DUMMY BOOKING ===
 window.addNewDummyEntry = function() {
     const newId = dummyData.length > 0 ? Math.max(...dummyData.map(d => d.id)) + 1 : 1;
-    const newEntry = {
-        id: newId, region: "DUMMY", vfPpp: "", sc: "", delivery: "", container20: 0, container40: 0, container40hc: 0, mad: "",
-        shipToParty: "", shippingPoint: "", country: "", incot: "FOB", destination: "", bookingDa: "", marksBy: "", etd: "", 
-        bookingNumb: "", liner: "", top1: "", reason: "", 
-        keterangan: "", vesselName: "", 
-        nw: 0, 
-        doStatus: "CUSTOMER", postToSap: false, masalah: "None", // CRITICAL FIX: Default "None"
-        siStatus: 'Pending', bcStatus: 'Pending'
-    };
+const newEntry = {
+    id: newId, region: currentRegion, vfPpp: "", sc: "", delivery: "", container20: 0, container40: 0, container40hc: 0, mad: "",
+    shipToParty: "", shippingPoint: "", country: "", incot: "FOB", destination: "", bookingDa: "", marksBy: "", etd: "", 
+    bookingNumb: "", liner: "", top1_20: "", top1_40: "", top1_40hc: "", reason: "", 
+    keterangan: "", vesselName: "", 
+    nw: 0, 
+    doStatus: "CUSTOMER", postToSap: false, masalah: "None",
+    siStatus: 'Pending', bcStatus: 'Pending'
+};
     dummyData.push(newEntry);
     renderDummyBookingTable();
 } 
@@ -424,19 +641,49 @@ window.addNewEntry = function() {
         id: newId, region: currentRegion, vfPpp: "", sc: "", delivery: "", container20: 0, container40: 0, container40hc: 0, mad: "",
         shipToParty: "", shippingPoint: "", country: "", incot: "FOB", destination: "", bookingDa: "", marksBy: "", etd: "", 
         bookingNumb: "", liner: "", top1: "", reason: "", 
-        keterangan: "", vesselName: "", 
+        keterangan: "", vesselName: "", voyage: "",
         nw: 0, 
-        doStatus: "CUSTOMER", postToSap: false, masalah: "None", // CRITICAL FIX: Default "None"
+        doStatus: "CUSTOMER", postToSap: false, masalah: "None",
         siStatus: 'Pending', bcStatus: 'Pending'
     };
     globalData.push(newEntry);
-    renderAllTablesAndCharts();
+    
+    // REVISI: Langsung render dashboard DAN tracking
+    const allData = globalData;
+    renderTable(allData, 'tableBody', false);
+    updateCharts(allData);
+    updateStats(allData);
+    
+    // Update tracking
+    filterTrackingTable();
+    
+    // Update dummy booking
+    renderDummyBookingTable();
+    
+    // Update calendar
+    renderCalendar(calendarCurrentDate);
 }
 
 window.deleteEntry = function(rowId) {
     if (confirm('Are you sure you want to delete this entry? This action cannot be undone.')) {
         globalData = globalData.filter(row => row.id !== parseInt(rowId));
-        renderAllTablesAndCharts();
+        
+        // REVISI: Langsung render dashboard DAN tracking
+        const allData = globalData;
+        renderTable(allData, 'tableBody', false);
+        updateCharts(allData);
+        updateStats(allData);
+        
+        // Update tracking jika sedang aktif
+        if (currentRegion) {
+            filterTrackingTable();
+        }
+        
+        // Update dummy booking
+        renderDummyBookingTable();
+        
+        // Update calendar
+        renderCalendar(calendarCurrentDate);
     }
 }
 
@@ -452,7 +699,22 @@ window.deleteRegionData = function() {
     }
     if (confirm(`ARE YOU SURE you want to delete all ${dataInRegion.length} entries for ${currentRegion}? This action cannot be undone and will be lost on refresh.`)) {
         globalData = globalData.filter(row => row.region !== currentRegion);
-        renderAllTablesAndCharts();
+        
+        // REVISI: Langsung render dashboard DAN tracking
+        const allData = globalData;
+        renderTable(allData, 'tableBody', false);
+        updateCharts(allData);
+        updateStats(allData);
+        
+        // Update tracking
+        filterTrackingTable();
+        
+        // Update dummy booking
+        renderDummyBookingTable();
+        
+        // Update calendar
+        renderCalendar(calendarCurrentDate);
+        
         alert(`All data for ${currentRegion} has been deleted.`);
     }
 }
@@ -565,8 +827,11 @@ function renderAllTablesAndCharts() {
     console.log('Total globalData:', globalData.length);
     console.log('Current region:', currentRegion);
     
-    // Render dashboard
-    filterTable();
+    // REVISI: Render dashboard TANPA FILTER - tampilkan SEMUA data
+    const allData = globalData;
+    renderTable(allData, 'tableBody', false);
+    updateCharts(allData);
+    updateStats(allData);
     
     // CRITICAL FIX: Render tracking untuk region yang sedang aktif
     if (currentRegion) {
@@ -852,107 +1117,144 @@ window.sendFileByEmail = function(rowId, fileIndex, isDummy = false) {
     const file = data[rowIndex].uploadedFiles[fileIndex];
     const row = data[rowIndex];
     
-    // PROMPT: Input email tujuan
-    const recipientEmail = prompt('Enter recipient email address:', 'shipping@example.com');
+    // Simulasi kirim email
+    const emailContent = `
+📧 EMAIL SIMULATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TO: TruckingPlannerIKK@app.co.id
+SUBJECT: SI & BC Documents - ${row.sc || 'N/A'} | ${row.delivery || 'N/A'}
+
+Dear Trucking Planner Team,
+
+Please find attached the SI & BC document for:
+
+📋 BOOKING DETAILS:
+- Region: ${row.region || 'N/A'}
+- SC Number: ${row.sc || 'N/A'}
+- Delivery Number: ${row.delivery || 'N/A'}
+- Ship to Party: ${row.shipToParty || 'N/A'}
+- Vessel Name: ${row.vesselName || 'N/A'}
+- Destination: ${row.destination || row.country || 'N/A'}
+
+📎 ATTACHMENT:
+- File: ${file.name}
+
+This is a simulated email. In production, this would send an actual email with the attached document.
+
+Best regards,
+Vessel Planner Team
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    `;
     
-    if (!recipientEmail || !recipientEmail.includes('@')) {
-        alert('Invalid email address');
-        return;
-    }
-    
-    // Show loading
-    const loadingModal = document.getElementById('image-viewer-modal');
+    // Tampilkan simulasi dalam modal
     const modalBody = document.getElementById('image-viewer-modal-body');
     const modalTitle = document.getElementById('image-modal-title');
     
-    modalTitle.textContent = '📧 Sending Email...';
+    modalTitle.textContent = '📧 Email Simulation';
+    
     modalBody.innerHTML = `
-        <div style="padding: 40px; text-align: center;">
-            <div style="font-size: 64px; margin-bottom: 20px; animation: spin 1s linear infinite;">⏳</div>
-            <h3 style="color: #2c3e50; margin-bottom: 10px;">Sending email to ${recipientEmail}</h3>
-            <p style="color: #7f8c8d;">Please wait...</p>
+        <div style="padding: 20px;">
+            <div style="background: #f8f9fa; border: 2px solid #667eea; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px;">
+                        📧
+                    </div>
+                    <div>
+                        <h3 style="margin: 0; color: #2c3e50; font-size: 18px;">Email Sent Successfully!</h3>
+                        <p style="margin: 5px 0 0 0; color: #7f8c8d; font-size: 12px;">Simulation mode - No actual email was sent</p>
+                    </div>
+                </div>
+                
+                <div style="background: white; border-radius: 6px; padding: 15px; margin-top: 15px;">
+                    <pre style="white-space: pre-wrap; font-family: 'Courier New', monospace; font-size: 11px; color: #2c3e50; margin: 0; line-height: 1.6;">${emailContent}</pre>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <button class="btn btn-primary" onclick="closeImageViewerModal()" style="padding: 10px 30px;">
+                    Close
+                </button>
+            </div>
         </div>
     `;
-    loadingModal.style.display = 'flex';
     
-    // EMAILJS CONFIG - REPLACE WITH YOUR CREDENTIALS
-    const serviceID = 'YOUR_SERVICE_ID';  // ⚠️ REPLACE THIS
-    const templateID = 'YOUR_TEMPLATE_ID'; // ⚠️ REPLACE THIS
-    const publicKey = 'YOUR_PUBLIC_KEY';   // ⚠️ REPLACE THIS
-    
-    // Initialize EmailJS (only once)
-    if (!window.emailJSInitialized) {
-        emailjs.init(publicKey);
-        window.emailJSInitialized = true;
-    }
-    
-    // Prepare email parameters
-    const emailParams = {
-        to_email: recipientEmail,
-        subject: `SI & BC Documents - ${row.sc || 'N/A'} | ${row.delivery || 'N/A'}`,
-        region: row.region || 'N/A',
-        sc_number: row.sc || 'N/A',
-        delivery_number: row.delivery || 'N/A',
-        ship_to_party: row.shipToParty || 'N/A',
-        vessel_name: row.vesselName || 'N/A',
-        destination: row.destination || row.country || 'N/A',
-        file_name: file.name,
-        file_size: (file.size / 1024).toFixed(2) + ' KB',
-        file_type: file.type || 'Unknown',
-        file_data: file.data, // Base64 data
-        message: `Please find attached the SI & BC document.\n\nFile: ${file.name}\nSize: ${(file.size / 1024).toFixed(2)} KB`
-    };
-    
-    // SEND EMAIL VIA EMAILJS
-    emailjs.send(serviceID, templateID, emailParams)
-        .then(function(response) {
-            console.log('✅ Email sent successfully!', response.status, response.text);
-            
-            // Show success modal
-            modalTitle.textContent = '✅ Email Sent Successfully!';
-            modalBody.innerHTML = `
-                <div style="padding: 40px; text-align: center;">
-                    <div style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 48px;">✅</div>
-                    <h3 style="color: #2c3e50; margin-bottom: 15px;">Email Sent Successfully!</h3>
-                    <div style="background: #f8f9fa; border-radius: 8px; padding: 20px; margin: 20px 0; text-align: left;">
-                        <p style="font-size: 12px; color: #7f8c8d; margin: 5px 0;"><strong>To:</strong> ${recipientEmail}</p>
-                        <p style="font-size: 12px; color: #7f8c8d; margin: 5px 0;"><strong>Subject:</strong> SI & BC Documents - ${row.sc || 'N/A'}</p>
-                        <p style="font-size: 12px; color: #7f8c8d; margin: 5px 0;"><strong>Attachment:</strong> ${file.name}</p>
-                        <p style="font-size: 12px; color: #7f8c8d; margin: 5px 0;"><strong>Size:</strong> ${(file.size / 1024).toFixed(2)} KB</p>
-                    </div>
-                    <p style="color: #27ae60; font-weight: 600; margin-top: 20px;">The recipient will receive the email shortly.</p>
-                    <button class="btn btn-primary" onclick="closeImageViewerModal()" style="margin-top: 20px; padding: 10px 30px;">Close</button>
-                </div>
-            `;
-        }, function(error) {
-            console.error('❌ Email sending failed:', error);
-            
-            // Show error modal
-            modalTitle.textContent = '❌ Email Sending Failed';
-            modalBody.innerHTML = `
-                <div style="padding: 40px; text-align: center;">
-                    <div style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 48px; color: white;">❌</div>
-                    <h3 style="color: #e74c3c; margin-bottom: 15px;">Failed to Send Email</h3>
-                    <div style="background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 8px; padding: 15px; margin: 20px 0; text-align: left;">
-                        <p style="font-size: 11px; color: #721c24; margin: 0;"><strong>Error:</strong> ${error.text || 'Unknown error'}</p>
-                        <p style="font-size: 11px; color: #721c24; margin: 5px 0 0 0;"><strong>Status:</strong> ${error.status || 'N/A'}</p>
-                    </div>
-                    <p style="color: #7f8c8d; font-size: 12px; margin-top: 15px;">Please check your EmailJS configuration or try again later.</p>
-                    <button class="btn btn-danger" onclick="closeImageViewerModal()" style="margin-top: 20px; padding: 10px 30px;">Close</button>
-                </div>
-            `;
-        });
-}    
     // Show modal
     document.getElementById('image-viewer-modal').style.display = 'flex';
     
     console.log('📧 Email simulation for file:', file.name);
     console.log('Row data:', row);
+}
 
 // CRITICAL FIX: Pindahkan closeImageViewerModal ke SCOPE GLOBAL, BUKAN di dalam deleteFile!
 window.closeImageViewerModal = function() {
     document.getElementById('image-viewer-modal').style.display = 'none';
 }
+// === FUNGSI BARU: SEND EMAIL TO OUTLOOK - LANGSUNG BUKA ===
+// === FUNGSI BARU: SEND EMAIL TO OUTLOOK ===
+// === FUNGSI BARU: SEND EMAIL TO OUTLOOK - FIXED ENCODING ===
+window.sendEmailToOutlook = function(rowId, isDummy = false) {
+    const data = isDummy ? dummyData : globalData;
+    const rowIndex = data.findIndex(row => row.id === parseInt(rowId));
+    
+    if (rowIndex === -1) {
+        alert('Error: Row not found');
+        return;
+    }
+    
+    const row = data[rowIndex];
+    const uploadedFiles = row.uploadedFiles || [];
+    
+    // Email Recipients
+    const toRecipients = 'Okky_Nurwidodo@app.co.id;Andhika_Pramana@app.co.id;Rizky_Ritonga@app.co.id';
+    const ccRecipients = 'Adek_Sari@app.co.id;Trisna_Admanegara@app.co.id;Tellyana_Kusuma@app.co.id;Maulidya_P_Salsabila@app.co.id;Muhammad_Azami@app.co.id;Fitri_Adrianti@app.co.id';
+    
+    // Subject
+    const scNumber = row.sc || 'N/A';
+    const deliveryNumber = row.delivery || 'N/A';
+    const subject = `SI & BC Documents - ${scNumber} | ${deliveryNumber}`;
+    
+    // Ambil data dari baris
+    const region = row.region || 'N/A';
+    const shipToParty = row.shipToParty || 'N/A';
+    const vesselName = row.vesselName || 'N/A';
+    const destination = row.destination || row.country || 'N/A';
+    const shippingPoint = row.shippingPoint || 'N/A';
+    
+    // CRITICAL FIX: Build body text TANPA encode dulu
+    const bodyTextRaw = 
+        `Dear Trucking Planner Team,\n\n` +
+        `Please find attached the SI & BC document for:\n\n` +
+        `📋 BOOKING DETAILS:\n` +
+        `- Region: ${region}\n` +
+        `- SC: ${scNumber}\n` +
+        `- Delivery Number : ${deliveryNumber}\n` +
+        `- Ship to Party: ${shipToParty}\n` +
+        `- Vessel Name: ${vesselName}\n` +
+        `- Destination: ${destination}\n` +
+        `- Shipping Point: ${shippingPoint}\n\n` +
+        `📎 ATTACHMENT:\n` +
+        `- File: SI & BC Documents\n\n` +
+        `Thank You\n\n` +
+        `Best regards,\n` +
+        `Vessel Planner Team`;
+    
+    // CRITICAL FIX: Encode SELURUH body text dengan encodeURIComponent
+    const bodyTextEncoded = encodeURIComponent(bodyTextRaw);
+    
+    // Build mailto link dengan body yang sudah di-encode dengan benar
+    const mailtoLink = `mailto:${toRecipients}?cc=${ccRecipients}&subject=${encodeURIComponent(subject)}&body=${bodyTextEncoded}`;
+    
+    // Buka Outlook
+    window.location.href = mailtoLink;
+    
+    // Log untuk debugging
+    console.log('Email opened successfully');
+    if (uploadedFiles.length > 0) {
+        console.log(`Files in system: ${uploadedFiles.length}`);
+    }
+}
+// // === AKHIR FUNGSI SEND EMAIL TO OUTLOOK ===
 
 window.deleteFile = function(rowId, fileIndex, isDummy = false) {
     if (!confirm('Are you sure you want to delete this file? This action cannot be undone.')) {
@@ -1049,7 +1351,7 @@ if (masalah !== 'None') {
                            onchange="handleSIBCFileUpload(${rowId}, this, ${isDummyFlag})">
                     ${fileCount > 0 ? `<span class="file-count-badge ${badgeClass}">${fileCount}/2</span>` : ''}
                     ${fileCount > 0 ? `<button class="btn-view-files" onclick="viewUploadedFiles(${rowId}, ${isDummyFlag})" title="View uploaded files">👁️</button>` : ''}
-                    ${fileCount > 0 ? `<button class="btn-send-email" onclick="sendFileByEmail(${rowId}, 0, ${isDummyFlag})" title="Send file via email">📩</button>` : ''}
+                    <button class="btn-send-email" onclick="sendEmailToOutlook(${rowId}, ${isDummyFlag})" title="Send via Outlook" style="background: #0078d4; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-left: 5px;">📧</button>
                 </div>
             </td>
         `;
@@ -1082,11 +1384,13 @@ if (masalah !== 'None') {
                 <td><input type="date" class="editable-cell" value="${row.bookingDa || ''}" onchange="${updateHandler}(${rowId}, 'bookingDa', this.value)"></td>
                 <td title="${row.marksBy || ''}"><input type="text" class="editable-cell" value="${row.marksBy || ''}" onchange="${updateHandler}(${rowId}, 'marksBy', this.value)"></td>
                 <td title="${row.bookingNumb || ''}"><input type="text" class="editable-cell" value="${row.bookingNumb || ''}" onchange="${updateHandler}(${rowId}, 'bookingNumb', this.value)"></td>
-                <td title="${row.liner || ''}"><input type="text" class="editable-cell" value="${row.liner || ''}" onchange="${updateHandler}(${rowId}, 'liner', this.value)"></td>
-                <td title="${row.top1 || ''}"><input type="text" class="editable-cell" value="${row.top1 || ''}" onchange="${updateHandler}(${rowId}, 'top1', this.value)"></td>
-                <td title="${row.reason || ''}"><input type="text" class="editable-cell" value="${row.reason || ''}" onchange="${updateHandler}(${rowId}, 'reason', this.value)"></td>
-                <td title="${row.keterangan || ''}"><input type="text" class="editable-cell" value="${row.keterangan || ''}" onchange="${updateHandler}(${rowId}, 'keterangan', this.value)"></td>
-                <td title="${row.vesselName || ''}"><input type="text" class="editable-cell" value="${row.vesselName || ''}" onchange="${updateHandler}(${rowId}, 'vesselName', this.value)"></td>
+<td title="${row.liner || ''}"><input type="text" class="editable-cell" value="${row.liner || ''}" onchange="${updateHandler}(${rowId}, 'liner', this.value)"></td>
+<td title="${row.top1_20 || ''}"><input type="text" class="editable-cell" value="${row.top1_20 || ''}" onchange="${updateHandler}(${rowId}, 'top1_20', this.value)"></td>
+<td title="${row.top1_40 || ''}"><input type="text" class="editable-cell" value="${row.top1_40 || ''}" onchange="${updateHandler}(${rowId}, 'top1_40', this.value)"></td>
+<td title="${row.top1_40hc || ''}"><input type="text" class="editable-cell" value="${row.top1_40hc || ''}" onchange="${updateHandler}(${rowId}, 'top1_40hc', this.value)"></td>
+<td title="${row.reason || ''}"><input type="text" class="editable-cell" value="${row.reason || ''}" onchange="${updateHandler}(${rowId}, 'reason', this.value)"></td>
+<td title="${row.keterangan || ''}"><input type="text" class="editable-cell" value="${row.keterangan || ''}" onchange="${updateHandler}(${rowId}, 'keterangan', this.value)"></td>
+<td title="${row.vesselName || ''}"><input type="text" class="editable-cell" value="${row.vesselName || ''}" onchange="${updateHandler}(${rowId}, 'vesselName', this.value)"></td>
                 <td title="${row.voyage || ''}"><input type="text" class="editable-cell" value="${row.voyage || ''}" onchange="${updateHandler}(${rowId}, 'voyage', this.value)"></td>
                 <td>
                     <div class="datetime-container">
@@ -1113,53 +1417,55 @@ if (masalah !== 'None') {
                         ${masalahOptionsHTML}
                     </select>
                 </td>
-                ${(tableBodyId === 'trackingTableBody' || isDummy) ? `
+                ${(tableBodyId === 'trackingTableBody' || tableBodyId === 'dummyBookingTableBody') ? `
                     ${siBcCell}
                     <td style="text-align:center;">
                         <button class="btn btn-danger btn-small" onclick="${deleteHandler}" style="font-size:9px; padding:2px 6px;">🗑️</button>
                     </td>
                 ` : ''}
             `;
-        } else {
-            const nwInTons = (parseFloat(row.nw) || 0) / 1000;
-            tr.innerHTML = `
-                <td style="text-align:center;"><strong>${index + 1}</strong></td>
-                <td title="${row.region || ''}">${row.region || ''}</td>
-                <td title="${row.vfPpp || ''}">${row.vfPpp || ''}</td>
-                <td title="${row.sc || ''}">${row.sc || ''}</td>
-                <td title="${row.delivery || ''}">${row.delivery || ''}</td>
-                <td style="text-align:center;">${row.container20 || 0}</td>
-                <td style="text-align:center;">${row.container40 || 0}</td>
-                <td style="text-align:center;">${row.container40hc || 0}</td>
-                <td>${row.mad || ''}</td>
-                <td title="${row.shipToParty || ''}">${row.shipToParty || ''}</td>
-                <td title="${row.shippingPoint || ''}">${row.shippingPoint || ''}</td>
-                <td title="${row.country || ''}">${row.country || ''}</td>
-                <td style="text-align:center;">${row.incot || ''}</td>
-                <td title="${row.destination || ''}">${row.destination || ''}</td>
-                <td>${row.bookingDa || ''}</td>
-                <td title="${row.marksBy || ''}">${row.marksBy || ''}</td>
-                <td title="${row.bookingNumb || ''}">${row.bookingNumb || ''}</td>
-                <td title="${row.liner || ''}">${row.liner || ''}</td>
-                <td title="${row.top1 || ''}">${row.top1 || ''}</td>
-                <td title="${row.reason || ''}">${row.reason || ''}</td>
-                <td title="${row.keterangan || ''}">${row.keterangan || ''}</td>
-                <td title="${row.vesselName || ''}">${row.vesselName || ''}</td>
-                <td title="${row.voyage || ''}">${row.voyage || ''}</td>
-                <td>${row.openCyDate || ''} ${row.openCyTime || ''}</td>
-                <td>${row.closingFisikDate || ''} ${row.closingFisikTime || ''}</td>
-                <td>${row.etd || ''}</td>
-                <td style="text-align:center;">${nwInTons.toFixed(2)}</td>
-                <td style="text-align:center;">
-                    <span class="status-badge status-${doStatus.toLowerCase()}">${doStatus}</span>
-                </td>
-                <td style="text-align:center;">
-                    <input type="checkbox" ${postToSap ? 'checked' : ''} disabled>
-                </td>
-                <td title="${masalah}">${masalah}</td>
-            `;
-        }
-        tbody.appendChild(tr);
+} 
+else {
+    const nwInTons = (parseFloat(row.nw) || 0) / 1000;
+    tr.innerHTML = `
+        <td style="text-align:center;"><strong>${index + 1}</strong></td>
+        <td title="${row.region || ''}">${row.region || ''}</td>
+        <td title="${row.vfPpp || ''}">${row.vfPpp || ''}</td>
+        <td title="${row.sc || ''}">${row.sc || ''}</td>
+        <td title="${row.delivery || ''}">${row.delivery || ''}</td>
+        <td style="text-align:center;">${row.container20 || 0}</td>
+        <td style="text-align:center;">${row.container40 || 0}</td>
+        <td style="text-align:center;">${row.container40hc || 0}</td>
+        <td>${row.mad || ''}</td>
+        <td title="${row.shipToParty || ''}">${row.shipToParty || ''}</td>
+        <td title="${row.shippingPoint || ''}">${row.shippingPoint || ''}</td>
+        <td title="${row.country || ''}">${row.country || ''}</td>
+        <td style="text-align:center;">${row.incot || ''}</td>
+        <td title="${row.destination || ''}">${row.destination || ''}</td>
+        <td>${row.bookingDa || ''}</td>
+        <td title="${row.marksBy || ''}">${row.marksBy || ''}</td>
+        <td title="${row.bookingNumb || ''}">${row.bookingNumb || ''}</td>
+<td title="${row.liner || ''}">${row.liner || ''}</td>
+<td title="${row.top1_20 || ''}">${row.top1_20 || ''}</td>
+<td title="${row.top1_40 || ''}">${row.top1_40 || ''}</td>
+<td title="${row.top1_40hc || ''}">${row.top1_40hc || ''}</td>
+<td title="${row.reason || ''}">${row.reason || ''}</td>
+<td title="${row.keterangan || ''}">${row.keterangan || ''}</td>
+        <td title="${row.vesselName || ''}">${row.vesselName || ''}</td>
+        <td title="${row.voyage || ''}">${row.voyage || ''}</td>
+        <td>${row.openCyDate || ''} ${row.openCyTime || ''}</td>
+        <td>${row.closingFisikDate || ''} ${row.closingFisikTime || ''}</td>
+        <td>${row.etd || ''}</td>
+        <td style="text-align:center;">${nwInTons.toFixed(2)}</td>
+        <td style="text-align:center;">
+            <input type="checkbox" class="do-status-checkbox" ${doStatus === 'OK' ? 'checked' : ''} disabled>
+        </td>
+        <td style="text-align:center;">
+            <input type="checkbox" ${postToSap ? 'checked' : ''} disabled>
+        </td>
+        <td title="${masalah}">${masalah}</td>
+    `;
+}        tbody.appendChild(tr);
     });
 }
 
@@ -1173,6 +1479,100 @@ function renderDummyBookingTable() {
 // === AKHIR FUNGSI BARU ===
 
 
+// === FUNGSI HELPER: FIND BEST LINER FOR ALL CONTAINER TYPES (20, 40, 40HC) ===
+// ========================= REVISI CRITICAL: TOP 1 LINER PER TYPE CONTAINER =========================
+// Fungsi ini mencari TOP 1 LINER untuk SETIAP TYPE CONTAINER (20, 40, 40HC) secara TERPISAH dan INDEPENDEN
+// KRITERIA WAJIB:
+// 1. Rate TERENDAH
+// 2. Destination Port HARUS sama
+// 3. Type container HARUS sesuai (20 ≠ 40 ≠ 40HC)
+// 4. Jika tidak ada match, return 'N/A' (NULL equivalent)
+function findBestLinersForAllTypes(destinationPort) {
+    // Validasi input
+    if (!destinationPort || !agreementData || agreementData.length === 0) {
+        console.log('[findBestLinersForAllTypes] No destination port or no agreement data');
+        return {
+            '20': 'N/A',
+            '40': 'N/A',
+            '40HC': 'N/A'
+        };
+    }
+
+    const destPortUpper = destinationPort.trim().toUpperCase();
+    console.log(`[findBestLinersForAllTypes] Searching for destination: ${destPortUpper}`);
+    
+    // Type mapping untuk matching dengan Agreement List
+    // Setiap type memiliki kemungkinan format yang berbeda di Agreement List
+    const typeMap = {
+        '20': ['20G0', '20'],      // Type 20 bisa ditulis sebagai 20G0 atau 20
+        '40': ['42G0', '40'],      // Type 40 bisa ditulis sebagai 42G0 atau 40
+        '40HC': ['45G0', '40HC']   // Type 40HC bisa ditulis sebagai 45G0 atau 40HC
+    };
+    
+    const results = {};
+    
+    // WAJIB: Loop untuk SETIAP tipe container SECARA TERPISAH
+    // Tidak boleh digabung atau dipaksakan satu LINER untuk semua type
+    ['20', '40', '40HC'].forEach(containerType => {
+        const validTypes = typeMap[containerType];
+        
+        console.log(`[findBestLinersForAllTypes] Processing type: ${containerType}, valid types: ${validTypes.join(', ')}`);
+        
+        // Filter agreements yang WAJIB memenuhi SEMUA kriteria:
+        // 1. Destination Port HARUS sama (exact match, case insensitive)
+        // 2. Type container HARUS sesuai dengan type yang dicari
+        const matchingAgreements = agreementData.filter(agreement => {
+            const agreementDest = (agreement['Destination Port'] || '').trim().toUpperCase();
+            const agreementType = (agreement.Type || '').trim();
+            
+            // CRITICAL: Destination Port HARUS exact match
+            const destMatch = agreementDest === destPortUpper;
+            
+            // CRITICAL: Type container HARUS sesuai (tidak boleh cross-type)
+            const typeMatch = validTypes.includes(agreementType);
+            
+            const isMatch = destMatch && typeMatch;
+            
+            if (isMatch) {
+                console.log(`[findBestLinersForAllTypes] Match found - LINER: ${agreement.LINER}, Type: ${agreementType}, Rate: ${agreement.Rate}`);
+            }
+            
+            return isMatch;
+        });
+        
+        console.log(`[findBestLinersForAllTypes] Found ${matchingAgreements.length} matches for type ${containerType}`);
+        
+        // Jika tidak ada agreement yang cocok, return N/A (NULL equivalent)
+        // TIDAK ADA default value, TIDAK ADA fallback, TIDAK ADA asumsi
+        if (matchingAgreements.length === 0) {
+            results[containerType] = 'N/A';
+            console.log(`[findBestLinersForAllTypes] No matches for type ${containerType} - returning N/A`);
+        } else {
+            // Sort by rate ASCENDING (termurah di index 0)
+            matchingAgreements.sort((a, b) => {
+                const rateA = parseFloat(a.Rate) || 999999;
+                const rateB = parseFloat(b.Rate) || 999999;
+                return rateA - rateB;
+            });
+            
+            // Ambil TOP 1 (rate termurah)
+            const topLiner = matchingAgreements[0];
+            results[containerType] = topLiner.LINER || 'N/A';
+            
+            console.log(`[findBestLinersForAllTypes] TOP 1 for type ${containerType}: ${results[containerType]} (Rate: ${topLiner.Rate})`);
+        }
+    });
+    
+    console.log('[findBestLinersForAllTypes] Final results:', results);
+    return results;
+}
+
+// === FUNGSI HELPER: FORMAT TOP 1 LINER DISPLAY (3 BARIS) ===
+function formatTop1LinerDisplay(linersObj) {
+    return `20: ${linersObj['20']}\n40: ${linersObj['40']}\n40HC: ${linersObj['40HC']}`;
+}
+
+// === LEGACY FUNCTION: findBestLiner (untuk backward compatibility) ===
 function findBestLiner(destinationPort, containerTypeCode) {
     if (!destinationPort || !containerTypeCode) return null;
 
@@ -1184,7 +1584,10 @@ function findBestLiner(destinationPort, containerTypeCode) {
     if (normalizedTypeCode === '45G0') alternateTypeCodes.push('40HC');
     if (normalizedTypeCode === '20G0') alternateTypeCodes.push('20');
     
-    const matchingAgreements = staticAgreementData.filter(agreement => {
+    // CRITICAL FIX: Use agreementData instead of staticAgreementData
+    if (!agreementData || agreementData.length === 0) return null;
+    
+    const matchingAgreements = agreementData.filter(agreement => {
         const agreementDest = (agreement['Destination Port'] || '').trim().toUpperCase();
         const agreementType = (agreement.Type || '').trim();
         return agreementDest === destinationPort && (agreementType === normalizedTypeCode || alternateTypeCodes.includes(agreementType));
@@ -1197,7 +1600,9 @@ function findBestLiner(destinationPort, containerTypeCode) {
     return matchingAgreements[0].LINER;
 }
 
-// === FUNGSI handleDummyCellUpdate (MIRIP handleCellUpdate) ===
+// === FUNGSI handleDummyCellUpdate - REVISI FINAL: HANYA ISI TOP 1 LINER ===
+// PENTING: KOLOM LINER TIDAK DIISI OTOMATIS - User harus isi manual
+// HANYA kolom TOP 1 LINER (20), TOP 1 LINER (40), dan TOP 1 LINER (40HC) yang diisi otomatis
 window.handleDummyCellUpdate = function(rowId, key, value) {
     const rowIndex = dummyData.findIndex(row => row.id === parseInt(rowId));
     if (rowIndex > -1) {
@@ -1215,38 +1620,88 @@ window.handleDummyCellUpdate = function(rowId, key, value) {
             dummyData[rowIndex][key] = value;
         }
         
-        // CRITICAL FIX: Tandai row sebagai modified
         dummyData[rowIndex].isModified = true;
 
-        // --- AUTO-FILL LOGIC (Sama dengan handleCellUpdate) ---
+        // === REVISI: AUTO-FILL TOP 1 LINER DARI AGREEMENT LIST ===
         const triggers = ['destination', 'container20', 'container40', 'container40hc'];
         if (triggers.includes(key)) {
             const currentRow = dummyData[rowIndex];
+            // PARSING: Ambil kata SEBELUM koma dari Destination Port
             const destPort = (currentRow.destination || '').split(',')[0].trim().toUpperCase();
 
-            if (destPort) {
-                let containerTypeCode = null;
+            if (destPort && agreementData && agreementData.length > 0) {
+                console.log(`[handleDummyCellUpdate] Destination: ${destPort}`);
                 
-                if (parseInt(currentRow.container20) > 0) containerTypeCode = '20';
-                else if (parseInt(currentRow.container40) > 0) containerTypeCode = '40';
-                else if (parseInt(currentRow.container40hc) > 0) containerTypeCode = '40HC';
-                
-                if (containerTypeCode) {
-                    const bestLiner = findBestLiner(destPort, containerTypeCode);
-                    if (bestLiner) {
-                        dummyData[rowIndex].liner = bestLiner;
-                        dummyData[rowIndex].top1 = bestLiner;
+                // === TOP 1 LINER untuk Container 20 ===
+                const qty20 = parseFloat(currentRow.container20) || 0;
+                if (qty20 > 0) {
+                    const matching20 = agreementData.filter(agr => {
+                        const agrDest = (agr['Destination Port'] || '').trim().toUpperCase();
+                        const agrType = (agr['Type'] || '').trim();
+                        return agrDest === destPort && (agrType === '20' || agrType === '20G0');
+                    });
+                    
+                    if (matching20.length > 0) {
+                        matching20.sort((a, b) => (parseFloat(a.Rate) || 999999) - (parseFloat(b.Rate) || 999999));
+                        dummyData[rowIndex].top1_20 = matching20[0].LINER || '';
+                        console.log(`[handleDummyCellUpdate] TOP 1 LINER (20): ${dummyData[rowIndex].top1_20}`);
+                    } else {
+                        dummyData[rowIndex].top1_20 = '';
                     }
+                } else {
+                    dummyData[rowIndex].top1_20 = '';
+                }
+                
+                // === TOP 1 LINER untuk Container 40 ===
+                const qty40 = parseFloat(currentRow.container40) || 0;
+                if (qty40 > 0) {
+                    const matching40 = agreementData.filter(agr => {
+                        const agrDest = (agr['Destination Port'] || '').trim().toUpperCase();
+                        const agrType = (agr['Type'] || '').trim();
+                        return agrDest === destPort && (agrType === '40' || agrType === '42G0');
+                    });
+                    
+                    if (matching40.length > 0) {
+                        matching40.sort((a, b) => (parseFloat(a.Rate) || 999999) - (parseFloat(b.Rate) || 999999));
+                        dummyData[rowIndex].top1_40 = matching40[0].LINER || '';
+                        console.log(`[handleDummyCellUpdate] TOP 1 LINER (40): ${dummyData[rowIndex].top1_40}`);
+                    } else {
+                        dummyData[rowIndex].top1_40 = '';
+                    }
+                } else {
+                    dummyData[rowIndex].top1_40 = '';
+                }
+                
+                // === TOP 1 LINER untuk Container 40HC ===
+                const qty40hc = parseFloat(currentRow.container40hc) || 0;
+                if (qty40hc > 0) {
+                    const matching40hc = agreementData.filter(agr => {
+                        const agrDest = (agr['Destination Port'] || '').trim().toUpperCase();
+                        const agrType = (agr['Type'] || '').trim();
+                        return agrDest === destPort && (agrType === '40HC' || agrType === '45G0');
+                    });
+                    
+                    if (matching40hc.length > 0) {
+                        matching40hc.sort((a, b) => (parseFloat(a.Rate) || 999999) - (parseFloat(b.Rate) || 999999));
+                        dummyData[rowIndex].top1_40hc = matching40hc[0].LINER || '';
+                        console.log(`[handleDummyCellUpdate] TOP 1 LINER (40HC): ${dummyData[rowIndex].top1_40hc}`);
+                    } else {
+                        dummyData[rowIndex].top1_40hc = '';
+                    }
+                } else {
+                    dummyData[rowIndex].top1_40hc = '';
                 }
             }
         }
         
-        // PENTING: Re-render untuk update warna baris secara real-time
         renderDummyBookingTable();
     }
 }
-// === AKHIR FUNGSI BARU ===
+// === AKHIR FUNGSI REVISI ===
 
+// === FUNGSI handleCellUpdate - REVISI FINAL: HANYA ISI TOP 1 LINER ===
+// PENTING: KOLOM LINER TIDAK DIISI OTOMATIS - User harus isi manual
+// HANYA kolom TOP 1 LINER (20), TOP 1 LINER (40), dan TOP 1 LINER (40HC) yang diisi otomatis
 window.handleCellUpdate = function(rowId, key, value) {
     const rowIndex = globalData.findIndex(row => row.id === parseInt(rowId));
     if (rowIndex > -1) {
@@ -1267,31 +1722,94 @@ window.handleCellUpdate = function(rowId, key, value) {
         // CRITICAL FIX: Tandai row sebagai modified
         globalData[rowIndex].isModified = true;
 
-        // --- AUTO-FILL LOGIC (Tidak berubah) ---
+        // === REVISI: AUTO-FILL TOP 1 LINER DARI AGREEMENT LIST ===
         const triggers = ['destination', 'container20', 'container40', 'container40hc'];
         if (triggers.includes(key)) {
             const currentRow = globalData[rowIndex];
+            // PARSING: Ambil kata SEBELUM koma dari Destination Port
             const destPort = (currentRow.destination || '').split(',')[0].trim().toUpperCase();
 
-            if (destPort) {
-                let containerTypeCode = null;
+            if (destPort && agreementData && agreementData.length > 0) {
+                console.log(`[handleCellUpdate] Destination: ${destPort}`);
                 
-                if (parseInt(currentRow.container20) > 0) containerTypeCode = '20';
-                else if (parseInt(currentRow.container40) > 0) containerTypeCode = '40';
-                else if (parseInt(currentRow.container40hc) > 0) containerTypeCode = '40HC';
-                
-                if (containerTypeCode) {
-                    const bestLiner = findBestLiner(destPort, containerTypeCode);
-                    if (bestLiner) {
-                        globalData[rowIndex].liner = bestLiner;
-                        globalData[rowIndex].top1 = bestLiner;
+                // === TOP 1 LINER untuk Container 20 ===
+                const qty20 = parseFloat(currentRow.container20) || 0;
+                if (qty20 > 0) {
+                    const matching20 = agreementData.filter(agr => {
+                        const agrDest = (agr['Destination Port'] || '').trim().toUpperCase();
+                        const agrType = (agr['Type'] || '').trim();
+                        return agrDest === destPort && (agrType === '20' || agrType === '20G0');
+                    });
+                    
+                    if (matching20.length > 0) {
+                        matching20.sort((a, b) => (parseFloat(a.Rate) || 999999) - (parseFloat(b.Rate) || 999999));
+                        globalData[rowIndex].top1_20 = matching20[0].LINER || '';
+                        console.log(`[handleCellUpdate] TOP 1 LINER (20): ${globalData[rowIndex].top1_20}`);
+                    } else {
+                        globalData[rowIndex].top1_20 = '';
                     }
+                } else {
+                    globalData[rowIndex].top1_20 = '';
+                }
+                
+                // === TOP 1 LINER untuk Container 40 ===
+                const qty40 = parseFloat(currentRow.container40) || 0;
+                if (qty40 > 0) {
+                    const matching40 = agreementData.filter(agr => {
+                        const agrDest = (agr['Destination Port'] || '').trim().toUpperCase();
+                        const agrType = (agr['Type'] || '').trim();
+                        return agrDest === destPort && (agrType === '40' || agrType === '42G0');
+                    });
+                    
+                    if (matching40.length > 0) {
+                        matching40.sort((a, b) => (parseFloat(a.Rate) || 999999) - (parseFloat(b.Rate) || 999999));
+                        globalData[rowIndex].top1_40 = matching40[0].LINER || '';
+                        console.log(`[handleCellUpdate] TOP 1 LINER (40): ${globalData[rowIndex].top1_40}`);
+                    } else {
+                        globalData[rowIndex].top1_40 = '';
+                    }
+                } else {
+                    globalData[rowIndex].top1_40 = '';
+                }
+                
+                // === TOP 1 LINER untuk Container 40HC ===
+                const qty40hc = parseFloat(currentRow.container40hc) || 0;
+                if (qty40hc > 0) {
+                    const matching40hc = agreementData.filter(agr => {
+                        const agrDest = (agr['Destination Port'] || '').trim().toUpperCase();
+                        const agrType = (agr['Type'] || '').trim();
+                        return agrDest === destPort && (agrType === '40HC' || agrType === '45G0');
+                    });
+                    
+                    if (matching40hc.length > 0) {
+                        matching40hc.sort((a, b) => (parseFloat(a.Rate) || 999999) - (parseFloat(b.Rate) || 999999));
+                        globalData[rowIndex].top1_40hc = matching40hc[0].LINER || '';
+                        console.log(`[handleCellUpdate] TOP 1 LINER (40HC): ${globalData[rowIndex].top1_40hc}`);
+                    } else {
+                        globalData[rowIndex].top1_40hc = '';
+                    }
+                } else {
+                    globalData[rowIndex].top1_40hc = '';
                 }
             }
         }
         
-        // PENTING: Re-render untuk update warna baris secara real-time
-        renderAllTablesAndCharts();
+        // REVISI: Langsung render dashboard DAN tracking
+        const allData = globalData;
+        renderTable(allData, 'tableBody', false);
+        updateCharts(allData);
+        updateStats(allData);
+        
+        // Update tracking jika sedang aktif
+        if (currentRegion) {
+            filterTrackingTable();
+        }
+        
+        // Update dummy booking
+        renderDummyBookingTable();
+        
+        // Update calendar
+        renderCalendar(calendarCurrentDate);
     }
 }
 
@@ -1315,16 +1833,38 @@ window.updateDoStatus = function(rowId, isChecked) {
         globalData[rowIndex]['doStatus'] = isChecked ? 'OK' : 'CUSTOMER';
         // CRITICAL FIX: Tandai row sebagai modified
         globalData[rowIndex].isModified = true;
-        // PENTING: Re-render untuk update warna baris secara real-time
-        renderAllTablesAndCharts();
+        
+        // REVISI: Langsung render dashboard DAN tracking
+        const allData = globalData;
+        renderTable(allData, 'tableBody', false);
+        updateCharts(allData);
+        updateStats(allData);
+        
+        // Update tracking jika sedang aktif
+        if (currentRegion) {
+            filterTrackingTable();
+        }
+        
+        // Update dummy booking
+        renderDummyBookingTable();
+        
+        // Update calendar
+        renderCalendar(calendarCurrentDate);
     }
 }
 
 function updateStats(data) {
-    document.getElementById('totalVessels').textContent = data.length;
-    document.getElementById('statusDoneCount').textContent = data.filter(r => r.postToSap).length;
-    document.getElementById('customerCount').textContent = data.filter(r => r.doStatus === 'CUSTOMER').length;
-    document.getElementById('pendingCount').textContent = data.length - data.filter(r => r.postToSap).length;
+    // Total Delivery Orders: semua data yang ada
+    document.getElementById('totalDeliveryOrders').textContent = data.length;
+    
+    // Done Booking: DO Status = 'OK' (sudah di-ceklis)
+    document.getElementById('doneBookingCount').textContent = data.filter(r => r.doStatus === 'OK').length;
+    
+    // Problem: Masalah !== "None"
+    document.getElementById('problemCount').textContent = data.filter(r => r.masalah && r.masalah !== 'None').length;
+    
+    // Done Process: Post to SAP = true (sudah di-ceklis)
+    document.getElementById('doneProcessCount').textContent = data.filter(r => r.postToSap === true).length;
 }
 
 function getFilteredDashboardData() {
@@ -1334,11 +1874,35 @@ function getFilteredDashboardData() {
     const dateTo = document.getElementById('filterDateTo').value;
 
     return globalData.filter(row => {
+        // Filter Region
         const matchesRegion = !regionFilter || row.region === regionFilter;
-        const matchesGlobal = !globalFilter || Object.values(row).some(val => String(val).toLowerCase().includes(globalFilter));
+        
+        // Filter Global Search
+        const matchesGlobal = !globalFilter || Object.values(row).some(val => 
+            String(val).toLowerCase().includes(globalFilter)
+        );
+        
+        // FIXED: Filter Tanggal - Check BOTH bookingDa AND mad
         let matchesDate = true;
-        if (dateFrom && row.mad) matchesDate = row.mad >= dateFrom;
-        if (matchesDate && dateTo && row.mad) matchesDate = row.mad <= dateTo;
+        
+        if (dateFrom || dateTo) {
+            // Get booking date from either bookingDa or mad (prioritize bookingDa)
+            const bookingDate = row.bookingDa || row.mad || '';
+            
+            if (!bookingDate) {
+                // No date in row - exclude if filter active
+                matchesDate = false;
+            } else {
+                // Check date range
+                if (dateFrom && bookingDate < dateFrom) {
+                    matchesDate = false;
+                }
+                if (dateTo && bookingDate > dateTo) {
+                    matchesDate = false;
+                }
+            }
+        }
+        
         return matchesRegion && matchesGlobal && matchesDate;
     });
 }
@@ -1346,8 +1910,8 @@ function getFilteredDashboardData() {
 function filterTable() {
     const filtered = getFilteredDashboardData();
     renderTable(filtered, 'tableBody', false);
-    updateCharts(filtered);
-    updateStats(filtered);
+    updateCharts(filtered); // ✅ Charts already updated
+    updateStats(filtered);  // ✅ Stats already updated
 }
 
 function filterTrackingTable() {
@@ -1385,7 +1949,7 @@ function filterTrackingTable() {
     console.log('Filtered data:', filtered.length);
     console.log('=== filterTrackingTable() END ===');
     
-    renderTable(filtered, 'trackingTableBody', true);
+    renderTable(filtered, 'trackingTableBody', true, false);
 }
 
 window.resetFilters = function() {
@@ -1419,82 +1983,88 @@ window.exportDashboardToExcel = function() {
     }
 
     // Header yang sesuai dengan tabel dashboard
-    const headers = [
-        "NO", "Region", "Product Group", "SC", "Delivery", "20", "40", "40 HC", 
-        "MAD", "Ship to Party", "Shipping Point", "Country", "IncoTerm", 
-        "Destination Port", "BOOKING DATE", "MARKS BY CS", "Booking Number", 
-        "LINER", "TOP 1 LINER", "REASON", "KETERANGAN", "Vessel Name", "Open CY", "Closing Fisik", "ETD", "NW (Ton)", "DO STATUS", 
-        "Post to SAP", "Masalah"
-    ];
+// Header yang sesuai dengan tabel dashboard
+const headers = [
+    "NO", "Region", "Product Group", "SC", "Delivery", "20", "40", "40 HC", 
+    "MAD", "Ship to Party", "Shipping Point", "Country", "IncoTerm", 
+    "Destination Port", "BOOKING DATE", "MARKS BY CS", "Booking Number", 
+    "LINER", "TOP 1 LINER", "REASON", "KETERANGAN", "Vessel Name", "Voyage", "Open CY", "Closing Fisik", "ETD", "NW (Ton)", "DO STATUS", 
+    "Post to SAP", "Masalah"
+];
 
-    // Siapkan data untuk Excel
-    const excelData = dataToExport.map((row, index) => {
-        const nwInTons = (parseFloat(row.nw) || 0) / 1000;
-        return [
-            index + 1,
-            row.region || '',
-            row.vfPpp || '',
-            row.sc || '',
-            row.delivery || '',
-            row.container20 || 0,
-            row.container40 || 0,
-            row.container40hc || 0,
-            row.mad || '',
-            row.shipToParty || '',
-            row.shippingPoint || '',
-            row.country || '',
-            row.incot || '',
-            row.destination || '',
-            row.bookingDa || '',
-            row.marksBy || '',
-            row.etd || '',
-            row.bookingNumb || '',
-            row.liner || '',
-            row.top1 || '',
-            row.reason || '',
-            row.keterangan || '',
-            nwInTons.toFixed(2),
-            row.doStatus || 'N/A',
-            row.postToSap ? 'Yes' : 'No',
-            row.masalah || ''
-        ];
-    });
+// Siapkan data untuk Excel
+const excelData = dataToExport.map((row, index) => {
+    const nwInTons = (parseFloat(row.nw) || 0) / 1000;
+    return [
+        index + 1,
+        row.region || '',
+        row.vfPpp || '',
+        row.sc || '',
+        row.delivery || '',
+        row.container20 || 0,
+        row.container40 || 0,
+        row.container40hc || 0,
+        row.mad || '',
+        row.shipToParty || '',
+        row.shippingPoint || '',
+        row.country || '',
+        row.incot || '',
+        row.destination || '',
+        row.bookingDa || '',
+        row.marksBy || '',
+        row.bookingNumb || '',
+        row.liner || '',
+        row.top1 || '',
+        row.reason || '',
+        row.keterangan || '',
+        row.vesselName || '',
+        row.voyage || '',
+        row.openCyDate || '',
+        row.closingFisikDate || '',
+        row.etd || '',
+        nwInTons.toFixed(2),
+        row.doStatus || 'N/A',
+        row.postToSap ? 'Yes' : 'No',
+        row.masalah || ''
+    ];
+});
 
     // Buat worksheet
     const ws = XLSX.utils.aoa_to_sheet([headers, ...excelData]);
 
     // Set column widths
-    const columnWidths = [
-        { wch: 2 },  // No
-        { wch: 5 }, // Region
-        { wch: 15 }, // Product Group
-        { wch: 12 }, // SC
-        { wch: 12 }, // Delivery
-        { wch: 5 },  // 20
-        { wch: 5 },  // 40
-        { wch: 10 },  // 40 HC
-        { wch: 12 }, // MAD
-        { wch: 25 }, // Ship to Party
-        { wch: 15 }, // Shipping Point
-        { wch: 15 }, // Country
-        { wch: 10 }, // IncoTerm
-        { wch: 20 }, // Destination Port
-        { wch: 14 }, // BOOKING DATE
-        { wch: 18 }, // MARKS BY CS
-        { wch: 18 }, // Booking Number
-        { wch: 20 }, // LINER
-        { wch: 20 }, // TOP 1 LINER
-        { wch: 15 }, // REASON
-        { wch: 20 }, // KETERANGAN
-        { wch: 12 }, // Vessel Name
-        { wch: 12 }, // Open CY
-        { wch: 12 }, // Closing FIsik
-        { wch: 12 }, // ETD
-        { wch: 10 }, // NW (Ton)
-        { wch: 12 }, // DO STATUS
-        { wch: 12 }, // Post to SAP
-        { wch: 15 }  // Masalah
-    ];
+const columnWidths = [
+    { wch: 2 },  // No
+    { wch: 5 }, // Region
+    { wch: 15 }, // Product Group
+    { wch: 12 }, // SC
+    { wch: 12 }, // Delivery
+    { wch: 5 },  // 20
+    { wch: 5 },  // 40
+    { wch: 10 },  // 40 HC
+    { wch: 12 }, // MAD
+    { wch: 25 }, // Ship to Party
+    { wch: 15 }, // Shipping Point
+    { wch: 15 }, // Country
+    { wch: 10 }, // IncoTerm
+    { wch: 20 }, // Destination Port
+    { wch: 14 }, // BOOKING DATE
+    { wch: 18 }, // MARKS BY CS
+    { wch: 18 }, // Booking Number
+    { wch: 20 }, // LINER
+    { wch: 20 }, // TOP 1 LINER
+    { wch: 15 }, // REASON
+    { wch: 20 }, // KETERANGAN
+    { wch: 18 }, // Vessel Name
+    { wch: 12 }, // Voyage
+    { wch: 12 }, // Open CY
+    { wch: 12 }, // Closing Fisik
+    { wch: 12 }, // ETD
+    { wch: 10 }, // NW (Ton)
+    { wch: 12 }, // DO STATUS
+    { wch: 12 }, // Post to SAP
+    { wch: 15 }  // Masalah
+];
     ws['!cols'] = columnWidths;
 
     // Styling: Header row
@@ -1551,53 +2121,6 @@ window.exportDashboardToExcel = function() {
     // Download file
     XLSX.writeFile(wb, filename);
 }
-
-// FUNGSI INI DIHAPUS SESUAI PERMINTAAN USER
-// window.exportData = function() {
-//     const dataToExport = getFilteredDashboardData();
-//     if (dataToExport.length === 0) {
-//         alert("No data to export based on current filters.");
-//         return;
-//     }
-//     const ws = XLSX.utils.json_to_sheet(dataToExport);
-//     const wb = XLSX.utils.book_new();
-//     XLSX.utils.book_append_sheet(wb, ws, "VesselData");
-//     XLSX.writeFile(wb, "vessel_planner_export.xlsx");
-// }
-
-// FUNGSI INI DIHAPUS SESUAI PERMINTAAN USER
-// window.refreshData = function() {
-//     let processedInitialData = JSON.parse(JSON.stringify(initialVesselData));
-//     processedInitialData.forEach((row, index) => {
-//         row.id = index + 1;
-//         row.doStatus = "CUSTOMER";
-//         row.postToSap = false;
-//         row.masalah = "Tidak Ada";
-//         row.nw = row.nw || 0; 
-//         row.vesselName = row.vesselName || ""; 
-//         row.siStatus = 'Pending'; 
-//         row.bcStatus = 'Pending'; 
-//     });
-//     globalData = processedInitialData;
-//     dummyData = []; 
-    
-//     if (globalData.length > 0 && globalData[0].mad) {
-//          calendarCurrentDate = new Date(globalData[0].mad + "T00:00:00");
-//     } else {
-//         calendarCurrentDate = new Date();
-//     }
-
-//     resetFilters();
-//     resetTrackingFilters();
-//     renderAllTablesAndCharts();
-//     renderImportedDataTableFromInitial();
-//     alert("Data has been reset to the data from your initial file.");
-// }
-
-// FUNGSI INI DIHAPUS SESUAI PERMINTAAN USER
-// window.showCharts = function() {
-//     document.getElementById('chartsSection')?.scrollIntoView({ behavior: 'smooth' });
-// }
 
 function switchView(targetId, newTitle) {
     document.querySelectorAll('.content-view').forEach(view => view.classList.remove('active'));
@@ -1701,18 +2224,53 @@ function handleExcelUpload(event) {
             
             const headersFromFile = rawHeaders.map(h => String(h || '').trim().toLowerCase().replace(/[\s\.\-\/]/g, ''));
             
-            const headerMap = {
-                'region': 'region','productgroup': 'vfPpp','vfppp': 'vfPpp','sc': 'sc','delivery': 'delivery',
-                '20': 'container20','container20': 'container20',
-                '40': 'container40','container40': 'container40',
-                '40hc': 'container40hc','container40hc': 'container40hc',
-                'mad': 'mad','shiptoparty': 'shipToParty','shippingpoint': 'shippingPoint','country': 'country',
-                'incoterm': 'incot','incot': 'incot','destinationport': 'destination','destination': 'destination',
-                'bookingdate': 'bookingDa','marksbycs': 'marksBy','etd': 'etd','bookingnumber': 'bookingNumb',
-                'liner': 'liner','top1liner': 'top1','reason': 'reason','keterangan': 'keterangan',
-                'nw': 'nw', 'netweight': 'nw', 'vesselname': 'vesselName', 'voyage': 'voyage'
-            };
-            
+const headerMap = {
+    'region': 'region',
+    'REGION': 'region',
+    'productgroup': 'vfPpp',
+    'vfppp': 'vfPpp',
+    'sc': 'sc',
+    'delivery': 'delivery',
+    '20': 'container20',
+    'container20': 'container20',
+    '40': 'container40',
+    'container40': 'container40',
+    '40hc': 'container40hc',
+    'container40hc': 'container40hc',
+    'mad': 'mad',
+    'shiptoparty': 'shipToParty',
+    
+    // FIXED: Shipping Point - handle both "Shipping Point" and "SP"
+    'shippingpoint': 'shippingPoint',
+    'sp': 'shippingPoint',
+    
+    // CRITICAL FIX: Country - handle "Country Port (Port)" exact match
+    'country': 'country',
+    'countryport': 'country',
+    'countryport(port)': 'country', // "Country Port (Port)" → "countryportport"
+    'port': 'country',
+    
+    'incoterm': 'incot',
+    'incot': 'incot',
+    'destinationport': 'destination',
+    'destination': 'destination',
+    'bookingdate': 'bookingDa',
+    'marksbycs': 'marksBy',
+    'etd': 'etd',
+    'bookingnumber': 'bookingNumb',
+    'liner': 'liner',
+    'top1liner': 'top1',
+    'reason': 'reason',
+    'keterangan': 'keterangan',
+    'nw': 'nw',
+    'netweight': 'nw',
+    
+    // FIXED: Vessel Name - handle both "Vessel Name" and "Vessel"
+    'vesselname': 'vesselName',
+    'vessel': 'vesselName',
+    
+    'voyage': 'voyage'
+};            
             // FUNGSI KRITIKAL: Mengonversi ke YYYY-MM-DD agar dibaca oleh input type="date"
             function convertToISODate(cellValue) {
                 if (!cellValue) return '';
@@ -1770,6 +2328,13 @@ function handleExcelUpload(event) {
                     }
                 }
 
+                // Normalisasi Destination Port
+                if (newRow.destination) {
+                    const originalDest = newRow.destination;
+                    newRow.destination = normalizeDestinationPort(newRow.destination);
+                    console.log(`Destination normalized: "${originalDest}" → "${newRow.destination}"`);
+                }
+
                 // Set default values
                 newRow.doStatus = 'CUSTOMER'; 
                 newRow.postToSap = false; 
@@ -1779,6 +2344,12 @@ function handleExcelUpload(event) {
                 newRow.voyage = newRow.voyage || "";
                 newRow.siStatus = 'Pending';
                 newRow.bcStatus = 'Pending';
+                
+                // Initialize TOP 1 LINER columns
+                newRow.top1_20 = '';
+                newRow.top1_40 = '';
+                newRow.top1_40hc = '';
+                newRow.top1 = '';
                 
                 return newRow;
             }).filter(row => {
@@ -1805,6 +2376,9 @@ function handleExcelUpload(event) {
             
             console.log('Total globalData after import:', globalData.length);
             
+            // AUTO-FILL TOP 1 LINER
+            autoFillTOP1LINER();
+            
             // CRITICAL FIX: Render semua view
             renderAllTablesAndCharts();
             
@@ -1815,7 +2389,7 @@ function handleExcelUpload(event) {
             }
             
             console.log('=== EXCEL IMPORT SUCCESS ===');
-            alert(`✅ ${jsonData.length} data berhasil diimpor ke globalData!\n\nSilakan buka menu Tracking Region untuk melihat data.`);
+            alert(`✅ ${jsonData.length} data berhasil diimpor ke globalData!\n\nKolom TOP 1 LINER telah terisi otomatis berdasarkan Agreement List.`);
 
         } catch (error) {
             console.error('=== EXCEL IMPORT ERROR ===', error);
@@ -1952,15 +2526,20 @@ window.addEventListener('DOMContentLoaded', () => {
     });
     // === AKHIR HOOK KALENDER ===
 
-    renderAgreementTable(staticAgreementData);
     renderVesselList();
     renderAllTablesAndCharts();
     
     // Inisiasi awal notifikasi
     updateNotificationDisplay();
-    
+    document.getElementById('agreement-excel-input').addEventListener('change', handleAgreementExcelUpload);
     document.getElementById('excel-input').addEventListener('change', handleExcelUpload);
+    document.getElementById('database-cost-input').addEventListener('change', handleDatabaseCostUpload);
     document.getElementById('filterAgreement').addEventListener('input', filterAgreementTable);
+// Event listener untuk upload Agreement Excel
+    const agreementExcelInput = document.getElementById('agreement-excel-input');
+    if (agreementExcelInput) {
+        agreementExcelInput.addEventListener('change', handleAgreementExcelUpload);
+    }
 
 document.querySelectorAll('.sidebar-menu .menu-item').forEach(item => {
     item.addEventListener('click', function() {
@@ -2042,6 +2621,378 @@ let mainTitle = this.dataset.region
         }
     });
 
+
+// === FUNGSI UNTUK DATABASE COST UPLOAD ===
+function handleDatabaseCostUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            console.log('=== DATABASE COST IMPORT START ===');
+            
+            const workbook = XLSX.read(new Uint8Array(e.target.result), { type: 'array', cellDates: true });
+            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+            const dataAsArray = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "", raw: false });
+
+            console.log('Total rows in Excel:', dataAsArray.length);
+
+            let headerRowIndex = -1;
+            const headerKeywords = ['shipping line', 'charges type', 'currency', 'amount', 'remarks', 'unit of measure', 'link'];
+            for(let i=0; i < Math.min(10, dataAsArray.length); i++){
+                const score = (dataAsArray[i] || []).reduce((acc, cell) => {
+                    const cellStr = String(cell).toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+                    return acc + (headerKeywords.some(kw => cellStr.includes(kw.replace(/\s/g, ''))) ? 1 : 0);
+                }, 0);
+                if (score > 2) { 
+                    headerRowIndex = i; 
+                    console.log('Header found at row:', i);
+                    break; 
+                }
+            }
+
+            if (headerRowIndex === -1) throw new Error("Could not find a valid header row in the Excel file.");
+            
+            const rawHeaders = dataAsArray[headerRowIndex];
+            const rawDataRows = dataAsArray.slice(headerRowIndex + 1);
+            
+            console.log('Raw headers:', rawHeaders);
+            console.log('Data rows to process:', rawDataRows.length);
+            
+            renderDatabaseCostTable(rawHeaders, rawDataRows);
+            
+            console.log('=== DATABASE COST IMPORT SUCCESS ===');
+            document.getElementById('database-cost-status').textContent = `✅ ${rawDataRows.length} rows berhasil diimpor dan ditampilkan!`;
+
+        } catch (error) {
+            console.error('=== DATABASE COST IMPORT ERROR ===', error);
+            document.getElementById('database-cost-status').textContent = "❌ Error: " + error.message;
+        } finally {
+            event.target.value = '';
+        }
+    };
+    reader.readAsArrayBuffer(file);
+}
+
+function renderDatabaseCostTable(headers, dataRows) {
+    console.log('=== RENDER DATABASE COST TABLE ===');
+    console.log('Headers:', headers);
+    console.log('Rows count:', dataRows.length);
+    
+    const tableBody = document.querySelector('#database-cost-preview-table tbody');
+    
+    // CRITICAL: Simpan data untuk fungsi search
+    // thead TIDAK diubah — header sudah static di index.php dengan tombol ▼
+    databaseCostData = {
+        headers: headers,
+        rows: dataRows,
+        colFilters: {}
+    };
+    
+    console.log('Data saved to databaseCostData:', databaseCostData);
+    
+    let bodyHtml = '';
+    dataRows.forEach((row, index) => {
+        bodyHtml += '<tr>';
+        headers.forEach((header, colIndex) => { 
+            let cellValue = row[colIndex];
+            cellValue = cellValue === undefined || cellValue === null ? '' : cellValue;
+            
+            // Jika kolom adalah "Link", buat sebagai hyperlink jika ada URL
+            const headerLower = String(header).toLowerCase();
+            if (headerLower === 'link' && cellValue && (String(cellValue).startsWith('http://') || String(cellValue).startsWith('https://'))) {
+                cellValue = `<a href="${cellValue}" target="_blank" style="color: #2563eb; text-decoration: underline;">Open Link</a>`;
+            }
+            
+            bodyHtml += `<td>${cellValue}</td>`;
+        });
+        bodyHtml += '</tr>';
+    });
+    tableBody.innerHTML = bodyHtml;
+    
+    console.log('=== RENDER COMPLETE ===');
+}
+
+// === FUNGSI DROPDOWN FILTER PER KOLOM DATABASE COST ===
+window.openDbCostColFilter = function(event, colIndex) {
+    event.stopPropagation();
+
+    // Tutup dropdown lama jika ada
+    const existingDrop = document.getElementById('db-cost-col-filter-dropdown');
+    if (existingDrop) existingDrop.remove();
+
+    if (!databaseCostData || !databaseCostData.rows || databaseCostData.rows.length === 0) return;
+
+    const rows = databaseCostData.rows;
+    const currentFilterVal = (databaseCostData.colFilters && databaseCostData.colFilters[colIndex]) || '';
+
+    // Kumpulkan nilai unik di kolom ini
+    const uniqueValues = [];
+    rows.forEach(row => {
+        const val = String(row[colIndex] !== undefined && row[colIndex] !== null ? row[colIndex] : '').trim();
+        if (val !== '' && !uniqueValues.includes(val)) uniqueValues.push(val);
+    });
+    uniqueValues.sort();
+
+    const dropdown = document.createElement('div');
+    dropdown.id = 'db-cost-col-filter-dropdown';
+    dropdown.style.cssText = `position:fixed; background:#fff; border:1px solid #c0b8f0; border-radius:8px; box-shadow:0 6px 24px rgba(106,90,205,0.18); z-index:99999; min-width:220px; max-width:300px; padding:10px 0 6px 0; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; font-size:12px;`;
+
+    const btnEl = document.getElementById('db-cost-filter-btn-' + colIndex);
+    const rect = btnEl ? btnEl.getBoundingClientRect() : event.target.getBoundingClientRect();
+    dropdown.style.top = (rect.bottom + 4) + 'px';
+    dropdown.style.left = Math.max(0, rect.left - 150) + 'px';
+
+    dropdown.innerHTML = `
+        <div style="padding:0 10px 8px 10px; border-bottom:1px solid #ededff;">
+            <input type="text" id="db-cost-col-filter-search" placeholder="🔍 Cari..." value="${currentFilterVal}"
+                style="width:100%; padding:5px 8px; border:1px solid #c0b8f0; border-radius:5px; font-size:12px; outline:none; box-sizing:border-box;"
+                oninput="dbCostColFilterSearch(${colIndex}, this.value)">
+        </div>
+        <div style="padding:6px 10px 4px 10px;">
+            <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-weight:600; color:#6A5ACD;">
+                <input type="checkbox" id="db-cost-select-all" onchange="dbCostSelectAll(${colIndex}, this.checked)" style="cursor:pointer;" checked>
+                (Pilih Semua)
+            </label>
+        </div>
+        <div id="db-cost-col-filter-list" style="max-height:200px; overflow-y:auto; padding:0 10px;">
+            ${uniqueValues.map(val => `
+                <label style="display:flex; align-items:center; gap:6px; cursor:pointer; padding:3px 0; color:#333;">
+                    <input type="checkbox" class="db-cost-val-cb" value="${String(val).replace(/"/g, '&quot;')}"
+                        ${currentFilterVal === '' || currentFilterVal.split('|||').includes(val) ? 'checked' : ''}
+                        onchange="dbCostColFilterApply(${colIndex})" style="cursor:pointer;">
+                    ${val}
+                </label>
+            `).join('')}
+        </div>
+        <div style="padding:8px 10px 2px 10px; border-top:1px solid #ededff; margin-top:6px; display:flex; gap:6px;">
+            <button onclick="dbCostClearColFilter(${colIndex})" style="flex:1; padding:5px; border:1px solid #c0b8f0; border-radius:5px; background:#f5f5ff; cursor:pointer; font-size:11px;">🗑️ Reset</button>
+            <button onclick="document.getElementById('db-cost-col-filter-dropdown').remove()" style="flex:1; padding:5px; border:none; border-radius:5px; background:#6A5ACD; color:#fff; cursor:pointer; font-size:11px;">✓ Tutup</button>
+        </div>
+    `;
+
+    document.body.appendChild(dropdown);
+    dbCostUpdateSelectAll();
+    setTimeout(() => { const inp = document.getElementById('db-cost-col-filter-search'); if (inp) inp.focus(); }, 50);
+}
+
+window.dbCostColFilterSearch = function(colIndex, searchVal) {
+    const list = document.getElementById('db-cost-col-filter-list');
+    if (!list) return;
+    list.querySelectorAll('label').forEach(label => {
+        const cb = label.querySelector('input[type=checkbox]');
+        const val = cb ? cb.value.toLowerCase() : '';
+        label.style.display = val.includes(searchVal.toLowerCase()) ? '' : 'none';
+    });
+    dbCostUpdateSelectAll();
+}
+
+window.dbCostUpdateSelectAll = function() {
+    const list = document.getElementById('db-cost-col-filter-list');
+    const selectAll = document.getElementById('db-cost-select-all');
+    if (!list || !selectAll) return;
+    const allCbs = list.querySelectorAll('input[type=checkbox]');
+    const visibleCbs = Array.from(allCbs).filter(cb => cb.closest('label').style.display !== 'none');
+    const allChecked = visibleCbs.length > 0 && visibleCbs.every(cb => cb.checked);
+    selectAll.checked = allChecked;
+    selectAll.indeterminate = !allChecked && visibleCbs.some(cb => cb.checked);
+}
+
+window.dbCostSelectAll = function(colIndex, checked) {
+    const list = document.getElementById('db-cost-col-filter-list');
+    if (!list) return;
+    list.querySelectorAll('input[type=checkbox]').forEach(cb => {
+        if (cb.closest('label').style.display !== 'none') cb.checked = checked;
+    });
+    dbCostColFilterApply(colIndex);
+}
+
+window.dbCostColFilterApply = function(colIndex) {
+    const list = document.getElementById('db-cost-col-filter-list');
+    if (!list) return;
+    const checkedCbs = list.querySelectorAll('input[type=checkbox]:checked');
+    const allCbs = list.querySelectorAll('input[type=checkbox]');
+    if (checkedCbs.length === allCbs.length) {
+        databaseCostData.colFilters[colIndex] = '';
+    } else {
+        databaseCostData.colFilters[colIndex] = Array.from(checkedCbs).map(cb => cb.value).join('|||');
+    }
+    dbCostUpdateSelectAll();
+    const btn = document.getElementById('db-cost-filter-btn-' + colIndex);
+    if (btn) {
+        btn.style.background = databaseCostData.colFilters[colIndex] ? '#6A5ACD' : 'rgba(255,255,255,0.25)';
+        btn.style.color = databaseCostData.colFilters[colIndex] ? '#fff' : '';
+    }
+    filterDatabaseCostTable();
+}
+
+window.dbCostClearColFilter = function(colIndex) {
+    if (databaseCostData && databaseCostData.colFilters) databaseCostData.colFilters[colIndex] = '';
+    const list = document.getElementById('db-cost-col-filter-list');
+    if (list) list.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = true);
+    const btn = document.getElementById('db-cost-filter-btn-' + colIndex);
+    if (btn) { btn.style.background = 'rgba(255,255,255,0.25)'; btn.style.color = ''; }
+    filterDatabaseCostTable();
+}
+
+document.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('db-cost-col-filter-dropdown');
+    if (dropdown && !dropdown.contains(e.target)) dropdown.remove();
+});
+
+// === FUNGSI SEARCH UNTUK DATABASE COST ===
+function filterDatabaseCostTable() {
+    console.log('=== FILTER DATABASE COST CALLED ===');
+    
+    const searchInput = document.getElementById('database-cost-search');
+    if (!searchInput) {
+        console.error('Search input not found!');
+        return;
+    }
+    
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    console.log('Search term:', searchTerm);
+    console.log('Database cost data:', databaseCostData);
+    
+    const tableBody = document.querySelector('#database-cost-preview-table tbody');
+    const tableHead = document.querySelector('#database-cost-preview-table thead');
+    
+    if (!databaseCostData || !databaseCostData.headers || databaseCostData.rows.length === 0) {
+        console.warn('No database cost data available');
+        return;
+    }
+    
+    const headers = databaseCostData.headers;
+    const dataRows = databaseCostData.rows;
+    const colFilters = databaseCostData.colFilters || {};
+    
+    console.log('Total rows before filter:', dataRows.length);
+    
+    // Filter rows: global search DAN per-column filter dropdown
+    const filteredRows = dataRows.filter(row => {
+        // Global search: cari di semua kolom
+        const globalMatch = searchTerm === '' || row.some(cell => {
+            const cellValue = String(cell || '').toLowerCase();
+            return cellValue.includes(searchTerm);
+        });
+        
+        // Per-column filter dari dropdown checkbox
+        const colMatch = Object.keys(colFilters).every(colIndex => {
+            const filterVal = colFilters[colIndex];
+            if (!filterVal) return true; // kosong = tidak difilter
+            const allowedVals = filterVal.split('|||');
+            const cellValue = String(row[colIndex] !== undefined && row[colIndex] !== null ? row[colIndex] : '').trim();
+            return allowedVals.includes(cellValue);
+        });
+        
+        return globalMatch && colMatch;
+    });
+    
+    console.log('Total rows after filter:', filteredRows.length);
+    
+    // Render ulang table dengan data yang sudah difilter
+    let bodyHtml = '';
+    filteredRows.forEach((row, index) => {
+        bodyHtml += '<tr>';
+        headers.forEach((header, colIndex) => { 
+            let cellValue = row[colIndex];
+            cellValue = cellValue === undefined || cellValue === null ? '' : cellValue;
+            
+            // Jika kolom adalah "Link", buat sebagai hyperlink jika ada URL
+            const headerLower = String(header).toLowerCase();
+            if (headerLower === 'link' && cellValue && (String(cellValue).startsWith('http://') || String(cellValue).startsWith('https://'))) {
+                cellValue = `<a href="${cellValue}" target="_blank" style="color: #2563eb; text-decoration: underline;">Open Link</a>`;
+            }
+            
+            bodyHtml += `<td>${cellValue}</td>`;
+        });
+        bodyHtml += '</tr>';
+    });
+    
+    if (filteredRows.length === 0) {
+        bodyHtml = `<tr><td colspan="${headers.length}" style="text-align: center; padding: 20px; color: #999;">Tidak ada data yang cocok dengan pencarian</td></tr>`;
+    }
+    
+    tableBody.innerHTML = bodyHtml;
+    console.log('=== FILTER COMPLETE ===');
+}
+// === FUNGSI SEARCH UNTUK DATABASE COST ===
+function filterDatabaseCostTable() {
+    console.log('=== FILTER DATABASE COST CALLED ===');
+    
+    const searchInput = document.getElementById('database-cost-search');
+    if (!searchInput) {
+        console.error('Search input not found!');
+        return;
+    }
+    
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    console.log('Search term:', searchTerm);
+    console.log('Database cost data:', databaseCostData);
+    
+    const tableBody = document.querySelector('#database-cost-preview-table tbody');
+    const tableHead = document.querySelector('#database-cost-preview-table thead');
+    
+    if (!databaseCostData || !databaseCostData.headers || databaseCostData.rows.length === 0) {
+        console.warn('No database cost data available');
+        return;
+    }
+    
+    const headers = databaseCostData.headers;
+    const dataRows = databaseCostData.rows;
+    const colFilters = databaseCostData.colFilters || {};
+    
+    console.log('Total rows before filter:', dataRows.length);
+    
+    // Filter rows: global search DAN per-column filter dropdown
+    const filteredRows = dataRows.filter(row => {
+        // Global search: cari di semua kolom
+        const globalMatch = searchTerm === '' || row.some(cell => {
+            const cellValue = String(cell || '').toLowerCase();
+            return cellValue.includes(searchTerm);
+        });
+        
+        // Per-column filter dari dropdown checkbox
+        const colMatch = Object.keys(colFilters).every(colIndex => {
+            const filterVal = colFilters[colIndex];
+            if (!filterVal) return true; // kosong = tidak difilter
+            const allowedVals = filterVal.split('|||');
+            const cellValue = String(row[colIndex] !== undefined && row[colIndex] !== null ? row[colIndex] : '').trim();
+            return allowedVals.includes(cellValue);
+        });
+        
+        return globalMatch && colMatch;
+    });
+    
+    console.log('Total rows after filter:', filteredRows.length);
+    
+    // Render ulang table dengan data yang sudah difilter
+    let bodyHtml = '';
+    filteredRows.forEach((row, index) => {
+        bodyHtml += '<tr>';
+        headers.forEach((header, colIndex) => { 
+            let cellValue = row[colIndex];
+            cellValue = cellValue === undefined || cellValue === null ? '' : cellValue;
+            
+            // Jika kolom adalah "Link", buat sebagai hyperlink jika ada URL
+            const headerLower = String(header).toLowerCase();
+            if (headerLower === 'link' && cellValue && (String(cellValue).startsWith('http://') || String(cellValue).startsWith('https://'))) {
+                cellValue = `<a href="${cellValue}" target="_blank" style="color: #2563eb; text-decoration: underline;">Open Link</a>`;
+            }
+            
+            bodyHtml += `<td>${cellValue}</td>`;
+        });
+        bodyHtml += '</tr>';
+    });
+    
+    if (filteredRows.length === 0) {
+        bodyHtml = `<tr><td colspan="${headers.length}" style="text-align: center; padding: 20px; color: #999;">Tidak ada data yang cocok dengan pencarian</td></tr>`;
+    }
+    
+    tableBody.innerHTML = bodyHtml;
+    console.log('=== FILTER COMPLETE ===');
+}
 // === FUNGSI UNTUK TABEL JADWAL TERMINAL ===
 // === FUNGSI HELPER: GROUP & SORT BY VESSEL NAME - ENHANCED ===
 // === FUNGSI HELPER: GROUP & SORT BY VESSEL NAME - ULTIMATE FIX ===
@@ -2896,17 +3847,310 @@ window.updateTotalTonaseAndReorder = function(vesselNameInput) {
     
     console.log('=== updateTotalTonaseAndReorder() END ===\n');
 }
-// Replace emailjs.send() with:
-fetch('api/send_email.php', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(emailParams)
-})
-.then(res => res.json())
-.then(data => {
-    if (data.success) {
-        // Show success modal
-    } else {
-        // Show error modal
+// === FUNGSI AUTO-FIT COLUMNS ===
+window.autoFitColumns = function(tableId) {
+    const table = document.getElementById(tableId);
+    if (!table) {
+        console.error(`Table with ID "${tableId}" not found`);
+        return;
     }
+    
+    console.log(`=== AUTO-FIT COLUMNS for ${tableId} ===`);
+    
+    const headers = table.querySelectorAll('thead th');
+    const rows = table.querySelectorAll('tbody tr');
+    
+    if (headers.length === 0) {
+        console.warn('No headers found in table');
+        return;
+    }
+    
+    // Reset all column widths first
+    headers.forEach(th => {
+        th.style.width = 'auto';
+        th.style.minWidth = '30px';
+        th.style.maxWidth = 'none';
+    });
+    
+    // Calculate optimal width for each column
+    headers.forEach((th, colIndex) => {
+        let maxWidth = 0;
+        
+        // Measure header text width
+        const headerText = th.textContent || th.innerText;
+        const headerWidth = getTextWidth(headerText, getComputedStyle(th).font);
+        maxWidth = Math.max(maxWidth, headerWidth);
+        
+        // Measure cell content widths (sample first 50 rows for performance)
+        const sampleSize = Math.min(rows.length, 50);
+        for (let i = 0; i < sampleSize; i++) {
+            const cell = rows[i].cells[colIndex];
+            if (!cell) continue;
+            
+            // Check if cell has input/select
+            const input = cell.querySelector('input, select');
+            if (input) {
+                const inputValue = input.value || input.placeholder || '';
+                const inputWidth = getTextWidth(inputValue, getComputedStyle(input).font);
+                maxWidth = Math.max(maxWidth, inputWidth);
+            } else {
+                const cellText = cell.textContent || cell.innerText;
+                const cellWidth = getTextWidth(cellText, getComputedStyle(cell).font);
+                maxWidth = Math.max(maxWidth, cellWidth);
+            }
+        }
+        
+        // Add padding (12px padding left + 12px padding right = 24px total)
+        const optimalWidth = Math.ceil(maxWidth) + 24;
+        
+        // Set minimum 30px, maximum 500px
+        const finalWidth = Math.max(30, Math.min(500, optimalWidth));
+        
+        th.style.width = `${finalWidth}px`;
+        
+        console.log(`Column ${colIndex + 1} (${headerText}): ${finalWidth}px`);
+    });
+    
+    console.log('=== AUTO-FIT COMPLETE ===');
+    alert(`✅ Columns auto-fitted successfully for ${tableId}!\n\nYou can still manually resize columns by dragging the column borders.`);
+}
+
+// Helper function to measure text width
+function getTextWidth(text, font) {
+    const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement('canvas'));
+    const context = canvas.getContext('2d');
+    context.font = font;
+    const metrics = context.measureText(text);
+    return metrics.width;
+}
+function handleAgreementExcelUpload(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const statusDiv = document.getElementById('agreement-import-status');
+    statusDiv.style.display = 'block';
+    statusDiv.style.background = '#fff3cd';
+    statusDiv.style.border = '1px solid #ffc107';
+    statusDiv.style.color = '#856404';
+    statusDiv.innerHTML = '⏳ Reading Excel file...';
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        try {
+            console.log('=== AGREEMENT EXCEL IMPORT START ===');
+            
+            const workbook = XLSX.read(new Uint8Array(e.target.result), { type: 'array', cellDates: true });
+            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+            const dataAsArray = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "", raw: false });
+
+            console.log('Total rows in Excel:', dataAsArray.length);
+
+            // Cari header row
+            let headerRowIndex = -1;
+            const headerKeywords = ['agreement', 'calculation', 'liner', 'type', 'rate', 'destination'];
+            for(let i = 0; i < Math.min(10, dataAsArray.length); i++){
+                const score = (dataAsArray[i] || []).reduce((acc, cell) => {
+                    const cellStr = String(cell).toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+                    return acc + (headerKeywords.some(kw => cellStr.includes(kw)) ? 1 : 0);
+                }, 0);
+                if (score > 2) { 
+                    headerRowIndex = i; 
+                    console.log('Header found at row:', i);
+                    break; 
+                }
+            }
+
+            if (headerRowIndex === -1) throw new Error("Could not find a valid header row in the Excel file.");
+            
+            const rawHeaders = dataAsArray[headerRowIndex];
+            const rawDataRows = dataAsArray.slice(headerRowIndex + 1);
+            
+            console.log('Raw headers:', rawHeaders);
+            console.log('Data rows to process:', rawDataRows.length);
+            
+            const headersFromFile = rawHeaders.map(h => String(h || '').trim().toLowerCase().replace(/[\s\.\-\/]/g, ''));
+            
+            const headerMap = {
+                'agreement': 'Agreement',
+                'calculationsheet': 'Calculation Sheet',
+                'liner': 'LINER',
+                'type': 'Type',
+                'rate': 'Rate',
+                'destinationport': 'Destination Port',
+                'destinationlocation': 'Destination Location',
+                // Alternatif mappings
+                'destination': 'Destination Port',
+                'dest': 'Destination Port',
+                'location': 'Destination Location'
+            };
+            
+            const jsonData = rawDataRows.map(rowArray => {
+                const newRow = {};
+                headersFromFile.forEach((header, index) => {
+                    if (header && headerMap[header]) {
+                        newRow[headerMap[header]] = rowArray[index];
+                    }
+                });
+                return newRow;
+            }).filter(row => {
+                // Filter: harus ada Agreement ATAU Rate
+                return row['Agreement'] || row['Rate'];
+            });
+            
+            console.log('Processed rows:', jsonData.length);
+            console.log('Sample data:', jsonData.slice(0, 2));
+            
+            if (jsonData.length === 0) throw new Error("No valid data found in Excel file.");
+            
+            // Set ke global variable
+            agreementData = jsonData;
+            
+            // Render tabel
+            renderAgreementTable(agreementData);
+            
+            // Update status
+            statusDiv.style.background = '#d4edda';
+            statusDiv.style.border = '1px solid #c3e6cb';
+            statusDiv.style.color = '#155724';
+            statusDiv.innerHTML = `✅ Successfully imported ${jsonData.length} agreement records!`;
+            
+            console.log('=== AGREEMENT EXCEL IMPORT SUCCESS ===');
+
+        } catch (error) {
+            console.error('=== AGREEMENT EXCEL IMPORT ERROR ===', error);
+            statusDiv.style.background = '#f8d7da';
+            statusDiv.style.border = '1px solid #f5c6cb';
+            statusDiv.style.color = '#721c24';
+            statusDiv.innerHTML = `❌ Error: ${error.message}`;
+        } finally {
+            event.target.value = '';
+        }
+    };
+    reader.readAsArrayBuffer(file);
+}
+// === FUNGSI DROPDOWN FILTER ▼ UNTUK SEMUA TABEL ===
+window.tableColFilter = function(event, tableId, colIndex) {
+    event.stopPropagation();
+    const existingDrop = document.getElementById('table-col-filter-dropdown');
+    if (existingDrop) existingDrop.remove();
+
+    const table = document.getElementById(tableId);
+    if (!table) return;
+    const rows = Array.from(table.querySelectorAll('tbody tr'));
+    if (rows.length === 0) return;
+
+    // Kumpulkan nilai unik di kolom ini
+    const uniqueValues = [];
+    rows.forEach(row => {
+        const cell = row.cells[colIndex];
+        const val = cell ? (cell.innerText || cell.textContent || '').trim() : '';
+        if (val !== '' && !uniqueValues.includes(val)) uniqueValues.push(val);
+    });
+    uniqueValues.sort();
+
+    const dropdown = document.createElement('div');
+    dropdown.id = 'table-col-filter-dropdown';
+    dropdown.setAttribute('data-table-id', tableId);
+    dropdown.setAttribute('data-col-index', colIndex);
+    dropdown.style.cssText = `position:fixed; background:#fff; border:1px solid #c0b8f0; border-radius:8px; box-shadow:0 6px 24px rgba(106,90,205,0.18); z-index:99999; min-width:220px; max-width:300px; padding:10px 0 6px 0; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; font-size:12px;`;
+
+    const rect = event.target.getBoundingClientRect();
+    dropdown.style.top = (rect.bottom + 4) + 'px';
+    dropdown.style.left = Math.max(0, rect.left - 150) + 'px';
+
+    dropdown.innerHTML = `
+        <div style="padding:0 10px 8px 10px; border-bottom:1px solid #ededff;">
+            <input type="text" id="table-col-filter-search" placeholder="🔍 Cari..."
+                style="width:100%; padding:5px 8px; border:1px solid #c0b8f0; border-radius:5px; font-size:12px; outline:none; box-sizing:border-box;"
+                oninput="tableColFilterSearch(this.value)">
+        </div>
+        <div style="padding:6px 10px 4px 10px;">
+            <label style="display:flex; align-items:center; gap:6px; cursor:pointer; font-weight:600; color:#6A5ACD;">
+                <input type="checkbox" id="table-col-select-all" onchange="tableColSelectAll(this.checked)" style="cursor:pointer;" checked>
+                (Pilih Semua)
+            </label>
+        </div>
+        <div id="table-col-filter-list" style="max-height:200px; overflow-y:auto; padding:0 10px;">
+            ${uniqueValues.map(val => `
+                <label style="display:flex; align-items:center; gap:6px; cursor:pointer; padding:3px 0; color:#333;">
+                    <input type="checkbox" class="table-col-val-cb" value="${String(val).replace(/"/g, '&quot;')}"
+                        checked onchange="tableColFilterApply()" style="cursor:pointer;">
+                    ${val}
+                </label>
+            `).join('')}
+        </div>
+        <div style="padding:8px 10px 2px 10px; border-top:1px solid #ededff; margin-top:6px; display:flex; gap:6px;">
+            <button onclick="tableColFilterReset()" style="flex:1; padding:5px; border:1px solid #c0b8f0; border-radius:5px; background:#f5f5ff; cursor:pointer; font-size:11px;">🗑️ Reset</button>
+            <button onclick="document.getElementById('table-col-filter-dropdown').remove()" style="flex:1; padding:5px; border:none; border-radius:5px; background:#6A5ACD; color:#fff; cursor:pointer; font-size:11px;">✓ Tutup</button>
+        </div>
+    `;
+
+    document.body.appendChild(dropdown);
+    setTimeout(() => { const inp = document.getElementById('table-col-filter-search'); if (inp) inp.focus(); }, 50);
+}
+
+window.tableColFilterSearch = function(searchVal) {
+    const list = document.getElementById('table-col-filter-list');
+    if (!list) return;
+    list.querySelectorAll('label').forEach(label => {
+        const cb = label.querySelector('input[type=checkbox]');
+        const val = cb ? cb.value.toLowerCase() : '';
+        label.style.display = val.includes(searchVal.toLowerCase()) ? '' : 'none';
+    });
+    const selectAll = document.getElementById('table-col-select-all');
+    const visibleCbs = Array.from(list.querySelectorAll('input[type=checkbox]')).filter(cb => cb.closest('label').style.display !== 'none');
+    if (selectAll) {
+        selectAll.checked = visibleCbs.every(cb => cb.checked);
+        selectAll.indeterminate = !visibleCbs.every(cb => cb.checked) && visibleCbs.some(cb => cb.checked);
+    }
+}
+
+window.tableColSelectAll = function(checked) {
+    const list = document.getElementById('table-col-filter-list');
+    if (!list) return;
+    list.querySelectorAll('input[type=checkbox]').forEach(cb => {
+        if (cb.closest('label').style.display !== 'none') cb.checked = checked;
+    });
+    tableColFilterApply();
+}
+
+window.tableColFilterApply = function() {
+    const dropdown = document.getElementById('table-col-filter-dropdown');
+    if (!dropdown) return;
+    const tableId = dropdown.getAttribute('data-table-id');
+    const colIndex = parseInt(dropdown.getAttribute('data-col-index'));
+    const table = document.getElementById(tableId);
+    if (!table) return;
+
+    const list = document.getElementById('table-col-filter-list');
+    const checkedCbs = list.querySelectorAll('input[type=checkbox]:checked');
+    const allCbs = list.querySelectorAll('input[type=checkbox]');
+    const allChecked = checkedCbs.length === allCbs.length;
+
+    const checkedVals = Array.from(checkedCbs).map(cb => cb.value);
+
+    const selectAll = document.getElementById('table-col-select-all');
+    if (selectAll) {
+        selectAll.checked = allChecked;
+        selectAll.indeterminate = !allChecked && checkedCbs.length > 0;
+    }
+
+    Array.from(table.querySelectorAll('tbody tr')).forEach(row => {
+        const cell = row.cells[colIndex];
+        const val = cell ? (cell.innerText || cell.textContent || '').trim() : '';
+        row.style.display = allChecked || checkedVals.includes(val) ? '' : 'none';
+    });
+}
+
+window.tableColFilterReset = function() {
+    const list = document.getElementById('table-col-filter-list');
+    if (list) list.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = true);
+    const selectAll = document.getElementById('table-col-select-all');
+    if (selectAll) { selectAll.checked = true; selectAll.indeterminate = false; }
+    tableColFilterApply();
+}
+
+document.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('table-col-filter-dropdown');
+    if (dropdown && !dropdown.contains(e.target) && !e.target.closest('thead')) dropdown.remove();
 });
