@@ -15,31 +15,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-    <!-- Firebase SDK -->
+<!-- Firebase SDK -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-      import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+      import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-      // === KONFIGURASI FIREBASE ANDA ===
-     const firebaseConfig = {
+      const firebaseConfig = {
          apiKey: "AIzaSyDpTCzJ6jd1q8gtu70dfZkdC9Y0kTkHgIU",
          authDomain: "vesselbookingsystem-34927.firebaseapp.com",
          projectId: "vesselbookingsystem-34927",
          storageBucket: "vesselbookingsystem-34927.firebasestorage.app",
          messagingSenderId: "11412561523",
          appId: "1:11412561523:web:74bbb97ccb9c7b9e9ad406",
-         measurementId: "G-KFN5LL4VGR"
-  };
-      const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
+      };
 
-      // Expose ke window agar bisa diakses dari script.js
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
       window._firebaseDB = db;
-      window._firebaseRef = ref;
-      window._firebaseSet = set;
-      window._firebasePush = push;
-      window._firebaseOnValue = onValue;
-      window._firebaseRemove = remove;
+      window._firestoreDoc = doc;
+      window._firestoreSetDoc = setDoc;
+      window._firestoreGetDoc = getDoc;
       window._firebaseReady = true;
       window.dispatchEvent(new Event('firebaseReady'));
     </script>
