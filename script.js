@@ -21,6 +21,71 @@ let eventsByDate = {}; // Object untuk menyimpan data acara berdasarkan tanggal
 let terminalNotifications = []; // Menyimpan notifikasi
 let hasNewNotifications = false; // Status notifikasi baru
 
+// === FUNGSI FIREBASE ===
+
+// Simpan SEMUA data (globalData + dummyData) ke Firebase
+window.saveAllDataToFirebase = async function() {
+    if (!window._firebaseReady) {
+        alert('Firebase belum siap. Tunggu sebentar dan coba lagi.');
+        return;
+    }
+    const btn = document.getElementById('btn-save-firebase');
+    const originalText = btn ? btn.innerHTML : '';
+    try {
+        if (btn) { btn.innerHTML = '⏳ Menyimpan...'; btn.disabled = true; }
+
+        const db = window._firebaseDB;
+        const ref = window._firebaseRef;
+        const set = window._firebaseSet;
+
+        // Simpan globalData
+        await set(ref(db, 'globalData'), globalData.length > 0 ? globalData : []);
+        // Simpan dummyData
+        await set(ref(db, 'dummyData'), dummyData.length > 0 ? dummyData : []);
+        // Simpan agreementData
+        await set(ref(db, 'agreementData'), agreementData.length > 0 ? agreementData : []);
+
+        if (btn) { btn.innerHTML = '✅ Tersimpan!'; }
+        setTimeout(() => { if (btn) { btn.innerHTML = originalText; btn.disabled = false; } }, 2000);
+        console.log('Firebase save success:', { globalData: globalData.length, dummyData: dummyData.length, agreementData: agreementData.length });
+    } catch (err) {
+        console.error('Firebase save error:', err);
+        alert('❌ Gagal menyimpan ke Firebase: ' + err.message);
+        if (btn) { btn.innerHTML = originalText; btn.disabled = false; }
+    }
+};
+
+// Load data dari Firebase saat login
+async function loadDataFromFirebase() {
+    if (!window._firebaseReady) return;
+    const db = window._firebaseDB;
+    const ref = window._firebaseRef;
+    const onValue = window._firebaseOnValue;
+
+    return new Promise((resolve) => {
+        onValue(ref(db, '/'), (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                if (data.globalData && Array.isArray(data.globalData)) {
+                    globalData = data.globalData;
+                    console.log('Firebase: loaded globalData', globalData.length);
+                }
+                if (data.dummyData && Array.isArray(data.dummyData)) {
+                    dummyData = data.dummyData;
+                    console.log('Firebase: loaded dummyData', dummyData.length);
+                }
+                if (data.agreementData && Array.isArray(data.agreementData)) {
+                    agreementData = data.agreementData;
+                    console.log('Firebase: loaded agreementData', agreementData.length);
+                }
+                renderAllTablesAndCharts();
+                if (agreementData.length > 0) renderAgreementTable(agreementData);
+            }
+            resolve();
+        }, { onlyOnce: true });
+    });
+}
+
 // === FUNGSI LOGIN & LOGOUT ===
 function handleLogin(event) {
     event.preventDefault(); // Mencegah form submit
@@ -35,6 +100,14 @@ function handleLogin(event) {
         document.querySelector('.sidebar').style.display = 'flex'; // 'flex' krn .sidebar adalah flex-column
         document.querySelector('.main-content').style.display = 'flex'; // 'flex' krn .main-content adalah flex-column
         errorEl.style.display = 'none';
+        // Dashboard is default view - apply dashboard-mode
+        const contentArea = document.getElementById('content-area');
+        if (contentArea) contentArea.classList.add('dashboard-mode');
+
+        // Load data dari Firebase setelah login
+        loadDataFromFirebase().then(() => {
+            renderAllTablesAndCharts();
+        });
     } else {
         // Gagal login
         errorEl.textContent = 'Username atau Password salah.';
@@ -633,12 +706,20 @@ window.clearAllDummyData = function() {
 
 window.addNewEntry = function() {
     if (!currentRegion) {
-        alert("Please select a region from the Tracking menu first.");
+        alert("Pilih planner dari menu Tracking terlebih dahulu.");
         return;
     }
+    if (currentRegion === 'Rekap') {
+        alert("Tidak bisa menambah data dari halaman Rekap. Pilih planner spesifik.");
+        return;
+    }
+    // Assign to planner's first region by default
+    const plannerInfo = PLANNERS[currentRegion];
+    const assignedRegion = plannerInfo ? plannerInfo.regions[0] : currentRegion;
+
     const newId = globalData.length > 0 ? Math.max(...globalData.map(d => d.id)) + 1 : 1;
     const newEntry = {
-        id: newId, region: currentRegion, vfPpp: "", sc: "", delivery: "", container20: 0, container40: 0, container40hc: 0, mad: "",
+        id: newId, region: assignedRegion, vfPpp: "", sc: "", delivery: "", container20: 0, container40: 0, container40hc: 0, mad: "",
         shipToParty: "", shippingPoint: "", country: "", incot: "FOB", destination: "", bookingDa: "", marksBy: "", etd: "", 
         bookingNumb: "", liner: "", top1: "", reason: "", 
         keterangan: "", vesselName: "", voyage: "",
@@ -687,35 +768,31 @@ window.deleteEntry = function(rowId) {
     }
 }
 
-window.deleteRegionData = function() {
+window.deleteRegionData = function() { window.deletePlannerData(); } // backward compat
+window.deletePlannerData = function() {
     if (!currentRegion) {
-        alert("Please select a region first.");
+        alert('Pilih planner terlebih dahulu.');
         return;
     }
-    const dataInRegion = globalData.filter(row => row.region === currentRegion);
-    if (dataInRegion.length === 0) {
-        alert(`There is no data to delete in ${currentRegion}.`);
+    if (currentRegion === 'Rekap') {
+        alert('Tidak bisa hapus data dari halaman Rekap. Pilih planner spesifik.');
         return;
     }
-    if (confirm(`ARE YOU SURE you want to delete all ${dataInRegion.length} entries for ${currentRegion}? This action cannot be undone and will be lost on refresh.`)) {
-        globalData = globalData.filter(row => row.region !== currentRegion);
-        
-        // REVISI: Langsung render dashboard DAN tracking
-        const allData = globalData;
-        renderTable(allData, 'tableBody', false);
-        updateCharts(allData);
-        updateStats(allData);
-        
-        // Update tracking
+    const plannerInfo = PLANNERS[currentRegion];
+    const plannerRegions = plannerInfo ? plannerInfo.regions : [];
+    const dataForPlanner = globalData.filter(row => plannerRegions.includes(row.region));
+    if (dataForPlanner.length === 0) {
+        alert(`Tidak ada data untuk planner ${currentRegion}.`);
+        return;
+    }
+    if (confirm(`YAKIN ingin menghapus semua ${dataForPlanner.length} data untuk ${currentRegion}? Tidak bisa dibatalkan.`)) {
+        globalData = globalData.filter(row => !plannerRegions.includes(row.region));
+        renderTable(globalData, 'tableBody', false);
+        updateCharts(globalData);
+        updateStats(globalData);
         filterTrackingTable();
-        
-        // Update dummy booking
         renderDummyBookingTable();
-        
-        // Update calendar
-        renderCalendar(calendarCurrentDate);
-        
-        alert(`All data for ${currentRegion} has been deleted.`);
+        alert(`Semua data untuk ${currentRegion} telah dihapus.`);
     }
 }
 
@@ -725,40 +802,180 @@ function initCharts() {
     if(destinationChart) destinationChart.destroy();
     if(shippingLineContainerChart) shippingLineContainerChart.destroy();
     if(containerChart) containerChart.destroy();
-    
+
+    // Dark green palette
+    const G = ['#3ecf8e','#00d4ff','#f39c12','#e74c3c','#a78bfa','#06b6d4','#fb923c','#60a5fa'];
+    const darkGrid = 'rgba(26,46,42,0.06)';
+    const darkTick = '#5a7a70';
+    const darkFont = { color: '#5a7a70', family: "'Plus Jakarta Sans', sans-serif", size: 10 };
+
     const commonBarOptions = {
         responsive: true,
         maintainAspectRatio: false,
-        layout: { padding: { top: 20 } },
+        layout: { padding: { top: 10 } },
         plugins: { legend: { display: false } },
         scales: {
-            x: { grid: { display: false, drawBorder: false } },
-            y: { grid: { display: true, drawBorder: false, color: '#f0f0f0' }, beginAtZero: true, ticks: { padding: 10 } }
+            x: {
+                grid: { display: false, drawBorder: false },
+                ticks: { ...darkFont, maxRotation: 35 }
+            },
+            y: {
+                grid: { display: true, drawBorder: false, color: darkGrid },
+                ticks: { ...darkFont, padding: 6 },
+                beginAtZero: true
+            }
         }
     };
-    
+
     const shippingLineChartOptions = {
         ...commonBarOptions,
-        plugins: { legend: { position: 'bottom', labels: { padding: 25 } } }
+        plugins: { legend: { position: 'bottom', labels: { padding: 16, color: '#5a7a70', font: { size: 10 } } } }
     };
 
-    incotermChart = new Chart('incotermChart', { type: 'doughnut', data: { labels: [], datasets: [{ data: [], backgroundColor: ['#667eea', '#11998e', '#f5576c', '#4facfe', '#f093fb', '#ffc107', '#38ef7d', '#764ba2'], borderWidth: 0 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' }}} });
-    monthlyChart = new Chart('monthlyChart', { type: 'line', data: { labels: [], datasets: [{ label: 'Shipments', data: [], borderColor: '#667eea', backgroundColor: 'rgba(102, 126, 234, 0.1)', tension: 0.4, fill: true }] }, options: { ...commonBarOptions, plugins: { legend: { display: false }}} });
-    destinationChart = new Chart('destinationChart', { type: 'bar', data: { labels: [], datasets: [{ label: 'Shipments', data: [], backgroundColor: ['#667eea', '#11998e', '#f5576c', '#4facfe', '#f093fb'], barPercentage: 0.6, categoryPercentage: 0.6 }] }, options: { ...commonBarOptions, plugins: { legend: { display: false }}} });
-    containerChart = new Chart('containerChart', { type: 'bar', data: { labels: ['20 ft', '40 ft', '40 HC'], datasets: [{ label: 'Total Containers', data: [], backgroundColor: ['#667eea', '#11998e', '#f5576c'], barPercentage: 0.6, categoryPercentage: 0.6 }] }, options: { ...commonBarOptions, plugins: { legend: { display: false }}} });
+    incotermChart = new Chart('incotermChart', {
+        type: 'doughnut',
+        data: { labels: [], datasets: [{ data: [], backgroundColor: G, borderWidth: 0, hoverOffset: 6 }] },
+        options: { responsive: true, maintainAspectRatio: false, cutout: '62%',
+            plugins: { legend: { position: 'bottom', labels: { padding: 10, color: '#5a7a70', font: { size: 10 }, boxWidth: 10 } } } }
+    });
+
+    monthlyChart = new Chart('monthlyChart', {
+        type: 'line',
+        data: { labels: [], datasets: [{ label: 'Shipments', data: [], borderColor: '#3ecf8e',
+            backgroundColor: 'rgba(62,207,142,0.1)', tension: 0.4, fill: true,
+            pointBackgroundColor: '#3ecf8e', pointRadius: 4, pointHoverRadius: 6, borderWidth: 2 }] },
+        options: { ...commonBarOptions, plugins: { legend: { display: false } } }
+    });
+
+    destinationChart = new Chart('destinationChart', {
+        type: 'bar',
+        data: { labels: [], datasets: [{ label: 'Shipments', data: [], backgroundColor: G, barPercentage: 0.65, categoryPercentage: 0.6, borderRadius: 4 }] },
+        options: { ...commonBarOptions }
+    });
+
+    containerChart = new Chart('containerChart', {
+        type: 'bar',
+        data: { labels: ['20 ft', '40 ft', '40 HC'],
+            datasets: [{ data: [], backgroundColor: ['#3ecf8e','#00d4ff','#f39c12'], barPercentage: 0.65, borderRadius: 6 }] },
+        options: { ...commonBarOptions }
+    });
+
     shippingLineContainerChart = new Chart('shippingLineContainerChart', {
         type: 'bar',
         data: { labels: [], datasets: [
-                { label: '20', data: [], backgroundColor: '#4facfe', barPercentage: 0.8, categoryPercentage: 0.7 },
-                { label: '40', data: [], backgroundColor: '#f093fb', barPercentage: 0.8, categoryPercentage: 0.7 },
-                { label: '40 HC', data: [], backgroundColor: '#38ef7d', barPercentage: 0.8, categoryPercentage: 0.7 }
-            ]
-        },
+            { label: '20', data: [], backgroundColor: '#3ecf8e', barPercentage: 0.8, categoryPercentage: 0.7, borderRadius: 3 },
+            { label: '40', data: [], backgroundColor: '#00d4ff', barPercentage: 0.8, categoryPercentage: 0.7, borderRadius: 3 },
+            { label: '40 HC', data: [], backgroundColor: '#f39c12', barPercentage: 0.8, categoryPercentage: 0.7, borderRadius: 3 }
+        ]},
         options: { ...shippingLineChartOptions }
     });
 }
 
+// ======================================================
+// WORLD MAP — SVG dot-map with destination highlighting
+// ======================================================
+const COUNTRY_COORDS = {
+    // Asia
+    'CHINA': [104, 35], 'JAPAN': [138, 36], 'SOUTH KOREA': [128, 37], 'KOREA': [128, 37],
+    'TAIWAN': [121, 24], 'HONG KONG': [114, 22], 'VIETNAM': [108, 14], 'THAILAND': [101, 15],
+    'MALAYSIA': [112, 4], 'SINGAPORE': [104, 1], 'INDONESIA': [118, -5], 'PHILIPPINES': [122, 12],
+    'INDIA': [78, 22], 'BANGLADESH': [90, 24], 'PAKISTAN': [70, 30], 'SRI LANKA': [81, 7],
+    'MYANMAR': [96, 17], 'CAMBODIA': [105, 12], 'LAOS': [103, 18],
+    // Middle East
+    'UAE': [54, 24], 'SAUDI ARABIA': [45, 24], 'KUWAIT': [48, 29], 'QATAR': [51, 25],
+    'BAHRAIN': [50, 26], 'OMAN': [58, 21], 'JORDAN': [36, 31], 'EGYPT': [30, 27],
+    'TURKEY': [35, 39],
+    // Europe
+    'GERMANY': [10, 51], 'NETHERLANDS': [5, 52], 'FRANCE': [2, 47], 'ITALY': [12, 43],
+    'SPAIN': [-4, 40], 'UK': [-2, 54], 'BELGIUM': [4, 51], 'POLAND': [20, 52],
+    'SWEDEN': [18, 60], 'DENMARK': [10, 56], 'NORWAY': [10, 60], 'FINLAND': [26, 64],
+    'PORTUGAL': [-8, 39], 'GREECE': [22, 38], 'AUSTRIA': [14, 47], 'SWITZERLAND': [8, 47],
+    // Americas
+    'USA': [-100, 40], 'UNITED STATES': [-100, 40], 'CANADA': [-96, 56],
+    'MEXICO': [-102, 24], 'BRAZIL': [-51, -10], 'ARGENTINA': [-65, -35],
+    'COLOMBIA': [-74, 4], 'CHILE': [-71, -35], 'PERU': [-76, -10],
+    // Africa
+    'SOUTH AFRICA': [25, -29], 'NIGERIA': [8, 10], 'KENYA': [38, 0],
+    'ETHIOPIA': [40, 8], 'GHANA': [-1, 8], 'TANZANIA': [35, -6],
+    // Oceania
+    'AUSTRALIA': [134, -26], 'NEW ZEALAND': [172, -41],
+};
+
+const MAP_COLORS = ['#3ecf8e','#60a5fa','#f59e0b','#f87171','#a78bfa','#34d399','#fb923c','#38bdf8'];
+
+// ======= MAP ZOOM/PAN STATE =======
+let mapScale = 1, mapX = 0, mapY = 0;
+let mapDragging = false, mapDragStart = {x:0, y:0};
+
+function initMapInteraction() {
+    // No-op — Leaflet handles its own interactions
+}
+
+let _leafletMap = null;
+let _leafletMarkers = [];
+
+function renderWorldMap(data) {
+    const legendEl = document.getElementById('mapLegend');
+    const mapEl = document.getElementById('leafletWorldMap');
+    if (!mapEl) return;
+
+    const destCount = {};
+    (data || []).forEach(row => {
+        if (row.country) {
+            const key = row.country.trim().toUpperCase();
+            destCount[key] = (destCount[key] || 0) + 1;
+        }
+    });
+
+    const topDests = Object.entries(destCount).sort((a, b) => b[1] - a[1]).slice(0, 10);
+    const maxCount = Math.max(...Object.values(destCount), 1);
+
+    if (!_leafletMap) {
+        _leafletMap = L.map('leafletWorldMap', {
+            center: [20, 20], zoom: 2, minZoom: 1, maxZoom: 8,
+            zoomControl: true, attributionControl: true
+        });
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors', maxZoom: 19
+        }).addTo(_leafletMap);
+    }
+
+    _leafletMarkers.forEach(m => m.remove());
+    _leafletMarkers = [];
+
+    topDests.forEach(([country, count], i) => {
+        const coords = COUNTRY_COORDS[country];
+        if (!coords) return;
+        const color = MAP_COLORS[i % MAP_COLORS.length];
+        const radius = 20000 + (count / maxCount) * 80000;
+        const circle = L.circle([coords[1], coords[0]], {
+            color: color, fillColor: color, fillOpacity: 0.55, weight: 2, opacity: 0.9, radius
+        }).addTo(_leafletMap);
+        circle.bindPopup(`
+            <div style="font-family:'Plus Jakarta Sans',sans-serif;text-align:center;padding:4px 8px;">
+                <div style="font-weight:700;font-size:14px;color:#1a2e2a;">${country}</div>
+                <div style="font-size:12px;color:#3ecf8e;font-weight:600;">${count} Order${count > 1 ? 's' : ''}</div>
+            </div>`);
+        _leafletMarkers.push(circle);
+    });
+
+    if (legendEl) {
+        legendEl.innerHTML = topDests.length === 0
+            ? '<span style="color:#888;font-size:11px;">No data</span>'
+            : topDests.slice(0, 6).map(([country, count], i) => `
+                <div class="map-legend-item">
+                    <div class="map-legend-dot" style="background:${MAP_COLORS[i % MAP_COLORS.length]};"></div>
+                    <span>${country.length > 14 ? country.slice(0,14)+'…' : country} <strong style="color:${MAP_COLORS[i % MAP_COLORS.length]}">${count}</strong></span>
+                </div>`).join('');
+    }
+
+    setTimeout(() => { if (_leafletMap) _leafletMap.invalidateSize(); }, 200);
+}
+
+
+
 function updateCharts(data) {
+    renderWorldMap(data || []);
     if (!incotermChart || !data) return; 
     
     const incotermCounts = data.reduce((acc, row) => {
@@ -842,9 +1059,7 @@ function renderAllTablesAndCharts() {
     // Render dummy booking
     renderDummyBookingTable();
     
-    // Render calendar
-    renderCalendar(calendarCurrentDate);
-    
+
     console.log('=== renderAllTablesAndCharts() DONE ===');
 }
 
@@ -1245,8 +1460,8 @@ window.sendEmailToOutlook = function(rowId, isDummy = false) {
     // Build mailto link dengan body yang sudah di-encode dengan benar
     const mailtoLink = `mailto:${toRecipients}?cc=${ccRecipients}&subject=${encodeURIComponent(subject)}&body=${bodyTextEncoded}`;
     
-    // Buka Outlook
-    window.location.href = mailtoLink;
+    // Buka Outlook Web
+    window.open(mailtoLink, '_blank');
     
     // Log untuk debugging
     console.log('Email opened successfully');
@@ -1351,7 +1566,7 @@ if (masalah !== 'None') {
                            onchange="handleSIBCFileUpload(${rowId}, this, ${isDummyFlag})">
                     ${fileCount > 0 ? `<span class="file-count-badge ${badgeClass}">${fileCount}/2</span>` : ''}
                     ${fileCount > 0 ? `<button class="btn-view-files" onclick="viewUploadedFiles(${rowId}, ${isDummyFlag})" title="View uploaded files">👁️</button>` : ''}
-                    <button class="btn-send-email" onclick="sendEmailToOutlook(${rowId}, ${isDummyFlag})" title="Send via Outlook" style="background: #0078d4; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer; font-size: 12px; margin-left: 5px;">📧</button>
+                    <button class="btn-send-email" onclick="sendEmailToOutlook(${rowId}, ${isDummyFlag})" title="Send via Outlook">📧</button>
                 </div>
             </td>
         `;
@@ -1467,6 +1682,12 @@ else {
     `;
 }        tbody.appendChild(tr);
     });
+
+    // Deteksi otomatis kolom terpotong setelah render selesai
+    const tableEl = tbody.closest('table');
+    if (tableEl && tableEl.id) {
+        setTimeout(() => detectClippedColumns(tableEl.id), 200);
+    }
 }
 
 // === AKHIR FUNGSI renderTable DIBUAT UMUM ===
@@ -1914,41 +2135,136 @@ function filterTable() {
     updateStats(filtered);  // ✅ Stats already updated
 }
 
+// === VARIABEL TRACKING TAB ===
+let currentTrackingTab = 'due_today'; // 'due_today' | 'attention' | 'recap'
+
+// === HELPER: ROW MASUK DUE TODAY jika bookingNumb kosong ===
+function isRowDueToday(row) {
+    return !row.bookingNumb || String(row.bookingNumb).trim() === '';
+}
+
+// === HELPER: ROW MASUK ATTENTION jika ETD <= today + 5 hari ===
+function isRowAttention(row) {
+    if (!row.etd || String(row.etd).trim() === '') return false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const etdDate = new Date(row.etd + 'T00:00:00');
+    if (isNaN(etdDate)) return false;
+    const diffDays = Math.ceil((etdDate - today) / (1000 * 60 * 60 * 24));
+    return diffDays <= 5;
+}
+
+// === FUNGSI: SWITCH TAB ===
+window.switchTrackingTab = function(tabName) {
+    currentTrackingTab = tabName;
+
+    document.querySelectorAll('.tracking-tab-btn').forEach(btn => {
+        const isActive = btn.dataset.tab === tabName;
+        btn.classList.toggle('active', isActive);
+
+        const colors = {
+            due_today: 'linear-gradient(135deg,#e74c3c,#c0392b)',
+            attention:  'linear-gradient(135deg,#f39c12,#d68910)',
+            recap:      'linear-gradient(135deg,#3ecf8e,#00b37a)'
+        };
+        const badge = btn.querySelector('.tab-badge');
+
+        if (isActive) {
+            btn.style.background   = colors[tabName];
+            btn.style.color        = '#fff';
+            btn.style.boxShadow    = '0 4px 12px rgba(0,0,0,0.2)';
+            btn.style.transform    = 'translateY(-1px)';
+            if (badge) { badge.style.background = 'rgba(255,255,255,0.3)'; badge.style.color = '#fff'; }
+        } else {
+            btn.style.background   = '#f0f4f8';
+            btn.style.color        = '#fff';
+            btn.style.boxShadow    = 'none';
+            btn.style.transform    = 'none';
+            if (badge) { badge.style.background = 'rgba(0,0,0,0.08)'; badge.style.color = '#5a7a70'; }
+        }
+    });
+
+    updateTrackingTabBadges();
+    filterTrackingTable();
+}
+
+// === FUNGSI: UPDATE BADGE COUNT ===
+function updateTrackingTabBadges() {
+    if (!currentRegion) return;
+
+    let sourceData;
+    if (currentRegion === 'Rekap') {
+        sourceData = globalData;
+    } else {
+        const plannerInfo = PLANNERS[currentRegion];
+        const plannerRegions = plannerInfo ? plannerInfo.regions : [];
+        sourceData = globalData.filter(row => plannerRegions.includes(row.region));
+    }
+
+    const dueTodayCount = sourceData.filter(isRowDueToday).length;
+    const attentionCount = sourceData.filter(isRowAttention).length;
+    const recapCount     = sourceData.length;
+
+    const dueBadge    = document.getElementById('tab-badge-due-today');
+    const attBadge    = document.getElementById('tab-badge-attention');
+    const recapBadge  = document.getElementById('tab-badge-recap');
+
+    if (dueBadge)   dueBadge.textContent   = dueTodayCount;
+    if (attBadge)   attBadge.textContent   = attentionCount;
+    if (recapBadge) recapBadge.textContent = recapCount;
+
+    // Sync badge rekap header
+    const dueBadgeR   = document.getElementById('tab-badge-due-today-rekap');
+    const attBadgeR   = document.getElementById('tab-badge-attention-rekap');
+    const recapBadgeR = document.getElementById('tab-badge-recap-rekap');
+    if (dueBadgeR)   dueBadgeR.textContent   = dueTodayCount;
+    if (attBadgeR)   attBadgeR.textContent   = attentionCount;
+    if (recapBadgeR) recapBadgeR.textContent = recapCount;
+}
+
 function filterTrackingTable() {
     if (!currentRegion) {
-        console.warn('filterTrackingTable() called but currentRegion is null');
+        console.warn('filterTrackingTable() called but currentRegion/planner is null');
         return;
     }
-    
-    console.log('=== filterTrackingTable() START ===');
-    console.log('Current region:', currentRegion);
-    console.log('Total globalData:', globalData.length);
-    
-    // CRITICAL FIX: Tambahkan global search filter
+
     const globalFilter = document.getElementById('filterTrackingGlobal') ? document.getElementById('filterTrackingGlobal').value.toLowerCase() : '';
     const dateFrom = document.getElementById('filterTrackingDateFrom') ? document.getElementById('filterTrackingDateFrom').value : '';
     const dateTo = document.getElementById('filterTrackingDateTo') ? document.getElementById('filterTrackingDateTo').value : '';
 
-    const regionalData = globalData.filter(row => row.region === currentRegion);
-    
-    console.log(`Data for ${currentRegion}:`, regionalData.length);
+    // Determine which rows to show
+    let sourceData;
+    if (currentRegion === 'Rekap') {
+        sourceData = globalData; // all data
+    } else {
+        const plannerInfo = PLANNERS[currentRegion];
+        const plannerRegions = plannerInfo ? plannerInfo.regions : [];
+        sourceData = globalData.filter(row => plannerRegions.includes(row.region));
+    }
 
-    const filtered = regionalData.filter(row => {
-        // CRITICAL FIX: Filter by global search
-        const matchesGlobal = !globalFilter || Object.values(row).some(val => 
+    // === FILTER BERDASARKAN TAB AKTIF ===
+    let tabFiltered;
+    if (currentTrackingTab === 'due_today') {
+        tabFiltered = sourceData.filter(isRowDueToday);
+    } else if (currentTrackingTab === 'attention') {
+        tabFiltered = sourceData.filter(isRowAttention);
+    } else {
+        // 'recap' = semua data tanpa filter tab
+        tabFiltered = sourceData;
+    }
+
+    const filtered = tabFiltered.filter(row => {
+        const matchesGlobal = !globalFilter || Object.values(row).some(val =>
             String(val).toLowerCase().includes(globalFilter)
         );
-        
         let matchesDate = true;
         if (dateFrom && row.mad) matchesDate = row.mad >= dateFrom;
         if (matchesDate && dateTo && row.mad) matchesDate = row.mad <= dateTo;
-        
         return matchesGlobal && matchesDate;
     });
-    
-    console.log('Filtered data:', filtered.length);
-    console.log('=== filterTrackingTable() END ===');
-    
+
+    updateTrackingTabBadges();
+
     renderTable(filtered, 'trackingTableBody', true, false);
 }
 
@@ -2126,60 +2442,200 @@ function switchView(targetId, newTitle) {
     document.querySelectorAll('.content-view').forEach(view => view.classList.remove('active'));
     document.getElementById(targetId)?.classList.add('active');
     if(newTitle) document.getElementById('main-title').innerHTML = newTitle;
+    const contentArea = document.getElementById('content-area');
+    if (contentArea) {
+        if (targetId === 'dashboard-view') {
+            contentArea.classList.add('dashboard-mode');
+            setTimeout(() => { if (_leafletMap) _leafletMap.invalidateSize(); }, 150);
+        } else {
+            contentArea.classList.remove('dashboard-mode');
+        }
+    }
 }
 
-function updateTrackingContent(regionName) {
-    currentRegion = regionName;
-    document.getElementById('tracking-region-title').textContent = `Tracking Information for ${regionName}`;
+const PLANNERS = {
+    'Rara':   { color: 'linear-gradient(135deg,#667eea,#764ba2)', regions: ['Region 1', 'Region 2'] },
+    'Fajrin': { color: 'linear-gradient(135deg,#f093fb,#f5576c)', regions: ['Region 3', 'Region 4'] },
+    'Tina':   { color: 'linear-gradient(135deg,#4facfe,#00f2fe)', regions: ['Region 5', 'Region 6'] },
+    'Arif':   { color: 'linear-gradient(135deg,#11998e,#38ef7d)', regions: ['Region 7', 'Region 8'] },
+};
+
+function updateTrackingContent(plannerName) {
+    currentRegion = plannerName; // reuse currentRegion variable as currentPlanner
+
+    const plannerHeader = document.getElementById('tracking-planner-header');
+    const rekapHeader = document.getElementById('tracking-rekap-header');
+
+    if (plannerName === 'Rekap') {
+        if (plannerHeader) plannerHeader.style.display = 'none';
+        if (rekapHeader) rekapHeader.style.display = 'flex';
+    } else {
+        if (rekapHeader) rekapHeader.style.display = 'none';
+        if (plannerHeader) plannerHeader.style.display = 'flex';
+
+        const info = PLANNERS[plannerName];
+        const avatar = document.getElementById('tracking-planner-avatar');
+        const welcome = document.getElementById('tracking-planner-welcome');
+        const sub = document.getElementById('tracking-planner-sub');
+
+        if (avatar && info) avatar.style.background = info.color;
+        if (welcome) welcome.textContent = `Welcome, ${plannerName}!`;
+        if (sub) sub.textContent = `Planner ${Object.keys(PLANNERS).indexOf(plannerName) + 1} — Data Tracking Anda`;
+    }
+
     filterTrackingTable();
 }
 
 function renderVesselList() {
     const vesselList = [
-        { name: "Wanhai", url: "https://shipper.wanhai.com/alertMessagePage.jsp", user: "647368 and IKKARAWANG", pass: "'@Codot2025" },
-        { name: "OOCL", url: "https://moc.oocl.com/admin/login/ul_sign_in_v2.jsf?ENTRY=MCC&ENTRY_TYPE=OOCL", user: "Adek_Sari@app.co.id", pass: "IndahKiat@2025" },
-        { name: "ONE", url: "https://www.one-line.com/en", user: "Arif_Munandar@app.co.id or ARIFIKK2025", pass: "IndahKiat2025@" },
-        { name: "KMTC", url: "https://www.ekmtc.com/index.html#/main", user: "IKK2025", pass: "IndahKiat2025@" },
-        { name: "Cosco", url: "https://elines.coscoshipping.com/ebusiness/", user: "Arif_Munandar@app.co.id", pass: "@IndahKiat2025" },
-        { name: "Intra", url: "https://my.inttra.com/dashboard", user: "Adek_Sari@app.co.id", pass: "IndahKiat@2025" },
-        { name: "CMA", url: "https://www.cma-cgm.com/ebusiness/customer-hub/", user: "IndahKiat@2025", pass: "IndahKiat@2025" },
-        { name: "Hapag", url: "https://www.hapag-lloyd.com/en/login.html", user: "Fajrin_S_Putrisani@app.co.id", pass: "Indahkiat_Hapag123" },
-        { name: "Yangming", url: "httpsS://www.yangming.com/e-service/member_area/member_login.aspx", user: "INDAHKIATKRW", pass: "Indahkiat2025" },
-        { name: "Maersk", url: "https://accounts.maersk.com/ocean-maeu/auth/login", user: "IKK2025", pass: "IndahKiat@2025" },
-        { name: "Evergreen", url: "https://www.shipmentlink.com/fid/", user: "Adek_Sari@app.co.id", pass: "IndahKiatK2025" },
-        { name: "MSC", url: "https://www.msc.com/en", user: "Arif_Munandar@app.co.id", pass: "IndahKiat2025@" },
-        { name: "SAMIN", url: "https://samudera.id/id#our-services", user: "Adek_Sari@app.co.id", pass: "IndahKiat@2025" },
-        { name: "RCL", url: "https://www.rclgroup.com/BookingLogin.aspx?id=65426f6f6b696e67", user: "ASITRL0003", pass: "ASITRL0003" },
-        { name: "HEUNG-A", url: "https://ebiz.heungaline.com/", user: "IKK2025", pass: "IndahKiat@2025" },
-        { name: "PIL", url: "https://www.pilship.com/en-e-services/12.html", user: "Arif_Munandar@app.co.id", pass: "IndahKiat2025@" },
-        { name: "HMM", url: "httpsS://www.hmm21.com/company.do", user: "IKK2025", pass: "hmm6088331" },
-        { name: "ZIM", url: "https://e.gsltd.com.hk", user: "fajrin_s_putrisani@app.co.id", pass: "IKKPassword_123" },
-        { name: "SINOKOR", url: "https://ebiz.sinokor.co.kr/Schedule", user: "IKSerang2016", pass: "export99" }
+        { name: "Wanhai Lines",           abbr: "WHL",     url: "https://shipper.wanhai.com/alertMessagePage.jsp",                                       user: "647368 and IKKARAWANG",           pass: "'@Codot2025",           emoji: "🚢", color: "#3ecf8e" },
+        { name: "OOCL",                   abbr: "OOCL",    url: "https://moc.oocl.com/admin/login/ul_sign_in_v2.jsf?ENTRY=MCC&ENTRY_TYPE=OOCL",          user: "Adek_Sari@app.co.id",             pass: "IndahKiat@2025",        emoji: "🌊", color: "#e74c3c" },
+        { name: "Ocean Network Express",  abbr: "ONE",     url: "https://www.one-line.com/en",                                                           user: "Arif_Munandar@app.co.id  /  ARIFIKK2025", pass: "IndahKiat2025@",  emoji: "⚓", color: "#9b59b6" },
+        { name: "KMTC Line",              abbr: "KMTC",    url: "https://www.ekmtc.com/index.html#/main",                                                user: "IKK2025",                         pass: "IndahKiat2025@",        emoji: "🏗️", color: "#2980b9" },
+        { name: "COSCO Shipping",         abbr: "COSCO",   url: "https://elines.coscoshipping.com/ebusiness/",                                           user: "Arif_Munandar@app.co.id",         pass: "@IndahKiat2025",        emoji: "🛳️", color: "#e67e22" },
+        { name: "INTTRA",                 abbr: "INTRA",   url: "https://my.inttra.com/dashboard",                                                       user: "Adek_Sari@app.co.id",             pass: "IndahKiat@2025",        emoji: "🌐", color: "#1abc9c" },
+        { name: "CMA CGM",                abbr: "CMA",     url: "https://www.cma-cgm.com/ebusiness/customer-hub/",                                       user: "IndahKiat@2025",                  pass: "IndahKiat@2025",        emoji: "📦", color: "#2c3e50" },
+        { name: "Hapag-Lloyd",            abbr: "HAPAG",   url: "https://www.hapag-lloyd.com/en/login.html",                                             user: "Fajrin_S_Putrisani@app.co.id",    pass: "Indahkiat_Hapag123",    emoji: "🔱", color: "#e74c3c" },
+        { name: "Yang Ming",              abbr: "YML",     url: "https://www.yangming.com/e-service/member_area/member_login.aspx",                      user: "INDAHKIATKRW",                    pass: "Indahkiat2025",         emoji: "🌏", color: "#27ae60" },
+        { name: "Maersk Line",            abbr: "MAERSK",  url: "https://accounts.maersk.com/ocean-maeu/auth/login",                                     user: "IKK2025",                         pass: "IndahKiat@2025",        emoji: "🔵", color: "#0072bb" },
+        { name: "Evergreen",              abbr: "EMC",     url: "https://www.shipmentlink.com/fid/",                                                     user: "Adek_Sari@app.co.id",             pass: "IndahKiatK2025",        emoji: "🌿", color: "#16a085" },
+        { name: "MSC",                    abbr: "MSC",     url: "https://www.msc.com/en",                                                                user: "Arif_Munandar@app.co.id",         pass: "IndahKiat2025@",        emoji: "🚤", color: "#8e44ad" },
+        { name: "Samudera Indonesia",     abbr: "SAMIN",   url: "https://samudera.id/id#our-services",                                                   user: "Adek_Sari@app.co.id",             pass: "IndahKiat@2025",        emoji: "🇮🇩", color: "#d35400" },
+        { name: "RCL Group",              abbr: "RCL",     url: "https://www.rclgroup.com/BookingLogin.aspx?id=65426f6f6b696e67",                        user: "ASITRL0003",                      pass: "ASITRL0003",            emoji: "⛴️", color: "#c0392b" },
+        { name: "Heung-A Line",           abbr: "HEUNG-A", url: "https://ebiz.heungaline.com/",                                                          user: "IKK2025",                         pass: "IndahKiat@2025",        emoji: "🎌", color: "#2980b9" },
+        { name: "PIL Shipping",           abbr: "PIL",     url: "https://www.pilship.com/en-e-services/12.html",                                         user: "Arif_Munandar@app.co.id",         pass: "IndahKiat2025@",        emoji: "🚀", color: "#e74c3c" },
+        { name: "HMM Co.",                abbr: "HMM",     url: "https://www.hmm21.com/company.do",                                                      user: "IKK2025",                         pass: "hmm6088331",            emoji: "🔷", color: "#2471a3" },
+        { name: "ZIM Integrated",         abbr: "ZIM",     url: "https://e.gsltd.com.hk",                                                                user: "fajrin_s_putrisani@app.co.id",    pass: "IKKPassword_123",       emoji: "✡️",  color: "#1e8bc3" },
+        { name: "Sinokor Merchant",       abbr: "SINOKOR", url: "https://ebiz.sinokor.co.kr/Schedule",                                                   user: "IKSerang2016",                    pass: "export99",              emoji: "🏴", color: "#27ae60" }
     ];
+
+    window._vesselListData = vesselList;
 
     const container = document.getElementById('vesselListContainer');
     if (!container) return;
-    container.innerHTML = vesselList.map(vessel => `
-        <div class="link-card">
-            <div class="link-card-header">
-                <div class="link-card-info">
-                    <div class="link-card-icon"><span>🚢</span></div>
-                    <h3 class="link-card-name">${vessel.name}</h3>
-                </div>
-                <a href="${vessel.url}" target="_blank" class="btn btn-secondary">Visit</a>
+
+    const headerHTML = `
+        <div class="view-page-header" style="margin-bottom:24px;">
+            <div>
+                <h2 class="view-page-title">🚢 Shipping Line Logins</h2>
+                <p class="view-page-sub">Akses portal booking masing-masing shipping line — klik <strong>Buka ↗</strong> untuk masuk ke situs</p>
             </div>
-            <div class="link-card-credentials">
-                <div class="credential-item">
-                    <span>Username</span>
-                    <strong>${vessel.user}</strong>
+            <div style="font-size:13px;color:#6b8f7a;font-weight:500;">${vesselList.length} Shipping Lines</div>
+        </div>`;
+
+    container.innerHTML = headerHTML + renderVesselCards(vesselList);
+}
+
+function renderVesselCards(list) {
+    return list.map((vessel) => {
+        const safePass = vessel.pass.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+        const safeUser = vessel.user.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+        return `
+        <div class="vessel-card" data-search="${(vessel.name + ' ' + vessel.abbr).toLowerCase()}">
+            <div class="vessel-card-top">
+                <div class="vessel-card-avatar" style="background:${vessel.color}18;border:2px solid ${vessel.color}35;">
+                    <span style="font-size:22px;line-height:1;">${vessel.emoji}</span>
                 </div>
-                <div class="credential-item">
-                    <span>Password</span>
-                    <strong>${vessel.pass}</strong>
+                <div class="vessel-card-info">
+                    <div class="vessel-card-name">${vessel.name}</div>
+                    <div class="vessel-card-abbr">${vessel.abbr}</div>
+                </div>
+                <a href="${vessel.url}" target="_blank" class="vessel-visit-btn" style="background:${vessel.color};">
+                    Buka ↗
+                </a>
+            </div>
+            <div class="vessel-card-divider"></div>
+            <div class="vessel-card-creds">
+                <div class="vessel-cred-row">
+                    <span class="vessel-cred-label">👤 User</span>
+                    <span class="vessel-cred-val" title="${vessel.user}">${vessel.user}</span>
+                    <button class="vessel-copy-btn" onclick="navigator.clipboard.writeText('${safeUser}').then(()=>showCopyToast())" title="Salin username">⎘</button>
+                </div>
+                <div class="vessel-cred-row">
+                    <span class="vessel-cred-label">🔒 Pass</span>
+                    <span class="vessel-cred-val vessel-pass-hidden" data-pass="${vessel.pass}">••••••••••</span>
+                    <button class="vessel-copy-btn" onclick="togglePass(this)" title="Tampilkan password">👁</button>
+                    <button class="vessel-copy-btn" onclick="navigator.clipboard.writeText('${safePass}').then(()=>showCopyToast())" title="Salin password">⎘</button>
                 </div>
             </div>
-        </div>
-    `).join('');
+        </div>`;
+    }).join('');
+}
+
+window.filterVesselList = function(query) {
+    const container = document.getElementById('vesselListContainer');
+    if (!container || !window._vesselListData) return;
+    const q = query.toLowerCase().trim();
+    const filtered = q === '' ? window._vesselListData : window._vesselListData.filter(v =>
+        (v.name + ' ' + v.abbr).toLowerCase().includes(q)
+    );
+    const existingCards = container.querySelectorAll('.vessel-card');
+    existingCards.forEach(c => c.remove());
+    const noResult = container.querySelector('.vessel-no-result');
+    if (noResult) noResult.remove();
+    container.insertAdjacentHTML('beforeend', renderVesselCards(filtered));
+    if (filtered.length === 0) {
+        container.insertAdjacentHTML('beforeend', `<div class="vessel-no-result" style="grid-column:1/-1;text-align:center;padding:40px;color:#aaa;font-size:14px;">Tidak ada shipping line yang cocok</div>`);
+    }
+};
+
+window.togglePass = function(btn) {
+    const row = btn.closest('.vessel-cred-row');
+    const span = row.querySelector('.vessel-pass-hidden');
+    if (!span) return;
+    if (span.textContent === '••••••••••') {
+        span.textContent = span.dataset.pass;
+        btn.textContent = '🙈';
+    } else {
+        span.textContent = '••••••••••';
+        btn.textContent = '👁';
+    }
+};
+
+window.showCopyToast = function() {
+    let toast = document.getElementById('copy-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'copy-toast';
+        toast.style.cssText = 'position:fixed;bottom:24px;right:24px;background:#1a2e2a;color:#3ecf8e;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;z-index:9999;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:opacity 0.3s;';
+        toast.textContent = '✓ Tersalin ke clipboard';
+        document.body.appendChild(toast);
+    }
+    toast.style.opacity = '1';
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+};
+
+// === HELPER: Tentukan planner/region berdasarkan Country Port ===
+function assignRegionByCountry(countryPort) {
+    const c = String(countryPort || '').trim().toUpperCase();
+
+    // CHINA → Arif (Region 7 & 8)
+    const chinaKeywords = ['CHINA', 'CHINESE', 'HONGKONG', 'HONG KONG', 'TAIWAN', 'MACAU'];
+    if (chinaKeywords.some(k => c.includes(k))) return 'Region 7';
+
+    // Asia Tenggara + Afrika → Rara (Region 1 & 2)
+    const raraKeywords = [
+        // Asia Tenggara
+        'MALAYSIA', 'SINGAPORE', 'SINGAPURA', 'BRUNEI', 'FILIPINA', 'PHILIPPINES',
+        'THAILAND', 'LAOS', 'CAMBODIA', 'KAMBOJA', 'VIETNAM', 'MYANMAR', 'BURMA',
+        'TIMOR LESTE', 'TIMOR-LESTE',
+        // Afrika
+        'AFRICA', 'AFRIKA', 'NIGERIA', 'KENYA', 'GHANA', 'ETHIOPIA', 'TANZANIA',
+        'SOUTH AFRICA', 'EGYPT', 'MOROCCO', 'ALGERIA', 'SENEGAL', 'MOZAMBIQUE',
+        'ANGOLA', 'CAMEROON', 'IVORY COAST', 'SUDAN', 'UGANDA', 'ZIMBABWE',
+        'ZAMBIA', 'BOTSWANA', 'NAMIBIA', 'LIBERIA', 'SIERRA LEONE', 'GUINEA',
+        'TOGO', 'BENIN', 'MALI', 'NIGER', 'CHAD', 'SOMALIA', 'DJIBOUTI',
+        'ERITREA', 'RWANDA', 'BURUNDI', 'MALAWI', 'LESOTHO', 'SWAZILAND', 'ESWATINI',
+        'MADAGASCAR', 'MAURITIUS', 'REUNION', 'COMOROS', 'SEYCHELLES',
+        'CAPE VERDE', 'SAO TOME', 'EQUATORIAL GUINEA', 'GABON', 'CONGO',
+        'DEMOCRATIC REPUBLIC', 'DRC', 'CENTRAL AFRICAN', 'SOUTH SUDAN',
+        'LIBYA', 'TUNISIA', 'MAURITANIA', 'WESTERN SAHARA'
+    ];
+    if (raraKeywords.some(k => c.includes(k))) return 'Region 1';
+
+    // Default: kembalikan null (nanti akan pakai region dari excel)
+    return null;
 }
 
 function handleExcelUpload(event) {
@@ -2190,206 +2646,305 @@ function handleExcelUpload(event) {
     reader.onload = function(e) {
         try {
             console.log('=== EXCEL IMPORT START ===');
-            
-            // Gunakan cellDates: true agar SheetJS mendeteksi objek tanggal otomatis
+
             const workbook = XLSX.read(new Uint8Array(e.target.result), { type: 'array', cellDates: true });
-            const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-            const dataAsArray = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "", raw: false });
+
+            // Auto-detect sheet RD, fallback ke sheet pertama
+            const sheetNames = workbook.SheetNames;
+            const rdSheetName = sheetNames.find(n => n.trim().toUpperCase() === 'RD') || sheetNames[0];
+            const isRDSheet = sheetNames.some(n => n.trim().toUpperCase() === 'RD');
+            console.log('Using sheet:', rdSheetName, '| isRD:', isRDSheet);
+
+            const worksheet = workbook.Sheets[rdSheetName];
+            // raw:true untuk dapat nilai angka asli, bukan string
+            const dataAsArray = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "", raw: true });
 
             console.log('Total rows in Excel:', dataAsArray.length);
 
-            let headerRowIndex = -1;
-            const headerKeywords = ['delivery', 'product group', 'country', 'liner', 'region', 'vfppp', 'shiptoparty'];
-            for(let i=0; i < Math.min(10, dataAsArray.length); i++){
-                const score = (dataAsArray[i] || []).reduce((acc, cell) => {
-                    const cellStr = String(cell).toLowerCase().trim().replace(/[^a-z0-9]/g, '');
-                    return acc + (headerKeywords.some(kw => cellStr.includes(kw)) ? 1 : 0);
-                }, 0);
-                if (score > 2) { 
-                    headerRowIndex = i; 
-                    console.log('Header found at row:', i);
-                    break; 
+            // === PREVIEW: tampilkan semua kolom persis seperti Excel ===
+            renderImportedDataTableRaw(dataAsArray);
+
+            // Tentukan header row
+            let headerRowIndex = 0; // RD sheet header selalu di row 0
+            if (!isRDSheet) {
+                headerRowIndex = -1;
+                const headerKeywords = ['delivery', 'product group', 'country', 'liner', 'region', 'vfppp', 'shiptoparty'];
+                for (let i = 0; i < Math.min(10, dataAsArray.length); i++) {
+                    const score = (dataAsArray[i] || []).reduce((acc, cell) => {
+                        const cellStr = String(cell).toLowerCase().trim().replace(/[^a-z0-9]/g, '');
+                        return acc + (headerKeywords.some(kw => cellStr.includes(kw)) ? 1 : 0);
+                    }, 0);
+                    if (score > 2) { headerRowIndex = i; break; }
                 }
+                if (headerRowIndex === -1) throw new Error("Could not find a valid header row in the Excel file.");
             }
 
-            if (headerRowIndex === -1) throw new Error("Could not find a valid header row in the Excel file.");
-            
             const rawHeaders = dataAsArray[headerRowIndex];
             const rawDataRows = dataAsArray.slice(headerRowIndex + 1);
-            
+
             console.log('Raw headers:', rawHeaders);
             console.log('Data rows to process:', rawDataRows.length);
-            
-            renderImportedDataTable(rawHeaders, rawDataRows);
-            
-            const headersFromFile = rawHeaders.map(h => String(h || '').trim().toLowerCase().replace(/[\s\.\-\/]/g, ''));
-            
-const headerMap = {
-    'region': 'region',
-    'REGION': 'region',
-    'productgroup': 'vfPpp',
-    'vfppp': 'vfPpp',
-    'sc': 'sc',
-    'delivery': 'delivery',
-    '20': 'container20',
-    'container20': 'container20',
-    '40': 'container40',
-    'container40': 'container40',
-    '40hc': 'container40hc',
-    'container40hc': 'container40hc',
-    'mad': 'mad',
-    'shiptoparty': 'shipToParty',
-    
-    // FIXED: Shipping Point - handle both "Shipping Point" and "SP"
-    'shippingpoint': 'shippingPoint',
-    'sp': 'shippingPoint',
-    
-    // CRITICAL FIX: Country - handle "Country Port (Port)" exact match
-    'country': 'country',
-    'countryport': 'country',
-    'countryport(port)': 'country', // "Country Port (Port)" → "countryportport"
-    'port': 'country',
-    
-    'incoterm': 'incot',
-    'incot': 'incot',
-    'destinationport': 'destination',
-    'destination': 'destination',
-    'bookingdate': 'bookingDa',
-    'marksbycs': 'marksBy',
-    'etd': 'etd',
-    'bookingnumber': 'bookingNumb',
-    'liner': 'liner',
-    'top1liner': 'top1',
-    'reason': 'reason',
-    'keterangan': 'keterangan',
-    'nw': 'nw',
-    'netweight': 'nw',
-    
-    // FIXED: Vessel Name - handle both "Vessel Name" and "Vessel"
-    'vesselname': 'vesselName',
-    'vessel': 'vesselName',
-    
-    'voyage': 'voyage'
-};            
-            // FUNGSI KRITIKAL: Mengonversi ke YYYY-MM-DD agar dibaca oleh input type="date"
-            function convertToISODate(cellValue) {
-                if (!cellValue) return '';
-                
-                let d, m, y;
 
-                // Jika sudah objek Date dari Excel
-                if (cellValue instanceof Date) {
-                    y = cellValue.getFullYear();
-                    m = String(cellValue.getMonth() + 1).padStart(2, '0');
-                    d = String(cellValue.getDate()).padStart(2, '0');
-                } else {
-                    const str = String(cellValue).trim();
-                    // Cek format M/D/YY atau MM/DD/YYYY (seperti di screenshot 5/16/24)
-                    const matchUS = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
-                    if (matchUS) {
-                        m = matchUS[1].padStart(2, '0');
-                        d = matchUS[2].padStart(2, '0');
-                        y = matchUS[3].length === 2 ? "20" + matchUS[3] : matchUS[3];
-                    } else {
-                        // Cek format YYYY.MM.DD atau YYYY-MM-DD
-                        const matchISO = str.match(/^(\d{4})[\.\-](\d{2})[\.\-](\d{2})/);
-                        if (matchISO) {
-                            y = matchISO[1]; m = matchISO[2]; d = matchISO[3];
-                        }
-                    }
+            // === FUNGSI CONVERT DATE ===
+            function convertToISODate(cellValue) {
+                if (cellValue === null || cellValue === undefined || cellValue === '') return '';
+
+                // SheetJS dengan raw:true → angka serial Excel
+                if (typeof cellValue === 'number') {
+                    // Serial Excel: 1 = 1900-01-01, hati-hati bug 1900 leap year
+                    if (cellValue < 2) return ''; // epoch / invalid
+                    const date = new Date(Math.round((cellValue - 25569) * 86400 * 1000));
+                    const y = date.getUTCFullYear();
+                    const m = String(date.getUTCMonth() + 1).padStart(2, '0');
+                    const d = String(date.getUTCDate()).padStart(2, '0');
+                    if (y < 1990 || y > 2099) return '';
+                    return `${y}-${m}-${d}`;
                 }
-                
-                return (y && m && d) ? `${y}-${m}-${d}` : '';
+
+                // Sudah Date object (cellDates:true)
+                if (cellValue instanceof Date) {
+                    const y = cellValue.getFullYear();
+                    if (y <= 1900 || y > 2099) return '';
+                    const m = String(cellValue.getMonth() + 1).padStart(2, '0');
+                    const d = String(cellValue.getDate()).padStart(2, '0');
+                    return `${y}-${m}-${d}`;
+                }
+
+                const str = String(cellValue).trim();
+                if (!str || str.startsWith('1900')) return '';
+
+                // Format YYYY-MM-DD atau YYYY.MM.DD
+                const matchISO = str.match(/^(\d{4})[\.\-\/](\d{2})[\.\-\/](\d{2})/);
+                if (matchISO) {
+                    const y = matchISO[1], m = matchISO[2], d = matchISO[3];
+                    if (parseInt(y) <= 1900 || parseInt(y) > 2099) return '';
+                    return `${y}-${m}-${d}`;
+                }
+                // Format DD/MM/YYYY atau M/D/YY
+                const matchDMY = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
+                if (matchDMY) {
+                    const d = matchDMY[1].padStart(2, '0');
+                    const m = matchDMY[2].padStart(2, '0');
+                    const y = matchDMY[3].length === 2 ? '20' + matchDMY[3] : matchDMY[3];
+                    return `${y}-${m}-${d}`;
+                }
+                return '';
             }
-            
+
+            // === MAPPING UNTUK SHEET RD (DIRECT INDEX) ===
+            const headersFromFile = rawHeaders.map(h => String(h || '').trim().toLowerCase().replace(/[\s\.\-\/\n\r\(\)]/g, ''));
+            const genericHeaderMap = {
+                'region': 'region', 'productgroup': 'vfPpp', 'productform': 'vfPpp', 'vfppp': 'vfPpp',
+                'sc': 'sc', 'delivery': 'delivery',
+                '20': 'container20', 'container20': 'container20',
+                '40': 'container40', 'container40': 'container40',
+                '40hc': 'container40hc', 'container40hc': 'container40hc',
+                'mad': 'mad', 'rdd': 'mad',
+                'shiptoparty': 'shipToParty', 'shippingpoint': 'shippingPoint', 'sp': 'shippingPoint',
+                'country': 'country', 'countryport': 'country', 'countryportport': 'country',
+                'incoterm': 'incot', 'incotterm': 'incot', 'incot': 'incot',
+                'destinationport': 'destination', 'destination': 'destination',
+                'bookingdate': 'bookingDa', 'marksbycs': 'marksBy',
+                'etd': 'etd', 'bookingnumber': 'bookingNumb',
+                'liner': 'liner', 'carrier': 'liner', 'fwdagent': 'marksBy',
+                'top1liner': 'top1', 'reason': 'reason', 'keterangan': 'keterangan',
+                'remark1': 'keterangan', 'cargoremark': 'reason',
+                'nw': 'nw', 'netweight': 'nw',
+                'vesselname': 'vesselName', 'vessel': 'vesselName', 'voyage': 'voyage',
+                'vbi': 'bookingNumb', 'donumber': 'bookingNumb',
+            };
+
             const jsonData = rawDataRows.map(rowArray => {
                 const newRow = {};
-                headersFromFile.forEach((header, index) => {
-                    if (header && headerMap[header]) {
-                        let val = rowArray[index];
-                        // Kolom tanggal diproses ke format ISO agar muncul di input date
-                        if (['mad', 'bookingDa', 'etd'].includes(headerMap[header])) {
-                            val = convertToISODate(val);
-                        }
-                        newRow[headerMap[header]] = val;
-                    }
-                });
 
-                // CRITICAL FIX: Normalisasi Region agar terbaca di Tracking
-                if (newRow.region) {
-                    const regionStr = String(newRow.region).trim();
-                    // Extract number dari berbagai format: "Region 1", "region1", "R1", "1"
-                    let regNum = regionStr.replace(/[^0-9]/g, '');
-                    if (regNum) {
-                        newRow.region = 'Region ' + regNum;
-                        console.log('Region normalized:', regionStr, '->', newRow.region);
+                if (isRDSheet) {
+                    // === DIRECT INDEX MAPPING UNTUK SHEET RD ===
+                    // [0]  Product Form  → vfPpp
+                    // [1]  ETD
+                    // [3]  Product Group → vfPpp (lebih prioritas)
+                    // [4]  SP            → shippingPoint
+                    // [5]  SC
+                    // [6]  Delivery
+                    // [7]  Fwd Agent     → marksBy
+                    // [8]  Carrier       → liner
+                    // [9]  20 (Rdy)      → container20
+                    // [10] 40 (Rdy)      → container40
+                    // [11] 40HC (Rdy)    → container40hc
+                    // [12] 20 (NR)       — gabung ke container20
+                    // [13] 40 (NR)       — gabung ke container40
+                    // [14] 40HC (NR)     — gabung ke container40hc
+                    // [27] NW
+                    // [30] RDD           → mad (fallback)
+                    // [32] Region
+                    // [33] Country Port
+                    // [34] MAD
+                    // [35] Ship to Party
+                    // [36] Inco Term     → incot
+                    // [37] VBI           → bookingNumb
+                    // [41] Destination Port → destination
+                    // [44] Vessel        → vesselName
+                    // [45] Voyage        → voyage
+
+                    newRow.vfPpp        = String(rowArray[3] || rowArray[0] || '').trim();
+                    newRow.sc           = String(rowArray[5] || '').trim();
+                    newRow.delivery     = String(rowArray[6] || '').trim();
+                    newRow.marksBy      = String(rowArray[7] || '').trim();
+                    newRow.liner        = String(rowArray[8] || '').trim();
+                    newRow.shippingPoint = String(rowArray[4] || '').trim();
+                    newRow.shipToParty  = String(rowArray[35] || '').trim();
+                    newRow.incot        = String(rowArray[36] || '').trim().replace(/\n/g, '').trim();
+                    newRow.bookingNumb  = String(rowArray[37] || '').trim();
+                    newRow.destination  = String(rowArray[41] || '').trim();
+                    newRow.vesselName   = String(rowArray[44] || '').trim();
+                    newRow.voyage       = String(rowArray[45] || '').trim();
+                    newRow.nw           = parseFloat(rowArray[27]) || 0;
+                    newRow.country      = String(rowArray[33] || '').trim().replace(/\n/g, ' ').trim();
+
+                    // Container: Rdy Oustd (9,10,11) + Not Ready (12,13,14)
+                    newRow.container20   = (parseFloat(rowArray[9])  || 0) + (parseFloat(rowArray[12]) || 0);
+                    newRow.container40   = (parseFloat(rowArray[10]) || 0) + (parseFloat(rowArray[13]) || 0);
+                    newRow.container40hc = (parseFloat(rowArray[11]) || 0) + (parseFloat(rowArray[14]) || 0);
+
+                    // Dates
+                    newRow.etd = convertToISODate(rowArray[1]);
+                    newRow.mad = convertToISODate(rowArray[34]) || convertToISODate(rowArray[30]);
+
+                    // === ASSIGN REGION BERDASARKAN COUNTRY PORT ===
+                    const assignedRegion = assignRegionByCountry(newRow.country);
+                    if (assignedRegion) {
+                        newRow.region = assignedRegion;
                     } else {
-                        console.warn('Could not normalize region:', regionStr);
+                        // Fallback: gunakan region dari excel (normalisasi angka → "Region X")
+                        const regionStr = String(rowArray[32] || '').trim();
+                        const regNum = regionStr.replace(/[^0-9]/g, '');
+                        newRow.region = regNum ? 'Region ' + regNum : regionStr;
+                    }
+
+                } else {
+                    // === GENERIC MAPPING (non-RD sheet) ===
+                    headersFromFile.forEach((header, index) => {
+                        if (header && genericHeaderMap[header]) {
+                            let val = rowArray[index];
+                            if (['mad', 'bookingDa', 'etd'].includes(genericHeaderMap[header])) {
+                                val = convertToISODate(val);
+                            }
+                            newRow[genericHeaderMap[header]] = val;
+                        }
+                    });
+
+                    // Normalisasi region
+                    if (newRow.region) {
+                        const regionStr = String(newRow.region).trim();
+                        const regNum = regionStr.replace(/[^0-9]/g, '');
+                        if (regNum) newRow.region = 'Region ' + regNum;
+                    }
+
+                    // Override region berdasarkan country jika bisa
+                    if (newRow.country) {
+                        const assigned = assignRegionByCountry(newRow.country);
+                        if (assigned) newRow.region = assigned;
                     }
                 }
 
                 // Normalisasi Destination Port
                 if (newRow.destination) {
-                    const originalDest = newRow.destination;
                     newRow.destination = normalizeDestinationPort(newRow.destination);
-                    console.log(`Destination normalized: "${originalDest}" → "${newRow.destination}"`);
                 }
 
                 // Set default values
-                newRow.doStatus = 'CUSTOMER'; 
-                newRow.postToSap = false; 
-                newRow.masalah = 'None';
-                newRow.nw = parseFloat(newRow.nw) || 0; 
-                newRow.vesselName = newRow.vesselName || "";
-                newRow.voyage = newRow.voyage || "";
-                newRow.siStatus = 'Pending';
-                newRow.bcStatus = 'Pending';
-                
-                // Initialize TOP 1 LINER columns
-                newRow.top1_20 = '';
-                newRow.top1_40 = '';
+                newRow.doStatus  = 'CUSTOMER';
+                newRow.postToSap = false;
+                newRow.masalah   = 'None';
+                newRow.nw        = parseFloat(newRow.nw) || 0;
+                newRow.vesselName = newRow.vesselName || '';
+                newRow.voyage    = newRow.voyage || '';
+                newRow.siStatus  = 'Pending';
+                newRow.bcStatus  = 'Pending';
+                newRow.top1_20   = '';
+                newRow.top1_40   = '';
                 newRow.top1_40hc = '';
-                newRow.top1 = '';
-                
+                newRow.top1      = '';
+
                 return newRow;
             }).filter(row => {
-                // Filter: harus ada delivery ATAU region ATAU vfPpp
                 const hasData = row.delivery || row.region || row.vfPpp;
-                if (!hasData) {
-                    console.warn('Row filtered out (no key data):', row);
-                }
+                if (!hasData) console.warn('Row filtered out (no key data):', row);
                 return hasData;
             });
-            
+
             console.log('Processed rows:', jsonData.length);
-            console.log('Sample data:', jsonData.slice(0, 2));
-            
             if (jsonData.length === 0) throw new Error("Data tidak ditemukan atau tidak valid.");
-            
-            // CRITICAL FIX: Add to globalData
+
+            // === DEDUPLIKASI: skip baris jika delivery number sudah ada ===
+            let addedCount = 0;
+            let skippedCount = 0;
             let nextId = globalData.length > 0 ? Math.max(...globalData.map(d => d.id)) + 1 : 1;
+
             jsonData.forEach(row => {
+                const deliveryKey = String(row.delivery || '').trim().toLowerCase();
+                const isDuplicate = deliveryKey && globalData.some(
+                    existing => String(existing.delivery || '').trim().toLowerCase() === deliveryKey
+                );
+                if (isDuplicate) {
+                    skippedCount++;
+                    console.log(`Skipped duplicate delivery: ${row.delivery}`);
+                    return;
+                }
                 row.id = nextId++;
                 globalData.push(row);
-                console.log('Added to globalData:', row.id, row.region, row.delivery);
+                addedCount++;
+                console.log('Added:', row.id, row.region, row.delivery, row.country);
             });
-            
-            console.log('Total globalData after import:', globalData.length);
-            
-            // AUTO-FILL TOP 1 LINER
+
+            console.log(`Import done — Added: ${addedCount}, Skipped (duplicate): ${skippedCount}, Total: ${globalData.length}`);
+
             autoFillTOP1LINER();
-            
-            // CRITICAL FIX: Render semua view
             renderAllTablesAndCharts();
-            
-            // CRITICAL FIX: Jika sedang di tracking view, update juga
-            if (currentRegion) {
-                console.log('Currently viewing region:', currentRegion);
-                filterTrackingTable();
+
+            // === FORCE: data masuk ke Rekap + semua planner, badge ter-update ===
+            const savedRegion = currentRegion;
+
+            // Update badge semua planner
+            ['Rekap', 'Rara', 'Fajrin', 'Tina', 'Arif'].forEach(planner => {
+                currentRegion = planner;
+                updateTrackingTabBadges();
+            });
+
+            // Default tampilkan Rekap tab Recap setelah import
+            currentRegion = 'Rekap';
+            currentTrackingTab = 'recap';
+
+            // Paksa render tracking view dengan data Rekap
+            updateTrackingContent('Rekap');
+            filterTrackingTable();
+
+            // Pindah tampilan ke tracking-view
+            switchView('tracking-view', '🗺️ Tracking - Rekap');
+
+            // Set menu sidebar Rekap sebagai active
+            document.querySelectorAll('.sidebar-menu .menu-item.active').forEach(i => i.classList.remove('active'));
+            const rekapItem = document.querySelector('.menu-item[data-planner="Rekap"]');
+            if (rekapItem) {
+                rekapItem.classList.add('active');
+                const parentSub = rekapItem.closest('.submenu');
+                if (parentSub) parentSub.previousElementSibling?.classList.add('active');
             }
-            
+
             console.log('=== EXCEL IMPORT SUCCESS ===');
-            alert(`✅ ${jsonData.length} data berhasil diimpor ke globalData!\n\nKolom TOP 1 LINER telah terisi otomatis berdasarkan Agreement List.`);
+            let msg = `✅ ${addedCount} data berhasil diimpor dari sheet "${rdSheetName}"!\n`;
+            if (skippedCount > 0) msg += `⚠️ ${skippedCount} baris dilewati (delivery number sudah ada).\n`;
+            msg += `\nData langsung masuk ke 📋 Rekap Keseluruhan dan semua planner.`;
+
+            // Auto-simpan ke Firebase setelah import
+            if (window._firebaseReady) {
+                saveAllDataToFirebase().then(() => {
+                    alert(msg + '\n\n💾 Data otomatis tersimpan ke Firebase.');
+                }).catch(() => {
+                    alert(msg + '\n\n⚠️ Gagal auto-simpan ke Firebase. Klik tombol "Simpan ke Firebase" secara manual.');
+                });
+            } else {
+                alert(msg);
+            }
 
         } catch (error) {
             console.error('=== EXCEL IMPORT ERROR ===', error);
@@ -2399,6 +2954,136 @@ const headerMap = {
         }
     };
     reader.readAsArrayBuffer(file);
+}
+
+// === FUNGSI BARU: Preview persis seperti Excel, semua kolom tampil tanpa padding ===
+function renderImportedDataTableRaw(dataAsArray) {
+    const tableHead = document.querySelector('#report-preview-table thead');
+    const tableBody = document.querySelector('#report-preview-table tbody');
+    if (!tableHead || !tableBody) return;
+
+    if (!dataAsArray || dataAsArray.length === 0) {
+        tableHead.innerHTML = '';
+        tableBody.innerHTML = '<tr><td>No data</td></tr>';
+        return;
+    }
+
+    const headers = dataAsArray[0];
+    const dataRows = dataAsArray.slice(1);
+
+    function fmtPreview(val) {
+        if (val === null || val === undefined || val === '') return '';
+        if (typeof val === 'number') {
+            if (val > 40000 && val < 60000) {
+                const date = new Date(Math.round((val - 25569) * 86400 * 1000));
+                const y = date.getUTCFullYear();
+                if (y >= 1990 && y <= 2099) {
+                    const m = String(date.getUTCMonth() + 1).padStart(2, '0');
+                    const d = String(date.getUTCDate()).padStart(2, '0');
+                    return `${d}/${m}/${y}`;
+                }
+            }
+            return String(val);
+        }
+        if (val instanceof Date) {
+            const y = val.getFullYear();
+            if (y <= 1900) return '';
+            const m = String(val.getMonth() + 1).padStart(2, '0');
+            const d = String(val.getDate()).padStart(2, '0');
+            return `${d}/${m}/${y}`;
+        }
+        const s = String(val).trim();
+        if (s.startsWith('1900')) return '';
+        return s;
+    }
+
+    // UKUR LEBAR REAL via canvas — header tidak terpotong
+    function measurePx(text, fontStr) {
+        const c = measurePx._canvas || (measurePx._canvas = document.createElement('canvas'));
+        const ctx = c.getContext('2d');
+        ctx.font = fontStr || 'bold 11px Plus Jakarta Sans, sans-serif';
+        return ctx.measureText(String(text || '')).width;
+    }
+
+    // Hitung lebar setiap kolom berdasarkan teks header (bukan estimasi karakter)
+    const colWidths = headers.map(h => {
+        const hStr = String(h || '').replace(/\n/g, ' ').trim();
+        return Math.max(90, Math.ceil(measurePx(hStr, 'bold 11px Plus Jakarta Sans, sans-serif')) + 32);
+    });
+
+    // RENDER HEADER
+    tableHead.innerHTML = `<tr style="position:sticky;top:0;z-index:10;">` +
+        headers.map((h, i) => {
+            const hStr = String(h || '').replace(/\n/g, ' ').trim();
+            return `<th style="
+                background:#1a7a5e;
+                color:#fff;
+                font-size:11px;
+                font-weight:700;
+                padding:8px 14px;
+                border-right:2px solid #155f4a;
+                border-bottom:2px solid #155f4a;
+                white-space:nowrap;
+                text-align:center;
+                min-width:${colWidths[i]}px;
+                width:${colWidths[i]}px;
+                position:sticky;
+                top:0;
+                z-index:10;
+                box-sizing:border-box;
+            " title="${hStr}">${hStr}</th>`;
+        }).join('') + `</tr>`;
+
+    // RENDER BODY
+    let bodyHtml = '';
+    let visibleRows = 0;
+    dataRows.forEach((row, ri) => {
+        if (!row || row.every(cell => cell === '' || cell === null || cell === undefined)) return;
+        visibleRows++;
+        const bg = ri % 2 === 0 ? '#ffffff' : '#f0faf6';
+        bodyHtml += `<tr style="background:${bg};" onmouseover="this.style.background='#daf4ea'" onmouseout="this.style.background='${bg}'">`;
+        headers.forEach((_, idx) => {
+            const raw = (row && row[idx] !== undefined) ? row[idx] : '';
+            const display = fmtPreview(raw);
+            const safe = String(display).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+            bodyHtml += `<td style="
+                font-size:11px;
+                padding:5px 14px;
+                border-right:1px solid #d0e8df;
+                border-bottom:1px solid #d0e8df;
+                white-space:nowrap;
+                color:#1a2e2a;
+                min-width:${colWidths[idx]}px;
+                box-sizing:border-box;
+            " title="${safe}">${safe !== '' ? safe : '<span style="color:#ccc">—</span>'}</td>`;
+        });
+        bodyHtml += `</tr>`;
+    });
+
+    if (!bodyHtml) {
+        bodyHtml = `<tr><td colspan="${headers.length}" style="text-align:center;padding:30px;color:#aaa;">Tidak ada data</td></tr>`;
+    }
+    tableBody.innerHTML = bodyHtml;
+
+    // WRAPPER: scroll horizontal + vertikal
+    const previewTable = document.getElementById('report-preview-table');
+    if (previewTable) {
+        previewTable.style.cssText = 'border-collapse:collapse; width:max-content; min-width:100%; table-layout:auto;';
+        const wrapper = previewTable.closest('.table-container');
+        if (wrapper) {
+            wrapper.style.cssText = 'overflow-x:auto !important; overflow-y:auto !important; max-height:520px; border:2px solid #3ecf8e; border-radius:8px; display:block;';
+        }
+    }
+
+    // Update status
+    const statusEl = document.getElementById('import-status');
+    if (statusEl) {
+        statusEl.innerHTML = `<span style="color:#1a7a5e;font-weight:600;">✅ Preview: ${visibleRows} baris × ${headers.length} kolom — scroll kanan/kiri untuk lihat semua kolom</span>`;
+    }
+}
+
+function renderImportedDataTable(headers, dataRows) {
+    renderImportedDataTableRaw([headers, ...dataRows]);
 }
 
 function renderImportedDataTable(headers, dataRows) {
@@ -2482,64 +3167,40 @@ window.addEventListener('DOMContentLoaded', () => {
     dummyData = []; 
 
     initCharts(); 
- // CRITICAL FIX: Add click outside to close modal
-window.addEventListener('DOMContentLoaded', () => {
-    // ... kode existing ...
-    
-    // Close modal saat click di overlay (area gelap)
-    document.getElementById('image-viewer-modal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeImageViewerModal();
-        }
-    });
-    
-    document.getElementById('notification-modal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeNotificationModal();
-        }
-    });
-    
-    document.getElementById('calendar-modal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeModal();
-        }
-    });
-    
-    document.getElementById('booking-modal').addEventListener('click', function(e) {
-        if (e.target === this) {
-            closeBookingModal();
-        }
-    });
-});   
-    // === HOOK UNTUK KALENDER ===
-    calendarCurrentDate = new Date(); 
-    renderCalendar(calendarCurrentDate);
 
-    document.getElementById('prev-month-btn').addEventListener('click', () => {
-        calendarCurrentDate.setMonth(calendarCurrentDate.getMonth() - 1);
-        renderCalendar(calendarCurrentDate);
+    // Close modal saat click di overlay (area gelap)
+    const imageViewerModal = document.getElementById('image-viewer-modal');
+    if (imageViewerModal) imageViewerModal.addEventListener('click', function(e) {
+        if (e.target === this) closeImageViewerModal();
     });
     
-    document.getElementById('next-month-btn').addEventListener('click', () => {
-        calendarCurrentDate.setMonth(calendarCurrentDate.getMonth() + 1);
-        renderCalendar(calendarCurrentDate);
+    const notificationModal = document.getElementById('notification-modal');
+    if (notificationModal) notificationModal.addEventListener('click', function(e) {
+        if (e.target === this) closeNotificationModal();
     });
-    // === AKHIR HOOK KALENDER ===
+    
+    const bookingModal = document.getElementById('booking-modal');
+    if (bookingModal) bookingModal.addEventListener('click', function(e) {
+        if (e.target === this) closeBookingModal();
+    });
 
     renderVesselList();
     renderAllTablesAndCharts();
     
     // Inisiasi awal notifikasi
     updateNotificationDisplay();
-    document.getElementById('agreement-excel-input').addEventListener('change', handleAgreementExcelUpload);
-    document.getElementById('excel-input').addEventListener('change', handleExcelUpload);
-    document.getElementById('database-cost-input').addEventListener('change', handleDatabaseCostUpload);
-    document.getElementById('filterAgreement').addEventListener('input', filterAgreementTable);
-// Event listener untuk upload Agreement Excel
+
     const agreementExcelInput = document.getElementById('agreement-excel-input');
-    if (agreementExcelInput) {
-        agreementExcelInput.addEventListener('change', handleAgreementExcelUpload);
-    }
+    if (agreementExcelInput) agreementExcelInput.addEventListener('change', handleAgreementExcelUpload);
+
+    const excelInput = document.getElementById('excel-input');
+    if (excelInput) excelInput.addEventListener('change', handleExcelUpload);
+
+    const dbCostInput = document.getElementById('database-cost-input');
+    if (dbCostInput) dbCostInput.addEventListener('change', handleDatabaseCostUpload);
+
+    const filterAgreement = document.getElementById('filterAgreement');
+    if (filterAgreement) filterAgreement.addEventListener('input', filterAgreementTable);
 
 document.querySelectorAll('.sidebar-menu .menu-item').forEach(item => {
     item.addEventListener('click', function() {
@@ -2565,26 +3226,20 @@ document.querySelectorAll('.sidebar-menu .menu-item').forEach(item => {
         const icon = this.querySelector('.menu-icon, span:first-child').textContent;
         const titleText = this.querySelector('span:last-child').textContent;
                     
-let mainTitle = this.dataset.region 
-            ? `🗺️ Tracking - ${this.dataset.region}` 
+let mainTitle = this.dataset.planner
+            ? `🗺️ Tracking - ${this.dataset.planner}` 
             : `${icon} ${titleText}`;
 
         switchView(targetId, mainTitle);
         
         if (targetId === 'dummy-booking-view') {
-            console.log('Switching to Dummy Booking view');
             renderDummyBookingTable();
             currentRegion = null; 
-        } else if (this.dataset.region) {
-            console.log('Switching to Tracking view for region:', this.dataset.region);
-            updateTrackingContent(this.dataset.region);
+        } else if (this.dataset.planner) {
+            updateTrackingContent(this.dataset.planner);
         } else {
-            console.log('Switching to other view:', targetId);
             currentRegion = null;
         }
-        
-        console.log('Current region after switch:', currentRegion);
-        console.log('=== MENU SWITCH COMPLETE ===');
     });
 });    
 
@@ -3003,69 +3658,53 @@ function groupAndSortByVessel(data) {
     console.log('=== groupAndSortByVessel() START ===');
     console.log('Input data count:', data.length);
     
-    // STEP 1: Build tonase map untuk SEMUA vessel yang ada di tracking
-    const allData = [...globalData, ...dummyData];
-    console.log('Total tracking data available:', allData.length);
+    // STEP 1: Build tonase map keyed by VOYAGE dari tracking data
+    const allTrackingData = [...globalData, ...dummyData];
+    console.log('Total tracking data available:', allTrackingData.length);
     
-    // Build tonase map dengan normalized keys
-    const vesselTonaseMap = {};
-    allData.forEach(booking => {
-        const normalizedName = normalizeVesselName(booking.vesselName);
-        if (normalizedName) {
-            if (!vesselTonaseMap[normalizedName]) {
-                vesselTonaseMap[normalizedName] = 0;
-            }
-            vesselTonaseMap[normalizedName] += (parseFloat(booking.nw) || 0);
+    // Map voyage → total NW (ton)
+    const voyageTonaseMap = {};
+    allTrackingData.forEach(booking => {
+        const voyage = (booking.voyage || '').trim().toUpperCase();
+        const nw = parseFloat(booking.nw) || 0;
+        if (voyage && nw > 0) {
+            voyageTonaseMap[voyage] = (voyageTonaseMap[voyage] || 0) + nw;
         }
     });
     
-    console.log('Vessel Tonase Map:', vesselTonaseMap);
+    console.log('Voyage Tonase Map:', voyageTonaseMap);
     
-    // STEP 2: Attach tonase ke setiap data row
+    // STEP 2: Attach tonase ke setiap schedule row berdasarkan voyage
     const dataWithTonase = data.map(item => {
-        const normalizedName = normalizeVesselName(item.vesselName);
-        const totalNW_Kg = vesselTonaseMap[normalizedName] || 0;
+        const voyageKey = (item.voyage || item.voyOut || '').trim().toUpperCase();
+        const totalNW_Kg = voyageTonaseMap[voyageKey] || 0;
         const totalNW_Ton = totalNW_Kg / 1000;
         
-        console.log(`Vessel: "${item.vesselName}" → Normalized: "${normalizedName}" → Tonase: ${totalNW_Ton.toFixed(2)} ton`);
+        console.log(`Vessel: "${item.vesselName}" | Voyage: "${voyageKey}" → Tonase: ${totalNW_Ton.toFixed(2)} ton`);
         
         return {
             ...item,
-            normalizedVesselName: normalizedName,
+            normalizedVesselName: normalizeVesselName(item.vesselName),
+            matchedVoyage: voyageKey,
             calculatedTonase: totalNW_Ton
         };
     });
     
-    console.log('Data with tonase (first 3):', dataWithTonase.slice(0, 3).map(d => ({
-        vesselName: d.vesselName,
-        normalized: d.normalizedVesselName,
-        tonase: d.calculatedTonase
-    })));
-    
-    // STEP 3: Sort by tonase DESC, then by vessel name ASC
+    // STEP 3: Sort by tonase DESC, then vessel name ASC
     const sorted = dataWithTonase.sort((a, b) => {
-        // PRIMARY: Tonase descending (vessels with tonase > 0 first)
         if (a.calculatedTonase !== b.calculatedTonase) {
             return b.calculatedTonase - a.calculatedTonase;
         }
-        
-        // SECONDARY: Vessel name ascending
         return a.normalizedVesselName.localeCompare(b.normalizedVesselName);
     });
     
-    console.log('Sorted data (first 5):', sorted.slice(0, 5).map(d => ({
-        vesselName: d.vesselName,
-        tonase: d.calculatedTonase.toFixed(2)
-    })));
-    
-    // STEP 4: Mark first occurrence of each vessel
-    let lastVessel = '';
-    sorted.forEach((item, index) => {
-        const currentVessel = item.normalizedVesselName;
-        if (currentVessel !== lastVessel) {
+    // STEP 4: Mark first occurrence of each vessel+voyage group
+    const seenKeys = new Set();
+    sorted.forEach((item) => {
+        const key = item.normalizedVesselName + '|' + item.matchedVoyage;
+        if (!seenKeys.has(key)) {
             item.isFirstOfGroup = true;
-            lastVessel = currentVessel;
-            console.log(`Row ${index}: FIRST of "${item.vesselName}" - Tonase: ${item.calculatedTonase.toFixed(2)} ton`);
+            seenKeys.add(key);
         } else {
             item.isFirstOfGroup = false;
         }
@@ -3438,69 +4077,35 @@ function getClosingDate(closingDate, etdDate) {
     return closingDateString;
 }
 
-// === FUNGSI getTonase() DIPERBARUI - FIXED CALCULATION ===
-// === FUNGSI getTonase() dengan DEBUG LENGKAP ===
-function getTonase(vesselName) {
-    console.log('=== getTonase() CALLED ===');
-    console.log('Input vesselName:', vesselName);
-    
-    if (!vesselName || vesselName.trim() === '') {
-        console.warn('⚠️ vesselName is EMPTY');
-        return "0.00";
-    }
-    
-    const lowerVesselName = vesselName.trim().toLowerCase();
-    console.log('Normalized vesselName:', lowerVesselName);
-    
-    // Gabungkan data global dan data dummy
+// === FUNGSI getTonase() - match by VOYAGE ===
+function getTonase(vesselName, voyageValue) {
     const allData = [...globalData, ...dummyData];
-    console.log('Total data available:', allData.length);
-    console.log('Sample data (first 3):', allData.slice(0, 3).map(item => ({
-        vesselName: item.vesselName,
-        nw: item.nw,
-        region: item.region
-    })));
     
-    // Filter matching bookings
-    const matchingBookings = allData.filter(item => {
-        const itemVesselName = (item.vesselName || '').trim().toLowerCase();
-        const isMatch = itemVesselName === lowerVesselName;
-        
-        if (isMatch) {
-            console.log('✓ MATCH FOUND:', {
-                vesselName: item.vesselName,
-                nw: item.nw,
-                region: item.region,
-                delivery: item.delivery
-            });
+    // If voyage is provided, match strictly by voyage
+    if (voyageValue && voyageValue.trim() !== '') {
+        const voyageKey = voyageValue.trim().toUpperCase();
+        const matchingBookings = allData.filter(item => {
+            const itemVoyage = (item.voyage || '').trim().toUpperCase();
+            return itemVoyage === voyageKey && (parseFloat(item.nw) || 0) > 0;
+        });
+        if (matchingBookings.length > 0) {
+            const totalNW_Kg = matchingBookings.reduce((sum, item) => sum + (parseFloat(item.nw) || 0), 0);
+            const totalNW_Ton = totalNW_Kg / 1000;
+            return totalNW_Ton.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2});
         }
-        
-        return isMatch;
-    });
-    
-    console.log(`Total matching bookings: ${matchingBookings.length}`);
-    
-    if (matchingBookings.length === 0) {
-        console.warn('⚠️ NO MATCHING BOOKINGS FOUND for:', vesselName);
-        console.log('Available vessels in data:', allData.map(item => item.vesselName).filter(Boolean));
         return "0.00";
     }
     
-    // Calculate total NW
-    let totalNW_Kg = 0;
-    matchingBookings.forEach((item, index) => {
-        const nwValue = parseFloat(item.nw) || 0;
-        console.log(`  [${index + 1}] NW: ${nwValue} kg | Delivery: ${item.delivery} | Region: ${item.region}`);
-        totalNW_Kg += nwValue;
+    // Fallback: match by vessel name only
+    if (!vesselName || vesselName.trim() === '') return "0.00";
+    const lowerVesselName = normalizeVesselName(vesselName);
+    const matchingBookings = allData.filter(item => {
+        return normalizeVesselName(item.vesselName) === lowerVesselName && (parseFloat(item.nw) || 0) > 0;
     });
-    
+    if (matchingBookings.length === 0) return "0.00";
+    const totalNW_Kg = matchingBookings.reduce((sum, item) => sum + (parseFloat(item.nw) || 0), 0);
     const totalNW_Ton = totalNW_Kg / 1000;
-    const formatted = totalNW_Ton.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-    
-    console.log(`✅ TOTAL for "${vesselName}": ${totalNW_Kg} kg = ${totalNW_Ton} ton (${formatted})`);
-    console.log('=== END getTonase() ===\n');
-    
-    return formatted;
+    return totalNW_Ton.toLocaleString('id-ID', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 }
 
 
@@ -3562,36 +4167,20 @@ window.updateTotalTonase = function(vesselNameInput) {
 
     const vesselName = vesselNameInput.value.trim();
     const tonaseCell = row.querySelector('.total-tonase-cell');
-    
     if (!tonaseCell) return;
     
-    console.log('Update tonase for:', vesselName);
+    // Get voyage from same row (3rd cell input)
+    const voyageInput = row.querySelector('td:nth-child(3) input.editable-cell');
+    const voyageValue = voyageInput ? voyageInput.value.trim() : '';
     
-    if (vesselName) {
-        const tonaseString = getTonase(vesselName);
+    if (vesselName || voyageValue) {
+        const tonaseString = getTonase(vesselName, voyageValue);
         tonaseCell.textContent = tonaseString;
         tonaseCell.style.fontWeight = '700';
-        tonaseCell.style.fontSize = '14px';
-        tonaseCell.style.color = '#2c3e50';
-        
-        // Update semua baris dengan vessel yang sama
-        const tableBody = document.getElementById('terminalScheduleBody');
-        if (tableBody) {
-            const allRows = tableBody.querySelectorAll('tr');
-            allRows.forEach(otherRow => {
-                const otherVesselInput = otherRow.querySelector('td:nth-child(2) input.editable-cell');
-                const otherTonaseCell = otherRow.querySelector('.total-tonase-cell');
-                
-                if (otherVesselInput && otherTonaseCell) {
-                    const otherVesselName = otherVesselInput.value.trim();
-                    if (otherVesselName.toLowerCase() === vesselName.toLowerCase()) {
-                        otherTonaseCell.textContent = tonaseString;
-                    }
-                }
-            });
-        }
+        tonaseCell.style.fontSize = '13px';
+        tonaseCell.style.color = '#1a2e2a';
     } else {
-        tonaseCell.textContent = '-';
+        tonaseCell.textContent = '0.00';
         tonaseCell.style.fontWeight = '400';
         tonaseCell.style.fontSize = '12px';
         tonaseCell.style.color = '#adb5bd';
@@ -3617,37 +4206,30 @@ function showBookingDetails(buttonEl) {
     if (!row) return;
 
     const vesselNameInput = row.querySelector('td:nth-child(2) input.editable-cell');
+    const voyageInputEl = row.querySelector('td:nth-child(3) input.editable-cell');
     if (!vesselNameInput) return;
 
     const vesselName = vesselNameInput.value.trim();
+    const voyageValue = voyageInputEl ? voyageInputEl.value.trim().toUpperCase() : '';
     
-    if (!vesselName) {
-        alert("Nama 'Vessel Name' di baris ini kosong.");
+    if (!vesselName && !voyageValue) {
+        alert("Nama Vessel / Voyage di baris ini kosong.");
         return;
     }
 
-    console.log('=== showBookingDetails() ===');
-    console.log('Input vessel name:', vesselName);
-    
-    // CRITICAL: Normalize untuk matching
-    const normalizedInput = normalizeVesselName(vesselName);
-    console.log('Normalized input:', normalizedInput);
-
-    // Gabungkan data global dan data dummy
     const allData = [...globalData, ...dummyData];
-    console.log('Total data available:', allData.length);
 
-    // CRITICAL: Filter dengan normalization
-    const matchingBookings = allData.filter(item => {
-        const itemVesselName = normalizeVesselName(item.vesselName);
-        const isMatch = itemVesselName === normalizedInput;
-        
-        if (isMatch) {
-            console.log('✓ Match found:', item.vesselName, '→', itemVesselName);
-        }
-        
-        return isMatch;
-    });
+    // Match by voyage if available, fallback to vessel name
+    let matchingBookings;
+    if (voyageValue) {
+        matchingBookings = allData.filter(item => {
+            const itemVoyage = (item.voyage || '').trim().toUpperCase();
+            return itemVoyage === voyageValue;
+        });
+    } else {
+        const normalizedInput = normalizeVesselName(vesselName);
+        matchingBookings = allData.filter(item => normalizeVesselName(item.vesselName) === normalizedInput);
+    }
 
     console.log('Total matches:', matchingBookings.length);
 
@@ -3854,73 +4436,219 @@ window.autoFitColumns = function(tableId) {
         console.error(`Table with ID "${tableId}" not found`);
         return;
     }
-    
+
     console.log(`=== AUTO-FIT COLUMNS for ${tableId} ===`);
-    
+
     const headers = table.querySelectorAll('thead th');
-    const rows = table.querySelectorAll('tbody tr');
-    
+    const allBodyRows = Array.from(table.querySelectorAll('tbody tr'));
+
     if (headers.length === 0) {
         console.warn('No headers found in table');
         return;
     }
-    
-    // Reset all column widths first
+
+    // Sementara ubah overflow ke visible agar scrollWidth terbaca benar
     headers.forEach(th => {
+        th.style.overflow = 'visible';
         th.style.width = 'auto';
         th.style.minWidth = '30px';
         th.style.maxWidth = 'none';
     });
-    
-    // Calculate optimal width for each column
+
     headers.forEach((th, colIndex) => {
         let maxWidth = 0;
-        
-        // Measure header text width
-        const headerText = th.textContent || th.innerText;
-        const headerWidth = getTextWidth(headerText, getComputedStyle(th).font);
-        maxWidth = Math.max(maxWidth, headerWidth);
-        
-        // Measure cell content widths (sample first 50 rows for performance)
-        const sampleSize = Math.min(rows.length, 50);
-        for (let i = 0; i < sampleSize; i++) {
-            const cell = rows[i].cells[colIndex];
-            if (!cell) continue;
-            
-            // Check if cell has input/select
-            const input = cell.querySelector('input, select');
-            if (input) {
-                const inputValue = input.value || input.placeholder || '';
-                const inputWidth = getTextWidth(inputValue, getComputedStyle(input).font);
-                maxWidth = Math.max(maxWidth, inputWidth);
+
+        // Ukur lebar teks header via canvas
+        const headerText = th.textContent.trim();
+        const headerFont = getComputedStyle(th).font || 'bold 11px Segoe UI';
+        maxWidth = Math.max(maxWidth, getTextWidth(headerText, headerFont));
+
+        // Ukur semua baris yang visible
+        const visibleRows = allBodyRows.filter(r => r.style.display !== 'none');
+        visibleRows.forEach(row => {
+            const cell = row.cells[colIndex];
+            if (!cell) return;
+
+            const inputEl = cell.querySelector('input[type="text"], input[type="number"], input[type="date"], input[type="time"]');
+            const selectEl = cell.querySelector('select');
+
+            if (inputEl) {
+                const val = inputEl.value || inputEl.placeholder || '';
+                const font = getComputedStyle(inputEl).font || '9px Segoe UI';
+                maxWidth = Math.max(maxWidth, getTextWidth(val, font));
+            } else if (selectEl) {
+                const opt = selectEl.options[selectEl.selectedIndex];
+                const val = opt ? opt.text : '';
+                const font = getComputedStyle(selectEl).font || '9px Segoe UI';
+                maxWidth = Math.max(maxWidth, getTextWidth(val, font));
             } else {
-                const cellText = cell.textContent || cell.innerText;
-                const cellWidth = getTextWidth(cellText, getComputedStyle(cell).font);
-                maxWidth = Math.max(maxWidth, cellWidth);
+                const cellText = (cell.textContent || cell.innerText).trim();
+                const font = getComputedStyle(cell).font || '10px Segoe UI';
+                maxWidth = Math.max(maxWidth, getTextWidth(cellText, font));
             }
-        }
-        
-        // Add padding (12px padding left + 12px padding right = 24px total)
-        const optimalWidth = Math.ceil(maxWidth) + 24;
-        
-        // Set minimum 30px, maximum 500px
-        const finalWidth = Math.max(30, Math.min(500, optimalWidth));
-        
-        th.style.width = `${finalWidth}px`;
-        
+        });
+
+        // Tambah padding 40px (16px kiri + 16px kanan + 8px buffer)
+        const finalWidth = Math.max(40, Math.ceil(maxWidth) + 40);
+
+        // Apply ke th dengan !important via cssText agar override semua CSS
+        th.style.cssText = `width: ${finalWidth}px !important; min-width: ${finalWidth}px !important; max-width: none !important; overflow: auto !important; resize: horizontal !important;`;
+
+        // Apply ke semua td di kolom ini agar konsisten
+        visibleRows.forEach(row => {
+            const cell = row.cells[colIndex];
+            if (cell) {
+                cell.style.cssText = `width: ${finalWidth}px !important; min-width: ${finalWidth}px !important; max-width: none !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`;
+            }
+        });
+
         console.log(`Column ${colIndex + 1} (${headerText}): ${finalWidth}px`);
     });
-    
+
+    // Jalankan deteksi setelah fit selesai
+    setTimeout(() => detectClippedColumns(tableId), 100);
+
     console.log('=== AUTO-FIT COMPLETE ===');
-    alert(`✅ Columns auto-fitted successfully for ${tableId}!\n\nYou can still manually resize columns by dragging the column borders.`);
 }
 
-// Helper function to measure text width
+// Fungsi deteksi kolom yang teksnya terpotong (tanda seru merah di header)
+window.detectClippedColumns = function(tableId) {
+    const table = document.getElementById(tableId);
+    if (!table) return;
+
+    const headers = Array.from(table.querySelectorAll('thead th'));
+    const allBodyRows = Array.from(table.querySelectorAll('tbody tr')).filter(r => r.style.display !== 'none');
+
+    // Hapus semua badge lama
+    table.querySelectorAll('.clipped-badge').forEach(el => el.remove());
+
+    let clippedCount = 0;
+
+    headers.forEach((th, colIndex) => {
+        let isClipped = false;
+
+        // Cek apakah header sendiri terpotong
+        if (th.scrollWidth > th.clientWidth + 2) {
+            isClipped = true;
+        }
+
+        // Cek setiap cell di kolom ini
+        if (!isClipped) {
+            for (let i = 0; i < allBodyRows.length; i++) {
+                const cell = allBodyRows[i].cells[colIndex];
+                if (!cell) continue;
+
+                const inputEl = cell.querySelector('input[type="text"], input[type="number"]');
+                const el = inputEl || cell;
+
+                if (el.scrollWidth > el.clientWidth + 2) {
+                    isClipped = true;
+                    break;
+                }
+            }
+        }
+
+        if (isClipped) {
+            clippedCount++;
+            // Tambah badge tanda seru merah di header
+            const badge = document.createElement('span');
+            badge.className = 'clipped-badge';
+            badge.title = 'Ada teks yang terpotong di kolom ini — klik Auto-Fit atau geser kolom untuk memperlebar';
+            badge.style.cssText = `
+                display: inline-block;
+                background: #e74c3c;
+                color: white;
+                font-size: 9px;
+                font-weight: bold;
+                border-radius: 50%;
+                width: 14px;
+                height: 14px;
+                line-height: 14px;
+                text-align: center;
+                margin-left: 4px;
+                cursor: pointer;
+                vertical-align: middle;
+                flex-shrink: 0;
+            `;
+            badge.textContent = '!';
+            badge.onclick = (e) => {
+                e.stopPropagation();
+                expandSingleColumn(tableId, colIndex);
+            };
+            th.appendChild(badge);
+        }
+    });
+
+    if (clippedCount > 0) {
+        console.warn(`[detectClippedColumns] ${clippedCount} kolom terpotong di tabel ${tableId}`);
+    } else {
+        console.log(`[detectClippedColumns] Semua kolom tampil penuh di tabel ${tableId}`);
+    }
+
+    return clippedCount;
+}
+
+// Expand satu kolom saja agar semua teksnya kelihatan (klik badge !)
+window.expandSingleColumn = function(tableId, colIndex) {
+    const table = document.getElementById(tableId);
+    if (!table) return;
+
+    const headers = Array.from(table.querySelectorAll('thead th'));
+    const th = headers[colIndex];
+    if (!th) return;
+
+    const allBodyRows = Array.from(table.querySelectorAll('tbody tr')).filter(r => r.style.display !== 'none');
+    let maxWidth = 0;
+
+    // Ukur header
+    const headerText = th.textContent.replace(/!$/, '').trim();
+    const headerFont = getComputedStyle(th).font || 'bold 11px Segoe UI';
+    maxWidth = Math.max(maxWidth, getTextWidth(headerText, headerFont));
+
+    // Ukur semua cell di kolom ini
+    allBodyRows.forEach(row => {
+        const cell = row.cells[colIndex];
+        if (!cell) return;
+
+        const inputEl = cell.querySelector('input[type="text"], input[type="number"], input[type="date"], input[type="time"]');
+        const selectEl = cell.querySelector('select');
+
+        if (inputEl) {
+            const val = inputEl.value || inputEl.placeholder || '';
+            const font = getComputedStyle(inputEl).font || '9px Segoe UI';
+            maxWidth = Math.max(maxWidth, getTextWidth(val, font));
+        } else if (selectEl) {
+            const opt = selectEl.options[selectEl.selectedIndex];
+            const val = opt ? opt.text : '';
+            const font = getComputedStyle(selectEl).font || '9px Segoe UI';
+            maxWidth = Math.max(maxWidth, getTextWidth(val, font));
+        } else {
+            const cellText = (cell.textContent || cell.innerText).trim();
+            const font = getComputedStyle(cell).font || '10px Segoe UI';
+            maxWidth = Math.max(maxWidth, getTextWidth(cellText, font));
+        }
+    });
+
+    const finalWidth = Math.max(40, Math.ceil(maxWidth) + 40);
+
+    th.style.cssText = `width: ${finalWidth}px !important; min-width: ${finalWidth}px !important; max-width: none !important; overflow: auto !important; resize: horizontal !important;`;
+    allBodyRows.forEach(row => {
+        const cell = row.cells[colIndex];
+        if (cell) {
+            cell.style.cssText = `width: ${finalWidth}px !important; min-width: ${finalWidth}px !important; max-width: none !important; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;`;
+        }
+    });
+
+    // Re-deteksi setelah expand
+    setTimeout(() => detectClippedColumns(tableId), 80);
+}
+
+// Helper function to measure text width using canvas
 function getTextWidth(text, font) {
     const canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement('canvas'));
     const context = canvas.getContext('2d');
-    context.font = font;
-    const metrics = context.measureText(text);
+    context.font = font || '10px Segoe UI';
+    const metrics = context.measureText(String(text));
     return metrics.width;
 }
 function handleAgreementExcelUpload(event) {
