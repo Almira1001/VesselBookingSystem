@@ -5,9 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Export Vessel Planner</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+      import { getDatabase, ref, set, push, onValue, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+      // === KONFIGURASI FIREBASE ANDA ===
+     const firebaseConfig = {
+         apiKey: "AIzaSyDpTCzJ6jd1q8gtu70dfZkdC9Y0kTkHgIU",
+         authDomain: "vesselbookingsystem-34927.firebaseapp.com",
+         projectId: "vesselbookingsystem-34927",
+         storageBucket: "vesselbookingsystem-34927.firebasestorage.app",
+         messagingSenderId: "11412561523",
+         appId: "1:11412561523:web:74bbb97ccb9c7b9e9ad406",
+         measurementId: "G-KFN5LL4VGR"
+  };
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+
+      // Expose ke window agar bisa diakses dari script.js
+      window._firebaseDB = db;
+      window._firebaseRef = ref;
+      window._firebaseSet = set;
+      window._firebasePush = push;
+      window._firebaseOnValue = onValue;
+      window._firebaseRemove = remove;
+      window._firebaseReady = true;
+      window.dispatchEvent(new Event('firebaseReady'));
+    </script>
     
     <link rel="stylesheet" href="style.css">
 </head>
@@ -33,51 +68,51 @@
     
     <div class="sidebar" style="display: none;">
         <div class="sidebar-header">
-            <h2>🚢 Vessel Planner</h2>
-            <p>Export Management System</p>
+            <div class="sidebar-logo">
+                <div class="sidebar-logo-icon">⚓</div>
+                <div class="sidebar-logo-text">
+                    <span class="sidebar-logo-name">VesselPlanner</span>
+                    <span class="sidebar-logo-sub">Export Management</span>
+                </div>
+            </div>
         </div>
+        <div class="sidebar-section-label">Menu</div>
         <div class="sidebar-menu">
             <div class="menu-item active" data-target="dashboard-view">
-                <span class="menu-icon">📊</span>
+                <span class="menu-icon">⊞</span>
                 <span>Dashboard</span>
             </div>
-            
             <div class="menu-item" data-target="vessel-list-view">
-                <span class="menu-icon">📦</span>
+                <span class="menu-icon">🚢</span>
                 <span>Shipping Line Logins</span>
             </div>
-            
             <div class="menu-item" data-target="vessel-schedule-view">
                 <span class="menu-icon">📅</span>
                 <span>Cargo Loaded by Vessel</span>
             </div>
-            
             <div class="menu-item" data-target="agreement-list-view">
                 <span class="menu-icon">🤝</span>
                 <span>Agreement List</span>
             </div>
-            
-            <div class="menu-item" data-target="dummy-booking-view">
-                <span class="menu-icon">✏️</span>
-                <span>Dummy Booking</span>
-            </div>
-            
+
+            <div class="sidebar-section-label">Tracking</div>
             <div class="menu-item has-submenu">
                 <span class="menu-icon">🗺️</span>
                 <span>Tracking</span>
                 <span class="submenu-indicator">›</span>
             </div>
+            
             <div class="submenu">
-                <div class="menu-item" data-target="tracking-view" data-region="Region 1"><span>Region 1</span></div>
-                <div class="menu-item" data-target="tracking-view" data-region="Region 2"><span>Region 2</span></div>
-                <div class="menu-item" data-target="tracking-view" data-region="Region 3"><span>Region 3</span></div>
-                <div class="menu-item" data-target="tracking-view" data-region="Region 4"><span>Region 4</span></div>
-                <div class="menu-item" data-target="tracking-view" data-region="Region 5"><span>Region 5</span></div>
-                <div class="menu-item" data-target="tracking-view" data-region="Region 6"><span>Region 6</span></div>
-                <div class="menu-item" data-target="tracking-view" data-region="Region 7"><span>Region 7</span></div>
-                <div class="menu-item" data-target="tracking-view" data-region="Region 8"><span>Region 8</span></div>
+                <!-- TRACKING TABS -->
+
+                <div class="menu-item" data-target="tracking-view" data-planner="Rekap"><span>📋 Rekap Keseluruhan</span></div>
+                <div class="menu-item" data-target="tracking-view" data-planner="Rara"><span>👤 Rara</span></div>
+                <div class="menu-item" data-target="tracking-view" data-planner="Fajrin"><span>👤 Fajrin</span></div>
+                <div class="menu-item" data-target="tracking-view" data-planner="Tina"><span>👤 Tina</span></div>
+                <div class="menu-item" data-target="tracking-view" data-planner="Arif"><span>👤 Arif</span></div>
             </div>
 
+            <div class="sidebar-section-label">General</div>
             <div class="menu-item" data-target="reports-view">
                 <span class="menu-icon">📄</span>
                 <span>Reports</span>
@@ -85,6 +120,16 @@
             <div class="menu-item" data-target="settings-view">
                 <span class="menu-icon">💾</span>
                 <span>Database Cost</span>
+            </div>
+        </div>
+
+        <div class="sidebar-bottom">
+            <div class="sidebar-upgrade-card">
+                <div class="sidebar-upgrade-emoji">🚀</div>
+                <div>
+                    <div class="sidebar-upgrade-title">Export System v2</div>
+                    <div class="sidebar-upgrade-sub">Indah Kiat Karawang</div>
+                </div>
             </div>
         </div>
     </div>
@@ -96,13 +141,17 @@
     <button class="btn btn-secondary btn-bell" id="notification-bell" onclick="showNotificationModal()" title="Notifications">
         🔔 <span id="notification-count" class="badge-count" style="display:none;">0</span>
     </button>
+
+    <button class="btn btn-success" id="btn-save-firebase" onclick="saveAllDataToFirebase()" title="Simpan semua data ke Firebase" style="font-size:13px; padding:6px 14px;">
+        💾 Simpan ke Firebase
+    </button>
     
     <button class="btn btn-danger" onclick="handleLogout()" title="Logout">
         🚪
     </button>
 </div>        </div>
 
-        <div class="content-area">
+        <div class="content-area" id="content-area">
         
             <input type="file" id="hidden-file-input" style="display: none;" 
                    onchange="processFileUpload(event)">
@@ -171,75 +220,80 @@
             </div>
             
             <div id="dashboard-view" class="content-view active">
-<div class="stats-container">
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div>
-                                <div class="stat-title">Total Delivery Orders</div>
-                                <div class="stat-value" id="totalDeliveryOrders">0</div>
-                                <div class="stat-change">All submitted orders</div>
+                <!-- Stat Cards Row -->
+                <div class="db-stats-container">
+                    <div class="db-stat-card">
+                        <div class="db-stat-top">
+                            <div class="db-stat-body">
+                                <div class="db-stat-title">Total Delivery Orders</div>
+                                <div class="db-stat-value" id="totalDeliveryOrders">0</div>
+                                <div class="db-stat-change positive">All submitted orders</div>
                             </div>
-                            <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">📦</div>
+                            <div class="db-stat-icon" style="background:linear-gradient(135deg,#7c6af7,#9b59b6);">📦</div>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div>
-                                <div class="stat-title">Done Booking</div>
-                                <div class="stat-value" id="doneBookingCount">0</div>
-                                <div class="stat-change">DO Status checked</div>
+                    <div class="db-stat-card">
+                        <div class="db-stat-top">
+                            <div class="db-stat-body">
+                                <div class="db-stat-title">Done Booking</div>
+                                <div class="db-stat-value" id="doneBookingCount">0</div>
+                                <div class="db-stat-change positive">DO Status checked</div>
                             </div>
-                            <div class="stat-icon" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white;">✓</div>
+                            <div class="db-stat-icon" style="background:linear-gradient(135deg,#1d4a3a,#3ecf8e);">✓</div>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div>
-                                <div class="stat-title">Problem</div>
-                                <div class="stat-value" id="problemCount">0</div>
-                                <div class="stat-change negative">Issues detected</div>
+                    <div class="db-stat-card">
+                        <div class="db-stat-top">
+                            <div class="db-stat-body">
+                                <div class="db-stat-title">Problem</div>
+                                <div class="db-stat-value" id="problemCount">0</div>
+                                <div class="db-stat-change negative">Issues detected</div>
                             </div>
-                            <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">⚠️</div>
+                            <div class="db-stat-icon" style="background:linear-gradient(135deg,#f5576c,#f093fb);">⚠️</div>
                         </div>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-header">
-                            <div>
-                                <div class="stat-title">Done Process</div>
-                                <div class="stat-value" id="doneProcessCount">0</div>
-                                <div class="stat-change">Posted to SAP</div>
+                    <div class="db-stat-card">
+                        <div class="db-stat-top">
+                            <div class="db-stat-body">
+                                <div class="db-stat-title">Done Process</div>
+                                <div class="db-stat-value" id="doneProcessCount">0</div>
+                                <div class="db-stat-change positive">Posted to SAP</div>
                             </div>
-                            <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">✅</div>
+                            <div class="db-stat-icon" style="background:linear-gradient(135deg,#4facfe,#00f2fe);">✅</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="charts-section" id="chartsSection">
-                
-                    <div class="chart-card" id="calendar-card-container">
-                        <div class="chart-header" id="calendar-header">
-                            <button id="prev-month-btn">‹</button>
-                            <div class="chart-title" id="calendar-month-year"></div>
-                            <button id="next-month-btn">›</button>
-                        </div>                        <div class="chart-body" id="calendar-body">
-                            <table id="calendar-table">
-                                <thead>
-                                    <tr>
-                                        <th>Min</th><th>Sen</th><th>Sel</th><th>Rab</th><th>Kam</th><th>Jum</th><th>Sab</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="calendar-dates-body">
-                                    </tbody>
-                            </table>
+                <!-- Middle: Chart + World Map -->
+                <div class="db-main-row">
+                    <div class="db-chart-card db-chart-tall">
+                        <div class="db-chart-header">
+                            <div class="db-chart-title">📈 Monthly Shipments</div>
+                        </div>
+                        <div class="db-chart-body"><canvas id="monthlyChart"></canvas></div>
+                    </div>
+                    <div class="db-chart-card db-chart-tall">
+                        <div class="db-chart-header">
+                            <div class="db-chart-title">🌍 Order Distribution by Destination</div>
+                        </div>
+                        <div class="db-map-wrap" style="position:relative;">
+                            <div id="leafletWorldMap" style="width:100%;height:320px;border-radius:10px;z-index:1;"></div>
+                            <div class="db-map-legend" id="mapLegend" style="position:absolute;bottom:12px;left:12px;z-index:1000;background:rgba(255,255,255,0.92);border-radius:8px;padding:8px 12px;font-size:11px;box-shadow:0 2px 8px rgba(0,0,0,0.12);"></div>
                         </div>
                     </div>
-                    <div class="chart-card"><div class="chart-header"><div class="chart-title">📔 Incoterm Distribution</div></div><div class="chart-body"><canvas id="incotermChart"></canvas></div></div>
-                    <div class="chart-card"><div class="chart-header"><div class="chart-title">📈 Monthly Shipments</div></div><div class="chart-body"><canvas id="monthlyChart"></canvas></div></div>
-                    <div class="chart-card"><div class="chart-header"><div class="chart-title">🌍 Destination Analysis</div></div><div class="chart-body"><canvas id="destinationChart"></canvas></div></div>
-                    <div class="chart-card"><div class="chart-header"><div class="chart-title">📦 Total Containers by Size</div></div><div class="chart-body"><canvas id="containerChart"></canvas></div></div>
-                    <div class="chart-card" id="full-width-chart"><div class="chart-header"><div class="chart-title">🚢 Total Container per Shipping Lines</div></div><div class="chart-body"><canvas id="shippingLineContainerChart"></canvas></div></div>
                 </div>
 
+                <!-- Bottom Charts -->
+                <div class="db-bottom-row" id="chartsSection">
+                    <div class="db-chart-card"><div class="db-chart-title">📔 Incoterm Distribution</div><div class="db-chart-body"><canvas id="incotermChart"></canvas></div></div>
+                    <div class="db-chart-card"><div class="db-chart-title">🌏 Destination Analysis</div><div class="db-chart-body"><canvas id="destinationChart"></canvas></div></div>
+                    <div class="db-chart-card"><div class="db-chart-title">📦 Container by Size</div><div class="db-chart-body"><canvas id="containerChart"></canvas></div></div>
+                    <div class="db-chart-card db-chart-wide"><div class="db-chart-title">🚢 Container per Shipping Lines</div><div class="db-chart-body"><canvas id="shippingLineContainerChart"></canvas></div></div>
+                </div>
+            </div>
+
+<!-- vesselTable filters & data - kept outside dashboard-view -->
+            <div id="vessel-data-panel" style="display:none;">
                 <div class="filters-section">
                      <div class="filters-grid">
                          <div class="filter-group"><label>🔍 Search All</label><input type="text" id="filterGlobal" placeholder="Search anything..."></div>
@@ -262,7 +316,6 @@
                          <div class="filter-group"><button class="btn btn-success" onclick="autoFitColumns('vesselTable')" style="width: 100%;">📏 Auto-Fit Columns</button></div>
                      </div>
                 </div>
-
                 <div class="table-card">
                     <div class="table-container">
                         <table id="vesselTable">
@@ -309,91 +362,93 @@
 </table>
                     </div>
                 </div>
-            </div>
+            </div><!-- end vessel-data-panel -->
 
             <div id="vessel-list-view" class="content-view">
+                <div class="vessel-list-search-bar">
+                    <span class="vessel-search-icon">🔍</span>
+                    <input type="text" id="vesselListSearch" class="vessel-search-input" placeholder="Cari shipping line..." oninput="filterVesselList(this.value)">
+                </div>
                 <div class="link-cards-container" id="vesselListContainer">
                 </div>
             </div>
             
 <div id="vessel-schedule-view" class="content-view">
-    <div class="link-cards-container" id="terminalScheduleContainer">
-        <div class="link-card">
-            <div class="link-card-header">
-                <div class="link-card-info">
-                    <div class="link-card-icon"><span>📅</span></div>
-                    <h3 class="link-card-name">JITC</h3>
-                </div>
-                <a href="https://jict.co.id/index.php/vessel-schedule" target="_blank" class="btn btn-secondary">Visit</a>
-            </div>
-        </div>
-        <div class="link-card">
-            <div class="link-card-header">
-                <div class="link-card-info">
-                    <div class="link-card-icon"><span>📅</span></div>
-                    <h3 class="link-card-name">KOJA</h3>
-                </div>
-                <a href="https://www.tpkkoja.co.id/vessel-schedule/" target="_blank" class="btn btn-secondary">Visit</a>
-            </div>
-        </div>
-        <div class="link-card">
-            <div class="link-card-header">
-                <div class="link-card-info">
-                    <div class="link-card-icon"><span>📅</span></div>
-                    <h3 class="link-card-name">NPCT1</h3>
-                </div>
-                <a href="https://www.npct1.co.id/vessel-schedule" target="_blank" class="btn btn-secondary">Visit</a>
-            </div>
-        </div>
-        <div class="link-card">
-            <div class="link-card-header">
-                <div class="link-card-info">
-                    <div class="link-card-icon"><span>📅</span></div>
-                    <h3 class="link-card-name">MAL</h3>
-                </div>
-                <a href="https://malt300.com/Layanan/jadwalKapal" target="_blank" class="btn btn-secondary">Visit</a>
-            </div>
-        </div>
-        <div class="link-card">
-            <div class="link-card-header">
-                <div class="link-card-info">
-                    <div class="link-card-icon"><span>📅</span></div>
-                    <h3 class="link-card-name">Pelindo</h3>
-                </div>
-                <a href="https://ipctpk.co.id/vessel-schedule/" target="_blank" class="btn btn-secondary">Visit</a>
-            </div>
-        </div>
-    </div>
-    
-    <div class="filters-section" style="margin-bottom: 20px;">
-        <div class="filters-grid" style="grid-template-columns: 1fr 1fr;">
-            <div class="filter-group">
-                <label for="terminal-select">🚢 Pilih Terminal untuk Auto-Populate</label>
-                <select id="terminal-select" class="editable-cell">
-                    <option value="">Pilih Terminal...</option>
-                    <option value="ALL_PORT">All Port (Agregasi)</option>
-                    <option value="JICT">JICT</option>
-                    <option value="KOJA">KOJA</option>
-                    <option value="NPCT1">NPCT1</option>
-                    <option value="MAL">MAL</option>
-                    <option value="Pelindo">Pelindo (Manual)</option>
-                </select>
-            </div>
-            <div class="filter-group">
-                <label for="vessel-schedule-search">🔍 Search Vessel Schedule</label>
-                <input type="text" id="vessel-schedule-search" class="editable-cell" placeholder="Search vessel, voyage, date, port..." oninput="filterVesselSchedule()">
-            </div>
+
+    <!-- Terminal Cards -->
+    <div class="view-page-header">
+        <div>
+            <h2 class="view-page-title">Cargo Loaded by Vessel</h2>
         </div>
     </div>
 
-    <div class="add-row-container">
-        <button class="btn btn-primary" onclick="addScheduleRow()">+ Add Schedule Row</button>
+    <div class="terminal-grid">
+        <a href="https://jict.co.id/index.php/vessel-schedule" target="_blank" class="terminal-chip">
+            <div class="terminal-chip-icon">⚓</div>
+            <div class="terminal-chip-body">
+                <span class="terminal-chip-name">JICT</span>
+                <span class="terminal-chip-sub">Jakarta International Container Terminal</span>
+            </div>
+            <span class="terminal-chip-arrow">↗</span>
+        </a>
+        <a href="https://www.tpkkoja.co.id/vessel-schedule/" target="_blank" class="terminal-chip">
+            <div class="terminal-chip-icon">🚢</div>
+            <div class="terminal-chip-body">
+                <span class="terminal-chip-name">KOJA</span>
+                <span class="terminal-chip-sub">Terminal Petikemas Koja</span>
+            </div>
+            <span class="terminal-chip-arrow">↗</span>
+        </a>
+        <a href="https://www.npct1.co.id/vessel-schedule" target="_blank" class="terminal-chip">
+            <div class="terminal-chip-icon">🏗️</div>
+            <div class="terminal-chip-body">
+                <span class="terminal-chip-name">NPCT1</span>
+                <span class="terminal-chip-sub">New Priok Container Terminal</span>
+            </div>
+            <span class="terminal-chip-arrow">↗</span>
+        </a>
+        <a href="https://malt300.com/Layanan/jadwalKapal" target="_blank" class="terminal-chip">
+            <div class="terminal-chip-icon">📦</div>
+            <div class="terminal-chip-body">
+                <span class="terminal-chip-name">MAL</span>
+                <span class="terminal-chip-sub">Multi Artha Lestari</span>
+            </div>
+            <span class="terminal-chip-arrow">↗</span>
+        </a>
+        <a href="https://ipctpk.co.id/vessel-schedule/" target="_blank" class="terminal-chip">
+            <div class="terminal-chip-icon">🌊</div>
+            <div class="terminal-chip-body">
+                <span class="terminal-chip-name">Pelindo</span>
+                <span class="terminal-chip-sub">Pelabuhan Indonesia</span>
+            </div>
+            <span class="terminal-chip-arrow">↗</span>
+        </a>
+    </div>
+
+    <!-- Search + Filter bar -->
+    <div class="controls-bar">
+        <div class="control-field">
+            <label class="ctrl-label">🚢 Auto-Populate Terminal</label>
+            <select id="terminal-select" class="ctrl-select">
+                <option value="">Pilih Terminal...</option>
+                <option value="ALL_PORT">All Port (Agregasi)</option>
+                <option value="JICT">JICT</option>
+                <option value="KOJA">KOJA</option>
+                <option value="NPCT1">NPCT1</option>
+                <option value="MAL">MAL</option>
+                <option value="Pelindo">Pelindo (Manual)</option>
+            </select>
+        </div>
+        <div class="control-field ctrl-grow">
+            <label class="ctrl-label">🔍 Search Vessel Schedule</label>
+            <input type="text" id="vessel-schedule-search" class="ctrl-input" placeholder="Cari vessel, voyage, tanggal, port..." oninput="filterVesselSchedule()">
+        </div>
     </div>
 
     <div class="table-card">
         <div class="table-container">
-            <table id="terminalScheduleTable">                <div class="table-card">
-                            <thead>
+            <table id="terminalScheduleTable">
+                <thead>
                     <tr>
                         <th style="position:relative;white-space:nowrap;padding-right:22px;">Terminal<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'terminalScheduleTable',0)">▼</span></th>
                         <th style="position:relative;white-space:nowrap;padding-right:22px;">Vessel Name<span style="cursor:pointer;position:absolute;right:5px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 3px;user-select:none;" onclick="tableColFilter(event,'terminalScheduleTable',1)">▼</span></th>
@@ -409,13 +464,11 @@
                         <th>Action</th>
                     </tr>
                 </thead>
-                <tbody id="terminalScheduleBody">
-                </tbody>
+                <tbody id="terminalScheduleBody"></tbody>
             </table>
         </div>
     </div>
 </div>
-            
 <div id="agreement-list-view" class="content-view">    
     <div class="filters-section" style="margin-top: 20px;">
          <div class="filters-grid" style="grid-template-columns: 1fr 2fr;">
@@ -461,15 +514,61 @@
 </div>
             
 <div id="tracking-view" class="content-view">
-    <h1 id="tracking-region-title">Tracking Information for Region 1</h1>
-    
-    <div style="display: flex; gap: 10px; margin-top: 10px; margin-bottom: 20px; align-items: center;">
+
+    <!-- Welcome / Planner Header -->
+    <div id="tracking-planner-header" style="display:none; align-items:center; gap:16px; background:#ffffff; border-radius:14px; padding:18px 22px; margin-bottom:16px; box-shadow:0 1px 6px rgba(26,46,42,0.08); border:1px solid #e8f0ed; flex-wrap:wrap;">
+        <div id="tracking-planner-avatar" style="width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:white;flex-shrink:0;background:linear-gradient(135deg,#1d4a3a,#3ecf8e);">👤</div>
+        <div style="flex:1; min-width:0;">
+            <div id="tracking-planner-welcome" style="font-size:18px;font-weight:700;color:#1a2e2a;"></div>
+            <div id="tracking-planner-sub" style="font-size:12px;color:#5a7a70;margin-top:2px;"></div>
+        </div>
+        <!-- TABS di dalam card -->
+        <div style="display:flex; gap:6px; align-items:center; flex-shrink:0;">
+            <button class="tracking-tab-btn active" data-tab="due_today" onclick="switchTrackingTab('due_today')" style="border:none; padding:7px 16px; border-radius:50px; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s; background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; box-shadow:0 3px 10px rgba(231,76,60,0.35); display:flex; align-items:center; gap:5px;">
+                📋 DUE TODAY
+                <span id="tab-badge-due-today" style="background:rgba(255,255,255,0.3);color:#fff;font-size:10px;font-weight:700;border-radius:10px;padding:1px 6px;min-width:16px;text-align:center;">0</span>
+            </button>
+            <button class="tracking-tab-btn" data-tab="attention" onclick="switchTrackingTab('attention')" style="border:none; padding:7px 16px; border-radius:50px; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s; background:#f0f4f8; color:#5a7a70; box-shadow:none; display:flex; align-items:center; gap:5px;">
+                ⚠️ ATTENTION
+                <span id="tab-badge-attention" style="background:rgba(0,0,0,0.08);color:#5a7a70;font-size:10px;font-weight:700;border-radius:10px;padding:1px 6px;min-width:16px;text-align:center;">0</span>
+            </button>
+            <button class="tracking-tab-btn" data-tab="recap" onclick="switchTrackingTab('recap')" style="border:none; padding:7px 16px; border-radius:50px; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s; background:#f0f4f8; color:#5a7a70; box-shadow:none; display:flex; align-items:center; gap:5px;">
+                📊 RECAP
+                <span id="tab-badge-recap" style="background:rgba(0,0,0,0.08);color:#5a7a70;font-size:10px;font-weight:700;border-radius:10px;padding:1px 6px;min-width:16px;text-align:center;">0</span>
+            </button>
+        </div>
+    </div>
+
+    <div id="tracking-rekap-header" style="display:none; align-items:center; gap:16px; background:#ffffff; border-radius:14px; padding:18px 22px; margin-bottom:16px; box-shadow:0 1px 6px rgba(26,46,42,0.08); border:1px solid #e8f0ed; flex-wrap:wrap;">
+        <div style="width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:white;flex-shrink:0;background:linear-gradient(135deg,#1d4a3a,#3ecf8e);">📋</div>
+        <div style="flex:1; min-width:0;">
+            <div style="font-size:18px;font-weight:700;color:#1a2e2a;">Rekap Keseluruhan</div>
+            <div style="font-size:12px;color:#5a7a70;margin-top:2px;">Semua data dari seluruh planner</div>
+        </div>
+        <!-- TABS di dalam card rekap juga -->
+        <div style="display:flex; gap:6px; align-items:center; flex-shrink:0;">
+            <button class="tracking-tab-btn active" data-tab="due_today" onclick="switchTrackingTab('due_today')" style="border:none; padding:7px 16px; border-radius:50px; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s; background:linear-gradient(135deg,#e74c3c,#c0392b); color:#fff; box-shadow:0 3px 10px rgba(231,76,60,0.35); display:flex; align-items:center; gap:5px;">
+                📋 DUE TODAY
+                <span id="tab-badge-due-today-rekap" style="background:rgba(255,255,255,0.3);color:#fff;font-size:10px;font-weight:700;border-radius:10px;padding:1px 6px;min-width:16px;text-align:center;">0</span>
+            </button>
+            <button class="tracking-tab-btn" data-tab="attention" onclick="switchTrackingTab('attention')" style="border:none; padding:7px 16px; border-radius:50px; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s; background:#f0f4f8; color:#5a7a70; box-shadow:none; display:flex; align-items:center; gap:5px;">
+                ⚠️ ATTENTION
+                <span id="tab-badge-attention-rekap" style="background:rgba(0,0,0,0.08);color:#5a7a70;font-size:10px;font-weight:700;border-radius:10px;padding:1px 6px;min-width:16px;text-align:center;">0</span>
+            </button>
+            <button class="tracking-tab-btn" data-tab="recap" onclick="switchTrackingTab('recap')" style="border:none; padding:7px 16px; border-radius:50px; font-size:12px; font-weight:700; cursor:pointer; transition:all 0.2s; background:#f0f4f8; color:#5a7a70; box-shadow:none; display:flex; align-items:center; gap:5px;">
+                📊 RECAP
+                <span id="tab-badge-recap-rekap" style="background:rgba(0,0,0,0.08);color:#5a7a70;font-size:10px;font-weight:700;border-radius:10px;padding:1px 6px;min-width:16px;text-align:center;">0</span>
+            </button>
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 10px; margin-bottom: 14px; align-items: center; flex-wrap:wrap;">
         <button class="btn btn-primary" onclick="addNewEntry()">+ Add New Entry</button>
-        <button class="btn btn-danger" onclick="deleteRegionData()">🗑️ Delete All (Region)</button>
+        <button class="btn btn-danger" onclick="deletePlannerData()">🗑️ Delete All (Planner)</button>
         <button class="btn btn-success" onclick="autoFitColumns('trackingVesselTable')">📏 Auto-Fit Columns</button>
     </div>
     
-    <div class="filters-section" style="margin-bottom: 20px;">
+    <div class="filters-section" style="margin-bottom: 14px;">
         <div class="filters-grid" style="grid-template-columns: 1fr 1fr 1fr 200px;">
             <div class="filter-group"><label>🔍 Search</label><input type="text" id="filterTrackingGlobal" placeholder="Search anything..."></div>
             <div class="filter-group"><label>📅 Booking Date From</label><input type="date" id="filterTrackingDateFrom"></div>
@@ -585,60 +684,83 @@
                 </div>
             </div>
             <div id="reports-view" class="content-view">
-                <h2>📄 Import Data from Excel</h2>
-                <p>Pilih file Excel (.xlsx, .xls) untuk diimpor. Sistem akan otomatis mencari baris header dan menambahkan datanya ke region yang sesuai. Data yang diimpor akan hilang jika halaman di-refresh.</p>
-                <div class="filter-group" style="margin-top: 20px; max-width: 400px;">
-                    <label for="excel-input">Pilih File Excel</label>
-                    <input type="file" id="excel-input" accept=".xlsx, .xls" class="editable-cell">
-                </div>
-                <div id="import-status" style="margin-top: 20px; white-space: pre-wrap;"></div>
-                <div class="table-card" style="margin-top: 20px;">
-                    <div class="table-container">
-                        <h3 style="text-align: center; padding: 15px 10px;">Isi Data dari File Excel</h3>
-                        <table id="report-preview-table">
-                            <thead></thead>
-                            <tbody><tobody>
-                        </table>
-                    </div>
-                </div>
+
+    <div class="view-page-header">
+        <div>
+            <h2 class="view-page-title">Import Data dari Excel</h2>
+            <p class="view-page-sub">Upload file .xlsx atau .xls — data otomatis masuk ke region yang sesuai</p>
+        </div>
+    </div>
+
+    <!-- Upload Drop Zone -->
+    <div class="upload-zone" id="uploadZone" onclick="document.getElementById('excel-input').click()">
+        <div class="upload-zone-inner">
+            <div class="upload-icon-wrap">📂</div>
+            <div class="upload-zone-title">Klik untuk pilih file Excel</div>
+            <div class="upload-zone-sub">Mendukung format .xlsx dan .xls</div>
+            <div class="upload-zone-btn">Browse File</div>
+        </div>
+        <input type="file" id="excel-input" accept=".xlsx, .xls" style="display:none;" onchange="handleExcelUpload(event)">
+    </div>
+
+    <div id="import-status" style="margin-top:14px; white-space:pre-wrap; font-size:12px;"></div>
+
+    <div class="table-card" style="margin-top:16px;">
+        <div style="padding:14px 18px; border-bottom:1px solid #e8f0ed; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+            <span style="font-size:13px; font-weight:700; color:#1a2e2a;">📋 Preview Data</span>
+            <span style="font-size:11px; color:#5a7a70;">← Scroll kanan/kiri untuk lihat semua kolom →</span>
+        </div>
+        <div class="table-container" style="overflow-x:auto; overflow-y:auto; max-height:520px; border:2px solid #3ecf8e; border-radius:8px;">
+            <table id="report-preview-table" style="border-collapse:collapse; width:max-content; min-width:100%; table-layout:auto;">
+                <thead></thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div id="settings-view" class="content-view">
+    <div class="view-page-header">
+        <div>
+            <h2 class="view-page-title">Database Cost</h2>
+        </div>
+    </div>
+
+    <!-- Upload + Search bar -->
+    <div class="controls-bar">
+        <div class="control-field">
+            <label class="ctrl-label">📁 Upload File Excel</label>
+            <div class="file-input-wrap">
+                <input type="file" id="database-cost-input" accept=".xlsx, .xls" onchange="handleDatabaseCostUpload ? handleDatabaseCostUpload(event) : null">
             </div>
-            <div id="settings-view" class="content-view">
-                
-                <div class="filters-section">
-                    <div class="filters-grid" style="grid-template-columns: 1fr 1fr;">
-                        <div class="filter-group">
-                            <label for="database-cost-input">📁 Pilih File Excel</label>
-                            <input type="file" id="database-cost-input" accept=".xlsx, .xls" class="editable-cell">
-                        </div>
-                        <div class="filter-group">
-                            <label for="database-cost-search">🔍 Search Database Cost</label>
-                            <input type="text" id="database-cost-search" class="editable-cell" placeholder="Search shipping line, charges type, currency..." oninput="filterDatabaseCostTable()">
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="database-cost-status" style="margin-top: 20px; white-space: pre-wrap;"></div>
-                
-                <div class="table-card" style="margin-top: 20px;">
-                    <div class="table-container">
-                        <table id="database-cost-preview-table">
-                            <thead>
-                                <tr>
-                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">No <span onclick="openDbCostColFilter(event,0)" id="db-cost-filter-btn-0" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
-                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Shipping Line <span onclick="openDbCostColFilter(event,1)" id="db-cost-filter-btn-1" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
-                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Charges Type <span onclick="openDbCostColFilter(event,2)" id="db-cost-filter-btn-2" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
-                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Currency <span onclick="openDbCostColFilter(event,3)" id="db-cost-filter-btn-3" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
-                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Amount <span onclick="openDbCostColFilter(event,4)" id="db-cost-filter-btn-4" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
-                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Remarks <span onclick="openDbCostColFilter(event,5)" id="db-cost-filter-btn-5" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
-                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Unit of Measure <span onclick="openDbCostColFilter(event,6)" id="db-cost-filter-btn-6" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
-                                    <th style="position:relative; white-space:nowrap; padding-right:28px;">Link <span onclick="openDbCostColFilter(event,7)" id="db-cost-filter-btn-7" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:11px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;line-height:1;user-select:none;">▼</span></th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+        </div>
+        <div class="control-field ctrl-grow">
+            <label class="ctrl-label">🔍 Search Database Cost</label>
+            <input type="text" id="database-cost-search" class="ctrl-input" placeholder="Cari shipping line, charges type, currency..." oninput="filterDatabaseCostTable()">
+        </div>
+    </div>
+
+    <div id="database-cost-status" style="margin-top:12px; white-space:pre-wrap; font-size:12px;"></div>
+
+    <div class="table-card" style="margin-top:16px;">
+        <div class="table-container">
+            <table id="database-cost-preview-table">
+                <thead>
+                    <tr>
+                        <th style="position:relative;white-space:nowrap;padding-right:28px;">No<span onclick="openDbCostColFilter(event,0)" id="db-cost-filter-btn-0" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;user-select:none;">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:28px;">Shipping Line<span onclick="openDbCostColFilter(event,1)" id="db-cost-filter-btn-1" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;user-select:none;">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:28px;">Charges Type<span onclick="openDbCostColFilter(event,2)" id="db-cost-filter-btn-2" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;user-select:none;">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:28px;">Currency<span onclick="openDbCostColFilter(event,3)" id="db-cost-filter-btn-3" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;user-select:none;">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:28px;">Amount<span onclick="openDbCostColFilter(event,4)" id="db-cost-filter-btn-4" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;user-select:none;">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:28px;">Remarks<span onclick="openDbCostColFilter(event,5)" id="db-cost-filter-btn-5" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;user-select:none;">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:28px;">Unit of Measure<span onclick="openDbCostColFilter(event,6)" id="db-cost-filter-btn-6" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;user-select:none;">▼</span></th>
+                        <th style="position:relative;white-space:nowrap;padding-right:28px;">Link<span onclick="openDbCostColFilter(event,7)" id="db-cost-filter-btn-7" style="cursor:pointer;position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:10px;background:rgba(255,255,255,0.25);border-radius:3px;padding:1px 4px;user-select:none;">▼</span></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
         </div>
     </div>
 
