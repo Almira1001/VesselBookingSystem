@@ -35,57 +35,91 @@ window.saveAllDataToFirebase = async function() {
         if (btn) { btn.innerHTML = '⏳ Menyimpan...'; btn.disabled = true; }
 
         const db = window._firebaseDB;
-        const ref = window._firebaseRef;
-        const set = window._firebaseSet;
+        const docFn = window._firestoreDoc;
+        const setDocFn = window._firestoreSetDoc;
 
-        // Simpan globalData
-        await set(ref(db, 'globalData'), globalData.length > 0 ? globalData : []);
+        // Firestore tidak bisa simpan array langsung > 1MB, pakai chunk per 500 item
+        const chunkArray = (arr, size) => {
+            const chunks = [];
+            for (let i = 0; i < arr.length; i += size) chunks.push(arr.slice(i, i + size));
+            return chunks;
+        };
+
+        // Simpan globalData (dibagi per chunk jika banyak)
+        const globalChunks = chunkArray(globalData, 300);
+        for (let i = 0; i < globalChunks.length; i++) {
+            await setDocFn(docFn(db, 'vesselData', `globalData_chunk_${i}`), { data: globalChunks[i], chunkIndex: i, totalChunks: globalChunks.length });
+        }
+        // Hapus chunk lama jika data sekarang lebih sedikit chunk-nya
+        await setDocFn(docFn(db, 'vesselData', 'globalData_meta'), { totalChunks: globalChunks.length });
+
         // Simpan dummyData
-        await set(ref(db, 'dummyData'), dummyData.length > 0 ? dummyData : []);
+        await setDocFn(docFn(db, 'vesselData', 'dummyData'), { data: dummyData });
+
         // Simpan agreementData
-        await set(ref(db, 'agreementData'), agreementData.length > 0 ? agreementData : []);
+        const agreementChunks = chunkArray(agreementData, 300);
+        for (let i = 0; i < agreementChunks.length; i++) {
+            await setDocFn(docFn(db, 'vesselData', `agreementData_chunk_${i}`), { data: agreementChunks[i] });
+        }
+        await setDocFn(docFn(db, 'vesselData', 'agreementData_meta'), { totalChunks: agreementChunks.length });
 
         if (btn) { btn.innerHTML = '✅ Tersimpan!'; }
         setTimeout(() => { if (btn) { btn.innerHTML = originalText; btn.disabled = false; } }, 2000);
-        console.log('Firebase save success:', { globalData: globalData.length, dummyData: dummyData.length, agreementData: agreementData.length });
+        console.log('Firestore save success');
     } catch (err) {
-        console.error('Firebase save error:', err);
+        console.error('Firestore save error:', err);
         alert('❌ Gagal menyimpan ke Firebase: ' + err.message);
         if (btn) { btn.innerHTML = originalText; btn.disabled = false; }
     }
 };
 
-// Load data dari Firebase saat login
 async function loadDataFromFirebase() {
     if (!window._firebaseReady) return;
     const db = window._firebaseDB;
-    const ref = window._firebaseRef;
-    const onValue = window._firebaseOnValue;
+    const docFn = window._firestoreDoc;
+    const getDocFn = window._firestoreGetDoc;
 
-    return new Promise((resolve) => {
-        onValue(ref(db, '/'), (snapshot) => {
-            const data = snapshot.val();
-            if (data) {
-                if (data.globalData && Array.isArray(data.globalData)) {
-                    globalData = data.globalData;
-                    console.log('Firebase: loaded globalData', globalData.length);
-                }
-                if (data.dummyData && Array.isArray(data.dummyData)) {
-                    dummyData = data.dummyData;
-                    console.log('Firebase: loaded dummyData', dummyData.length);
-                }
-                if (data.agreementData && Array.isArray(data.agreementData)) {
-                    agreementData = data.agreementData;
-                    console.log('Firebase: loaded agreementData', agreementData.length);
-                }
-                renderAllTablesAndCharts();
-                if (agreementData.length > 0) renderAgreementTable(agreementData);
+    try {
+        // Load globalData
+        const metaSnap = await getDocFn(docFn(db, 'vesselData', 'globalData_meta'));
+        if (metaSnap.exists()) {
+            const totalChunks = metaSnap.data().totalChunks;
+            let allGlobal = [];
+            for (let i = 0; i < totalChunks; i++) {
+                const snap = await getDocFn(docFn(db, 'vesselData', `globalData_chunk_${i}`));
+                if (snap.exists()) allGlobal = allGlobal.concat(snap.data().data);
             }
-            resolve();
-        }, { onlyOnce: true });
-    });
-}
+            globalData = allGlobal;
+            console.log('Firestore: loaded globalData', globalData.length);
+        }
 
+        // Load dummyData
+        const dummySnap = await getDocFn(docFn(db, 'vesselData', 'dummyData'));
+        if (dummySnap.exists()) {
+            dummyData = dummySnap.data().data || [];
+            console.log('Firestore: loaded dummyData', dummyData.length);
+        }
+
+        // Load agreementData
+        const agrMetaSnap = await getDocFn(docFn(db, 'vesselData', 'agreementData_meta'));
+        if (agrMetaSnap.exists()) {
+            const totalChunks = agrMetaSnap.data().totalChunks;
+            let allAgr = [];
+            for (let i = 0; i < totalChunks; i++) {
+                const snap = await getDocFn(docFn(db, 'vesselData', `agreementData_chunk_${i}`));
+                if (snap.exists()) allAgr = allAgr.concat(snap.data().data);
+            }
+            agreementData = allAgr;
+            console.log('Firestore: loaded agreementData', agreementData.length);
+        }
+
+        renderAllTablesAndCharts();
+        if (agreementData.length > 0) renderAgreementTable(agreementData);
+
+    } catch (err) {
+        console.error('Firestore load error:', err);
+    }
+}
 // === FUNGSI LOGIN & LOGOUT ===
 function handleLogin(event) {
     event.preventDefault(); // Mencegah form submit
